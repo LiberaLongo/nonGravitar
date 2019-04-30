@@ -1,15 +1,15 @@
 #include <iostream>
 
-#include "../header/Gioco.hpp"
-#include "../utils/Lista.hpp"
+//#include "../header/Gioco.hpp"
+#include "../header/Lista.hpp"
 
 using namespace std;
 
 int main()
 {
   //testo cose
-  Lista<int> lista();
-  struct Elem* head = lista.head();
+  Lista<int> lista; //senza parentesi ()
+  struct Elem<int>* head = lista.head();
   lista.insert_head(1);
   lista.insert_head(2);
   lista.insert_head(3);

@@ -2,80 +2,80 @@
 #include <iostream>
 using namespace std;
 
-#include "./Lista.hpp"
+#include "../header/Lista.hpp"
 
 //costruttore e distruttore
 template <typename Tipo>
 Lista<Tipo>::Lista(void)
 {
-    struct Elem sentinella;
+    struct Elem<Tipo> sentinella;
     sentinella.prev = sentinella;
     sentinella.next = sentinella;
     //sentinella.item non ci interessa
-    this.head = &sentinella;
+    this.testa = &sentinella;
 }
 
 template <typename Tipo>
-virtual Lista<Tipo>::~Lista(void)
+/*virtual*/ Lista<Tipo>::~Lista(void)
 {
 }
 
 //setters
 template <typename Tipo>
-void Lista<Tipo>::setHead(struct Elem *head)
+void Lista<Tipo>::setHead(struct Elem<Tipo>* head)
 {
-    this.head = head;
+    this.testa = head;
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::getHead(void)
+struct Elem<Tipo>* Lista<Tipo>::getHead(void)
 {
-    return this.head;
+    return this.testa;
 }
 //metodi
 template <typename Tipo>
 bool Lista<Tipo>::empty(void)
 {
-    return (this.head->next == this.head->prev == this.head);
+    return (this.testa->next == this.testa->prev == this.testa);
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::head(void)
+struct Elem<Tipo>* Lista<Tipo>::head(void)
 {
-    return this.head->next;
+    return this.testa->next;
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::tail(void)
+struct Elem<Tipo>* Lista<Tipo>::tail(void)
 {
-    return this.head->prev;
+    return this.testa->prev;
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::next(struct Elem *p)
+struct Elem<Tipo>* Lista<Tipo>::next(struct Elem<Tipo>* p)
 {
     return p->next;
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::prev(struct Elem *p)
+struct Elem<Tipo>* Lista<Tipo>::prev(struct Elem<Tipo>* p)
 {
     return p->prev;
 }
 template <typename Tipo>
-bool Lista<Tipo>::finished(struct Elem *p)
+bool Lista<Tipo>::finished(struct Elem<Tipo>* p)
 {
-    return (p == this.head);
+    return (p == this.testa);
 }
 template <typename Tipo>
-Tipo Lista<Tipo>::read(struct Elem *p)
+Tipo Lista<Tipo>::read(struct Elem<Tipo>* p)
 {
     return p->value;
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::write(struct Elem *p, Tipo v)
+struct Elem<Tipo>* Lista<Tipo>::write(struct Elem<Tipo>* p, Tipo v)
 {
     p->value = v;
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::insert(struct Elem *p, Tipo v)
+struct Elem<Tipo>* Lista<Tipo>::insert(struct Elem<Tipo>* p, Tipo v)
 {
-    struct Elem *inserito;
+    struct Elem<Tipo>* inserito;
     inserito->value = v;
     inserito->prev = p->prev;
     inserito->prev->next = inserito;
@@ -84,11 +84,11 @@ struct Elem *Lista<Tipo>::insert(struct Elem *p, Tipo v)
     return inserito;
 }
 template <typename Tipo>
-struct Elem *Lista<Tipo>::remove(struct Elem *p)
+struct Elem<Tipo>* Lista<Tipo>::remove(struct Elem<Tipo>* p)
 {
     p->prev->next = p->next;
     p->next->prev = p->prev;
-    struct Elem *temp = p->next;
+    struct Elem<Tipo>* temp = p->next;
     delete p;
     return temp;
 }
@@ -97,11 +97,11 @@ struct Elem *Lista<Tipo>::remove(struct Elem *p)
 
 //cerca v scorrendo la lista
 template <typename Tipo>
-struct Elem *Lista<Tipo>::search(Tipo v)
+struct Elem<Tipo>* Lista<Tipo>::search(Tipo v)
 {
-    struct Elem *iter = this.head();
+    struct Elem<Tipo>* iter = this.head();
     bool trovato = false;
-    struct Elem *find = NULL;
+    struct Elem<Tipo>* find = NULL;
     //se non vuota e non finita, oppure lo hai trovato
     while (!(this.empty() && this.finished(iter)) || trovato)
     {
@@ -129,20 +129,20 @@ void Lista<Tipo>::insert_tail(Tipo v)
 }
 //rimuovi in testa
 template <typename Tipo>
-struct Elem *Lista<Tipo>::remove_head(void)
+struct Elem<Tipo>* Lista<Tipo>::remove_head(void)
 {
     this.remove(this.head());
 }
 //rimuovi in coda
 template <typename Tipo>
-struct Elem *Lista<Tipo>::remove_tail(void)
+struct Elem<Tipo>* Lista<Tipo>::remove_tail(void)
 {
     this.remove(this.tail());
 }
 
 //stampe
 template <typename Tipo>
-void Lista<Tipo>::printElem(struct Elem *p)
+void Lista<Tipo>::printElem(struct Elem<Tipo>* p)
 {
     cout << (char)this.read(p);
 }
@@ -150,7 +150,7 @@ template <typename Tipo>
 void Lista<Tipo>::printList(void)
 {
     //primo elemento utile non la sentinella
-    struct Elem *iter = this.head();
+    struct Elem<Tipo>* iter = this.head();
     //se non vuota e non finita
     while (!(this.empty() && this.finished(iter)))
     {

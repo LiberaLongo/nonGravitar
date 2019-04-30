@@ -11,20 +11,23 @@ LINK_SFML =  $(SYSTEM) $(WINDOW) $(GRAFICS) $(NETWORK) $(AUDIO)
 #cartelle progetto
 S = ./
 H = ../header/
-U = ../utils/
+
+#comando per compilare
+COMPILE = g++ -c
 
 all: sfml-app
 #lancia l'app in automatico
 	./$<
 
-List.o: $(U)Lista.cpp $(U)Lista.hpp
-	g++ -c Lista.cpp
+Lista.o: $(S)Lista.cpp $(H)Lista.hpp
+	$(COMPILE) $(S)Lista.cpp
 
-main.o: $(S)main.cpp $(U)Lista.hpp
-	g++ -c main.cpp
+main.o: $(S)main.cpp $(H)Lista.hpp
+	$(COMPILE) $(S)main.cpp
 
-sfml-app: main.o
-	g++ main.o -o sfml-app $(LINK_SFML)
+sfml-app: Lista.o main.o
+#	g++ main.o -o sfml-app $(LINK_SFML)
+	g++ main.o -o sfml-app
 
 clean:
 	rm -rf *.o sfml-app

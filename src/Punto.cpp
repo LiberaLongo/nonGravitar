@@ -1,5 +1,5 @@
 //codice punti
-#include "./Punto.hpp"
+#include "../header/Punto.hpp"
 
 //costruttore
 Punto::Punto(float x, float y)
