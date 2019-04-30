@@ -1,4 +1,7 @@
 //codice liste
+#include <iostream>
+using namespace std;
+
 #include "./Lista.hpp"
 
 //costruttore e distruttore
@@ -19,12 +22,12 @@ virtual Lista<Tipo>::~Lista(void)
 
 //setters
 template <class Tipo>
-void Lista<Tipo>::setHead(struct Elem* head)
+void Lista<Tipo>::setHead(typeHead head)
 {
     this.head = head;
 }
 template <class Tipo>
-struct Elem* Lista<Tipo>::getHead(void)
+typeHead Lista<Tipo>::getHead(void)
 {
     return this.head;
 }
@@ -72,7 +75,7 @@ pos Lista<Tipo>::write(pos p, Tipo v)
 template <class Tipo>
 pos Lista<Tipo>::insert(pos p, Tipo v)
 {
-    struct Elem* inserito;
+    pos inserito;
     inserito->value = v;
     inserito->prev = p->prev;
     inserito->prev->next = inserito;
@@ -85,9 +88,54 @@ pos Lista<Tipo>::remove(pos p)
 {
     p->prev->next = p->next;
     p->next->prev = p->prev;
-    struct Elem* temp = p->next;
+    pos temp = p->next;
     delete p;
     return temp;
+}
+
+//metodi ausiliari
+
+//cerca v scorrendo la lista
+template <class Tipo>
+pos Lista<Tipo>::search(Tipo v) {
+
+}
+//inserisci in testa
+template <class Tipo>
+void Lista<Tipo>::insert_head(Tipo v) {
+
+}
+//inserisci in coda
+template <class Tipo>
+void Lista<Tipo>::insert_tail(Tipo v){
+
+}
+//rimuovi in testa
+template <class Tipo>
+typeHead Lista<Tipo>::remove_head(void){
+
+}
+//rimuovi in coda
+template <class Tipo>
+typeHead Lista<Tipo>::remove_tail(void){
+    
+}
+
+//stampe
+void printElem(pos p)
+{
+    cout << (char)this.read(p);
+}
+void printList(void)
+{
+    //primo elemento utile non la sentinella
+    pos iter = this.head();
+    //se non vuota e non finita
+    while (!(this.empty() && this.finished(iter)))
+    {
+        printElem(iter);
+        iter = this.next(iter);
+    }
 }
 
 /*
