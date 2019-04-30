@@ -2,60 +2,59 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-
-template <class Tipo>
+template <typename Tipo>
 struct Elem
 {
-    struct Elem* prev;
-    struct Elem* next;
+    struct Elem<Tipo>* prev;
+    struct Elem<Tipo>* next;
     Tipo item;
 };
 
-typedef struct Elem* pos;
-typedef struct Elem* typeHead;
+/*volevamo definire struct Elem* come pos e typeHead
+ma non è facilmente disponibile typedef template
+bisogna fare cose difficilmente comprensibili*/
 
-//lista bidirezionale, circolare, con sentinella
-template <class Tipo>
+template <typename Tipo>
 class Lista
 {
 private:
-    typeHead head;
+    struct Elem* head;
 public:
     //costruttore e distruttore
     Lista(void);
     virtual ~Lista(void);
 
     //setters
-    void setHead(typeHead head);
-    typeHead getHead(void);
+    void setHead(struct Elem* head);
+    struct Elem* getHead(void);
 
     //metodi
     bool empty(void);
-    pos head(void);
-    pos tail(void);
-    pos next(pos p);
-    pos prev(pos p);
-    bool finished(pos p);
-    Tipo read(pos p);
-    pos write(pos p, Tipo v);
-    pos insert(pos p, Tipo v);
-    pos remove(pos p);
+    struct Elem* head(void);
+    struct Elem* tail(void);
+    struct Elem* next(struct Elem* p);
+    struct Elem* prev(struct Elem* p);
+    bool finished(struct Elem* p);
+    Tipo read(struct Elem* p);
+    struct Elem* write(struct Elem* p, Tipo v);
+    struct Elem* insert(struct Elem* p, Tipo v);
+    struct Elem* remove(struct Elem* p);
 
     //metodi ausiliari
 
     //cerca v scorrendo la lista
-    pos search(Tipo v);
+    struct Elem* search(Tipo v);
     //inserisci in testa
     void insert_head(Tipo v);
     //inserisci in coda
     void insert_tail(Tipo v);
     //rimuovi in testa
-    typeHead remove_head(void);
+    struct Elem* remove_head(void);
     //rimuovi in coda
-    typeHead remove_tail(void);
+    struct Elem* remove_tail(void);
 
     //stampe
-    void printElem(pos p);
+    void printElem(struct Elem* p);
     void printList(void);
 };
 

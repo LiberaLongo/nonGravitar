@@ -5,7 +5,7 @@ using namespace std;
 #include "./Lista.hpp"
 
 //costruttore e distruttore
-template <class Tipo>
+template <typename Tipo>
 Lista<Tipo>::Lista(void)
 {
     struct Elem sentinella;
@@ -15,67 +15,67 @@ Lista<Tipo>::Lista(void)
     this.head = &sentinella;
 }
 
-template <class Tipo>
+template <typename Tipo>
 virtual Lista<Tipo>::~Lista(void)
 {
 }
 
 //setters
-template <class Tipo>
-void Lista<Tipo>::setHead(typeHead head)
+template <typename Tipo>
+void Lista<Tipo>::setHead(struct Elem* head)
 {
     this.head = head;
 }
-template <class Tipo>
-typeHead Lista<Tipo>::getHead(void)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::getHead(void)
 {
     return this.head;
 }
 //metodi
-template <class Tipo>
+template <typename Tipo>
 bool Lista<Tipo>::empty(void)
 {
     return (this.head->next == this.head->prev == this.head);
 }
-template <class Tipo>
-pos Lista<Tipo>::head(void)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::head(void)
 {
     return this.head->next;
 }
-template <class Tipo>
-pos Lista<Tipo>::tail(void)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::tail(void)
 {
     return this.head->prev;
 }
-template <class Tipo>
-pos Lista<Tipo>::next(pos p)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::next(struct Elem* p)
 {
     return p->next;
 }
-template <class Tipo>
-pos Lista<Tipo>::prev(pos p)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::prev(struct Elem* p)
 {
     return p->prev;
 }
-template <class Tipo>
-bool Lista<Tipo>::finished(pos p)
+template <typename Tipo>
+bool Lista<Tipo>::finished(struct Elem* p)
 {
     return (p == this.head);
 }
-template <class Tipo>
-Tipo Lista<Tipo>::read(pos p)
+template <typename Tipo>
+Tipo Lista<Tipo>::read(struct Elem* p)
 {
     return p->value;
 }
-template <class Tipo>
-pos Lista<Tipo>::write(pos p, Tipo v)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::write(struct Elem* p, Tipo v)
 {
     p->value = v;
 }
-template <class Tipo>
-pos Lista<Tipo>::insert(pos p, Tipo v)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::insert(struct Elem* p, Tipo v)
 {
-    pos inserito;
+    struct Elem* inserito;
     inserito->value = v;
     inserito->prev = p->prev;
     inserito->prev->next = inserito;
@@ -83,12 +83,12 @@ pos Lista<Tipo>::insert(pos p, Tipo v)
     p->prev = inserito;
     return inserito;
 }
-template <class Tipo>
-pos Lista<Tipo>::remove(pos p)
+template <typename Tipo>
+struct Elem* Lista<Tipo>::remove(struct Elem* p)
 {
     p->prev->next = p->next;
     p->next->prev = p->prev;
-    pos temp = p->next;
+    struct Elem* temp = p->next;
     delete p;
     return temp;
 }
@@ -96,40 +96,40 @@ pos Lista<Tipo>::remove(pos p)
 //metodi ausiliari
 
 //cerca v scorrendo la lista
-template <class Tipo>
-pos Lista<Tipo>::search(Tipo v) {
+template <typename Tipo>
+struct Elem* Lista<Tipo>::search(Tipo v) {
 
 }
 //inserisci in testa
-template <class Tipo>
+template <typename Tipo>
 void Lista<Tipo>::insert_head(Tipo v) {
 
 }
 //inserisci in coda
-template <class Tipo>
+template <typename Tipo>
 void Lista<Tipo>::insert_tail(Tipo v){
 
 }
 //rimuovi in testa
-template <class Tipo>
-typeHead Lista<Tipo>::remove_head(void){
+template <typename Tipo>
+struct Elem* Lista<Tipo>::remove_head(void){
 
 }
 //rimuovi in coda
-template <class Tipo>
-typeHead Lista<Tipo>::remove_tail(void){
+template <typename Tipo>
+struct Elem* Lista<Tipo>::remove_tail(void){
     
 }
 
 //stampe
-void printElem(pos p)
+void printElem(struct Elem* p)
 {
-    cout << (char)this.read(p);
+    cout << (char) this.read(p);
 }
 void printList(void)
 {
     //primo elemento utile non la sentinella
-    pos iter = this.head();
+    struct Elem* iter = this.head();
     //se non vuota e non finita
     while (!(this.empty() && this.finished(iter)))
     {
