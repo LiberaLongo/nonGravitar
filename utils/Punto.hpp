@@ -11,7 +11,7 @@ private:
 public:
     //costruttore e distruttore
     Punto(float x, float y);
-    virtual ~Punto();
+    virtual ~Punto(void);
 
     //setters
     void setX(float x);
