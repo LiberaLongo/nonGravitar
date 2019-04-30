@@ -141,11 +141,13 @@ struct Elem *Lista<Tipo>::remove_tail(void)
 }
 
 //stampe
-void printElem(struct Elem *p)
+template <typename Tipo>
+void Lista<Tipo>::printElem(struct Elem *p)
 {
     cout << (char)this.read(p);
 }
-void printList(void)
+template <typename Tipo>
+void Lista<Tipo>::printList(void)
 {
     //primo elemento utile non la sentinella
     struct Elem *iter = this.head();
