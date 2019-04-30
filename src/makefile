@@ -9,7 +9,7 @@ AUDIO := -lsfml-audio
 LINK_SFML =  $(SYSTEM) $(WINDOW) $(GRAFICS) $(NETWORK) $(AUDIO)
 
 #cartelle progetto
-S = ./src/
+S = ./
 H = ../header/
 U = ../utils/
 
@@ -23,8 +23,8 @@ List.o: $(U)Lista.cpp $(U)Lista.hpp
 main.o: $(S)main.cpp $(U)Lista.hpp
 	g++ -c main.cpp
 
-#sfml-app: main.o
-#	g++ main.o -o sfml-app $(LINK_SFML)
+sfml-app: main.o
+	g++ main.o -o sfml-app $(LINK_SFML)
 
 clean:
 	rm -rf *.o sfml-app
