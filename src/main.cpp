@@ -4,11 +4,8 @@ using namespace std;
 //#include "../header/Gioco.hpp"
 #include "../header/Lista.hpp"
 
-
-//ATTENZIONE!
-//le definizioni dei template non vengono incluse nei file oggetto dei sorgenti C++
-//#include "./dichiarazioni.cpp"
-template class Lista<int>;
+//ATTENZIONE!!!!
+#include "./definizioni.cpp"
 //fine ATTENZIONE!
 
 

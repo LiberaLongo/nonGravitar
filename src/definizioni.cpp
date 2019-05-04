@@ -1,2 +1,2 @@
-#include "./Lista.hpp"
+#include "./Lista.cpp"
 template class Lista<int>;

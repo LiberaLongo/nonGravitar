@@ -22,12 +22,15 @@ all: sfml-app
 Lista.o: $(S)Lista.cpp $(H)Lista.hpp
 	$(COMPILE) $(S)Lista.cpp
 
+definizioni.o: $(S)definizioni.cpp $(S)Lista.cpp
+	$(COMPILE) $(S)definizioni.cpp
+
 main.o: $(S)main.cpp $(H)Lista.hpp
 	$(COMPILE) $(S)main.cpp
 
 sfml-app: Lista.o main.o
 #	g++ main.o -o sfml-app $(LINK_SFML)
-	g++ main.o -o sfml-app
+	g++ Lista.o main.o -o sfml-app
 
 clean:
 	rm -rf *.o sfml-app
