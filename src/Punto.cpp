@@ -4,8 +4,8 @@
 //costruttore
 Punto::Punto(float x, float y)
 {
-    this.x = x;
-    this.y = y;
+    this->x = x;
+    this->y = y;
 }
 //distruttore
 virtual Punto::~Punto(void)
@@ -16,24 +16,24 @@ virtual Punto::~Punto(void)
 //setters
 void Punto::setX(float x)
 {
-    this.x = x;
+    this->x = x;
 }
 void Punto::setY(float y)
 {
-    this.y = y;
+    this->y = y;
 }
 void Punto::setCoord(float x, float y)
 {
-    this.x = x;
-    this.y = y;
+    this->x = x;
+    this->y = y;
 }
 
 //getters
 float Punto::getX(void)
 {
-    return this.x;
+    return this->x;
 }
 float Punto::getY(void)
 {
-    return this.y;
+    return this->y;
 }

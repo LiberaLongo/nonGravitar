@@ -8,11 +8,11 @@ using namespace std;
 template <typename Tipo>
 Lista<Tipo>::Lista(void)
 {
-    struct Elem<Tipo> sentinella;
-    sentinella.prev = sentinella;
-    sentinella.next = sentinella;
-    //sentinella.item non ci interessa
-    this.testa = &sentinella;
+    struct Elem<Tipo>* sentinella;
+    sentinella->prev = sentinella;
+    sentinella->next = sentinella;
+    //sentinella->item non ci interessa
+    this->testa = sentinella;
 }
 
 template <typename Tipo>
@@ -24,28 +24,32 @@ template <typename Tipo>
 template <typename Tipo>
 void Lista<Tipo>::setHead(struct Elem<Tipo>* head)
 {
-    this.testa = head;
+    this->testa = head;
 }
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::getHead(void)
 {
-    return this.testa;
+    return this->testa;
 }
 //metodi
 template <typename Tipo>
 bool Lista<Tipo>::empty(void)
 {
-    return (this.testa->next == this.testa->prev == this.testa);
+    if (this->testa->next != this->testa->prev)
+	return false;
+    if (this->testa->next != this->testa)
+	return false;
+    return true;
 }
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::head(void)
 {
-    return this.testa->next;
+    return this->testa->next;
 }
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::tail(void)
 {
-    return this.testa->prev;
+    return this->testa->prev;
 }
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::next(struct Elem<Tipo>* p)
@@ -60,23 +64,23 @@ struct Elem<Tipo>* Lista<Tipo>::prev(struct Elem<Tipo>* p)
 template <typename Tipo>
 bool Lista<Tipo>::finished(struct Elem<Tipo>* p)
 {
-    return (p == this.testa);
+    return (p == this->testa);
 }
 template <typename Tipo>
 Tipo Lista<Tipo>::read(struct Elem<Tipo>* p)
 {
-    return p->value;
+    return p->item;
 }
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::write(struct Elem<Tipo>* p, Tipo v)
 {
-    p->value = v;
+    p->item = v;
 }
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::insert(struct Elem<Tipo>* p, Tipo v)
 {
     struct Elem<Tipo>* inserito;
-    inserito->value = v;
+    inserito->item = v;
     inserito->prev = p->prev;
     inserito->prev->next = inserito;
     inserito->next = p;
@@ -99,19 +103,19 @@ struct Elem<Tipo>* Lista<Tipo>::remove(struct Elem<Tipo>* p)
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::search(Tipo v)
 {
-    struct Elem<Tipo>* iter = this.head();
+    struct Elem<Tipo>* iter = this->head();
     bool trovato = false;
     struct Elem<Tipo>* find = NULL;
     //se non vuota e non finita, oppure lo hai trovato
-    while (!(this.empty() && this.finished(iter)) || trovato)
+    while (!(this->empty() && this->finished(iter)) || trovato)
     {
         //se lo trovi
-        if (this.read(iter) == v)
+        if (this->read(iter) == v)
         {
             find = iter;
             trovato = true;
         }
-        iter = this.next(iter);
+        iter = this->next(iter);
     }
     return find;
 }
@@ -119,43 +123,43 @@ struct Elem<Tipo>* Lista<Tipo>::search(Tipo v)
 template <typename Tipo>
 void Lista<Tipo>::insert_head(Tipo v)
 {
-    this.insert(this.head(), v);
+    this->insert(this->head(), v);
 }
 //inserisci in coda
 template <typename Tipo>
 void Lista<Tipo>::insert_tail(Tipo v)
 {
-    this.insert(this.tail(), v);
+    this->insert(this->tail(), v);
 }
 //rimuovi in testa
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::remove_head(void)
 {
-    this.remove(this.head());
+    this->remove(this->head());
 }
 //rimuovi in coda
 template <typename Tipo>
 struct Elem<Tipo>* Lista<Tipo>::remove_tail(void)
 {
-    this.remove(this.tail());
+    this->remove(this->tail());
 }
 
 //stampe
 template <typename Tipo>
 void Lista<Tipo>::printElem(struct Elem<Tipo>* p)
 {
-    cout << (char)this.read(p);
+    cout << (char)this->read(p);
 }
 template <typename Tipo>
 void Lista<Tipo>::printList(void)
 {
     //primo elemento utile non la sentinella
-    struct Elem<Tipo>* iter = this.head();
+    struct Elem<Tipo>* iter = this->head();
     //se non vuota e non finita
-    while (!(this.empty() && this.finished(iter)))
+    while (!(this->empty() && this->finished(iter)))
     {
         printElem(iter);
-        iter = this.next(iter);
+        iter = this->next(iter);
     }
 }
 
