@@ -1,20 +1,26 @@
 #include <iostream>
+using namespace std;
 
 //#include "../header/Gioco.hpp"
 #include "../header/Lista.hpp"
 
-using namespace std;
+
+//ATTENZIONE!
+//le definizioni dei template non vengono incluse nei file oggetto dei sorgenti C++
+//#include "./dichiarazioni.cpp"
+template class Lista<int>;
+//fine ATTENZIONE!
+
 
 int main()
 {
   //testo cose
   Lista<int> lista; //senza parentesi ()
-  struct Elem<int>* head = lista.head();
   lista.insert_head(1);
   lista.insert_head(2);
   lista.insert_head(3);
   lista.printList();
-  head = lista.remove(lista.search(2));
+  lista.remove(lista.search(2));
   lista.printList();
   //chiamo funzione gioco
   //errore è true se si è presentato un errore, false altrimenti
