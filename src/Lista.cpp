@@ -14,11 +14,11 @@ Lista<Tipo>::Lista(void)
 	#ifdef DEBUG
 	cout << "costruttore" << endl;
 	#endif
-	struct Elem<Tipo> sentinella;
-	sentinella.prev = &sentinella;
-	sentinella.next = &sentinella;
+	struct Elem<Tipo>* sentinella = new Elem<Tipo>;
+	sentinella->prev = sentinella;
+	sentinella->next = sentinella;
 	//sentinella.item non ci interessa
-	this->testa = &sentinella;
+	this->testa = sentinella;
 }
 
 template <typename Tipo>
@@ -121,13 +121,13 @@ struct Elem<Tipo> *Lista<Tipo>::insert(struct Elem<Tipo> *p, Tipo v)
 	#ifdef DEBUG
 	cout << "inserisci" << endl;
 	#endif
-	struct Elem<Tipo> inserito;
-	inserito.item = v;
-	inserito.prev = p->prev;
-	inserito.prev->next = &inserito;
-	inserito.next = p;
-	p->prev = &inserito;
-	return &inserito;
+	struct Elem<Tipo>* inserito = new Elem<Tipo>;
+	inserito->item = v;
+	inserito->prev = p->prev;
+	inserito->prev->next = inserito;
+	inserito->next = p;
+	p->prev = inserito;
+	return inserito;
 }
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::remove(struct Elem<Tipo> *p)
@@ -153,7 +153,7 @@ struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 	#endif
 	struct Elem<Tipo> *iter = this->head();
 	bool trovato = false;
-	struct Elem<Tipo> *find = NULL;
+	struct Elem<Tipo> *find = nullptr;
 	//se non vuota e non finita, oppure lo hai trovato
 	while (!(this->empty() && this->finished(iter)) || trovato)
 		{
