@@ -121,13 +121,13 @@ struct Elem<Tipo> *Lista<Tipo>::insert(struct Elem<Tipo> *p, Tipo v)
 	#ifdef DEBUG
 	cout << "inserisci" << endl;
 	#endif
-	struct Elem<Tipo> *inserito;
-	inserito->item = v;
-	inserito->prev = p->prev;
-	inserito->prev->next = inserito;
-	inserito->next = p;
-	p->prev = inserito;
-	return inserito;
+	struct Elem<Tipo> inserito;
+	inserito.item = v;
+	inserito.prev = p->prev;
+	inserito.prev->next = &inserito;
+	inserito.next = p;
+	p->prev = &inserito;
+	return &inserito;
 }
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::remove(struct Elem<Tipo> *p)
