@@ -4,7 +4,7 @@ using namespace std;
 
 #include "../header/Lista.hpp"
 
-#define DEBUG
+//#define DEBUG
 //uncomment this line to remove DEBUG printing
 
 //costruttore e distruttore
@@ -151,19 +151,22 @@ struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 	#ifdef DEBUG
 	cout << "cerca " << v << endl;
 	#endif
-	struct Elem<Tipo> *iter = this->head();
-	bool trovato = false;
 	struct Elem<Tipo> *find = nullptr;
-	//se non vuota e non finita, oppure lo hai trovato
-	while (!(this->empty() && this->finished(iter)) || trovato)
-		{
-		//se lo trovi
-		if (this->read(iter) == v)
-		{
-			find = iter;
-			trovato = true;
+	if(!(this->empty()))
+	{
+		struct Elem<Tipo> *iter = this->head();
+		bool trovato = false;
+		//se non finita, oppure lo hai trovato
+		while (!(this->finished(iter)) || !trovato)
+			{
+			//se lo trovi
+			if (this->read(iter) == v)
+			{
+				find = iter;
+				trovato = true;
+			}
+			iter = this->next(iter);
 		}
-		iter = this->next(iter);
 	}
 	return find;
 }
@@ -211,7 +214,7 @@ void Lista<Tipo>::printElem(struct Elem<Tipo> *p)
 	#ifdef DEBUG
 	cout << "stampa elemento" << endl;
 	#endif
-	cout << (char)this->read(p);
+	cout << this->read(p);
 }
 template <typename Tipo>
 void Lista<Tipo>::printList(void)
@@ -219,14 +222,21 @@ void Lista<Tipo>::printList(void)
 	#ifdef DEBUG
 	cout << "stampa lista" << endl;
 	#endif
-	//primo elemento utile non la sentinella
-	struct Elem<Tipo> *iter = this->head();
-	//se non vuota e non finita
-	while (!(this->empty() && this->finished(iter)))
+	cout << "Lista : [ ";
+	if(!(this->empty()))
 	{
-		printElem(iter);
-		iter = this->next(iter);
+		//primo elemento utile non la sentinella
+		struct Elem<Tipo> *iter = this->head();
+		//se non vuota e non finita
+		while (!(this->finished(iter)))
+		{
+			printElem(iter);
+			iter = this->next(iter);
+			if(!(this->finished(iter)))
+				cout << " --> ";
+		}
 	}
+	cout << " ]" << endl;
 }
 
 /*
