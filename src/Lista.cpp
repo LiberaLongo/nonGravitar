@@ -214,7 +214,7 @@ void Lista<Tipo>::printElem(struct Elem<Tipo> *p)
 	#ifdef DEBUG
 	cout << "stampa elemento" << endl;
 	#endif
-	cout << this->read(p);
+	cout << "( " << this->read(p) << " )";
 }
 template <typename Tipo>
 void Lista<Tipo>::printList(void)

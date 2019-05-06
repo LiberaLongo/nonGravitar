@@ -1,14 +1,20 @@
 //codice punti
+#include <iostream>
+using namespace std;
+
 #include "../header/Punto.hpp"
 
 //costruttore
+Punto::Punto(void)
+{
+}
 Punto::Punto(float x, float y)
 {
     this->x = x;
     this->y = y;
 }
 //distruttore
-virtual Punto::~Punto(void)
+/*virtual*/ Punto::~Punto(void)
 {
     //nothing to to
 }
@@ -36,4 +42,8 @@ float Punto::getX(void)
 float Punto::getY(void)
 {
     return this->y;
+}
+void Punto::print(void)
+{
+    cout << "Punto: ( " << this->x << ", " << this->y << " )" << endl;
 }

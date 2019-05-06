@@ -5,13 +5,14 @@
 class Punto
 {
 private:
-    float x;
-    float y;
+    float x = 0;
+    float y = 0;
 
 public:
-    //costruttore e distruttore
+    //costruttori e distruttore
+    Punto(void);
     Punto(float x, float y);
-    virtual ~Punto(void);
+    /*virtual*/ ~Punto(void);
 
     //setters
     void setX(float x);
@@ -21,6 +22,9 @@ public:
     //getters
     float getX(void);
     float getY(void);
+
+    //stampa
+    void print(void);
 };
 
 #endif //PUNTO_H

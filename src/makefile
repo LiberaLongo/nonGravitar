@@ -15,6 +15,10 @@ H = ../header/
 #comando per compilare
 COMPILE = g++ -c
 
+#insieme di oggetti che vogliono essere lanciati (chiamati da main)
+OBJ = Punto.o
+
+
 all: sfml-app
 #lancia l'app in automatico
 	./$<
@@ -25,12 +29,15 @@ Lista.o: $(S)Lista.cpp $(H)Lista.hpp
 definizioni.o: $(S)definizioni.cpp $(S)Lista.cpp
 	$(COMPILE) $(S)definizioni.cpp
 
+Punto.o: $(S)Punto.cpp $(H)Punto.hpp
+	$(COMPILE) $(S)Punto.cpp
+
 main.o: $(S)main.cpp $(H)Lista.hpp
 	$(COMPILE) $(S)main.cpp
 
-sfml-app: Lista.o definizioni.o main.o
+sfml-app: $(OBJ) main.o
 #	g++ ... -o sfml-app $(LINK_SFML)
-	g++ Lista.o definizioni.o main.o -o sfml-app
+	g++ $(OBJ) main.o -o sfml-app
 
 clean:
 	rm -rf *.o sfml-app
