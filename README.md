@@ -11,7 +11,7 @@ apri il terminale
 (Ctrl + Alt + T)
 
 scarica la libreria
-sudo apt-get install libsfml-dev
+`sudo apt-get install libsfml-dev`
 
 per maggiori informazioni sulla libreria
 <https://www.sfml-dev.org/learn.php>
@@ -24,6 +24,7 @@ per maggiori informazioni su come installare sfml su linux
 con il terminale aperto
 
 spostati con il comando `cd` sulla cartella in cui vuoi clonare il progetto
+
 (esempio Desktop: `cd Desktop` oppure Documents: `cd Documents`)
 
 `git clone http://www.github.com/LiberaLongo/nonGravitar.git`
