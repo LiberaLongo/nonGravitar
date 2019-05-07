@@ -16,7 +16,7 @@ H = ../header/
 COMPILE = g++ -c
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = Punto.o Lista.o ListaClasse.o definizioni.o
+OBJ = Punto.o Lista.o ListaClasse.o definizioni.o Gioco.o
 
 
 all: sfml-app
@@ -35,12 +35,15 @@ definizioni.o: $(S)definizioni.cpp $(S)Lista.cpp
 Punto.o: $(S)Punto.cpp $(H)Punto.hpp
 	$(COMPILE) $(S)Punto.cpp
 
-main.o: $(S)main.cpp $(H)Lista.hpp
+Gioco.o: $(S)Gioco.cpp $(H)Gioco.hpp
+	$(COMPILE) $(S)Gioco.cpp
+
+main.o: $(S)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp
 	$(COMPILE) $(S)main.cpp
 
 sfml-app: $(OBJ) main.o
-#	g++ ... -o sfml-app $(LINK_SFML)
-	g++ $(OBJ) main.o -o sfml-app
+#	linkiamo tutti gli object e la grafica SFML
+	g++ $(OBJ) main.o -o sfml-app $(LINK_SFML)
 
 clean:
 	rm -rf *.o sfml-app

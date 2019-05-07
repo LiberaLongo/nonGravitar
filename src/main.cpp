@@ -1,7 +1,9 @@
 #include <iostream>
 using namespace std;
 
-//#include "../header/Gioco.hpp"
+//#include <SFML/Graphics.hpp>
+
+#include "../header/Gioco.hpp"
 #include "../header/Lista.hpp"
 #include "../header/Punto.hpp"
 
@@ -13,6 +15,7 @@ using namespace std;
 
 int main()
 {
+	/*
 	float X[] = {1, 2, 3, 4, 5};
 	float Y[] = {5, 4, 3, 2, 1};
 	//testo cose
@@ -24,8 +27,9 @@ int main()
 		lista.insert_head(p);
 	}
 	lista.print();
+	*/
 	//chiamo funzione gioco
 	//errore è true se si è presentato un errore, false altrimenti
-	//bool errore = Gioco();
-	//return (int) errore;
+	bool errore = Gioco();
+	return (int) errore;
 }
