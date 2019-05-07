@@ -5,7 +5,7 @@
 #include "./Lista.hpp"
 
 template <typename Tipo>
-class ListaClasse : protected Lista<Tipo> {
+class ListaClasse : public Lista<Tipo> {
 public:
 	//costruttore e distruttore
 	ListaClasse(void);
