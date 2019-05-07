@@ -11,7 +11,7 @@ using namespace std;
 
 //costruttore e distruttore
 template <typename Tipo>
-ListaClasse<Tipo>::ListaClasse(void) : Lista()
+ListaClasse<Tipo>::ListaClasse(void) : Lista<Tipo>()
 {
 }
 //
@@ -24,6 +24,7 @@ template <typename Tipo>
 }
 
 //cerca v scorrendo la lista
+//override
 template <typename Tipo>
 struct Elem<Tipo> *ListaClasse<Tipo>::search(Tipo v)
 {
@@ -51,6 +52,7 @@ struct Elem<Tipo> *ListaClasse<Tipo>::search(Tipo v)
 }
 
 //stampe
+//override
 template <typename Tipo>
 void ListaClasse<Tipo>::print(void)
 {
