@@ -5,8 +5,8 @@
 class Punto
 {
 private:
-    float x = 0;
-    float y = 0;
+    float x = 0.f;
+    float y = 0.f;
 
 public:
     //costruttori e distruttore

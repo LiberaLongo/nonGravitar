@@ -6,14 +6,16 @@ NETWORK := -lsfml-network
 AUDIO := -lsfml-audio
 
 #link all
-LINK_SFML =  $(SYSTEM) $(WINDOW) $(GRAFICS) $(NETWORK) $(AUDIO)
+LINK_SFML = $(SYSTEM) $(WINDOW) $(GRAFICS) $(NETWORK) $(AUDIO)
 
 #cartelle progetto
 S = ./
 H = ../header/
 
 #comando per compilare
-COMPILE = g++ -c
+CC = g++
+CFLAGS = -c -std=c++11
+COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = Punto.o Lista.o ListaClasse.o definizioni.o Navicella.o Gioco.o
@@ -46,7 +48,7 @@ main.o: $(S)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp
 
 sfml-app: $(OBJ) main.o
 #	linkiamo tutti gli object e la grafica SFML
-	g++ $(OBJ) main.o -o sfml-app $(LINK_SFML)
+	$(CC) $(OBJ) main.o -o sfml-app $(LINK_SFML)
 
 clean:
 	rm -rf *.o sfml-app
