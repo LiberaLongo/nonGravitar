@@ -7,8 +7,19 @@ using namespace std;
 //costruttori e distruttore
 Navicella::Navicella(void)
 {
-    this->centro.setCoord(0.f, 0.f);
-    this->raggio = 0.f;
+    //default x, y, raggio
+}
+Navicella::Navicella(float raggio) {
+    //default centro
+    this->raggio = raggio;
+}
+Navicella::Navicella(Punto centro) {
+    this->centro = centro;
+    //default raggio
+}
+Navicella::Navicella(float x, float y) {
+    this->centro.setCoord(x, y);
+    //default raggio
 }
 Navicella::Navicella(Punto centro, float raggio)
 {

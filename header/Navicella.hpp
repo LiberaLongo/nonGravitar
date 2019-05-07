@@ -9,12 +9,17 @@
 class Navicella
 {
 private:
-    Punto centro; //il centro della navicella
-    float raggio;
+    //il centro della navicella
+    Punto centro;   //di default (0,0) in accordo con il default di Punto
+    //il raggio della circonferenza circoscritta
+    float raggio = 25.f;
 
 public:
     //costruttori e distruttore
     Navicella(void);
+    Navicella(float raggio);
+    Navicella(Punto centro);
+    Navicella(float x, float y);
     Navicella(Punto centro, float raggio);
     Navicella(float x, float y, float raggio);
     /*virtual*/ ~Navicella(void);
