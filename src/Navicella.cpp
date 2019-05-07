@@ -73,10 +73,10 @@ bool Navicella::confronto(Navicella nav)
 }
 
 //disegna
-void Navicella::draw(sf::RenderWindow window)
+ sf::CircleShape Navicella::draw(void)
 {
     sf::CircleShape navicella(this->raggio, 3);
     navicella.setFillColor(sf::Color::Green);
     navicella.setPosition(this->centro.getX(), this->centro.getY());
-    window.draw(navicella);
+    return navicella;
 }

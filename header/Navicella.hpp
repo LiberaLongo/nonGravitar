@@ -37,7 +37,7 @@ public:
     bool confronto(Navicella nav);
 
     //disegna
-    void draw(sf::RenderWindow window);
+     sf::CircleShape draw(void);
 };
 
 #endif //NAVICELLA_H
