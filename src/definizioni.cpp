@@ -3,5 +3,6 @@
 
 //ATTENZIONE!!!!
 #include "./Lista.cpp"
+#include "./ListaClasse.cpp"
 //fine ATTENZIONE!
-template class Lista<Punto>;
+template class ListaClasse<Punto>;

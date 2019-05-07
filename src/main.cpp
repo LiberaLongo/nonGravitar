@@ -23,7 +23,7 @@ int main()
 		p.setCoord(X[i], Y[i]);
 		lista.insert_head(p);
 	}
-	lista.printList();
+	lista.print();
 	//chiamo funzione gioco
 	//errore è true se si è presentato un errore, false altrimenti
 	//bool errore = Gioco();

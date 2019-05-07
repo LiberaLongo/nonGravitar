@@ -20,7 +20,7 @@ Lista<Tipo>::Lista(void)
 	//sentinella.item non ci interessa
 	this->testa = sentinella;
 }
-
+//
 template <typename Tipo>
 /*virtual*/ Lista<Tipo>::~Lista(void)
 {
@@ -46,6 +46,7 @@ struct Elem<Tipo> *Lista<Tipo>::getHead(void)
 #endif
 	return this->testa;
 }
+
 //metodi
 template <typename Tipo>
 bool Lista<Tipo>::empty(void)
@@ -59,6 +60,7 @@ bool Lista<Tipo>::empty(void)
 		return false;
 	return true;
 }
+//
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::head(void)
 {
@@ -66,28 +68,36 @@ struct Elem<Tipo> *Lista<Tipo>::head(void)
 	cout << "primo elemento in testa" << endl;
 #endif
 	return this->testa->next;
-} template <typename Tipo>
+}
+//
+template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::tail(void)
 {
 #ifdef DEBUG
 	cout << "primo elemento in coda" << endl;
 #endif
 	return this->testa->prev;
-} template <typename Tipo>
+}
+//
+template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::next(struct Elem<Tipo> *p)
 {
 #ifdef DEBUG
 	cout << "next" << endl;
 #endif
 	return p->next;
-} template <typename Tipo>
+}
+//
+template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::prev(struct Elem<Tipo> *p)
 {
 #ifdef DEBUG
 	cout << "prev" << endl;
 #endif
 	return p->prev;
-} template <typename Tipo>
+}
+//
+template <typename Tipo>
 bool Lista<Tipo>::finished(struct Elem<Tipo> *p)
 {
 #ifdef DEBUG
@@ -95,6 +105,7 @@ bool Lista<Tipo>::finished(struct Elem<Tipo> *p)
 #endif
 	return (p == this->testa);
 }
+//
 template <typename Tipo>
 Tipo Lista<Tipo>::read(struct Elem<Tipo> *p)
 {
@@ -103,6 +114,7 @@ Tipo Lista<Tipo>::read(struct Elem<Tipo> *p)
 #endif
 	return p->item;
 }
+//
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::write(struct Elem<Tipo> *p, Tipo v)
 {
@@ -111,6 +123,7 @@ struct Elem<Tipo> *Lista<Tipo>::write(struct Elem<Tipo> *p, Tipo v)
 #endif
 	p->item = v;
 }
+//
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::insert(struct Elem<Tipo> *p, Tipo v)
 {
@@ -125,6 +138,7 @@ struct Elem<Tipo> *Lista<Tipo>::insert(struct Elem<Tipo> *p, Tipo v)
 	p->prev = inserito;
 	return inserito;
 }
+//
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::remove(struct Elem<Tipo> *p)
 {
@@ -140,32 +154,6 @@ struct Elem<Tipo> *Lista<Tipo>::remove(struct Elem<Tipo> *p)
 
 //metodi ausiliari
 
-//cerca v scorrendo la lista
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
-{
-#ifdef DEBUG
-	cout << "cerca " << v << endl;
-#endif
-	struct Elem<Tipo> *find = nullptr;
-	if (!(this->empty()))
-	{
-		struct Elem<Tipo> *iter = this->head();
-		bool trovato = false;
-		//se non finita, oppure lo hai trovato
-		while (!(this->finished(iter)) || !trovato)
-		{
-			//se lo trovi
-			if (this->read(iter) == v)	//e se confronto due CLASSI?
-			{
-				find = iter;
-				trovato = true;
-			}
-			iter = this->next(iter);
-		}
-	}
-	return find;
-}
 //inserisci in testa
 template <typename Tipo>
 void Lista<Tipo>::insert_head(Tipo v)
@@ -203,18 +191,36 @@ struct Elem<Tipo> *Lista<Tipo>::remove_tail(void)
 	this->remove(this->tail());
 }
 
-//stampe
+//cerca v scorrendo la lista
 template <typename Tipo>
-void Lista<Tipo>::printElem(struct Elem<Tipo> *p)
+struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 {
 #ifdef DEBUG
-	cout << "stampa elemento" << endl;
+	cout << "cerca " << v << endl;
 #endif
-	//cout << "( " << this->read(p) << " )";
-	cout << this->read(p);	//e se voglio stampare una CLASSE?
+	struct Elem<Tipo> *find = nullptr;
+	if (!(this->empty()))
+	{
+		struct Elem<Tipo> *iter = this->head();
+		bool trovato = false;
+		//se non finita, oppure lo hai trovato
+		while (!(this->finished(iter)) || !trovato)
+		{
+			//se lo trovi
+			if (this->read(iter) == v)
+			{
+				find = iter;
+				trovato = true;
+			}
+			iter = this->next(iter);
+		}
+	}
+	return find;
 }
+
+//stampe
 template <typename Tipo>
-void Lista<Tipo>::printList(void)
+void Lista<Tipo>::print(void)
 {
 #ifdef DEBUG
 	cout << "stampa lista" << endl;
@@ -227,7 +233,9 @@ void Lista<Tipo>::printList(void)
 		//se non vuota e non finita
 		while (!(this->finished(iter)))
 		{
-			printElem(iter);
+			//stampo elemento
+			cout << this->read(iter);
+			//passo al successivo e stampo freccia
 			iter = this->next(iter);
 			if (!(this->finished(iter)))
 				cout << " --> ";

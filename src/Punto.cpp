@@ -43,7 +43,14 @@ float Punto::getY(void)
 {
     return this->y;
 }
+
+//stampa
 void Punto::print(void)
 {
     cout << "Punto: ( " << this->x << ", " << this->y << " )" << endl;
+}
+
+//confronto
+bool Punto::confronto(Punto p) {
+    return (this->x == p.getX() && this->y == p.getY());
 }

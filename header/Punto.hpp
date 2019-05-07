@@ -25,6 +25,9 @@ public:
 
     //stampa
     void print(void);
+
+    //contronto
+    bool confronto(Punto p);
 };
 
 #endif //PUNTO_H

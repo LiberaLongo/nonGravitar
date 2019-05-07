@@ -41,9 +41,6 @@ public:
 	struct Elem<Tipo>* remove(struct Elem<Tipo>* p);
 
 	//metodi ausiliari
-
-	//cerca v scorrendo la lista
-	struct Elem<Tipo>* search(Tipo v);
 	//inserisci in testa
 	void insert_head(Tipo v);
 	//inserisci in coda
@@ -53,9 +50,11 @@ public:
 	//rimuovi in coda
 	struct Elem<Tipo>* remove_tail(void);
 
+	//cerca v scorrendo la lista
+	struct Elem<Tipo>* search(Tipo v);
+
 	//stampe
-	void printElem(struct Elem<Tipo>* p);
-	void printList(void);
+	void print(void);
 };
 
 #endif //LISTA_H
