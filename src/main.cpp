@@ -16,7 +16,7 @@ int main()
 	float X[] = {1, 2, 3, 4, 5};
 	float Y[] = {5, 4, 3, 2, 1};
 	//testo cose
-	Lista<Punto> lista;
+	ListaClasse<Punto> lista;
 	Punto p;
 	lista.insert_head(p);
 	for(int i = 0; i < 5 ; i++) {
