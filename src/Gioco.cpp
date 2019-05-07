@@ -1,14 +1,14 @@
 //codice gioco
 #include <SFML/Graphics.hpp>
 
+#include "../header/Navicella.hpp"
+
 bool Gioco(void)
 {
     //codice della gestione del gioco
 
     //funzione finestra di SFML
-    double width = 400.0, height = 500.0;
-    double raggio = width / 3;
-    double widthTronco = width / 4;
+    float width = 400.0, height = 500.0;
     // create the lobby
     sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
 
@@ -25,11 +25,13 @@ bool Gioco(void)
         }
 
         // clear the window with black color
-        lobby.clear(sf::Color::Blue);
+        lobby.clear(sf::Color::Black);
 
         // draw everything here...
+        Navicella me = Navicella(width/2, height/2, 50.f);
+        me.draw(lobby); //ummmmm?
 
-        // lobby.draw(...);
+        // lobby.draw(...);        
 
         // end the current frame
         lobby.display();

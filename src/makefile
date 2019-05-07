@@ -16,7 +16,7 @@ H = ../header/
 COMPILE = g++ -c
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = Punto.o Lista.o ListaClasse.o definizioni.o Gioco.o
+OBJ = Punto.o Lista.o ListaClasse.o definizioni.o Navicella.o Gioco.o
 
 
 all: sfml-app
@@ -34,6 +34,9 @@ definizioni.o: $(S)definizioni.cpp $(S)Lista.cpp
 
 Punto.o: $(S)Punto.cpp $(H)Punto.hpp
 	$(COMPILE) $(S)Punto.cpp
+
+Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp
+	$(COMPILE) $(S)Navicella.cpp
 
 Gioco.o: $(S)Gioco.cpp $(H)Gioco.hpp
 	$(COMPILE) $(S)Gioco.cpp
