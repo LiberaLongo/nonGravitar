@@ -28,7 +28,7 @@ bool Gioco(void)
         lobby.clear(sf::Color::Black);
 
         // draw everything here...
-        Navicella me = Navicella(width/2, height/2, 50.f);
+        Navicella me = Navicella(width/2, height/2);
         lobby.draw(me.draw());
 
         // lobby.draw(...);        
