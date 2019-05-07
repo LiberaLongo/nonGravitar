@@ -29,7 +29,7 @@ bool Gioco(void)
 
         // draw everything here...
         Navicella me = Navicella(width/2, height/2, 50.f);
-        lobby.draw(me.draw()); //ummmmm?
+        lobby.draw(me.draw());
 
         // lobby.draw(...);        
 

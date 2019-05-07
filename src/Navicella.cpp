@@ -73,10 +73,18 @@ bool Navicella::confronto(Navicella nav)
 }
 
 //disegna
- sf::CircleShape Navicella::draw(void)
+sf::CircleShape Navicella::draw(void)
 {
-    sf::CircleShape navicella(this->raggio, 3);
-    navicella.setFillColor(sf::Color::Green);
-    navicella.setPosition(this->centro.getX(), this->centro.getY());
-    return navicella;
+    //calcolo x e y in modo che il centro
+    //sia effettivamente il centro della circonferenza circoscritta il triangolo
+    //anche per la libreria SFML
+    float x = this->centro.getX() - this->raggio;
+    float y = this->centro.getY() - this->raggio;
+    //il triangolo è una circonferenza con solo 3 lati
+    sf::CircleShape triangolo(this->raggio, 3);
+    //blu
+    triangolo.setFillColor(sf::Color::Blue);
+    //in posizione effettiva del centro
+    triangolo.setPosition(x, y);
+    return triangolo;
 }
