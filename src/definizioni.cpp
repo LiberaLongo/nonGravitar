@@ -1,2 +1,7 @@
+#include "../header/Punto.hpp"
+
+
+//ATTENZIONE!!!!
 #include "./Lista.cpp"
-template class Lista<int>;
+//fine ATTENZIONE!
+template class Lista<Punto>;
