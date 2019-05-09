@@ -18,8 +18,8 @@ CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = Punto.o Lista.o ListaClasse.o definizioni.o Navicella.o Gioco.o
-
+OBJ = Punto.o Lista.o ListaClasse.o definizioni.o Navicella.o Gioco.o main.o
+# Controlli.o
 
 all: sfml-app
 #lancia l'app in automatico
@@ -40,15 +40,18 @@ Punto.o: $(S)Punto.cpp $(H)Punto.hpp
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp
 	$(COMPILE) $(S)Navicella.cpp
 
+#Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp
+#	$(COMPILE) $(S)Controlli.cpp
+
 Gioco.o: $(S)Gioco.cpp $(H)Gioco.hpp
 	$(COMPILE) $(S)Gioco.cpp
 
 main.o: $(S)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp
 	$(COMPILE) $(S)main.cpp
 
-sfml-app: $(OBJ) main.o
+sfml-app: $(OBJ)
 #	linkiamo tutti gli object e la grafica SFML
-	$(CC) $(OBJ) main.o -o sfml-app $(LINK_SFML)
+	$(CC) $(OBJ) -o sfml-app $(LINK_SFML)
 
 clean:
 	rm -rf *.o sfml-app

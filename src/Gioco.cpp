@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 //#include <Keyboard.hpp>
 
-#include "../header/Navicella.hpp"
+#include "../header/Gioco.hpp"
 
 //#define DEBUG
 
@@ -27,13 +27,15 @@ bool Gioco(void)
         sf::Event event;
         while (lobby.pollEvent(event))
         {
+            //le cose della Render Window le devo controllare in QUESTA funzione!
+            //in particolare se la finestra è stata chiusa
+            if (event.type == sf::Event::Closed)
+                lobby.close();
+            //altrimenti passo il controllo alla mia funzione dei controlli
+            //controlli(player, event);
+            /*la funzione controlli non va per non si sa quale motivo*/
             switch (event.type)
             {
-            // window closed
-            case sf::Event::Closed:
-                lobby.close();
-                break;
-
             // key pressed
             case sf::Event::KeyPressed:
                 //...
@@ -74,6 +76,7 @@ bool Gioco(void)
             default:
                 break;
             }
+            /*la funzione controlli non va per non si sa quale motivo*/
         }
 
         // clear the window with black color
