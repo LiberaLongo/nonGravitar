@@ -125,37 +125,37 @@ sf::CircleShape Navicella::draw(void)
     return triangolo;
 }
 
-void Navicella::moveUp(void)
+void Navicella::moveUp(float hight)
 {
     //sù
 #ifdef DEBUG
-    std::cout << "W\t";
+    cout << "W\t";
 #endif
     this->setY(this->getY() - this->speed);
     this->angle = 0.f;
 }
-void Navicella::moveLeft(void)
+void Navicella::moveLeft(float width)
 {
     //sinistra
 #ifdef DEBUG
-    std::cout << "A\t";
+    cout << "A\t";
 #endif
     this->setX(this->getX() - this->speed);
     this->angle = 270.f;
 }
-void Navicella::moveDown(void)
+void Navicella::moveDown(float hight)
 {
     //giù
 #ifdef DEBUG
-    std::cout << "S\t";
+    cout << "S\t";
 #endif
     this->setY(this->getY() + this->speed);
     this->angle = 180.f;
 }
-void Navicella::moveRight(void)
+void Navicella::moveRight(float width)
 {
 #ifdef DEBUG
-    std::cout << "D\t";
+    cout << "D\t";
 #endif
     //destra
     this->setX(this->getX() + this->speed);

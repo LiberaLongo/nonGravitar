@@ -54,10 +54,10 @@ public:
     sf::CircleShape draw(void);
 
     //controlli di movimento
-    void moveUp(void);
-    void moveLeft(void);
-    void moveDown(void);
-    void moveRight(void);
+    void moveUp(float hight);
+    void moveLeft(float width);
+    void moveDown(float hight);
+    void moveRight(float width);
 };
 
 #endif //NAVICELLA_H

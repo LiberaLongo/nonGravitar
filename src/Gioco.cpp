@@ -1,6 +1,4 @@
 //codice gioco
-#include <iostream>
-
 #include <SFML/Graphics.hpp>
 //#include <Keyboard.hpp>
 
@@ -43,29 +41,29 @@ bool Gioco(void)
                 {
                 //WASD
                 case sf::Keyboard::W:
-                    player.moveUp();
+                    player.moveUp(height);
                     break;
                 case sf::Keyboard::A:
-                    player.moveLeft();
+                    player.moveLeft(width);
                     break;
                 case sf::Keyboard::S:
-                    player.moveDown();
+                    player.moveDown(height);
                     break;
                 case sf::Keyboard::D:
-                    player.moveRight();
+                    player.moveRight(width);
                     break;
                 //freccie
                 case sf::Keyboard::Up:
-                    player.moveUp();
+                    player.moveUp(height);
                     break;
                 case sf::Keyboard::Left:
-                    player.moveLeft();
+                    player.moveLeft(width);
                     break;
                 case sf::Keyboard::Down:
-                    player.moveDown();
+                    player.moveDown(height);
                     break;
                 case sf::Keyboard::Right:
-                    player.moveRight();
+                    player.moveRight(width);
                     break;
                 default:
                     break;
