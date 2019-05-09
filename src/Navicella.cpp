@@ -118,8 +118,10 @@ sf::CircleShape Navicella::draw(void)
     triangolo.setFillColor(sf::Color::Blue);
     //in posizione effettiva del centro
     triangolo.setPosition(x, y);
+    //punto di origine per la trasfomazione
+    //triangolo.setOrigin(x, y);
     //ruota di angolo
-    triangolo.rotate(this->angle);
+    //triangolo.rotate(this->angle);
     return triangolo;
 }
 
