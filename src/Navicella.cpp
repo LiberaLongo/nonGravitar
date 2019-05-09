@@ -10,18 +10,18 @@ using namespace std;
 //costruttore void
 Navicella::Navicella(void)
 {
-    //default x, y, raggio
+    //default tutto
 }
 //costruttori punto
 Navicella::Navicella(Punto centro)
 {
     this->centro = centro;
-    //default raggio
+    //default raggio, velocità, angolo
 }
 Navicella::Navicella(float x, float y)
 {
     this->centro.setCoord(x, y);
-    //default raggio
+    //default raggio, velocità, angolo
 }
 //costruttori completi
 Navicella::Navicella(Punto centro, float raggio, float angle, float speed)
@@ -110,8 +110,8 @@ sf::CircleShape Navicella::draw(void)
     //calcolo x e y in modo che il centro
     //sia effettivamente il centro della circonferenza circoscritta il triangolo
     //anche per la libreria SFML
-    float x = this->centro.getX() - this->raggio;
-    float y = this->centro.getY() - this->raggio;
+    float x = this->getX() - this->raggio;
+    float y = this->getY() - this->raggio;
     //il triangolo è una circonferenza con solo 3 lati
     sf::CircleShape triangolo(this->raggio, 3);
     //blu
@@ -119,16 +119,18 @@ sf::CircleShape Navicella::draw(void)
     //in posizione effettiva del centro
     triangolo.setPosition(x, y);
     //ruota di angolo
+    triangolo.rotate(this->angle);
     return triangolo;
 }
 
 void Navicella::moveUp(void)
 {
-    //su
+    //sù
 #ifdef DEBUG
     std::cout << "W\t";
 #endif
     this->setY(this->getY() - this->speed);
+    this->angle = 0.f;
 }
 void Navicella::moveLeft(void)
 {
@@ -137,6 +139,7 @@ void Navicella::moveLeft(void)
     std::cout << "A\t";
 #endif
     this->setX(this->getX() - this->speed);
+    this->angle = 270.f;
 }
 void Navicella::moveDown(void)
 {
@@ -145,6 +148,7 @@ void Navicella::moveDown(void)
     std::cout << "S\t";
 #endif
     this->setY(this->getY() + this->speed);
+    this->angle = 180.f;
 }
 void Navicella::moveRight(void)
 {
@@ -153,4 +157,5 @@ void Navicella::moveRight(void)
 #endif
     //destra
     this->setX(this->getX() + this->speed);
+    this->angle = 90.f;
 }

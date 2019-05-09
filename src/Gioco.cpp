@@ -13,17 +13,17 @@ bool Gioco(void)
     //codice della gestione del gioco
 
     //funzione finestra di SFML
-    float width = 400.0, height = 500.0;
-    // create the lobby
+    float width = 400.f, height = 500.f;
+    //crea la lobby
     sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
 
     //mia navicella
     Navicella player = Navicella(width / 2, height / 2);
 
-    // run the program as long as the window is open
+    //esegui il programma finchè la finestra è aperta
     while (lobby.isOpen())
     {
-        // check all the window's events that were triggered since the last iteration of the loop
+        //controlla se qualche evento viene scatenato prima del prossimo loop
         sf::Event event;
         while (lobby.pollEvent(event))
         {
@@ -36,7 +36,7 @@ bool Gioco(void)
             /*la funzione controlli non va per non si sa quale motivo*/
             switch (event.type)
             {
-            // key pressed
+            //tasti premuti?
             case sf::Event::KeyPressed:
                 //...
                 switch (event.key.code)
@@ -72,22 +72,22 @@ bool Gioco(void)
                 }
                 break;
 
-            // we don't process other types of events
+            //noi non controlliamo gli altri tipi di evento
             default:
                 break;
             }
             /*la funzione controlli non va per non si sa quale motivo*/
         }
 
-        // clear the window with black color
+        //pulisci la finestra colorandola di nero
         lobby.clear(sf::Color::Black);
 
-        // draw everything here...
+        //disegna qui...
         lobby.draw(player.draw());
 
         // lobby.draw(...);
 
-        // end the current frame
+        //fine del frame corrente
         lobby.display();
     }
 
