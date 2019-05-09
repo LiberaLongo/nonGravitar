@@ -1,7 +1,12 @@
 //codice gioco
+#include <iostream>
+
 #include <SFML/Graphics.hpp>
+//#include <Keyboard.hpp>
 
 #include "../header/Navicella.hpp"
+
+//#define DEBUG
 
 bool Gioco(void)
 {
@@ -12,6 +17,9 @@ bool Gioco(void)
     // create the lobby
     sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
 
+    //mia navicella
+    Navicella player = Navicella(width / 2, height / 2);
+
     // run the program as long as the window is open
     while (lobby.isOpen())
     {
@@ -19,19 +27,62 @@ bool Gioco(void)
         sf::Event event;
         while (lobby.pollEvent(event))
         {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            switch (event.type)
+            {
+            // window closed
+            case sf::Event::Closed:
                 lobby.close();
+                break;
+
+            // key pressed
+            case sf::Event::KeyPressed:
+                //...
+                switch (event.key.code)
+                {
+                //WASD
+                case sf::Keyboard::W:
+                    player.moveUp();
+                    break;
+                case sf::Keyboard::A:
+                    player.moveLeft();
+                    break;
+                case sf::Keyboard::S:
+                    player.moveDown();
+                    break;
+                case sf::Keyboard::D:
+                    player.moveRight();
+                    break;
+                //freccie
+                case sf::Keyboard::Up:
+                    player.moveUp();
+                    break;
+                case sf::Keyboard::Left:
+                    player.moveLeft();
+                    break;
+                case sf::Keyboard::Down:
+                    player.moveDown();
+                    break;
+                case sf::Keyboard::Right:
+                    player.moveRight();
+                    break;
+                default:
+                    break;
+                }
+                break;
+
+            // we don't process other types of events
+            default:
+                break;
+            }
         }
 
         // clear the window with black color
         lobby.clear(sf::Color::Black);
 
         // draw everything here...
-        Navicella me = Navicella(width/2, height/2);
-        lobby.draw(me.draw());
+        lobby.draw(player.draw());
 
-        // lobby.draw(...);        
+        // lobby.draw(...);
 
         // end the current frame
         lobby.display();

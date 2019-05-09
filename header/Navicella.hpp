@@ -13,36 +13,51 @@ private:
     Punto centro;   //di default (0,0) in accordo con il default di Punto
     //il raggio della circonferenza circoscritta
     float raggio = 25.f;
+    float angle = 0.f; //punta verso l'alto
+    float speed = 5.f; //velocità
 
 public:
-    //costruttori e distruttore
+    //COSTRUTTORI
+    //costruttore void
     Navicella(void);
-    Navicella(float raggio);
+    //costruttori punto
     Navicella(Punto centro);
     Navicella(float x, float y);
-    Navicella(Punto centro, float raggio);
-    Navicella(float x, float y, float raggio);
+    //costruttori completi
+    Navicella(Punto centro, float raggio, float angle, float speed);
+    Navicella(float x, float y, float raggio, float angle, float speed);
+
+    //distruttori
     /*virtual*/ ~Navicella(void);
 
-    //setters
+    //SETTERS
+    //setters coordinate
     void setX(float x);
     void setY(float y);
     void setCoord(float x, float y);
+    //altri setter
     void setRaggio(float raggio);
+    void setAngolo(float angle);
+    void setSpeed(float speed);
 
     //getters
     float getX(void);
     float getY(void);
     float getRaggio(void);
+    float getAngolo(void);
+    float getSpeed(void);
 
     //stampa
     void print(void);
 
-    //contronto
-    bool confronto(Navicella nav);
-
     //disegna
-     sf::CircleShape draw(void);
+    sf::CircleShape draw(void);
+
+    //controlli di movimento
+    void moveUp(void);
+    void moveLeft(void);
+    void moveDown(void);
+    void moveRight(void);
 };
 
 #endif //NAVICELLA_H
