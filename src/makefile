@@ -40,6 +40,8 @@ Punto.o: $(S)Punto.cpp $(H)Punto.hpp
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp
 	$(COMPILE) $(S)Navicella.cpp
 
+#pianeta
+
 #Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp
 #	$(COMPILE) $(S)Controlli.cpp
 
