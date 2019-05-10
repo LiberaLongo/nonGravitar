@@ -6,22 +6,34 @@ using namespace std;
 
 //#define DEBUG
 
+//funzione privata che setta origin
+/*void Navicella::setOrigin()
+{
+    //float x = 900.f/2 , y = 700.f/2 ;
+    float x = this->centro.getX() + this->raggio;
+    float y = this->centro.getY() + this->raggio;
+    this->origine.setCoord(x, y);
+}*/
+
 //COSTRUTTORI
 //costruttore void
 Navicella::Navicella(void)
 {
     //default tutto
+    //this->setOrigin();
 }
 //costruttori punto
 Navicella::Navicella(Punto centro)
 {
     this->centro = centro;
     //default raggio, velocità, angolo
+    //this->setOrigin();
 }
 Navicella::Navicella(float x, float y)
 {
     this->centro.setCoord(x, y);
     //default raggio, velocità, angolo
+    //this->setOrigin();
 }
 //costruttori completi
 Navicella::Navicella(Punto centro, float raggio, float angle, float speed)
@@ -30,6 +42,7 @@ Navicella::Navicella(Punto centro, float raggio, float angle, float speed)
     this->raggio = raggio;
     this->angle = angle;
     this->speed = speed;
+    //this->setOrigin();
 }
 Navicella::Navicella(float x, float y, float raggio, float angle, float speed)
 {
@@ -37,6 +50,7 @@ Navicella::Navicella(float x, float y, float raggio, float angle, float speed)
     this->raggio = raggio;
     this->angle = angle;
     this->speed = speed;
+    //this->setOrigin();
 }
 
 //distruttore
@@ -49,14 +63,17 @@ Navicella::Navicella(float x, float y, float raggio, float angle, float speed)
 void Navicella::setX(float x)
 {
     this->centro.setX(x);
+    //this->setOrigin();
 }
 void Navicella::setY(float y)
 {
     this->centro.setY(y);
+    //this->setOrigin();
 }
 void Navicella::setCoord(float x, float y)
 {
     this->centro.setCoord(x, y);
+    //this->setOrigin();
 }
 void Navicella::setRaggio(float raggio)
 {
@@ -98,6 +115,10 @@ void Navicella::print(void)
 {
     cout << "Navicella : [ centro = ";
     this->centro.print();
+    /*#ifdef DEBUG
+    cout << ", origine = ";
+    this->origine.print();
+#endif*/
     cout << ", raggio = " << this->raggio;
     cout << ", angolo = " << this->angle;
     cout << ", speed = " << this->speed;
@@ -119,45 +140,73 @@ sf::CircleShape Navicella::draw(void)
     //in posizione effettiva del centro
     triangolo.setPosition(x, y);
     //punto di origine per la trasfomazione
-    //triangolo.setOrigin(x, y);
+    //triangolo.setOrigin(this->origine.getX(), this->origine.getY());
     //ruota di angolo
     //triangolo.rotate(this->angle);
     return triangolo;
 }
 
-void Navicella::moveUp(float hight)
+void Navicella::moveUp(void)
 {
     //sù
 #ifdef DEBUG
     cout << "W\t";
 #endif
-    this->setY(this->getY() - this->speed);
+    float y = this->getY() - this->speed;
+    if ((y - this->raggio) < 0.f) //se non vuole andare troppo in alto
+    {
+        //collisione
+        cout << "non uscire dallo schermo" << endl;
+    }
+    else
+        this->setY(y);
     this->angle = 0.f;
 }
-void Navicella::moveLeft(float width)
+void Navicella::moveLeft(void)
 {
     //sinistra
 #ifdef DEBUG
     cout << "A\t";
 #endif
-    this->setX(this->getX() - this->speed);
+    float x = this->getX() - this->speed;
+    if ((x - this->raggio) < 0.f) //se non vuole andare troppo in alto
+    {
+        //collisione
+        cout << "non uscire dallo schermo" << endl;
+    }
+    else           
+        this->setX(x);
     this->angle = 270.f;
 }
-void Navicella::moveDown(float hight)
+void Navicella::moveDown(float height)
 {
     //giù
 #ifdef DEBUG
     cout << "S\t";
 #endif
-    this->setY(this->getY() + this->speed);
+    float y = this->getY() + this->speed;
+    if ((y + this->raggio) > height ) //se non vuole andare troppo in alto
+    {
+        //collisione
+        cout << "non uscire dallo schermo" << endl;
+    }
+    else
+        this->setY(y);
     this->angle = 180.f;
 }
 void Navicella::moveRight(float width)
 {
+    //destra
 #ifdef DEBUG
     cout << "D\t";
 #endif
-    //destra
-    this->setX(this->getX() + this->speed);
+    float x = this->getX() + this->speed;
+    if ((x + this->raggio) > width ) //se non vuole andare troppo in alto
+    {
+        //collisione
+        cout << "non uscire dallo schermo" << endl;
+    }
+    else
+        this->setX(x);
     this->angle = 90.f;
 }

@@ -11,7 +11,7 @@ bool Gioco(void)
     //codice della gestione del gioco
 
     //funzione finestra di SFML
-    float width = 400.f, height = 500.f;
+    float width = 900.f, height = 700.f;
     //crea la lobby
     sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
 
@@ -41,10 +41,10 @@ bool Gioco(void)
                 {
                 //WASD
                 case sf::Keyboard::W:
-                    player.moveUp(height);
+                    player.moveUp();
                     break;
                 case sf::Keyboard::A:
-                    player.moveLeft(width);
+                    player.moveLeft();
                     break;
                 case sf::Keyboard::S:
                     player.moveDown(height);
@@ -54,10 +54,10 @@ bool Gioco(void)
                     break;
                 //freccie
                 case sf::Keyboard::Up:
-                    player.moveUp(height);
+                    player.moveUp();
                     break;
                 case sf::Keyboard::Left:
-                    player.moveLeft(width);
+                    player.moveLeft();
                     break;
                 case sf::Keyboard::Down:
                     player.moveDown(height);

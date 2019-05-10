@@ -6,7 +6,7 @@
 
 #include "./Punto.hpp"
 
-class Navicella
+class Navicella// : public sf::Drawable, public sf::Transformable
 {
 private:
     //il centro della navicella
@@ -16,6 +16,10 @@ private:
     float angle = 0.f; //punta verso l'alto
     float speed = 5.f; //velocità
 
+/*  Punto origine;
+    //funzione privata che setta origin
+private:
+    void setOrigin(void);*/
 public:
     //COSTRUTTORI
     //costruttore void
@@ -54,9 +58,9 @@ public:
     sf::CircleShape draw(void);
 
     //controlli di movimento
-    void moveUp(float hight);
-    void moveLeft(float width);
-    void moveDown(float hight);
+    void moveUp(void);
+    void moveLeft(void);
+    void moveDown(float height);
     void moveRight(float width);
 };
 
