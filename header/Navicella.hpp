@@ -2,11 +2,12 @@
 #ifndef NAVICELLA_H
 #define NAVICELLA_H
 
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
 
+#include "./DisegnabileI.hpp"
 #include "./Punto.hpp"
 
-class Navicella// : public sf::Drawable, public sf::Transformable
+class Navicella : public DisegnabileI
 {
 private:
     //il centro della navicella
