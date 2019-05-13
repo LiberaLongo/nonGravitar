@@ -55,7 +55,7 @@ public:
     void print(void);
 
     //disegna
-    sf::CircleShape draw(void);
+    void draw(sf::RenderWindow &window);
 
     //controlli di movimento
     void moveUp(void);

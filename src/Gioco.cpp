@@ -81,7 +81,7 @@ bool Gioco(void)
         lobby.clear(sf::Color::Black);
 
         //disegna qui...
-        lobby.draw(player.draw());
+        player.draw(lobby);
 
         // lobby.draw(...);
 

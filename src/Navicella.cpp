@@ -126,7 +126,7 @@ void Navicella::print(void)
 }
 
 //disegna
-sf::CircleShape Navicella::draw(void)
+void Navicella::draw(sf::RenderWindow &window)
 {
     //calcolo x e y in modo che il centro
     //sia effettivamente il centro della circonferenza circoscritta il triangolo
@@ -143,7 +143,7 @@ sf::CircleShape Navicella::draw(void)
     //triangolo.setOrigin(this->origine.getX(), this->origine.getY());
     //ruota di angolo
     //triangolo.rotate(this->angle);
-    return triangolo;
+    window.draw(triangolo);
 }
 
 void Navicella::moveUp(void)
