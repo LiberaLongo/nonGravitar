@@ -117,7 +117,6 @@ void Navicella::draw(sf::RenderWindow &window)
 {
     //centro iniziale della figura prima di fare setPosition
     float x = 0.f, y = 0.f; //centro: (0,0)
-    Punto a = Punto(x, y);
     //crea una empty shape convex con 3 punti
     sf::ConvexShape triangolo;
     triangolo.setPointCount(3);

@@ -1,8 +1,9 @@
 //header punti
 #ifndef PUNTO_H
 #define PUNTO_H
+#include "./DisegnabileI.hpp"
 
-class Punto
+class Punto : public DisegnabileI
 {
 private:
     float x = 0.f;
@@ -28,6 +29,9 @@ public:
 
     //contronto
     bool confronto(Punto p);
+
+    //disegna
+    void draw(sf::RenderWindow &window);
 };
 
 #endif //PUNTO_H

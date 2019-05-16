@@ -13,7 +13,7 @@ private:
     //il centro della navicella
     Punto centro;   //di default (0,0) in accordo con il default di Punto
     //il raggio della circonferenza circoscritta
-    float size = 120.f; //ampiezza massima
+    float size = 10.f; //ampiezza diviso 4...
     float angle = 0.f; //punta verso l'alto
     float speed = 5.f; //velocità
 
