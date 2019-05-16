@@ -115,30 +115,21 @@ void Navicella::print(void)
 //disegna
 void Navicella::draw(sf::RenderWindow &window)
 {
-    //il triangolo è una circonferenza con solo 3 lati
-    //sf::CircleShape triangolo(this->size, 3);
-
     //centro iniziale della figura prima di fare setPosition
     float x = 0.f, y = 0.f; //centro: (0,0)
-    float littlesize = this->size/4; //serve per avere size come ampiezza massima
-    //e poi giocare con le proporzioni piccole
-    // create an empty shape convex
+    Punto a = Punto(x, y);
+    //crea una empty shape convex con 3 punti
     sf::ConvexShape triangolo;
-    // resize it to 3 points
-    triangolo.setPointCount(5);
-    // definisci i punti per disegnare la figura con centro (0,0) (poi modificata)
-    triangolo.setPoint(0, sf::Vector2f(x /*+ littlesize*3*/, y + littlesize*3));
-    triangolo.setPoint(1, sf::Vector2f(x - littlesize, y - littlesize));
-    triangolo.setPoint(2, sf::Vector2f(x - littlesize, y + littlesize));
-    //proporzioni modificabili purchè risulti ancora rispetto alle coordinate (0,0)
-    //in cui è settato il centro di rotazione
-    // che altrimenti comincia a fare cose molto strane
-
+    triangolo.setPointCount(3);
+    //definisci i punti rispetto a (0,0)
+    triangolo.setPoint(0, sf::Vector2f(x, y - this->size*3));
+    triangolo.setPoint(1, sf::Vector2f(x - this->size, y + this->size));
+    triangolo.setPoint(2, sf::Vector2f(x + this->size, y + this->size));
     //blu
     triangolo.setFillColor(sf::Color::Blue);
-    //ruota di angolo
+    //ruota di angolo, PRIMA! della rotazione
     triangolo.setRotation(this->angle);
-    //in posizione effettiva del centro
+    //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
     //disegna sulla window passata per riferimento
     window.draw(triangolo);

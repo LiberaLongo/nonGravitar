@@ -54,3 +54,13 @@ void Punto::print(void)
 bool Punto::confronto(Punto p) {
     return (this->x == p.getX() && this->y == p.getY());
 }
+
+//disegna
+void Punto::draw(sf::RenderWindow &window) {
+    float size = 10.f;
+    sf::RectangleShape rectangle(sf::Vector2f(size, size));
+    rectangle.setPosition(this->x, this->y);
+    //il punto non è al centro del rettangolo
+    //ma lo (0.0) del rettangolo invece della window
+    window.draw(rectangle);
+}
