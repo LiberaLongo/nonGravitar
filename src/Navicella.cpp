@@ -6,51 +6,42 @@ using namespace std;
 
 //#define DEBUG
 
-//funzione privata che setta origin
-/*void Navicella::setOrigin()
-{
-    //float x = 900.f/2 , y = 700.f/2 ;
-    float x = this->centro.getX() + this->raggio;
-    float y = this->centro.getY() + this->raggio;
-    this->origine.setCoord(x, y);
-}*/
-
 //COSTRUTTORI
 //costruttore void
 Navicella::Navicella(void)
 {
     //default tutto
-    //this->setOrigin();
+    
 }
 //costruttori punto
 Navicella::Navicella(Punto centro)
 {
     this->centro = centro;
-    //default raggio, velocità, angolo
-    //this->setOrigin();
+    //default size, velocità, angolo
+    
 }
 Navicella::Navicella(float x, float y)
 {
     this->centro.setCoord(x, y);
-    //default raggio, velocità, angolo
-    //this->setOrigin();
+    //default size, velocità, angolo
+    
 }
 //costruttori completi
-Navicella::Navicella(Punto centro, float raggio, float angle, float speed)
+Navicella::Navicella(Punto centro, float size, float angle, float speed)
 {
     this->centro = centro;
-    this->raggio = raggio;
+    this->size = size;
     this->angle = angle;
     this->speed = speed;
-    //this->setOrigin();
+    
 }
-Navicella::Navicella(float x, float y, float raggio, float angle, float speed)
+Navicella::Navicella(float x, float y, float size, float angle, float speed)
 {
     this->centro.setCoord(x, y);
-    this->raggio = raggio;
+    this->size = size;
     this->angle = angle;
     this->speed = speed;
-    //this->setOrigin();
+    
 }
 
 //distruttore
@@ -63,21 +54,21 @@ Navicella::Navicella(float x, float y, float raggio, float angle, float speed)
 void Navicella::setX(float x)
 {
     this->centro.setX(x);
-    //this->setOrigin();
+    
 }
 void Navicella::setY(float y)
 {
     this->centro.setY(y);
-    //this->setOrigin();
+    
 }
 void Navicella::setCoord(float x, float y)
 {
     this->centro.setCoord(x, y);
-    //this->setOrigin();
+    
 }
-void Navicella::setRaggio(float raggio)
+void Navicella::setSize(float size)
 {
-    this->raggio = raggio;
+    this->size = size;
 }
 void Navicella::setAngolo(float angle)
 {
@@ -97,9 +88,9 @@ float Navicella::getY(void)
 {
     return this->centro.getY();
 }
-float Navicella::getRaggio(void)
+float Navicella::getSize(void)
 {
-    return this->raggio;
+    return this->size;
 }
 float Navicella::getAngolo(void)
 {
@@ -115,11 +106,7 @@ void Navicella::print(void)
 {
     cout << "Navicella : [ centro = ";
     this->centro.print();
-    /*#ifdef DEBUG
-    cout << ", origine = ";
-    this->origine.print();
-#endif*/
-    cout << ", raggio = " << this->raggio;
+    cout << ", size = " << this->size;
     cout << ", angolo = " << this->angle;
     cout << ", speed = " << this->speed;
     cout << " ]" << endl;
@@ -128,21 +115,32 @@ void Navicella::print(void)
 //disegna
 void Navicella::draw(sf::RenderWindow &window)
 {
-    //calcolo x e y in modo che il centro
-    //sia effettivamente il centro della circonferenza circoscritta il triangolo
-    //anche per la libreria SFML
-    float x = this->getX() - this->raggio;
-    float y = this->getY() - this->raggio;
     //il triangolo è una circonferenza con solo 3 lati
-    sf::CircleShape triangolo(this->raggio, 3);
+    //sf::CircleShape triangolo(this->size, 3);
+
+    //centro iniziale della figura prima di fare setPosition
+    float x = 0.f, y = 0.f; //centro: (0,0)
+    float littlesize = this->size/4; //serve per avere size come ampiezza massima
+    //e poi giocare con le proporzioni piccole
+    // create an empty shape convex
+    sf::ConvexShape triangolo;
+    // resize it to 3 points
+    triangolo.setPointCount(5);
+    // definisci i punti per disegnare la figura con centro (0,0) (poi modificata)
+    triangolo.setPoint(0, sf::Vector2f(x /*+ littlesize*3*/, y + littlesize*3));
+    triangolo.setPoint(1, sf::Vector2f(x - littlesize, y - littlesize));
+    triangolo.setPoint(2, sf::Vector2f(x - littlesize, y + littlesize));
+    //proporzioni modificabili purchè risulti ancora rispetto alle coordinate (0,0)
+    //in cui è settato il centro di rotazione
+    // che altrimenti comincia a fare cose molto strane
+
     //blu
     triangolo.setFillColor(sf::Color::Blue);
-    //in posizione effettiva del centro
-    triangolo.setPosition(x, y);
-    //punto di origine per la trasfomazione
-    //triangolo.setOrigin(this->origine.getX(), this->origine.getY());
     //ruota di angolo
-    //triangolo.rotate(this->angle);
+    triangolo.setRotation(this->angle);
+    //in posizione effettiva del centro
+    triangolo.setPosition(this->getX(), this->getY());
+    //disegna sulla window passata per riferimento
     window.draw(triangolo);
 }
 
@@ -153,7 +151,7 @@ void Navicella::moveUp(void)
     cout << "W\t";
 #endif
     float y = this->getY() - this->speed;
-    if ((y - this->raggio) < 0.f) //se non vuole andare troppo in alto
+    if ((y - this->size) < 0.f) //se non vuole andare troppo in alto
     {
         //collisione
         cout << "non uscire dallo schermo" << endl;
@@ -169,7 +167,7 @@ void Navicella::moveLeft(void)
     cout << "A\t";
 #endif
     float x = this->getX() - this->speed;
-    if ((x - this->raggio) < 0.f) //se non vuole andare troppo in alto
+    if ((x - this->size) < 0.f) //se non vuole andare troppo in alto
     {
         //collisione
         cout << "non uscire dallo schermo" << endl;
@@ -185,7 +183,7 @@ void Navicella::moveDown(float height)
     cout << "S\t";
 #endif
     float y = this->getY() + this->speed;
-    if ((y + this->raggio) > height ) //se non vuole andare troppo in alto
+    if ((y + this->size) > height ) //se non vuole andare troppo in alto
     {
         //collisione
         cout << "non uscire dallo schermo" << endl;
@@ -201,7 +199,7 @@ void Navicella::moveRight(float width)
     cout << "D\t";
 #endif
     float x = this->getX() + this->speed;
-    if ((x + this->raggio) > width ) //se non vuole andare troppo in alto
+    if ((x + this->size) > width ) //se non vuole andare troppo in alto
     {
         //collisione
         cout << "non uscire dallo schermo" << endl;
