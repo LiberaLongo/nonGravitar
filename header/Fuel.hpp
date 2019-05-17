@@ -3,12 +3,14 @@
 #define FUEL_H
 
 #include "./utils.hpp"
+#include "../header/Punto.hpp"
 
 class Fuel : public DisegnabileI
 {
 private:
     Punto centro;
     float quantita = FUEL1;
+    float size;
 
 public:
     //costruttore vuoto
@@ -17,8 +19,10 @@ public:
     Fuel(Punto centro);
     Fuel(float x, float y);
     //costruttore completo
-    Fuel(Punto centro, float raggio);
-    Fuel(float x, float y, float raggio);
+    Fuel(Punto centro, float quantita, float size);
+    Fuel(float x, float y, float quantita, float size);
+
+    //distruttore
     /*virtual*/ ~Fuel(void);
 
     //setters
@@ -26,17 +30,19 @@ public:
     void setY(float y);
     void setCoord(float x, float y);
     void setQuantita(float quantita);
+    void setSize(float size);
 
     //getters
     float getX(void);
     float getY(void);
     float getQuantita(void);
+    float getSize(void);
 
     //stampa
     void print(void);
 
     //contronto
-    bool confronto(Fuel p);
+    bool confronto(Fuel f);
 
     //disegna
     void draw(sf::RenderWindow &window);
