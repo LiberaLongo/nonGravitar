@@ -79,7 +79,7 @@ void Direzione::print(void) {
 
 //contronto
 bool Direzione::confronto(Direzione dir) {
-    return (this->origine.getX() == dir.getXOrigine() && this->origine.getY() == dir.getYOrigine() && this->speed == dir.getSpeed && this->angolo == dir.getAngolo());    
+    return (this->getXOrigine() == dir.getXOrigine() && this->origine.getY() == dir.getYOrigine() && this->speed == dir.getSpeed() && this->angolo == dir.getAngolo());    
 }
 
 //disegna
