@@ -5,9 +5,10 @@
 //#include <SFML/Graphics.hpp>
 
 #include "./DisegnabileI.hpp"
+#include "./utils.hpp"
 #include "./Punto.hpp"
-#include "./Fuel.hpp"
 #include "./Direzione.hpp"
+#include "./Fuel.hpp"
 
 class Navicella : public DisegnabileI
 {
@@ -27,8 +28,8 @@ public:
     Navicella(Punto centro);
     Navicella(float x, float y);
     //costruttori completi
-    Navicella(Punto centro, Fuel carburante, float size, float angle, float speed);
-    Navicella(float x, float y, float carburante, float size, float angle, float speed);
+    Navicella(Punto centro, Fuel carburante, Direzione dir, float size);
+    Navicella(float x, float y, float carburante, float angle, float speed, float size);
 
     //distruttori
     /*virtual*/ ~Navicella(void);

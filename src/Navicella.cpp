@@ -17,32 +17,34 @@ Navicella::Navicella(void)
 Navicella::Navicella(Punto centro)
 {
     this->centro = centro;
-    //default size, velocità, angolo, carburante
+    this->dir.setOrigine(centro);
+    //default size, dir, carburante
     
 }
 Navicella::Navicella(float x, float y)
 {
     this->centro.setCoord(x, y);
-    //default size, velocità, angolo, carburante
+    this->dir.setOrigine(x, y);
+    //default size, dir, carburante
     
 }
 //costruttori completi
-Navicella::Navicella(Punto centro, Fuel carburante, float size, float angle, float speed)
+Navicella::Navicella(Punto centro, Fuel carburante, Direzione dir, float size)
 {
     this->centro = centro;
     this->carburante = carburante;
+    this->dir = dir;
     this->size = size;
-    this->angle = angle;
-    this->speed = speed;
     
 }
-Navicella::Navicella(float x, float y, float carburante, float size, float angle, float speed)
+Navicella::Navicella(float x, float y, float carburante, float angle, float speed, float size)
 {
     this->centro.setCoord(x, y);
     this->carburante.setQuantita(carburante);
+    this->dir.setOrigine(x, y);
+    this->dir.setAngolo(angle);
+    this->dir.setSpeed(speed);
     this->size = size;
-    this->angle = angle;
-    this->speed = speed;
 }
 
 //distruttore
@@ -60,12 +62,12 @@ void Navicella::setX(float x)
 void Navicella::setY(float y)
 {
     this->centro.setY(y);
-    
+        
 }
 void Navicella::setCoord(float x, float y)
 {
     this->centro.setCoord(x, y);
-    
+    this->dir.setOrigine(x, y);    
 }
 void Navicella::setSize(float size)
 {
@@ -73,11 +75,11 @@ void Navicella::setSize(float size)
 }
 void Navicella::setAngolo(float angle)
 {
-    this->angle = angle;
+    this->dir.setAngolo(angle);
 }
 void Navicella::setSpeed(float speed)
 {
-    this->speed = speed;
+    this->dir.setSpeed(speed);
 }
 void Navicella::setFuel(Fuel carburante) {
     this->carburante = carburante;
@@ -98,11 +100,11 @@ float Navicella::getSize(void)
 }
 float Navicella::getAngolo(void)
 {
-    return this->angle;
+    return this->dir.getAngolo();
 }
 float Navicella::getSpeed(void)
 {
-    return this->speed;
+    return this->dir.getSpeed();
 }
 float Navicella::getFuel(void) {
     return this->carburante.getQuantita();
@@ -113,9 +115,8 @@ void Navicella::print(void)
 {
     cout << "Navicella : [ centro = ";
     this->centro.print();
+    this->dir.print();
     cout << ", size = " << this->size;
-    cout << ", angolo = " << this->angle;
-    cout << ", speed = " << this->speed;
     cout << " ]" << endl;
 }
 
@@ -134,7 +135,7 @@ void Navicella::draw(sf::RenderWindow &window)
     //blu
     triangolo.setFillColor(sf::Color::Blue);
     //ruota di angolo, PRIMA! della rotazione
-    triangolo.setRotation(this->angle);
+    triangolo.setRotation(this->dir.getAngolo());
     //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
     //disegna sulla window passata per riferimento
@@ -144,64 +145,28 @@ void Navicella::draw(sf::RenderWindow &window)
 void Navicella::moveUp(void)
 {
     //sù
-#ifdef DEBUG
-    cout << "W\t";
-#endif
-    float y = this->getY() - this->speed;
-    if ((y - this->size) < 0.f) //se non vuole andare troppo in alto
-    {
-        //collisione
-        cout << "non uscire dallo schermo" << endl;
-    }
-    else
-        this->setY(y);
-    this->angle = 0.f;
+    this->dir.setAngolo(0.f);
+    this->dir.move();
+    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
 }
 void Navicella::moveLeft(void)
 {
     //sinistra
-#ifdef DEBUG
-    cout << "A\t";
-#endif
-    float x = this->getX() - this->speed;
-    if ((x - this->size) < 0.f) //se non vuole andare troppo in alto
-    {
-        //collisione
-        cout << "non uscire dallo schermo" << endl;
-    }
-    else           
-        this->setX(x);
-    this->angle = 270.f;
+    this->dir.setAngolo(270.f);
+    this->dir.move();
+    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
 }
 void Navicella::moveDown(float height)
 {
     //giù
-#ifdef DEBUG
-    cout << "S\t";
-#endif
-    float y = this->getY() + this->speed;
-    if ((y + this->size) > height ) //se non vuole andare troppo in alto
-    {
-        //collisione
-        cout << "non uscire dallo schermo" << endl;
-    }
-    else
-        this->setY(y);
-    this->angle = 180.f;
+    this->dir.setAngolo(180.f);
+    this->dir.move();
+    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
 }
 void Navicella::moveRight(float width)
 {
     //destra
-#ifdef DEBUG
-    cout << "D\t";
-#endif
-    float x = this->getX() + this->speed;
-    if ((x + this->size) > width ) //se non vuole andare troppo in alto
-    {
-        //collisione
-        cout << "non uscire dallo schermo" << endl;
-    }
-    else
-        this->setX(x);
-    this->angle = 90.f;
+    this->dir.setAngolo(90.f);
+    this->dir.move();
+    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
 }

@@ -2,13 +2,13 @@
 #ifndef FUEL_H
 #define FUEL_H
 
-const float consumo = 1.f;
+#include "./utils.hpp"
 
 class Fuel : public DisegnabileI
 {
 private:
     Punto centro;
-    float quantita = 100.f;
+    float quantita = FUEL1;
 
 public:
     //costruttore vuoto
