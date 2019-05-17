@@ -17,31 +17,32 @@ Navicella::Navicella(void)
 Navicella::Navicella(Punto centro)
 {
     this->centro = centro;
-    //default size, velocità, angolo
+    //default size, velocità, angolo, carburante
     
 }
 Navicella::Navicella(float x, float y)
 {
     this->centro.setCoord(x, y);
-    //default size, velocità, angolo
+    //default size, velocità, angolo, carburante
     
 }
 //costruttori completi
-Navicella::Navicella(Punto centro, float size, float angle, float speed)
+Navicella::Navicella(Punto centro, Fuel carburante, float size, float angle, float speed)
 {
     this->centro = centro;
+    this->carburante = carburante;
     this->size = size;
     this->angle = angle;
     this->speed = speed;
     
 }
-Navicella::Navicella(float x, float y, float size, float angle, float speed)
+Navicella::Navicella(float x, float y, float carburante, float size, float angle, float speed)
 {
     this->centro.setCoord(x, y);
+    this->carburante.setQuantita(carburante);
     this->size = size;
     this->angle = angle;
     this->speed = speed;
-    
 }
 
 //distruttore
@@ -78,6 +79,9 @@ void Navicella::setSpeed(float speed)
 {
     this->speed = speed;
 }
+void Navicella::setFuel(Fuel carburante) {
+    this->carburante = carburante;
+}
 
 //getters
 float Navicella::getX(void)
@@ -99,6 +103,9 @@ float Navicella::getAngolo(void)
 float Navicella::getSpeed(void)
 {
     return this->speed;
+}
+float Navicella::getFuel(void) {
+    return this->carburante.getQuantita();
 }
 
 //stampa
