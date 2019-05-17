@@ -7,10 +7,6 @@ using namespace std;
 #include "../header/Lista.hpp"
 #include "../header/Punto.hpp"
 
-//ATTENZIONE!!!!
-#include "./definizioni.cpp"
-//fine ATTENZIONE!
-
 //#define DIM 5;
 
 int main()

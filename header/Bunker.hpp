@@ -5,6 +5,8 @@
 #include "./DisegnabileI.hpp"
 #include "./Direzione.hpp"
 
+template class ListaClasse<Direzione>;
+
 class Bunker : public DisegnabileI
 {
 private:
@@ -16,7 +18,7 @@ private:
     float angle = 0.f; //angolo del cannone
     float speed = 5.f; //velocità degli spari
 private:
-    //bla bla bla
+    
 };
 
 #endif //BUNKER_H

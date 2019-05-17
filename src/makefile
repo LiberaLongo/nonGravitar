@@ -18,7 +18,7 @@ CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = Punto.o Lista.o ListaClasse.o definizioni.o Navicella.o Gioco.o main.o
+OBJ = Punto.o Lista.o ListaClasse.o Navicella.o Gioco.o main.o
 # Controlli.o
 
 all: sfml-app
@@ -30,9 +30,6 @@ Lista.o: $(S)Lista.cpp $(H)Lista.hpp
 
 ListaClasse.o: $(S)ListaClasse.cpp $(H)Lista.hpp
 	$(COMPILE) $(S)ListaClasse.cpp
-
-definizioni.o: $(S)definizioni.cpp $(S)Lista.cpp
-	$(COMPILE) $(S)definizioni.cpp
 
 Punto.o: $(S)Punto.cpp $(H)Punto.hpp
 	$(COMPILE) $(S)Punto.cpp

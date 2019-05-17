@@ -3,6 +3,7 @@
 
 #include "./utils.hpp"
 #include "./DisegnabileI.hpp"
+#include "./Punto.hpp"
 
 class Direzione : public DisegnabileI
 {
@@ -19,8 +20,10 @@ public:
     //costruttore completo
     Direzione(Punto origine, float angolo, float speed);
     Direzione(float x, float y, float angolo, float speed);
+
     //distruttore
     /*virtual*/ ~Direzione(void);
+
     //setters
     void setXOrigine(float x);
     void setYOrigine(float y);
@@ -28,6 +31,7 @@ public:
     void setOrigine(float x, float y);
     void setAngolo(float angolo);
     void setSpeed(float speed);
+
     //getters
     float getXOrigine(void);
     float getYOrigine(void);

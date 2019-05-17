@@ -8,6 +8,9 @@
 #include "../header/Fuel.hpp"
 #include "../header/Bunker.hpp"
 
+template class ListaClasse<Punto>;
+template class ListaClasse<Fuel>;
+template class ListaClasse<Bunker>;
 
 class Pianeta : public DisegnabileI
 {
