@@ -142,31 +142,10 @@ void Navicella::draw(sf::RenderWindow &window)
     window.draw(triangolo);
 }
 
-void Navicella::moveUp(void)
+void Navicella::move(float angolo)
 {
     //sù
-    this->dir.setAngolo(0.f);
-    this->dir.move();
-    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
-}
-void Navicella::moveLeft(void)
-{
-    //sinistra
-    this->dir.setAngolo(270.f);
-    this->dir.move();
-    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
-}
-void Navicella::moveDown(float height)
-{
-    //giù
-    this->dir.setAngolo(180.f);
-    this->dir.move();
-    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
-}
-void Navicella::moveRight(float width)
-{
-    //destra
-    this->dir.setAngolo(90.f);
+    this->dir.setAngolo(angolo);
     this->dir.move();
     this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
 }

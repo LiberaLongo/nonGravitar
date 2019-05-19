@@ -17,6 +17,8 @@ CC = g++
 CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
+#indieme di header molto usati
+HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = Lista.o ListaClasse.o Punto.o Direzione.o Fuel.o Navicella.o Gioco.o main.o
 # Controlli.o
@@ -34,13 +36,14 @@ ListaClasse.o: $(S)ListaClasse.cpp $(H)Lista.hpp
 Punto.o: $(S)Punto.cpp $(H)Punto.hpp
 	$(COMPILE) $(S)Punto.cpp
 
-Direzione.o: $(S)Direzione.cpp $(H)Direzione.hpp
+Direzione.o: $(S)Direzione.cpp $(H)Direzione.hpp $(HDR)
 	$(COMPILE) $(S)Direzione.cpp
 
-Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp
+Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
 	$(COMPILE) $(S)Fuel.cpp
 
-Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp
+#include "../header/Gioco.hpp"
+Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Direzione.hpp $(H)Fuel.hpp
 	$(COMPILE) $(S)Navicella.cpp
 
 #pianeta

@@ -41,29 +41,29 @@ bool Gioco(void)
                 {
                 //WASD
                 case sf::Keyboard::W:
-                    player.moveUp();
+                    player.move(UP);
                     break;
                 case sf::Keyboard::A:
-                    player.moveLeft();
+                    player.move(LEFT);
                     break;
                 case sf::Keyboard::S:
-                    player.moveDown(height);
+                    player.move(DOWN);
                     break;
                 case sf::Keyboard::D:
-                    player.moveRight(width);
+                    player.move(RIGHT);
                     break;
                 //freccie
                 case sf::Keyboard::Up:
-                    player.moveUp();
+                    player.move(UP);
                     break;
                 case sf::Keyboard::Left:
-                    player.moveLeft();
+                    player.move(LEFT);
                     break;
                 case sf::Keyboard::Down:
-                    player.moveDown(height);
+                    player.move(DOWN);
                     break;
                 case sf::Keyboard::Right:
-                    player.moveRight(width);
+                    player.move(RIGHT);
                     break;
                 default:
                     break;

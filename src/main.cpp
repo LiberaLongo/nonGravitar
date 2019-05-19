@@ -4,8 +4,8 @@ using namespace std;
 //#include <SFML/Graphics.hpp>
 
 #include "../header/Gioco.hpp"
-#include "../header/Lista.hpp"
-#include "../header/Punto.hpp"
+//#include "../header/Lista.hpp"
+//#include "../header/Punto.hpp"
 
 //#define DIM 5;
 

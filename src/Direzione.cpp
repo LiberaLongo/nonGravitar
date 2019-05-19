@@ -1,4 +1,6 @@
 //codice punti
+#include <cmath>
+
 #include <iostream>
 using namespace std;
 
@@ -47,13 +49,6 @@ void Direzione::setOrigine(Punto origine) {
 void Direzione::setOrigine(float x, float y) {
     this->origine.setCoord(x, y);
 }
-void Direzione::setAngolo(float angolo) {
-    this->angolo = angolo;
-}
-void Direzione::setSpeed(float speed) {
-    this->speed = speed;
-}
-
 //getters
 float Direzione::getXOrigine(void) {
     return this->origine.getX();
@@ -86,9 +81,20 @@ bool Direzione::confronto(Direzione dir) {
 void Direzione::draw(sf::RenderWindow &window) {
     //per ora vuota
 }
+
 //move
+
+//Precondition: dato l'angolo e l'origine
+//Postcondition: deve muoversi di speed pixel in quella direzione
+//              e aggiornare le sue coordinate del origine
 void Direzione::move(void) {
-    //dato l'angolo e l'origine
-    //deve muoversi di speed pixel in quella direzione
-    //e aggiornare le sue coordinate del origine
+    //this->angolo è l'angolo secondo l'orientamento di sfml
+    //angolo è l'angolo invece di cmath
+    //float angolo = this->angolo;
+    //il movimento si scompone della sua parte s_x e s_y
+    //float s_x = this->speed * cos(angolo);
+    //float s_y = this->speed * sin(angolo);
+    //a cui viene opportunamente aggiunto (o sottratto) le coordinate iniziali
+    //this->setXOrigine( this->getXOrigine() + s_x );
+    //this->setYOrigine( this->getYOrigine() + s_y );
 }

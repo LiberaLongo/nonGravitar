@@ -3,7 +3,8 @@
 #define FUEL_H
 
 #include "./utils.hpp"
-#include "../header/Punto.hpp"
+#include "./DisegnabileI.hpp"
+#include "./Punto.hpp"
 
 class Fuel : public DisegnabileI
 {

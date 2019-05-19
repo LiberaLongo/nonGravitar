@@ -59,10 +59,7 @@ public:
     void draw(sf::RenderWindow &window);
 
     //controlli di movimento
-    void moveUp(void);
-    void moveLeft(void);
-    void moveDown(float height);
-    void moveRight(float width);
+    void move(float angle);
 };
 
 #endif //NAVICELLA_H
