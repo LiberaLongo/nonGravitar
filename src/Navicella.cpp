@@ -144,7 +144,7 @@ void Navicella::draw(sf::RenderWindow &window)
 
 void Navicella::move(float angolo)
 {
-    //sù
+    //WASD
     this->dir.setAngolo(angolo);
     this->dir.move();
     this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());

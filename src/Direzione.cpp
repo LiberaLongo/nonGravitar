@@ -49,6 +49,12 @@ void Direzione::setOrigine(Punto origine) {
 void Direzione::setOrigine(float x, float y) {
     this->origine.setCoord(x, y);
 }
+void Direzione::setAngolo(float angolo) {
+    this->angolo = angolo;
+}
+void Direzione::setSpeed(float speed) {
+    this->speed = speed;
+}
 //getters
 float Direzione::getXOrigine(void) {
     return this->origine.getX();
@@ -96,5 +102,5 @@ void Direzione::move(void) {
     //float s_y = this->speed * sin(angolo);
     //a cui viene opportunamente aggiunto (o sottratto) le coordinate iniziali
     //this->setXOrigine( this->getXOrigine() + s_x );
-    //this->setYOrigine( this->getYOrigine() + s_y );
+    //this->setYOrigine( this->getYOrigine() - s_y );
 }
