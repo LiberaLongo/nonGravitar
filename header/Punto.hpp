@@ -1,6 +1,8 @@
 //header punti
 #ifndef PUNTO_H
 #define PUNTO_H
+
+#include "./utils.hpp"
 #include "./DisegnabileI.hpp"
 
 class Punto : public DisegnabileI
