@@ -1,6 +1,3 @@
-#include <iostream>
-using namespace std;
-
 //#include <SFML/Graphics.hpp>
 
 #include "../header/Gioco.hpp"

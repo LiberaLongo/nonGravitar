@@ -1,7 +1,4 @@
 //codice navicella
-#include <iostream>
-using namespace std;
-
 #include "../header/Navicella.hpp"
 
 //#define DEBUG
@@ -11,7 +8,6 @@ using namespace std;
 Navicella::Navicella(void)
 {
     //default tutto
-    
 }
 //costruttori punto
 Navicella::Navicella(Punto centro)
@@ -19,14 +15,12 @@ Navicella::Navicella(Punto centro)
     this->centro = centro;
     this->dir.setOrigine(centro);
     //default size, dir, carburante
-    
 }
 Navicella::Navicella(float x, float y)
 {
     this->centro.setCoord(x, y);
     this->dir.setOrigine(x, y);
     //default size, dir, carburante
-    
 }
 //costruttori completi
 Navicella::Navicella(Punto centro, Fuel carburante, Direzione dir, float size)
@@ -35,7 +29,6 @@ Navicella::Navicella(Punto centro, Fuel carburante, Direzione dir, float size)
     this->carburante = carburante;
     this->dir = dir;
     this->size = size;
-    
 }
 Navicella::Navicella(float x, float y, float carburante, float angle, float speed, float size)
 {
@@ -57,17 +50,15 @@ Navicella::Navicella(float x, float y, float carburante, float angle, float spee
 void Navicella::setX(float x)
 {
     this->centro.setX(x);
-    
 }
 void Navicella::setY(float y)
 {
     this->centro.setY(y);
-        
 }
 void Navicella::setCoord(float x, float y)
 {
     this->centro.setCoord(x, y);
-    this->dir.setOrigine(x, y);    
+    this->dir.setOrigine(x, y);
 }
 void Navicella::setSize(float size)
 {
@@ -81,7 +72,8 @@ void Navicella::setSpeed(float speed)
 {
     this->dir.setSpeed(speed);
 }
-void Navicella::setFuel(Fuel carburante) {
+void Navicella::setFuel(Fuel carburante)
+{
     this->carburante = carburante;
 }
 
@@ -106,7 +98,8 @@ float Navicella::getSpeed(void)
 {
     return this->dir.getSpeed();
 }
-float Navicella::getFuel(void) {
+float Navicella::getFuel(void)
+{
     return this->carburante.getQuantita();
 }
 
@@ -123,13 +116,16 @@ void Navicella::print(void)
 //disegna
 void Navicella::draw(sf::RenderWindow &window)
 {
+#ifdef DEBUG
+    this->dir.draw(window);
+#endif
     //centro iniziale della figura prima di fare setPosition
     float x = 0.f, y = 0.f; //centro: (0,0)
     //crea una empty shape convex con 3 punti
     sf::ConvexShape triangolo;
     triangolo.setPointCount(3);
     //definisci i punti rispetto a (0,0)
-    triangolo.setPoint(0, sf::Vector2f(x, y - this->size*3));
+    triangolo.setPoint(0, sf::Vector2f(x, y - this->size * 3));
     triangolo.setPoint(1, sf::Vector2f(x - this->size, y + this->size));
     triangolo.setPoint(2, sf::Vector2f(x + this->size, y + this->size));
     //blu

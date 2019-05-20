@@ -1,7 +1,4 @@
 //codice punti
-#include <iostream>
-using namespace std;
-
 #include "../header/Punto.hpp"
 
 //costruttore

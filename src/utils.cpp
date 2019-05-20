@@ -1,6 +1,6 @@
 //codice cose utili usate in tutto il codice
 
-#include <cmath>
+#include "../header/utils.hpp"
 #include "../header/Punto.hpp"
 
 //distanza tra due punti

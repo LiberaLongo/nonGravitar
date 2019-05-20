@@ -1,7 +1,4 @@
 //codice bunker
-#include <iostream>
-using namespace std;
-
 #include "../header/Bunker.hpp"
 
 template class ListaClasse<Direzione>;

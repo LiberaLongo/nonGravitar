@@ -1,7 +1,4 @@
 //codice carburante
-#include <iostream>
-using namespace std;
-
 #include "../header/Fuel.hpp"
 
 //costruttore vuoto

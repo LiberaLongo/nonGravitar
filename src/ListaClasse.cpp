@@ -1,9 +1,6 @@
 //lista per le classi ereditata
 //quindi non posso usare == o cout<<
 //ma devo usare contronto() e print()
-#include <iostream>
-using namespace std;
-
 #include "../header/ListaClasse.hpp"
 
 //#define DEBUG

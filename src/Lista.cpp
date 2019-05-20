@@ -1,7 +1,4 @@
 //codice liste
-#include <iostream>
-using namespace std;
-
 #include "../header/Lista.hpp"
 
 //#define DEBUG
