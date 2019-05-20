@@ -4,14 +4,14 @@
 
 #include "../header/Gioco.hpp"
 
-#define DEBUG
+//#define DEBUG
 
 bool Gioco(void)
 {
     //codice della gestione del gioco
 
     //funzione finestra di SFML
-    float width = 400.f, height = 300.f;
+    float width = 900.f, height = 600.f;
     //crea la lobby
     sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
 

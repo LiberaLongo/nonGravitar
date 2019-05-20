@@ -1,3 +1,0 @@
-qui inseriamo il codice che vorremmo fare
-abbiamo già implementato quasi del tutto
-ma non riusciamo nonostante molti tentativi a fare compilare

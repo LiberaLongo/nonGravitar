@@ -119,6 +119,7 @@ void Navicella::draw(sf::RenderWindow &window)
 #ifdef DEBUG
     this->dir.draw(window);
 #endif
+    
     //centro iniziale della figura prima di fare setPosition
     float x = 0.f, y = 0.f; //centro: (0,0)
     //crea una empty shape convex con 3 punti
@@ -128,12 +129,20 @@ void Navicella::draw(sf::RenderWindow &window)
     triangolo.setPoint(0, sf::Vector2f(x, y - this->size * 3));
     triangolo.setPoint(1, sf::Vector2f(x - this->size, y + this->size));
     triangolo.setPoint(2, sf::Vector2f(x + this->size, y + this->size));
+    
     //blu
     triangolo.setFillColor(sf::Color::Blue);
+    
     //ruota di angolo, PRIMA! della rotazione
-    triangolo.setRotation(angoloLibreria(this->dir.getAngolo()));
+    float angolo = angoloLibreria(this->dir.getAngolo());
+    triangolo.setRotation(angolo);
+#ifdef DEBUG
+    cout << "angoloCanonico = " << this->dir.getAngolo();
+    cout << ", angoloSFML = " << angolo; 
+#endif
     //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
+    
     //disegna sulla window passata per riferimento
     window.draw(triangolo);
 }
