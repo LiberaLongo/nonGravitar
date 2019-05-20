@@ -4,14 +4,14 @@
 
 #include "../header/Gioco.hpp"
 
-//#define DEBUG
+#define DEBUG
 
 bool Gioco(void)
 {
     //codice della gestione del gioco
 
     //funzione finestra di SFML
-    float width = 900.f, height = 700.f;
+    float width = 400.f, height = 300.f;
     //crea la lobby
     sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
 
@@ -41,28 +41,52 @@ bool Gioco(void)
                 {
                 //WASD
                 case sf::Keyboard::W:
+#ifdef DEBUG
+                    cout << "W\n";
+#endif
                     player.move(UP);
                     break;
                 case sf::Keyboard::A:
+#ifdef DEBUG
+                    cout << "A\n";
+#endif
                     player.move(LEFT);
                     break;
                 case sf::Keyboard::S:
+#ifdef DEBUG
+                    cout << "S\n";
+#endif
                     player.move(DOWN);
                     break;
                 case sf::Keyboard::D:
+#ifdef DEBUG
+                    cout << "D\n";
+#endif
                     player.move(RIGHT);
                     break;
                 //freccie
                 case sf::Keyboard::Up:
+#ifdef DEBUG
+                    cout << "Up\n";
+#endif
                     player.move(UP);
                     break;
                 case sf::Keyboard::Left:
+#ifdef DEBUG
+                    cout << "Left\n";
+#endif
                     player.move(LEFT);
                     break;
                 case sf::Keyboard::Down:
+#ifdef DEBUG
+                    cout << "Down\n";
+#endif
                     player.move(DOWN);
                     break;
                 case sf::Keyboard::Right:
+#ifdef DEBUG
+                    cout << "Right\n";
+#endif
                     player.move(RIGHT);
                     break;
                 default:

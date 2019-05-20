@@ -17,10 +17,17 @@ using namespace std;
 #define FUEL2 200.f
 #define SPEED 5.f
 
-//direzioni con la tastiera WASD o freccette
-#define UP 0.f
-#define RIGHT 90.f
-#define DOWN 180.f
-#define LEFT 270.f
+//direzioni canoniche con angoli studiati in matematica
+#define RIGHT   0.f
+#define UP      90.f
+#define LEFT    180.f
+#define DOWN    270.f
+
+//Precondition: prende un angolo in gradi in forma canonica
+//Postcondition: lo trasforma opportunamente secondo la libreria grafica
+float angoloLibreria(float angolo);
+
+//restituisce la distanza tra due punti
+//float distance(Punto a, Punto b);
 
 #endif //UTILS_H

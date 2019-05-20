@@ -1,7 +1,7 @@
 //codice punti
 #include "../header/Direzione.hpp"
 
-//define DEBUG
+#define DEBUG
 
 //costruttore vuoto
 Direzione::Direzione(void)
@@ -116,7 +116,7 @@ void Direzione::move(void)
 {
     //this->angolo è l'angolo secondo l'orientamento di sfml
     //angolo è l'angolo invece di cmath
-    float angolo = (double)this->angolo * M_PI / 180;
+    float angolo = (double) this->angolo * M_PI / 180;
     //il movimento si scompone della sua parte s_x e s_y
     float s_x = this->speed * (float)cos(angolo);
     float s_y = this->speed * (float)sin(angolo);
@@ -127,5 +127,9 @@ void Direzione::move(void)
 #endif
     //a cui viene opportunamente aggiunto (o sottratto) le coordinate iniziali
     this->setXOrigine(this->getXOrigine() + s_x);
-    this->setYOrigine(this->getYOrigine() - s_y);
+    this->setYOrigine(this->getYOrigine() + s_y);
+#ifdef DEBUG
+    this->print();
+    cout << endl;
+#endif
 }

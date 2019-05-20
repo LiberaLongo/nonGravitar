@@ -2,6 +2,8 @@
 #ifndef LISTA_H
 #define LISTA_H
 
+#include "./utils.hpp"
+
 template <typename Tipo>
 struct Elem
 {

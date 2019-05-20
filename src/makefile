@@ -15,47 +15,49 @@ H = ../header/
 #comando per compilare
 CC = g++
 CFLAGS = -c -std=c++11
-COMPILE = $(CC) $(CFLAGS)
+COMPILE = $(CC) $(CFLAGS) $(S)
 
 #indieme di header molto usati
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = Lista.o ListaClasse.o Punto.o Direzione.o Fuel.o Navicella.o Gioco.o main.o
+OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o Fuel.o Navicella.o Gioco.o main.o
 # Controlli.o
 
 all: sfml-app
 #lancia l'app in automatico
 	./$<
-
 Lista.o: $(S)Lista.cpp $(H)Lista.hpp
-	$(COMPILE) $(S)Lista.cpp
+	$(COMPILE)Lista.cpp
 
 ListaClasse.o: $(S)ListaClasse.cpp $(H)Lista.hpp
-	$(COMPILE) $(S)ListaClasse.cpp
+	$(COMPILE)ListaClasse.cpp
 
 Punto.o: $(S)Punto.cpp $(H)Punto.hpp
-	$(COMPILE) $(S)Punto.cpp
+	$(COMPILE)Punto.cpp
+
+utils.o: $(S)utils.cpp $(H)utils.hpp $(H)Punto.hpp
+	$(COMPILE)utils.cpp
 
 Direzione.o: $(S)Direzione.cpp $(H)Direzione.hpp $(HDR)
-	$(COMPILE) $(S)Direzione.cpp
+	$(COMPILE)Direzione.cpp
 
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
-	$(COMPILE) $(S)Fuel.cpp
+	$(COMPILE)Fuel.cpp
 
 #include "../header/Gioco.hpp"
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Direzione.hpp $(H)Fuel.hpp
-	$(COMPILE) $(S)Navicella.cpp
+	$(COMPILE)Navicella.cpp
 
 #pianeta
 
 #Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp
-#	$(COMPILE) $(S)Controlli.cpp
+#	$(COMPILE)Controlli.cpp
 
 Gioco.o: $(S)Gioco.cpp $(H)Gioco.hpp
-	$(COMPILE) $(S)Gioco.cpp
+	$(COMPILE)Gioco.cpp
 
 main.o: $(S)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp
-	$(COMPILE) $(S)main.cpp
+	$(COMPILE)main.cpp
 
 sfml-app: $(OBJ)
 #	linkiamo tutti gli object e la grafica SFML

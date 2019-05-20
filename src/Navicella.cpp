@@ -131,7 +131,7 @@ void Navicella::draw(sf::RenderWindow &window)
     //blu
     triangolo.setFillColor(sf::Color::Blue);
     //ruota di angolo, PRIMA! della rotazione
-    triangolo.setRotation(this->dir.getAngolo());
+    triangolo.setRotation(angoloLibreria(this->dir.getAngolo()));
     //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
     //disegna sulla window passata per riferimento

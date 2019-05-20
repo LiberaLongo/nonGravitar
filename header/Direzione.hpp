@@ -9,7 +9,7 @@ class Direzione : public DisegnabileI
 {
 private:
     Punto origine;
-    float angolo = 0.f;
+    float angolo = 0.f; //angolo canonico studiato in matematica
     float speed = SPEED;
 public:
     //costruttore vuoto
