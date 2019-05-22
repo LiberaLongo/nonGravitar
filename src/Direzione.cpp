@@ -118,16 +118,17 @@ void Direzione::move(void)
     //angolo è l'angolo invece di cmath
     float angolo = (double) this->angolo * M_PI / 180;
     //il movimento si scompone della sua parte s_x e s_y
-    float s_x = this->speed * round(cos(angolo));
-    float s_y = this->speed * round(sin(angolo));
+    //prima erano float e round();
+    double s_x = this->speed * (cos(angolo));
+    double s_y = this->speed * (sin(angolo));
 #ifdef DEBUG
     this->print();
-    cout << "s_x = [speed = " << this->speed << "]*[cos(" << this->angolo << " gradi) = " << round(cos(angolo)) << "] = " << s_x << endl;
-    cout << "s_y = [speed = " << this->speed << "]*[sin(" << this->angolo << " gradi) = " << round(sin(angolo)) << "] = " << s_y << endl;
+    cout << "s_x = [speed = " << this->speed << "]*[cos(" << this->angolo << " gradi) = " << (cos(angolo)) << "] = " << s_x << endl;
+    cout << "s_y = [speed = " << this->speed << "]*[sin(" << this->angolo << " gradi) = " << (sin(angolo)) << "] = " << s_y << endl;
 #endif
     //a cui viene opportunamente aggiunto (o sottratto) le coordinate iniziali
-    this->setXOrigine(this->getXOrigine() + s_x);
-    this->setYOrigine(this->getYOrigine() - s_y);
+    this->setXOrigine(this->getXOrigine() + (float) s_x);
+    this->setYOrigine(this->getYOrigine() - (float) s_y);
 #ifdef DEBUG
     this->print();
     cout << endl;
