@@ -18,9 +18,11 @@ CFLAGS = -c -std=c++11
 COMPILE = $(CC) $(CFLAGS) $(S)
 
 #indieme di header molto usati
-HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp
+HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o Fuel.o Navicella.o Gioco.o main.o
+OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o \
+	Fuel.o Navicella.o Bunker.o Pianeta.o \
+	Gioco.o main.o
 # Controlli.o
 
 all: sfml-app
@@ -38,17 +40,21 @@ Punto.o: $(S)Punto.cpp $(H)Punto.hpp
 utils.o: $(S)utils.cpp $(H)utils.hpp $(H)Punto.hpp
 	$(COMPILE)utils.cpp
 
-Direzione.o: $(S)Direzione.cpp $(H)Direzione.hpp $(HDR)
+Direzione.o: $(S)Direzione.cpp $(HDR)
 	$(COMPILE)Direzione.cpp
 
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
 	$(COMPILE)Fuel.cpp
 
 #include "../header/Gioco.hpp"
-Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Direzione.hpp $(H)Fuel.hpp
+Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp
 	$(COMPILE)Navicella.cpp
 
-#pianeta
+Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)ListaClasse.hpp
+	$(COMPILE)Bunker.cpp
+
+Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp
+	$(COMPILE)Pianeta.cpp
 
 #Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp
 #	$(COMPILE)Controlli.cpp

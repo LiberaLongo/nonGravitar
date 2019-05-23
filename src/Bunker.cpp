@@ -1,8 +1,6 @@
 //codice bunker
 #include "../header/Bunker.hpp"
 
-template class ListaClasse<Direzione>;
-template class Elem<Direzione>;
 
 //metodo per scorrere la lista e aggiornare i centri
 void Bunker::aggiornaCentriDirezione(ListaClasse<Direzione> headDir)

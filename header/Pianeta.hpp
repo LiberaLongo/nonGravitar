@@ -20,6 +20,9 @@ protected:
     ListaClasse<Punto> surface;
     ListaClasse<Fuel> fuel;
     ListaClasse<Bunker> bunker;
+    //cose grafiche e basta
+    //coloreRGB colore;
+
 public:
     //COSTRUTTORI
     //costruttore void
@@ -37,25 +40,31 @@ public:
     void setY(float y);
     void setCoord(float x, float y);
     void setRaggio(float raggio);
-    void setHeadSurface(ListaClasse<Punto> headSurface);
-    void setHeadFuel(ListaClasse<Fuel> headFuel);
-    void setHeadBunker(ListaClasse<Bunker> headBunker);
+    //setta la lista
+    void setSurface(ListaClasse<Punto> headSurface);
+    void setFuel(ListaClasse<Fuel> headFuel);
+    void setBunker(ListaClasse<Bunker> headBunker);
+    //setta il puntatore della lista
+    void setHeadSurface(struct Elem<Punto> *headSurface);
+    void setHeadFuel(struct Elem<Fuel> *headFuel);
+    void setHeadBunker(struct Elem<Bunker> *headBunker);
     //getters
     float getX(void);
     float getY(void);
     float getRaggio(void);
-    struct Elem<Punto>* getHeadSurface(void);
-    struct Elem<Fuel>* getHeadFuel(void);
-    struct Elem<Bunker>* getHeadBunker(void);
+    //ottengo il puntatore alla testa, non al primo elemento
+    struct Elem<Punto> *getHeadSurface(void);
+    struct Elem<Fuel> *getHeadFuel(void);
+    struct Elem<Bunker> *getHeadBunker(void);
     //stampa
     void print(void);
     //confronto
     bool confronto(Pianeta p);
     //disegna
     void draw(sf::RenderWindow &window);
+    void drawVisuale(sf::RenderWindow &window);
     //generaPianeta(void);
     void generaPianeta(void);
     //altre cose
-
 };
 #endif
