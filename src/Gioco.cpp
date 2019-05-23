@@ -104,7 +104,7 @@ bool Gioco(void)
         //pulisci la finestra colorandola di nero
         lobby.clear(sf::Color::Black);
 
-        Pianeta earth = Pianeta(width/3, height/4);
+        //Pianeta earth = Pianeta(width/3, height/4);
         //disegna qui...
         player.draw(lobby);
 
