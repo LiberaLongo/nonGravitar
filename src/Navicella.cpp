@@ -154,3 +154,6 @@ void Navicella::move(float angolo)
     this->dir.move();
     this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
 }
+void Navicella::shoot(Punto mouseclick) {
+    this->dir.shoot(mouseclick);
+}

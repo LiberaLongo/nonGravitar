@@ -56,13 +56,22 @@ void Direzione::setOrigine(float x, float y)
 {
     this->origine.setCoord(x, y);
 }
+void Direzione::setSpeed(float speed)
+{
+    this->speed = speed;
+}
 void Direzione::setAngolo(float angolo)
 {
     this->angolo = angolo;
 }
-void Direzione::setSpeed(float speed)
+void Direzione::setAngolo(Punto arrivo)
 {
-    this->speed = speed;
+    //tangente(AB) = (xB - xA ) / (yB - yA);
+    float deltaX = this->getXOrigine() - arrivo.getX();
+    float deltaY = this->getYOrigine() - arrivo.getY();
+    float tangente = deltaX / deltaY;
+    double angolo = atan(tangente) * 180 / M_PI;
+    this->angolo = (float)angolo;
 }
 //getters
 float Direzione::getXOrigine(void)
@@ -116,7 +125,7 @@ void Direzione::move(void)
 {
     //this->angolo è l'angolo secondo l'orientamento di sfml
     //angolo è l'angolo invece di cmath
-    float angolo = (double) this->angolo * M_PI / 180;
+    float angolo = (double)this->angolo * M_PI / 180;
     //il movimento si scompone della sua parte s_x e s_y
     //prima erano float e round();
     double s_x = this->speed * (cos(angolo));
@@ -127,10 +136,16 @@ void Direzione::move(void)
     cout << "s_y = [speed = " << this->speed << "]*[sin(" << this->angolo << " gradi) = " << (sin(angolo)) << "] = " << s_y << endl;
 #endif
     //a cui viene opportunamente aggiunto (o sottratto) le coordinate iniziali
-    this->setXOrigine(this->getXOrigine() + (float) s_x);
-    this->setYOrigine(this->getYOrigine() - (float) s_y);
+    this->setXOrigine(this->getXOrigine() + (float)s_x);
+    this->setYOrigine(this->getYOrigine() - (float)s_y);
 #ifdef DEBUG
     this->print();
     cout << endl;
 #endif
+}
+
+void Direzione::shoot(Punto mouseclick)
+{
+    this->setAngolo(mouseclick);
+    //se abbiamo bisogno restituiamo l'angolo
 }

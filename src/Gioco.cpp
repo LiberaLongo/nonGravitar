@@ -18,6 +18,10 @@ bool Gioco(void)
     //mia navicella
     Navicella player = Navicella(width / 2, height / 2);
 
+    //un punto adibito a mouse click
+    Punto mouseClick;
+    bool haCliccato = false;
+
     //esegui il programma finchè la finestra è aperta
     while (lobby.isOpen())
     {
@@ -32,8 +36,23 @@ bool Gioco(void)
             //altrimenti passo il controllo alla mia funzione dei controlli
             //controlli(player, event);
             /*la funzione controlli non va per non si sa quale motivo*/
+
             switch (event.type)
             {
+            //mouse cliccato
+            case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+#ifdef DEBUG
+                    std::cout << "the left button was pressed" << std::endl;
+                    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+#endif
+                    haCliccato = true;
+                    mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                    player.shoot(mouseClick);
+                }
+                break;
             //tasti premuti?
             case sf::Event::KeyPressed:
                 //...
@@ -107,7 +126,8 @@ bool Gioco(void)
         //Pianeta earth = Pianeta(width/3, height/4);
         //disegna qui...
         player.draw(lobby);
-
+        if(haCliccato)
+            mouseClick.draw(lobby);
         // lobby.draw(...);
 
         //fine del frame corrente

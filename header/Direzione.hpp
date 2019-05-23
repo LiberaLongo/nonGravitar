@@ -29,8 +29,9 @@ public:
     void setYOrigine(float y);
     void setOrigine(Punto origine);
     void setOrigine(float x, float y);
-    void setAngolo(float angolo);
     void setSpeed(float speed);
+    void setAngolo(float angolo);
+    void setAngolo(Punto arrivo);
 
     //getters
     float getXOrigine(void);
@@ -48,6 +49,8 @@ public:
     void draw(sf::RenderWindow &window);
     //move
     void move(void);
+    //spara
+    void shoot(Punto mouseclick);
 };
 
 #endif

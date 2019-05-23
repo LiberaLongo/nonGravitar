@@ -60,6 +60,9 @@ public:
 
     //controlli di movimento
     void move(float angle);
+
+    //spara
+    void shoot(Punto mouseclick);
 };
 
 #endif //NAVICELLA_H
