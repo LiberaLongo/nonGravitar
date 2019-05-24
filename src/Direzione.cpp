@@ -1,7 +1,7 @@
 //codice punti
 #include "../header/Direzione.hpp"
 
-//#define DEBUG
+#define DEBUG
 
 //costruttore vuoto
 Direzione::Direzione(void)
@@ -67,11 +67,19 @@ void Direzione::setAngolo(float angolo)
 void Direzione::setAngolo(Punto arrivo)
 {
     //tangente(AB) = (xB - xA ) / (yB - yA);
-    float deltaX = this->getXOrigine() - arrivo.getX();
-    float deltaY = this->getYOrigine() - arrivo.getY();
+    float deltaX = arrivo.getX() - this->getXOrigine();
+    float deltaY = arrivo.getY() - this->getYOrigine();
     float tangente = deltaX / deltaY;
-    double angolo = atan(tangente) * 180 / M_PI;
-    this->angolo = (float)angolo;
+    double angoloRadianti = atan(tangente);
+    float angoloGradi = angoloRadianti * 180 / M_PI;
+#ifdef DEBUG
+    cout << "deltaX = " << arrivo.getX() << " - " << this->getXOrigine() << " = " << deltaX << endl;
+    cout << "deltaY = " << arrivo.getY() << " - " << this->getYOrigine() << " = " << deltaY << endl;
+    cout << "tangente = " << tangente << endl;
+    cout << "angoloRadianti = " << angoloRadianti << endl;
+    cout << "angoloGradi = "<< angoloGradi << endl;
+#endif
+    this->angolo = (float)angoloGradi;
 }
 //getters
 float Direzione::getXOrigine(void)
