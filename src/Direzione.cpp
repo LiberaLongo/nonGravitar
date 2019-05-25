@@ -68,18 +68,28 @@ void Direzione::setAngolo(Punto arrivo)
 {
     //tangente(AB) = (xB - xA ) / (yB - yA);
     float deltaX = arrivo.getX() - this->getXOrigine();
-    float deltaY = arrivo.getY() - this->getYOrigine();
-    float tangente = deltaX / deltaY;
-    double angoloRadianti = atan(tangente);
-    float angoloGradi = angoloRadianti * 180 / M_PI;
-#ifdef DEBUG
-    cout << "deltaX = " << arrivo.getX() << " - " << this->getXOrigine() << " = " << deltaX << endl;
-    cout << "deltaY = " << arrivo.getY() << " - " << this->getYOrigine() << " = " << deltaY << endl;
-    cout << "tangente = " << tangente << endl;
-    cout << "angoloRadianti = " << angoloRadianti << endl;
-    cout << "angoloGradi = "<< angoloGradi << endl;
-#endif
-    this->angolo = (float)angoloGradi;
+    //la Y va nella direzione opposta
+    float deltaY = -(arrivo.getY() - this->getYOrigine());
+    if (deltaY != 0) {
+        //se posso fare la divisione
+        float tangente = deltaX / deltaY;
+        double angoloRadianti = atan(tangente);
+        //trasformo l'angolo opportunamente secondo la libreria grafica
+        float angoloGradi = angoloLibreria(angoloRadianti * 180 / M_PI);
+        if (deltaY > 0) {
+            //se arrivo è "sopra" la partenza
+            //la tangente ha segnato l'ancolo corretto
+            this->angolo = (float)angoloGradi;
+        } else {
+            //altrimenti giralo di un angolo piatto
+            this->angolo = (float)(angoloGradi + 180.f);
+        }
+    }
+    else
+    {
+        //comunico che la divisione per 0 non è avventua
+        cout << "Prevenuta divisione per 0 nel calcolo della direzione.\n";
+    }    
 }
 //getters
 float Direzione::getXOrigine(void)
@@ -143,8 +153,9 @@ void Direzione::move(void)
     cout << "s_x = [speed = " << this->speed << "]*[cos(" << this->angolo << " gradi) = " << (cos(angolo)) << "] = " << s_x << endl;
     cout << "s_y = [speed = " << this->speed << "]*[sin(" << this->angolo << " gradi) = " << (sin(angolo)) << "] = " << s_y << endl;
 #endif
-    //a cui viene opportunamente aggiunto (o sottratto) le coordinate iniziali
+    //a cui viene opportunamente aggiunto le coordinate iniziali
     this->setXOrigine(this->getXOrigine() + (float)s_x);
+    //la y va nella direzione opposta
     this->setYOrigine(this->getYOrigine() - (float)s_y);
 #ifdef DEBUG
     this->print();
