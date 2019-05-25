@@ -1,6 +1,8 @@
 //lista per le classi ereditata
 //quindi non posso usare == o cout<<
 //ma devo usare contronto() e print()
+
+
 #include "../header/ListaClasse.hpp"
 
 //#define DEBUG
@@ -75,4 +77,3 @@ void ListaClasse<Tipo>::print(void)
 	}
 	cout << " ]" << endl;
 }
-

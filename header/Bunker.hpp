@@ -4,8 +4,14 @@
 
 #include "./DisegnabileI.hpp"
 #include "./Direzione.hpp"
+
 #include "./ListaClasse.hpp"
 
+//ATTENZIONE! cpp inclusi per classi template
+#include "../src/Lista.cpp"
+#include "../src/ListaClasse.cpp"
+
+//per Bunker
 template class ListaClasse<Direzione>;
 
 class Bunker : public DisegnabileI

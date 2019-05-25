@@ -22,8 +22,7 @@ HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o \
 	Gioco.o main.o \
-	Fuel.o Navicella.o
-# Bunker.o Pianeta.o 
+	Fuel.o Navicella.o Bunker.o Pianeta.o 
 # Controlli.o
 
 all: sfml-app
@@ -51,11 +50,11 @@ Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp
 	$(COMPILE)Navicella.cpp
 
-#Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)ListaClasse.hpp
-#	$(COMPILE)Bunker.cpp
+Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)ListaClasse.hpp
+	$(COMPILE)Bunker.cpp
 
-#Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp
-#	$(COMPILE)Pianeta.cpp
+Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp
+	$(COMPILE)Pianeta.cpp
 
 #Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp
 #	$(COMPILE)Controlli.cpp

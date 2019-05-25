@@ -3,9 +3,12 @@
 #define PIANETA_H
 
 #include "../header/DisegnabileI.hpp"
-#include "../header/ListaClasse.hpp"
 #include "../header/Punto.hpp"
 #include "../header/Fuel.hpp"
+
+#include "../header/ListaClasse.hpp"
+
+//ATTENZIONE! cpp sono qui inclusi per classi template
 #include "../header/Bunker.hpp"
 
 template class ListaClasse<Punto>;

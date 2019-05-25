@@ -1,0 +1,21 @@
+NOTA BENE:
+noi usiamo liste di tipo generico,
+il che significa che usiamo liste template.
+bene il problema è che per usarle deve essere incluso
+il cpp delle liste, oltre che l'hpp
+e bisogna dichiararlo.
+
+il main quindi ha:
+
+...
+#include "../header/ListaClasse.hpp"
+#include "../header/Punto.hpp"
+...
+
+//ATTENZIONE! cpp inclusi per classi template
+#include "./Lista.cpp"
+#include "./ListaClasse.cpp"
+
+template class ListaClasse<Punto>;
+
+int main() { ... }
