@@ -21,8 +21,8 @@ COMPILE = $(CC) $(CFLAGS) $(S)
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o \
-	Gioco.o main.o \
-	Fuel.o Navicella.o Bunker.o Pianeta.o 
+	Fuel.o Navicella.o Bunker.o Pianeta.o \
+	Gioco.o main.o
 # Controlli.o
 
 all: sfml-app
