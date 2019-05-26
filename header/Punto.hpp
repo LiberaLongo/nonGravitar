@@ -34,6 +34,10 @@ public:
 
     //disegna
     void draw(sf::RenderWindow &window);
+
+    //è dentro?
+    bool isIn(float x, float y, float size);
+    bool isIn(Punto centro, float size);
 };
 
 #endif //PUNTO_H

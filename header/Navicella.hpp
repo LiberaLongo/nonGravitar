@@ -9,6 +9,7 @@
 #include "./Punto.hpp"
 #include "./Direzione.hpp"
 #include "./Fuel.hpp"
+#include "./Pianeta.hpp"
 
 class Navicella : public DisegnabileI
 {
@@ -63,6 +64,9 @@ public:
 
     //spara
     void shoot(Punto mouseclick);
+
+    //controlla se è dentro
+    bool isIn(Pianeta planet);
 };
 
 #endif //NAVICELLA_H

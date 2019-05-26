@@ -14,6 +14,8 @@ bool Gioco(void)
     float width = 900.f, height = 600.f;
     //crea la lobby
     sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
+    //crea la visuale pianeta
+    //sf::RenderWindow visualePianeta(sf::VideoMode(width, height), "VisualePianeta");
 
     //mia navicella
     Navicella player = Navicella(width / 2, height / 2);

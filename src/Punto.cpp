@@ -60,3 +60,19 @@ void Punto::draw(sf::RenderWindow &window) {
     //il punto è al centro del rettangolo
     window.draw(rectangle);
 }
+
+bool Punto::isIn(float x, float y, float size) {
+    //and
+    if ( this->x < x - size ) //minore di minX
+        return false;
+    if ( this->x > x + size ) //maggiore di maxX
+        return false;
+    if ( this->y < y - size ) //minore di minY
+        return false;
+    if ( this->y > y + size ) //maggiore di maxY
+        return false;
+    return true;
+}
+bool Punto::isIn(Punto centro, float size) {
+    return this->isIn(centro.getX(), centro.getY(), size);
+}
