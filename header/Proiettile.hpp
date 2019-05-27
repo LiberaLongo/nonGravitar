@@ -2,6 +2,9 @@
 #ifndef PROIETTILE_H
 #define PROIETTILE_H
 
+#include <ctime>
+#include <cstdlib>
+
 #include "./Direzione.hpp"
 #include "./DisegnabileI.hpp"
 

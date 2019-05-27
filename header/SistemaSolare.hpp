@@ -2,6 +2,9 @@
 #ifndef SISTEMA_SOLARE_HPP
 #define SISTEMA_SOLARE_HPP
 
+#include <ctime>
+#include <cstdlib>
+
 #include "./utils.hpp"
 #include "./Pianeta.hpp"
 

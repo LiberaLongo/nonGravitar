@@ -1,6 +1,4 @@
 //codice sistema solare
-#include <ctime>
-#include <cstdlib>
 
 #include "../header/SistemaSolare.hpp"
 
@@ -72,7 +70,7 @@ void SistemaSolare::genera()
     //seme per i numeri casuali
     srand(time(NULL));
     //genera tutti i pianeti all'inizio o man mano?
-    for (int i = 1; i < MAX_PLANET; i++)
+    for (int i = 0; i < MAX_PLANET; i++)
     {
         //numero random per le coordinate
         float x = 0.f, y = 0.f;

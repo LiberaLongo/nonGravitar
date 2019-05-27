@@ -58,10 +58,10 @@ Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp
 Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)ListaClasse.hpp
 	$(COMPILE)Bunker.cpp
 
-Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp
+Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)ListaClasse.hpp
 	$(COMPILE)Pianeta.cpp
 
-SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp
+SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)ListaClasse.hpp
 	$(COMPILE)SistemaSolare.cpp
 
 #Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp

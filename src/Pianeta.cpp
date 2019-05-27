@@ -119,9 +119,12 @@ Pianeta::print(void)
 {
     cout << "Pianeta : { centro = ";
     this->centro.print();
-    cout << ", raggio = " << this->raggio;
+    cout << ", raggio = " << this->raggio << endl;
+    cout << "superficie";
     this->surface.print();
+    cout << "carburante";
     this->fuel.print();
+    cout << "bunker";
     this->bunker.print();
     cout << " }" << endl;
 }
@@ -160,11 +163,11 @@ void Pianeta::genera(void)
     //seme per i numeri casuali
     srand(time(NULL));
     //genera tutti i pianeti all'inizio o man mano?
-    for( int i = 1; i < MAX_PLANET ; i++) {
+    for( int i = 0; i < MAX_PLANET ; i++) {
         //numero random per le coordinate
         float x = 0.f, y = 0.f;
-        x = rand() % (int)WIDTH;    //tra 0.f e WIDTH
-        y = rand() % (int)HEIGHT;   //tra 0.f e HEIGHT
+        x = rand() % ((int)WIDTH);    //tra 0.f e WIDTH
+        y = rand() % ((int)HEIGHT);   //tra 0.f e HEIGHT
         //costruisci pianeta
         Punto p = Punto(x, y);
         //inserirlo nella lista
