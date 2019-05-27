@@ -8,7 +8,7 @@ visualeSistemaSolare::visualeSistemaSolare(void)
 
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
 {
-    bool Running = false;
+    bool Running = true;
     
     sf::Event event;
 
