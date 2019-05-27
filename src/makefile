@@ -22,7 +22,7 @@ HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o ColoreRGB.o \
 	Proiettile.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
-	Gioco.o main.o
+	visualePianeta.o visualeSistemaSolare.o Gioco.o main.o
 # Controlli.o
 
 all: sfml-app
@@ -67,13 +67,17 @@ Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(
 SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)ListaClasse.hpp $(H)utils.hpp
 	$(COMPILE)SistemaSolare.cpp
 
-#Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp
-#	$(COMPILE)Controlli.cpp
+#cose per gestire le varie visuali di gioco
 
-#cose per il main
+visualePianeta.o: $(S)visualePianeta.cpp $(H)visualePianeta.hpp
+	$(COMPILE)visualePianeta.cpp
+
+visualeSistemaSolare.o: $(S)visualeSistemaSolare.cpp $(H)visualeSistemaSolare.hpp
+	$(COMPILE)visualeSistemaSolare.cpp
+
 Gioco.o: $(S)Gioco.cpp $(H)Gioco.hpp
 	$(COMPILE)Gioco.cpp
-
+#main
 main.o: $(S)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp
 	$(COMPILE)main.cpp
 

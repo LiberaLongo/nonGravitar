@@ -8,6 +8,10 @@
 
 int main()
 {
+	//chiamo funzione gioco
+	//errore è true se si è presentato un errore, false altrimenti
+	int risultato = Gioco();
+	return risultato;
 	/*
 	float X[] = {1, 2, 3, 4, 5};
 	float Y[] = {5, 4, 3, 2, 1};
@@ -21,8 +25,4 @@ int main()
 	}
 	lista.print();
 	*/
-	//chiamo funzione gioco
-	//errore è true se si è presentato un errore, false altrimenti
-	bool errore = Gioco();
-	return (int) errore;
 }
