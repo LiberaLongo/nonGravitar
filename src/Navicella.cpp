@@ -106,11 +106,11 @@ float Navicella::getFuel(void)
 //stampa
 void Navicella::print(void)
 {
-    cout << "Navicella : [ centro = ";
+    cout << "Navicella : { centro = ";
     this->centro.print();
     this->dir.print();
     cout << ", size = " << this->size;
-    cout << " ]" << endl;
+    cout << " } " << endl;
 }
 
 //disegna

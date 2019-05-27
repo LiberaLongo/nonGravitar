@@ -11,14 +11,17 @@ bool Gioco(void)
     //codice della gestione del gioco
 
     //funzione finestra di SFML
-    float width = 900.f, height = 600.f;
     //crea la lobby
-    sf::RenderWindow lobby(sf::VideoMode(width, height), "My lobby");
+    sf::RenderWindow lobby(sf::VideoMode(WIDTH, HEIGHT), "My lobby");
     //crea la visuale pianeta
-    //sf::RenderWindow visualePianeta(sf::VideoMode(width, height), "VisualePianeta");
+    //sf::RenderWindow visualePianeta(sf::VideoMode(WIDTH, HEIGHT), "VisualePianeta");
+
+    SistemaSolare ohSoleMio;
+    ohSoleMio.genera();
+    ohSoleMio.print();
 
     //mia navicella
-    Navicella player = Navicella(width / 2, height / 2);
+    Navicella player = Navicella(WIDTH / 2, HEIGHT / 2);
 
     //un punto adibito a mouse click
     Punto mouseClick;
@@ -125,10 +128,11 @@ bool Gioco(void)
         //pulisci la finestra colorandola di nero
         lobby.clear(sf::Color::Black);
 
-        Pianeta earth = Pianeta(width/3, height/4);
         //disegna qui...
-        earth.draw(lobby);
+        ohSoleMio.draw(lobby);
+
         player.draw(lobby);
+
         if(haCliccato)
             mouseClick.draw(lobby);
         // lobby.draw(...);

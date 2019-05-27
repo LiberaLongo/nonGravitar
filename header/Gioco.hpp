@@ -3,7 +3,7 @@
 #define GIOCO_H
 
 #include "../header/Navicella.hpp"
-#include "../header/Pianeta.hpp"
+#include "../header/SistemaSolare.hpp"
 //#include "../header/Controlli.hpp"
 
 bool Gioco(void);

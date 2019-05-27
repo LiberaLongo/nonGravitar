@@ -34,8 +34,8 @@ public:
     Pianeta(Punto centro);
     Pianeta(float x, float y);
     //costruttori completi
-    Pianeta(Punto centro, float raggio, ListaClasse<Punto> headSurface, ListaClasse<Fuel> headFuel, ListaClasse<Bunker> headBunker);
-    Pianeta(float x, float y, float raggio, ListaClasse<Punto> headSurface, ListaClasse<Fuel> headFuel, ListaClasse<Bunker> headBunker);
+    Pianeta(Punto centro, float raggio, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
+    Pianeta(float x, float y, float raggio, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
     //distruttori
     /*virtual*/ ~Pianeta(void);
     //SETTERS
@@ -44,9 +44,9 @@ public:
     void setCoord(float x, float y);
     void setRaggio(float raggio);
     //setta la lista
-    void setSurface(ListaClasse<Punto> headSurface);
-    void setFuel(ListaClasse<Fuel> headFuel);
-    void setBunker(ListaClasse<Bunker> headBunker);
+    void setSurface(ListaClasse<Punto> listaSurface);
+    void setFuel(ListaClasse<Fuel> listaFuel);
+    void setBunker(ListaClasse<Bunker> listaBunker);
     //setta il puntatore della lista
     void setHeadSurface(struct Elem<Punto> *headSurface);
     void setHeadFuel(struct Elem<Fuel> *headFuel);
@@ -66,8 +66,8 @@ public:
     //disegna
     void draw(sf::RenderWindow &window);
     void drawVisuale(sf::RenderWindow &window);
-    //generaPianeta(void);
-    void generaPianeta(void);
+    //genera Pianeta
+    void genera(void);
     //altre cose
 };
 #endif

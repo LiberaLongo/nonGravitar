@@ -58,7 +58,7 @@ void ListaClasse<Tipo>::print(void)
 #ifdef DEBUG
 	cout << "stampa lista" << endl;
 #endif
-	cout << "ListaClasse : [ ";
+	cout << "ListaClasse : [ " << endl;
 	if (!(this->empty()))
 	{
 		//primo elemento utile non la sentinella

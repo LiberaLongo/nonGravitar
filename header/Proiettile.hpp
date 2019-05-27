@@ -5,7 +5,7 @@
 #include "./Direzione.hpp"
 #include "./DisegnabileI.hpp"
 
-class Proiettile : public Direzione, public DisegnabileI
+class Proiettile : public Direzione //disegnabile
 {
 public:
     //costruttore vuoto

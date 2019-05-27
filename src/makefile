@@ -21,13 +21,15 @@ COMPILE = $(CC) $(CFLAGS) $(S)
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o \
-	Proiettile.o Fuel.o Navicella.o Bunker.o Pianeta.o \
+	Proiettile.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
 	Gioco.o main.o
 # Controlli.o
 
 all: sfml-app
 #lancia l'app in automatico
 	./$<
+
+#cose utili
 Lista.o: $(S)Lista.cpp $(H)Lista.hpp
 	$(COMPILE)Lista.cpp
 
@@ -43,13 +45,13 @@ utils.o: $(S)utils.cpp $(H)utils.hpp $(H)Punto.hpp
 Direzione.o: $(S)Direzione.cpp $(HDR)
 	$(COMPILE)Direzione.cpp
 
+#oggetti del gioco
 Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
 	$(COMPILE)Proiettile.cpp
 
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
 	$(COMPILE)Fuel.cpp
 
-#include "../header/Gioco.hpp"
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp
 	$(COMPILE)Navicella.cpp
 
@@ -59,9 +61,13 @@ Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)ListaClasse.hpp
 Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp
 	$(COMPILE)Pianeta.cpp
 
+SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp
+	$(COMPILE)SistemaSolare.cpp
+
 #Controlli.o: $(S)Controlli.cpp $(H)Controlli.hpp
 #	$(COMPILE)Controlli.cpp
 
+#cose per il main
 Gioco.o: $(S)Gioco.cpp $(H)Gioco.hpp
 	$(COMPILE)Gioco.cpp
 

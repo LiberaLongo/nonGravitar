@@ -19,21 +19,21 @@ Pianeta::Pianeta(float x, float y)
     //raggio di default
 }
 //costruttori completi
-Pianeta::Pianeta(Punto centro, float raggio, ListaClasse<Punto> headSurface, ListaClasse<Fuel> headFuel, ListaClasse<Bunker> headBunker)
+Pianeta::Pianeta(Punto centro, float raggio, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker)
 {
     this->centro = centro;
     this->raggio = raggio;
-    this->surface = headSurface;
-    this->fuel = headFuel;
-    this->bunker = headBunker;
+    this->surface = listaSurface;
+    this->fuel = listaFuel;
+    this->bunker = listaBunker;
 }
-Pianeta::Pianeta(float x, float y, float raggio, ListaClasse<Punto> headSurface, ListaClasse<Fuel> headFuel, ListaClasse<Bunker> headBunker)
+Pianeta::Pianeta(float x, float y, float raggio, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker)
 {
     this->centro.setCoord(x, y);
     this->raggio = raggio;
-    this->surface = headSurface;
-    this->fuel = headFuel;
-    this->bunker = headBunker;
+    this->surface = listaSurface;
+    this->fuel = listaFuel;
+    this->bunker = listaBunker;
 }
 //distruttori
 /*virtual*/ Pianeta::~Pianeta(void)
@@ -58,17 +58,17 @@ void Pianeta::setRaggio(float raggio)
     this->raggio = raggio;
 }
 //setta la lista
-void Pianeta::setSurface(ListaClasse<Punto> headSurface)
+void Pianeta::setSurface(ListaClasse<Punto> listaSurface)
 {
-    this->surface = headSurface;
+    this->surface = listaSurface;
 }
-void Pianeta::setFuel(ListaClasse<Fuel> headFuel)
+void Pianeta::setFuel(ListaClasse<Fuel> listaFuel)
 {
-    this->fuel = headFuel;
+    this->fuel = listaFuel;
 }
-void Pianeta::setBunker(ListaClasse<Bunker> headBunker)
+void Pianeta::setBunker(ListaClasse<Bunker> listaBunker)
 {
-    this->bunker = headBunker;
+    this->bunker = listaBunker;
 }
 //setta il puntatore della lista
 void Pianeta::setHeadSurface(struct Elem<Punto> *headSurface)
@@ -100,10 +100,16 @@ float Pianeta::getRaggio(void)
 struct Elem<Punto> *Pianeta::getHeadSurface(void)
 {
     return this->surface.getHead();
-} struct Elem<Fuel> *Pianeta::getHeadFuel(void)
+}
+//
+struct Elem<Fuel> *
+Pianeta::getHeadFuel(void)
 {
     return this->fuel.getHead();
-} struct Elem<Bunker> *Pianeta::getHeadBunker(void)
+}
+//
+struct Elem<Bunker> *
+Pianeta::getHeadBunker(void)
 {
     return this->bunker.getHead();
 }
@@ -111,13 +117,13 @@ struct Elem<Punto> *Pianeta::getHeadSurface(void)
 void
 Pianeta::print(void)
 {
-    cout << "Pianeta : [ centro = ";
+    cout << "Pianeta : { centro = ";
     this->centro.print();
     cout << ", raggio = " << this->raggio;
     this->surface.print();
     this->fuel.print();
     this->bunker.print();
-    cout << " ]" << endl;
+    cout << " }" << endl;
 }
 //confronto
 bool Pianeta::confronto(Pianeta p)
@@ -149,7 +155,20 @@ void Pianeta::drawVisuale(sf::RenderWindow &window)
     //i punti in una convex o in un poligono
 }
 //generaPianeta(void);
-void Pianeta::generaPianeta(void)
+void Pianeta::genera(void)
 {
+    //seme per i numeri casuali
+    srand(time(NULL));
+    //genera tutti i pianeti all'inizio o man mano?
+    for( int i = 1; i < MAX_PLANET ; i++) {
+        //numero random per le coordinate
+        float x = 0.f, y = 0.f;
+        x = rand() % (int)WIDTH;    //tra 0.f e WIDTH
+        y = rand() % (int)HEIGHT;   //tra 0.f e HEIGHT
+        //costruisci pianeta
+        Punto p = Punto(x, y);
+        //inserirlo nella lista
+        this->surface.insert_head(p);
+    }
 }
 //altre cose
