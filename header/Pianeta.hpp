@@ -19,7 +19,7 @@ class Pianeta : public DisegnabileI
 {
 protected:
     Punto centro;
-    float raggio = 50.f;
+    float raggio = PIANETA_RAGGIO;
     ListaClasse<Punto> surface;
     ListaClasse<Fuel> fuel;
     ListaClasse<Bunker> bunker;

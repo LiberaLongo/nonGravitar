@@ -1,6 +1,8 @@
 //codice pianeta
 #include "../header/Pianeta.hpp"
 
+//#define DEBUG
+
 //COSTRUTTORI
 //costruttore void
 Pianeta::Pianeta(void)
@@ -160,8 +162,6 @@ void Pianeta::drawVisuale(sf::RenderWindow &window)
 //generaPianeta(void);
 void Pianeta::genera(void)
 {
-    //seme per i numeri casuali
-    srand(time(NULL));
     //genera tutti i pianeti all'inizio o man mano?
     for( int i = 0; i < MAX_PLANET ; i++) {
         //numero random per le coordinate
@@ -170,6 +170,11 @@ void Pianeta::genera(void)
         y = rand() % ((int)HEIGHT);   //tra 0.f e HEIGHT
         //costruisci pianeta
         Punto p = Punto(x, y);
+
+        #ifdef DEBUG
+            p.print();
+            cout << "\t";
+        #endif
         //inserirlo nella lista
         this->surface.insert_head(p);
     }

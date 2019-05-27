@@ -2,6 +2,9 @@
 #ifndef GIOCO_H
 #define GIOCO_H
 
+#include <ctime>
+#include <cstdlib>
+
 #include "../header/Navicella.hpp"
 #include "../header/SistemaSolare.hpp"
 //#include "../header/Controlli.hpp"

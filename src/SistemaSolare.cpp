@@ -2,6 +2,8 @@
 
 #include "../header/SistemaSolare.hpp"
 
+//#define DEBUG
+
 //COSTRUTTORI
 //costruttore void
 SistemaSolare::SistemaSolare(void)
@@ -41,7 +43,9 @@ struct Elem<Pianeta> *SistemaSolare::getHeadPianeti(void)
 }
 
 //stampa
-void SistemaSolare::print(void) {
+void
+SistemaSolare::print(void)
+{
     cout << "SistemaSolare : {" << endl;
     this->pianeti.print();
     cout << " }" << endl;
@@ -67,20 +71,31 @@ void SistemaSolare::draw(sf::RenderWindow &window)
 //genera lista di pianeti
 void SistemaSolare::genera()
 {
-    //seme per i numeri casuali
-    srand(time(NULL));
     //genera tutti i pianeti all'inizio o man mano?
     for (int i = 0; i < MAX_PLANET; i++)
     {
         //numero random per le coordinate
         float x = 0.f, y = 0.f;
-        x = rand() % ((int)WIDTH);  //tra 0.f e WIDTH
-        y = rand() % ((int)HEIGHT); //tra 0.f e HEIGHT
+        //distanza raggio del pianeta più un pò di spazio per la navicella
+        float dist = PIANETA_RAGGIO + 20.f;
+        x = (rand() % (int)(WIDTH - dist*2)) + dist;  //tra 0.f e WIDTH ma che non esca
+        y = (rand() % (int)(HEIGHT - dist*2)) + dist; //tra 0.f e HEIGHT ma che non esca
         //costruisci pianeta
         Pianeta newPianeta = Pianeta(x, y);
         //genera il pianeta
         newPianeta.genera();
+//#ifdef DEBUG
+//#endif
         //inserirlo nella lista
         this->pianeti.insert_head(newPianeta);
     }
+    /*
+    problema 1: i pianeti si possono generare "vicini vicini"
+    se per ogni pianeta che genero controllo che non sia troppo vicino a
+    un altro pianeta la complessità mi diventa da O(n) a O(n^2).
+    problema 2: la navicella può essere dentro un pianeta appena generato,
+    cè un algoritmo intelligente per evitarlo?
+    si, compressione delle lunghezze e controllo if (pensato)
+    ma, "keep it simple and stupid"
+    */
 }

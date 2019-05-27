@@ -17,6 +17,8 @@ bool Gioco(void)
     //sf::RenderWindow visualePianeta(sf::VideoMode(WIDTH, HEIGHT), "VisualePianeta");
 
     SistemaSolare ohSoleMio;
+    //seme per i numeri casuali
+    srand(time(NULL));
     ohSoleMio.genera();
     ohSoleMio.print();
 

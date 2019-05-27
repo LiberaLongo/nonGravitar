@@ -19,6 +19,7 @@ using namespace std;
 #define FUEL1 100.f
 #define FUEL2 200.f
 #define SPEED 5.f
+#define PIANETA_RAGGIO 50.f
 #define MAX_PLANET 7 //numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
 
 //direzioni canoniche con angoli studiati in matematica
