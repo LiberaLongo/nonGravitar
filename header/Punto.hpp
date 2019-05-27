@@ -12,9 +12,11 @@ private:
     float y = 0.f;
 
 public:
-    //costruttori e distruttore
+    //costruttore vuoto
     Punto(void);
+    //cotruttore completo
     Punto(float x, float y);
+    //distruttore
     /*virtual*/ ~Punto(void);
 
     //setters

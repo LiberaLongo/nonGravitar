@@ -80,8 +80,21 @@ void SistemaSolare::genera()
         float dist = PIANETA_RAGGIO + 20.f;
         x = (rand() % (int)(WIDTH - dist*2)) + dist;  //tra 0.f e WIDTH ma che non esca
         y = (rand() % (int)(HEIGHT - dist*2)) + dist; //tra 0.f e HEIGHT ma che non esca
+
+        //colore
+        int r, g, b;
+        r = (rand() % LUMUS_MAXIMA);
+        g = (rand() % LUMUS_MAXIMA);
+        b = (rand() % LUMUS_MAXIMA);
+
+        //colore outline
+        int ro, go, bo;
+        ro = (rand() % LUMUS_MAXIMA);
+        go = (rand() % LUMUS_MAXIMA);
+        bo = (rand() % LUMUS_MAXIMA);
+
         //costruisci pianeta
-        Pianeta newPianeta = Pianeta(x, y);
+        Pianeta newPianeta = Pianeta(x, y, r, g, b, ro, go, bo);
         //genera il pianeta
         newPianeta.genera();
 //#ifdef DEBUG

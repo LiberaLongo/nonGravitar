@@ -14,13 +14,18 @@ using namespace std;
 //dimensioni
 #define HEIGHT 600.f
 #define WIDTH 900.f
+
+//per i colori
+#define LUMUS_MAXIMA 255 //LUMUS_MAXIMA, citazione Harry Potter, (luminosità RGB)
+
 //alcune costanti nella costruzione delle varie parti del gioco
 #define CONSUMO 1.f
 #define FUEL1 100.f
 #define FUEL2 200.f
 #define SPEED 5.f
 #define PIANETA_RAGGIO 50.f
-#define MAX_PLANET 7 //numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
+#define MAX_SUPERFICE 6 //42, Risposta alla domanda fondamentale sulla vita, l'universo e tutto quanto, (cit. Davoli)
+#define MAX_PLANET 7 //7, numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
 
 //direzioni canoniche con angoli studiati in matematica
 #define RIGHT   0.f

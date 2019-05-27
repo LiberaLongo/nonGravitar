@@ -1,0 +1,42 @@
+//header colori
+#ifndef COLORE_H
+#define COLORE_H
+
+#include <SFML/Graphics.hpp>
+
+#include "./utils.hpp"
+
+class ColoreRGB
+{
+private:
+    //default bianco
+    int red = LUMUS_MAXIMA;
+    int green = LUMUS_MAXIMA;
+    int blue = LUMUS_MAXIMA;
+
+public:
+    //costruttore vuoto
+    ColoreRGB(void);
+    //costruttore completo
+    ColoreRGB(int red, int green, int blue);
+    //distruttore
+    /*virtual*/ ~ColoreRGB(void);
+
+    //setters
+    void setRed(int red);
+    void setGreen(int green);
+    void setBlue(int blue);
+    void setRGB(int red, int green, int blue);
+
+    //getters
+    int getRed(void);
+    int getGreen(void);
+    int getBlue(void);
+
+    //stampa
+    void print(void);
+
+    sf::Color getColor(void);
+};
+
+#endif //PUNTO_H
