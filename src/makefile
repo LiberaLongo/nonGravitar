@@ -21,7 +21,7 @@ COMPILE = $(CC) $(CFLAGS) $(S)
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = Lista.o ListaClasse.o Punto.o utils.o Direzione.o \
-	Fuel.o Navicella.o Bunker.o Pianeta.o \
+	Proiettile.o Fuel.o Navicella.o Bunker.o Pianeta.o \
 	Gioco.o main.o
 # Controlli.o
 
@@ -42,6 +42,9 @@ utils.o: $(S)utils.cpp $(H)utils.hpp $(H)Punto.hpp
 
 Direzione.o: $(S)Direzione.cpp $(HDR)
 	$(COMPILE)Direzione.cpp
+
+Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
+	$(COMPILE)Proiettile.cpp
 
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
 	$(COMPILE)Fuel.cpp
