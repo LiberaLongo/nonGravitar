@@ -17,7 +17,8 @@
 class visualeSistemaSolare : public cScreen
 {
 private:
-	bool playing;
+    SistemaSolare sistemasolare;
+	Navicella player;
 public:
 	visualeSistemaSolare(void);
 	virtual int Run(sf::RenderWindow &App);

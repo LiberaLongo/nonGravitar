@@ -3,7 +3,13 @@
 
 visualeSistemaSolare::visualeSistemaSolare(void)
 {
-	playing = false;
+    //seme per i numeri casuali
+    srand(time(NULL));
+    this->sistemasolare.genera();
+    //this->sistemasolare.print();
+
+    //mia navicella
+    this->player = Navicella(WIDTH / 2, HEIGHT / 2);
 }
 
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
@@ -11,15 +17,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
     bool Running = true;
     
     sf::Event event;
-
-    SistemaSolare ohSoleMio;
-    //seme per i numeri casuali
-    srand(time(NULL));
-    ohSoleMio.genera();
-    //ohSoleMio.print();
-
-    //mia navicella
-    Navicella player = Navicella(WIDTH / 2, HEIGHT / 2);
 
     //un punto adibito a mouse click
     Punto mouseClick;
@@ -31,16 +28,12 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         //controlla se qualche evento viene scatenato prima del prossimo loop
         while (App.pollEvent(event))
         {
-            //le cose della Render Window le devo controllare in QUESTA funzione!
-            //in particolare se la finestra è stata chiusa
-            if (event.type == sf::Event::Closed)
-                return -1;
-            //altrimenti passo il controllo alla mia funzione dei controlli
-            //controlli(player, event);
-            /*la funzione controlli non va per non si sa quale motivo*/
-
             switch (event.type)
             {
+            //se la finestra è stata chiusa
+            case sf::Event::Closed:
+                return -1;
+                break;
             //mouse cliccato
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
@@ -52,7 +45,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 #endif
                     haCliccato = true;
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
-                    player.shoot(mouseClick);
+                    this->player.shoot(mouseClick);
                 }
                 break;
             //tasti premuti?
@@ -60,55 +53,59 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 //...
                 switch (event.key.code)
                 {
+                //tasto Esc
+				case sf::Keyboard::Escape:
+					return (-1);
+					break;
                 //WASD
                 case sf::Keyboard::W:
 #ifdef DEBUG
                     cout << "W\n";
 #endif
-                    player.move(UP);
+                    this->player.move(UP);
                     break;
                 case sf::Keyboard::A:
 #ifdef DEBUG
                     cout << "A\n";
 #endif
-                    player.move(LEFT);
+                    this->player.move(LEFT);
                     break;
                 case sf::Keyboard::S:
 #ifdef DEBUG
                     cout << "S\n";
 #endif
-                    player.move(DOWN);
+                    this->player.move(DOWN);
                     break;
                 case sf::Keyboard::D:
 #ifdef DEBUG
                     cout << "D\n";
 #endif
-                    player.move(RIGHT);
+                    this->player.move(RIGHT);
                     break;
                 //freccie
                 case sf::Keyboard::Up:
 #ifdef DEBUG
                     cout << "Up\n";
 #endif
-                    player.move(UP);
+                    this->player.move(UP);
                     break;
                 case sf::Keyboard::Left:
 #ifdef DEBUG
                     cout << "Left\n";
 #endif
-                    player.move(LEFT);
+                    this->player.move(LEFT);
                     break;
                 case sf::Keyboard::Down:
 #ifdef DEBUG
                     cout << "Down\n";
 #endif
-                    player.move(DOWN);
+                    this->player.move(DOWN);
                     break;
                 case sf::Keyboard::Right:
 #ifdef DEBUG
                     cout << "Right\n";
 #endif
-                    player.move(RIGHT);
+                    this->player.move(RIGHT);
                     break;
                 default:
                     break;
@@ -126,9 +123,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         App.clear(sf::Color::Black);
 
         //disegna qui...
-        ohSoleMio.draw(App);
+        this->sistemasolare.draw(App);
 
-        player.draw(App);
+        this->player.draw(App);
 
         if(haCliccato)
             mouseClick.draw(App);

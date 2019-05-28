@@ -10,5 +10,5 @@ visualePianeta::visualePianeta(void)
 int visualePianeta::Run(sf::RenderWindow &App)
 {
     //non fare assolutamente niente
-    return -1;
+    return 0;
 }

@@ -17,10 +17,10 @@ int Gioco(void)
 	App.setMouseCursorVisible(false);
 
 	//Screens preparations
-	visualePianeta vP;
-	Screens.push_back(&vP);
 	visualeSistemaSolare vS;
 	Screens.push_back(&vS);
+	visualePianeta vP;
+	Screens.push_back(&vP);
 
 	//Main loop
 	while (screen >= 0)

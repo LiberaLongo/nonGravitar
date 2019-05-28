@@ -24,7 +24,7 @@ using namespace std;
 #define FUEL2 200.f
 #define SPEED 5.f
 #define PIANETA_RAGGIO 50.f
-#define MAX_SUPERFICE 6 //42, Risposta alla domanda fondamentale sulla vita, l'universo e tutto quanto, (cit. Davoli)
+#define MAX_SUPERFICE 0 //42, Risposta alla domanda fondamentale sulla vita, l'universo e tutto quanto, (cit. Davoli)
 #define MAX_PLANET 7 //7, numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
 
 //direzioni canoniche con angoli studiati in matematica
