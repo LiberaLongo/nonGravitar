@@ -35,14 +35,9 @@ con il terminale aperto
 spostati sulla cartella del progetto
 `cd nonGravitar`
 
-spostarsi nella cartella in cui si trova il main (src)
-`cd src`
-
 compilare
 `make`
 (per pulire: `make clean`, ma non è necessario per ricompilare)
 
 eventualmente rilanciare il gioco (rieseguendo il programma)
 `./sfml-app`
-
-
