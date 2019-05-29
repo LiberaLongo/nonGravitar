@@ -8,8 +8,8 @@
 #include "./ListaClasse.hpp"
 
 //ATTENZIONE! cpp inclusi per classi template
-#include "../src/Lista.cpp"
-#include "../src/ListaClasse.cpp"
+#include "../utils/Lista.cpp"
+#include "../utils/ListaClasse.cpp"
 
 //per Bunker
 template class ListaClasse<Direzione>;
