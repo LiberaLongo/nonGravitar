@@ -4,9 +4,19 @@
 
 //#define DEBUG
 
+SistemaSolare sistemasolare;
+
 int Gioco(void)
 {
-    	//Applications variables
+    //seme per i numeri casuali
+    srand(time(NULL));
+	
+	//genero il sistema solare
+    sistemasolare.genera();
+    //sistemasolare.print();
+
+
+    //Applications variables
 	std::vector<cScreen*> Screens;
 	int screen = 0;
 

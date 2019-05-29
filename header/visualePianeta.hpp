@@ -1,11 +1,16 @@
 //visuale pianeta header
-#ifndef VISUALE_PIANETA
-#define VISUALE_PIANETA
+#ifndef VISUALE_PIANETA_H
+#define VISUALE_PIANETA_H
 
 #include <iostream>
-#include "cScreen.hpp"
+#include "./cScreen.hpp"
 
 #include <SFML/Graphics.hpp>
+
+#include "./utils.hpp"
+#include "./SistemaSolare.hpp"
+
+extern SistemaSolare sistemasolare;
 
 class visualePianeta : public cScreen
 {
@@ -15,4 +20,5 @@ public:
 	visualePianeta(void);
 	virtual int Run(sf::RenderWindow &App);
 };
-#endif
+
+#endif //VISUALE_PIANETA_H

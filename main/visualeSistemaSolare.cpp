@@ -3,11 +3,6 @@
 
 visualeSistemaSolare::visualeSistemaSolare(void)
 {
-    //seme per i numeri casuali
-    srand(time(NULL));
-    this->sistemasolare.genera();
-    //this->sistemasolare.print();
-
     //mia navicella
     this->player = Navicella(WIDTH / 2, HEIGHT / 2);
 }
@@ -32,7 +27,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             {
             //se la finestra è stata chiusa
             case sf::Event::Closed:
-                return -1;
+                return EXIT;
                 break;
             //mouse cliccato
             case sf::Event::MouseButtonPressed:
@@ -55,7 +50,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 {
                 //tasto Esc
 				case sf::Keyboard::Escape:
-					return (-1);
+					return EXIT;
 					break;
                 //WASD
                 case sf::Keyboard::W:
@@ -123,7 +118,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         App.clear(sf::Color::Black);
 
         //disegna qui...
-        this->sistemasolare.draw(App);
+        sistemasolare.draw(App);
 
         this->player.draw(App);
 
@@ -135,5 +130,5 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         App.display();
     }
 
-    return -1;
+    return EXIT;
 }

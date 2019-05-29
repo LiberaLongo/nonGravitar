@@ -2,15 +2,15 @@
 #ifndef PIANETA_H
 #define PIANETA_H
 
-#include "../header/DisegnabileI.hpp"
-#include "../header/Punto.hpp"
-#include "../header/Fuel.hpp"
-#include "../header/ColoreRGB.hpp"
+#include "./DisegnabileI.hpp"
+#include "./Punto.hpp"
+#include "./Fuel.hpp"
+#include "./ColoreRGB.hpp"
 
-#include "../header/ListaClasse.hpp"
+#include "./ListaClasse.hpp"
 
 //ATTENZIONE! cpp sono qui inclusi per classi template
-#include "../header/Bunker.hpp"
+#include "./Bunker.hpp"
 
 template class ListaClasse<Punto>;
 template class ListaClasse<Fuel>;

@@ -33,11 +33,19 @@ using namespace std;
 #define LEFT    180.f
 #define DOWN    270.f
 
+//macro per gestire opportunamente le visuali
+#define EXIT -1
+#define VISUALE_SISTEMA_SOLARE 0
+#define VISUALE_PIANETA 1
+
+//FUNZIONI
+
 //Precondition: prende un angolo in gradi in forma canonica
 //Postcondition: lo trasforma opportunamente secondo la libreria grafica
 float angoloLibreria(float angolo);
 
 //restituisce la distanza tra due punti
+//float distance(Punto a, Punto b);
 //float distance(Punto a, Punto b);
 
 #endif //UTILS_H

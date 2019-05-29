@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "screens.hpp"
+#include "./screens.hpp"
 
 int Gioco(void);
 //GESTISCE TUTTO IL GIOCO

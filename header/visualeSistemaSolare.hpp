@@ -1,6 +1,6 @@
 // visuale sistema solare header
-#ifndef VISUALE_SISTEMA_SOLARE
-#define VISUALE_SISTEMA_SOLARE
+#ifndef VISUALE_SISTEMA_SOLARE_H
+#define VISUALE_SISTEMA_SOLARE_H
 
 #include <iostream>
 
@@ -14,13 +14,14 @@
 #include "../header/Navicella.hpp"
 #include "../header/SistemaSolare.hpp"
 
+extern SistemaSolare sistemasolare;
+
 class visualeSistemaSolare : public cScreen
 {
 private:
-    SistemaSolare sistemasolare;
 	Navicella player;
 public:
 	visualeSistemaSolare(void);
 	virtual int Run(sf::RenderWindow &App);
 };
-#endif
+#endif //VISUALE_SISTEMA_SOLARE_H
