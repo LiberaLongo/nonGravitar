@@ -16,8 +16,3 @@ float angoloLibreria(float angolo)
     //ci devo aggiungere 90 gradi ma stando attenta al modulo
     return (-angolo + 90.f);
 }
-//distanza tra due punti
-float distance(Punto a, Punto b)
-{
-    return (float)sqrt(pow(a.getX() - b.getX(), 2) + pow(a.getY() - b.getY(), 2));
-}

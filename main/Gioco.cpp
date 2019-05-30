@@ -32,8 +32,11 @@ int Gioco(void)
 	//Screens preparations
 	visualeSistemaSolare vS;
 	Screens.push_back(&vS);
+	//indirizzo visuale sistema solare nel vettore 0
 	visualePianeta vP;
 	Screens.push_back(&vP);
+	//indirizzo visuale pianeta nel vettore 1
+	//se questi indirizzi vengono modificati bisogna modificare anche VISUALE_... di utils.hpp
 
 	//Main loop
 	while (screen >= 0)

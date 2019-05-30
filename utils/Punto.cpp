@@ -62,19 +62,41 @@ void Punto::draw(sf::RenderWindow &window)
     //il punto è al centro del rettangolo
     window.draw(rectangle);
 }
-
-bool Punto::isNear(float x, float y, float size)
+//distanza
+//distanza tra due punti
+float Punto::distance(float x, float y)
+{
+    return (float)sqrt(pow(this->getX() - x, 2) + pow(this->getY() - y, 2));
+}
+//il punto è dentro un rettangolo con centro x y e dimensioni "raddoppiate"
+bool Punto::isNear(float x, float y, float width, float height)
 {
     //and
-    if (this->x < x - size) //minore di minX
+    if (this->x < x - width) //minore di minX
         return false;
-    if (this->x > x + size) //maggiore di maxX
+    if (this->x > x + width) //maggiore di maxX
         return false;
-    if (this->y < y - size) //minore di minY
+    if (this->y < y - height) //minore di minY
         return false;
-    if (this->y > y + size) //maggiore di maxY
+    if (this->y > y + height) //maggiore di maxY
         return false;
     return true;
+}
+//se è dentro un quadrato
+bool Punto::isNear(float x, float y, float size)
+{
+    bool isNear = this->isNear(x, y, size, size);
+    
+    if (isNear)
+    {
+        //controllo anche la distanza dal centro
+        if (this->distance(x, y) > size)
+        {
+            isNear = false;
+        }
+    }
+    
+    return isNear;
 }
 
 bool Punto::isNear(Punto centro, float size)
