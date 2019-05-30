@@ -77,7 +77,7 @@ visualePianeta.o: $(M)visualePianeta.cpp $(H)visualePianeta.hpp $(H)cScreen.hpp 
 visualeSistemaSolare.o: $(M)visualeSistemaSolare.cpp $(H)visualeSistemaSolare.hpp $(H)cScreen.hpp $(H)Navicella.hpp $(H)SistemaSolare.hpp
 	$(COMPILE) $(M)visualeSistemaSolare.cpp
 
-Gioco.o: $(M)Gioco.cpp $(H)Gioco.hpp
+Gioco.o: $(M)Gioco.cpp $(H)Gioco.hpp $(H)visualeSistemaSolare.hpp $(H)visualePianeta.hpp
 	$(COMPILE) $(M)Gioco.cpp
 
 main.o: $(M)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp

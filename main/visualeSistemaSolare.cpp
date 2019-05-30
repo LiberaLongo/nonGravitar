@@ -33,6 +33,9 @@ visualeSistemaSolare::visualeSistemaSolare(void)
 
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
 {
+    //aggiorno coordinate
+    this->player.setCoord(WIDTH / 2, HEIGHT / 2);
+
     bool Running = true;
     bool NavicellaMoved = false;
 

@@ -2,13 +2,33 @@
 
 #include "../header/visualePianeta.hpp"
 
+#define DEBUG
+
 visualePianeta::visualePianeta(void)
 {
-	playing = false;
+    //aggiorno coordinate
+    this->player = Navicella(WIDTH / 4, HEIGHT / 4);
 }
 
 int visualePianeta::Run(sf::RenderWindow &App)
 {
+    //aggiorno coordinate
+    this->player.setCoord(WIDTH / 4, HEIGHT / 4);
+    //aggiorno il pianeta
+    if (pianetaInsideNow != nullptr)
+    {
+        //stampa
+        //pianetaInsideNow è la posizione del pianeta nella lista
+        Pianeta pianeta = sistemasolare.toPtrPlanet(pianetaInsideNow);
+//voglio sapere come dare nome a un oggetto puntato da un puntatore
+#ifdef DEBUG
+        pianeta.print();
+#endif
+    }
+#ifdef DEBUG
+    cout << "sono dentro il pianeta!" << endl;
+#endif
+    return EXIT;
     //non fare assolutamente niente
     /*
     //codice simile ma da aggiustare
@@ -136,6 +156,4 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
     return EXIT;
     */
-    cout << "sono dentro il pianeta!" << endl;
-    return EXIT;
 }

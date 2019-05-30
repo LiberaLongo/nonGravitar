@@ -17,8 +17,8 @@ extern struct Elem<Pianeta> *pianetaInsideNow;
 class visualePianeta : public cScreen
 {
 private:
-	bool playing;
-
+	Navicella player;
+	Pianeta pianetaVisualizzato;
 public:
 	visualePianeta(void);
 	virtual int Run(sf::RenderWindow &App);
