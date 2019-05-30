@@ -75,15 +75,23 @@ public:
 
     //conta i punti della superficie
     int lunghezzaSuperfice(void);
+    
     //stampa
     void print(void);
+
     //confronto
     bool confronto(Pianeta p);
+
     //disegna
     void draw(sf::RenderWindow &window);
     void drawVisuale(sf::RenderWindow &window, int length);
+
     //genera Pianeta
     void genera(void);
+
+    //ordina la lista dei punti del pianeta...
+    void ordinaPunti(void);
+
     //altre cose
 };
 #endif

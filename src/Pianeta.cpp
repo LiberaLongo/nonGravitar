@@ -246,4 +246,10 @@ void Pianeta::genera(void)
         this->surface.insert_head(p);
     }
 }
+
+//ordina la lista dei punti del pianeta...
+void Pianeta::ordinaPunti(void) {
+    //non fare niente
+    //idea: ordinare i punti in base al loro angolo rispetto al centro
+}
 //altre cose

@@ -104,6 +104,7 @@ bool Punto::isNear(Punto centro, float size)
     return this->isNear(centro.getX(), centro.getY(), size);
 }
 
+//calcola angolo rispetto al punto corrente
 float Punto::calcolaAngolo(Punto arrivo)
 {
     float angolo = 0.f;
