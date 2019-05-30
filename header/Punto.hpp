@@ -40,6 +40,9 @@ public:
     //è dentro?
     bool isIn(float x, float y, float size);
     bool isIn(Punto centro, float size);
+
+    //restituisci un vettore della libreria
+    sf::Vector2f getVector(void);
 };
 
 #endif //PUNTO_H

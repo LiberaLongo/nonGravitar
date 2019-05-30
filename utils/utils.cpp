@@ -8,14 +8,16 @@
 //NOTA dei programmatori: ovviamente va modificata
 //              quando si usa una libreria grafica diversa
 
-float angoloLibreria(float angolo) {
+float angoloLibreria(float angolo)
+{
     //sembra che la libreria SFML fa aumentare l'angolo in senso antiorario
     //se le cose di default voglio che puntino verso l'alto
     //(perchè ad esempio un trangolo regolare (cerchio di 3 lati) non ruotato ha una punta verso l'alto )
     //ci devo aggiungere 90 gradi ma stando attenta al modulo
-    return (- angolo + 90.f);
+    return (-angolo + 90.f);
 }
 //distanza tra due punti
-float distance(Punto a, Punto b) {
-    return (float) sqrt( pow(a.getX() - b.getX(), 2) + pow(a.getY() - b.getY(), 2) );
+float distance(Punto a, Punto b)
+{
+    return (float)sqrt(pow(a.getX() - b.getX(), 2) + pow(a.getY() - b.getY(), 2));
 }

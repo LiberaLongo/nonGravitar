@@ -48,31 +48,41 @@ void Punto::print(void)
 }
 
 //confronto
-bool Punto::confronto(Punto p) {
+bool Punto::confronto(Punto p)
+{
     return (this->x == p.getX() && this->y == p.getY());
 }
 
 //disegna
-void Punto::draw(sf::RenderWindow &window) {
+void Punto::draw(sf::RenderWindow &window)
+{
     float size = 10.f;
     sf::RectangleShape rectangle(sf::Vector2f(size, size));
-    rectangle.setPosition(this->x - size/2, this->y - size/2);
+    rectangle.setPosition(this->x - size / 2, this->y - size / 2);
     //il punto è al centro del rettangolo
     window.draw(rectangle);
 }
 
-bool Punto::isIn(float x, float y, float size) {
+bool Punto::isIn(float x, float y, float size)
+{
     //and
-    if ( this->x < x - size ) //minore di minX
+    if (this->x < x - size) //minore di minX
         return false;
-    if ( this->x > x + size ) //maggiore di maxX
+    if (this->x > x + size) //maggiore di maxX
         return false;
-    if ( this->y < y - size ) //minore di minY
+    if (this->y < y - size) //minore di minY
         return false;
-    if ( this->y > y + size ) //maggiore di maxY
+    if (this->y > y + size) //maggiore di maxY
         return false;
     return true;
 }
-bool Punto::isIn(Punto centro, float size) {
+
+bool Punto::isIn(Punto centro, float size)
+{
     return this->isIn(centro.getX(), centro.getY(), size);
+}
+
+sf::Vector2f Punto::getVector(void)
+{
+    return sf::Vector2f(this->x, this->y);
 }
