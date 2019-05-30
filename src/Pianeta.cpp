@@ -176,9 +176,12 @@ Pianeta::getHeadBunker(void)
     return this->bunker.getHead();
 }
 
+//conta i punti della superficie
+int Pianeta::lunghezzaSuperfice(void) {
+    return this->surface.lunghezza();
+}
 //stampa
-void
-Pianeta::print(void)
+void Pianeta::print(void)
 {
     cout << "Pianeta : { ";
     cout << "\ncentro = ";
@@ -227,7 +230,7 @@ void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
     convexSuperficie.setPointCount(length);
 
     //blu
-    convexSuperficie.setFillColor(sf::Color::Blue);
+    convexSuperficie.setFillColor(this->getColoreLib());
 
     if (!(this->surface.empty()))
     {

@@ -151,7 +151,27 @@ struct Elem<Tipo> *Lista<Tipo>::remove(struct Elem<Tipo> *p)
 }
 
 //metodi ausiliari
-
+//calcola la lunghezza della lista (e serve per non fare errori)
+template <typename Tipo>
+int Lista<Tipo>::lunghezza(void)
+{
+	//conta il numero di elementi
+	int conta = 0;
+	if (!(this->empty()))
+	{
+		//primo elemento utile non la sentinella
+		struct Elem<Tipo> *iter = this->head();
+		//se non vuota e non finita
+		while (!(this->finished(iter)))
+		{
+			//incremento la conta
+			conta++;
+			//passo al successivo e stampo freccia
+			iter = this->next(iter);
+		}
+	}
+	return conta;
+}
 //inserisci in testa
 template <typename Tipo>
 void Lista<Tipo>::insert_head(Tipo v)

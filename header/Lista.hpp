@@ -43,6 +43,8 @@ public:
 	struct Elem<Tipo>* remove(struct Elem<Tipo>* p);
 
 	//metodi ausiliari
+	//calcola la lunghezza della lista (e serve per non fare errori)
+	int lunghezza(void);
 	//inserisci in testa
 	void insert_head(Tipo v);
 	//inserisci in coda

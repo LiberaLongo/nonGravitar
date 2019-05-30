@@ -1,7 +1,7 @@
 //visuale sistema solare codice
 #include "../header/visualeSistemaSolare.hpp"
 
-#define DEBUG //se è definita stampo per debugghing
+//#define DEBUG //se è definita stampo per debugghing
 
 //privata
 bool visualeSistemaSolare::check(void)

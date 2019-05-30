@@ -79,6 +79,8 @@ public:
     struct Elem<Fuel> *getHeadFuel(void);
     struct Elem<Bunker> *getHeadBunker(void);
 
+    //conta i punti della superficie
+    int lunghezzaSuperfice(void);
     //stampa
     void print(void);
     //confronto
