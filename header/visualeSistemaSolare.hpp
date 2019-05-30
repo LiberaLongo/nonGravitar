@@ -15,14 +15,16 @@
 #include "../header/SistemaSolare.hpp"
 
 extern SistemaSolare sistemasolare;
-extern Pianeta* pianetaInsideNow;
+extern struct Elem<Pianeta> *pianetaInsideNow;
 
 class visualeSistemaSolare : public cScreen
 {
 private:
 	Navicella player;
+
 private:
 	bool check(bool move);
+
 public:
 	visualeSistemaSolare(void);
 	virtual int Run(sf::RenderWindow &App);

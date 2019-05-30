@@ -12,12 +12,13 @@
 #include "./SistemaSolare.hpp"
 
 extern SistemaSolare sistemasolare;
-extern Pianeta* pianetaInsideNow;
+extern struct Elem<Pianeta> *pianetaInsideNow;
 
 class visualePianeta : public cScreen
 {
 private:
 	bool playing;
+
 public:
 	visualePianeta(void);
 	virtual int Run(sf::RenderWindow &App);

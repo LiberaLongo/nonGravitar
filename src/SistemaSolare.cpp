@@ -137,10 +137,16 @@ void SistemaSolare::genera()
     */
 }
 
-//controlla se la navicella è vicina a un pianeta nella lista
-Pianeta *SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
+//restituisce il puntatore al pianeta ricevendo la sua posizione nella lista
+Pianeta SistemaSolare::toPtrPlanet(struct Elem<Pianeta> *posizionePianeta)
 {
-    Pianeta *findedPlanet = nullptr;
+    return (this->pianeti.read(posizionePianeta));
+}
+
+//controlla se la navicella è vicina a un pianeta nella lista
+struct Elem<Pianeta> *SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
+{
+    struct Elem<Pianeta> *findedPlanet = nullptr;
     if (!(this->pianeti.empty()))
     {
 #ifdef DEBUG
@@ -163,8 +169,8 @@ Pianeta *SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
 #endif
                 //esco dal while
                 vicino = true;
-                //aggiorno findedPlanet all'indirizzo di controllato
-                findedPlanet = &controllato;
+                //aggiorno findedPlanet
+                findedPlanet = iter;
             }
             //passo al successivo
             iter = this->pianeti.next(iter);

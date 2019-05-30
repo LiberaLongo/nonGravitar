@@ -5,22 +5,22 @@
 #define DEBUG
 
 SistemaSolare sistemasolare;
-//puntatore al pianeta corrente
-Pianeta* pianetaInsideNow = nullptr;
+//puntatore alla posizione del pianeta corrente
+struct Elem<Pianeta> *pianetaInsideNow = nullptr;
 
 int Gioco(void)
 {
-    //seme per i numeri casuali
-    srand(time(NULL));
-	
-	//genero il sistema solare
-    sistemasolare.genera();
-	#ifdef DEBUG
-    sistemasolare.printCentri();
-	#endif
+	//seme per i numeri casuali
+	srand(time(NULL));
 
-    //Applications variables
-	std::vector<cScreen*> Screens;
+	//genero il sistema solare
+	sistemasolare.genera();
+#ifdef DEBUG
+	sistemasolare.printCentri();
+#endif
+
+	//Applications variables
+	std::vector<cScreen *> Screens;
 	int screen = 0;
 
 	//Window creation
@@ -42,5 +42,5 @@ int Gioco(void)
 	}
 
 	return EXIT_SUCCESS;
-    //ritorno VERO perchè il gioco non è stato ancora implementato
+	//ritorno VERO perchè il gioco non è stato ancora implementato
 }

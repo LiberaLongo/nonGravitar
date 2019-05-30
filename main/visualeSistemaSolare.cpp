@@ -17,9 +17,10 @@ bool visualeSistemaSolare::check(bool move)
             ritorno = true;
 #ifdef DEBUG
             //stampa
-            Pianeta inside = *pianetaInsideNow; //cosa fa?
+            //pianetaInsideNow è la posizione del pianeta nella lista
+            Pianeta pianeta = sistemasolare.toPtrPlanet(pianetaInsideNow);
             //voglio sapere come dare nome a un oggetto puntato da un puntatore
-            inside.print();
+            pianeta.print();
 #endif
         }
     }
