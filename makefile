@@ -71,10 +71,10 @@ SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H
 
 #cose per gestire le varie visuali di gioco (in ./main)
 
-visualePianeta.o: $(M)visualePianeta.cpp $(H)visualePianeta.hpp
+visualePianeta.o: $(M)visualePianeta.cpp $(H)visualePianeta.hpp $(H)cScreen.hpp $(H)utils.hpp $(H)SistemaSolare.hpp
 	$(COMPILE) $(M)visualePianeta.cpp
 
-visualeSistemaSolare.o: $(M)visualeSistemaSolare.cpp $(H)visualeSistemaSolare.hpp
+visualeSistemaSolare.o: $(M)visualeSistemaSolare.cpp $(H)visualeSistemaSolare.hpp $(H)cScreen.hpp $(H)Navicella.hpp $(H)SistemaSolare.hpp
 	$(COMPILE) $(M)visualeSistemaSolare.cpp
 
 Gioco.o: $(M)Gioco.cpp $(H)Gioco.hpp

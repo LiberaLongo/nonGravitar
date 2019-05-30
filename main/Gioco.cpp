@@ -15,7 +15,6 @@ int Gioco(void)
     sistemasolare.genera();
     //sistemasolare.print();
 
-
     //Applications variables
 	std::vector<cScreen*> Screens;
 	int screen = 0;
@@ -23,8 +22,8 @@ int Gioco(void)
 	//Window creation
 	sf::RenderWindow App(sf::VideoMode(WIDTH, HEIGHT), "SFML nonGravitar");
 
-	//Mouse cursor no more visible
-	App.setMouseCursorVisible(false);
+	//Mouse cursor visible? true => yes,it is; false => no it is'nt
+	//App.setMouseCursorVisible(true);
 
 	//Screens preparations
 	visualeSistemaSolare vS;

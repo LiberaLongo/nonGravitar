@@ -3,9 +3,10 @@
 #define VISUALE_PIANETA_H
 
 #include <iostream>
-#include "./cScreen.hpp"
 
 #include <SFML/Graphics.hpp>
+
+#include "./cScreen.hpp"
 
 #include "./utils.hpp"
 #include "./SistemaSolare.hpp"
