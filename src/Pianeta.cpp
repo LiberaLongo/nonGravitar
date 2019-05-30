@@ -154,7 +154,7 @@ sf::Color Pianeta::getColoreLib(void)
 {
     this->colore.getColorLib();
 }
-sf::Color Pianeta::getOutlineLib(void)
+sf::Color Pianeta::getAtmosferaLib(void)
 {
     this->outline.getColorLib();
 }
@@ -214,7 +214,7 @@ void Pianeta::draw(sf::RenderWindow &window)
     //setta un bordo di 10 all'interno del cerchio
     pianeta.setOutlineThickness(-10.f);
     //colore del bordo giallo
-    pianeta.setOutlineColor(this->getOutlineLib());
+    pianeta.setOutlineColor(this->getAtmosferaLib());
 
     window.draw(pianeta);
 }

@@ -4,25 +4,22 @@
 #define DEBUG //se è definita stampo per debugghing
 
 //privata
-bool visualeSistemaSolare::check(bool move)
+bool visualeSistemaSolare::check(void)
 {
     bool ritorno = false;
-    if (move)
+    pianetaInsideNow = sistemasolare.isNavicellaNearAPlanet(this->player);
+    //controlla se la navicella è vicina a un pianeta nella lista
+    //e setto pianetaInsideNow con il pianeta in cui si trova la navicella
+    if (pianetaInsideNow != nullptr)
     {
-        pianetaInsideNow = sistemasolare.isNavicellaNearAPlanet(this->player);
-        //controlla se la navicella è vicina a un pianeta nella lista
-        //e setto pianetaInsideNow con il pianeta in cui si trova la navicella
-        if (pianetaInsideNow != nullptr)
-        {
-            ritorno = true;
+        ritorno = true;
 #ifdef DEBUG
-            //stampa
-            //pianetaInsideNow è la posizione del pianeta nella lista
-            Pianeta pianeta = sistemasolare.toPtrPlanet(pianetaInsideNow);
-            //voglio sapere come dare nome a un oggetto puntato da un puntatore
-            pianeta.print();
+        //stampa
+        //pianetaInsideNow è la posizione del pianeta nella lista
+        Pianeta pianeta = sistemasolare.toPtrPlanet(pianetaInsideNow);
+        //voglio sapere come dare nome a un oggetto puntato da un puntatore
+        pianeta.print();
 #endif
-        }
     }
     return ritorno;
 }
@@ -119,11 +116,16 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             default:
                 break;
             }
-            if(this->check(NavicellaMoved))
+            if(NavicellaMoved){
+            if (this->player.isOutsideScreen()) {
+                cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
+                return EXIT;
+            }
+            if (this->check())
             {
                 cout << "uscita di emergenza" << endl;
                 return VISUALE_PIANETA;
-            }
+            }}
         }
 
         //pulisci la finestra colorandola di nero

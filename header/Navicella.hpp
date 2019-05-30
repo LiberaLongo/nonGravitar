@@ -67,6 +67,8 @@ public:
 
     //controlla se è dentro il pianeta
     bool isNear(Pianeta planet);
+
+    bool isOutsideScreen(void);
 };
 
 #endif //NAVICELLA_H

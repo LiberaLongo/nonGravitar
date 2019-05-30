@@ -23,7 +23,7 @@ private:
 	Navicella player;
 
 private:
-	bool check(bool move);
+	bool check(void);
 
 public:
 	visualeSistemaSolare(void);

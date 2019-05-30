@@ -160,3 +160,6 @@ void Navicella::shoot(Punto mouseclick) {
 bool Navicella::isNear(Pianeta planet) {
     return this->centro.isNear(planet.getX(), planet.getY(), planet.getRaggio());
 }
+bool Navicella::isOutsideScreen(void) {
+    return !this->centro.isNear(WIDTH/2, HEIGHT/2, WIDTH/2, HEIGHT/2);
+}

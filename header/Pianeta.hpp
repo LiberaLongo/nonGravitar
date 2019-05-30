@@ -73,7 +73,7 @@ public:
     float getRaggio(void);
     //colori
     sf::Color getColoreLib(void);
-    sf::Color getOutlineLib(void);
+    sf::Color getAtmosferaLib(void);
     //ottengo il puntatore alla testa, non al primo elemento
     struct Elem<Punto> *getHeadSurface(void);
     struct Elem<Fuel> *getHeadFuel(void);
