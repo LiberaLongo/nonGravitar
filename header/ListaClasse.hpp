@@ -9,7 +9,7 @@ class ListaClasse : public Lista<Tipo> {
 public:
 	//costruttore e distruttore
 	ListaClasse(void);
-	/*virtual*/ ~ListaClasse(void);
+	virtual ~ListaClasse(void);
 
     //cerca v scorrendo la lista
     //override

@@ -20,7 +20,7 @@ public:
     //costruttore completo
     ColoreRGB(int red, int green, int blue);
     //distruttore
-    /*virtual*/ ~ColoreRGB(void);
+    virtual ~ColoreRGB(void);
 
     //setters
     void setRed(int red);

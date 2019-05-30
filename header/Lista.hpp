@@ -24,7 +24,7 @@ private:
 public:
 	//costruttore e distruttore
 	Lista(void);
-	/*virtual*/ ~Lista(void);
+	virtual ~Lista(void);
 
 	//setters
 	void setHead(struct Elem<Tipo>* head);

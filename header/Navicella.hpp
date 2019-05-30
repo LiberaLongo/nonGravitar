@@ -33,7 +33,7 @@ public:
     Navicella(float x, float y, float carburante, float angle, float speed, float size);
 
     //distruttori
-    /*virtual*/ ~Navicella(void);
+    virtual ~Navicella(void);
 
     //SETTERS
     //setters coordinate

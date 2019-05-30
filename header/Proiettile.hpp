@@ -20,7 +20,7 @@ public:
     Proiettile(Punto origine, float angolo, float speed);
     Proiettile(float x, float y, float angolo, float speed);
     //distruttore
-    /*virtual*/ ~Proiettile(void);
+    virtual ~Proiettile(void);
     void print(void);
     //disegna
     void draw(sf::RenderWindow &window);

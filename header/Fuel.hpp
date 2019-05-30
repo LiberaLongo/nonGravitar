@@ -24,7 +24,7 @@ public:
     Fuel(float x, float y, float quantita, float size);
 
     //distruttore
-    /*virtual*/ ~Fuel(void);
+    virtual ~Fuel(void);
 
     //setters
     void setX(float x);

@@ -45,7 +45,7 @@ public:
     Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
     Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
     //distruttore
-    /*virtual*/ ~Pianeta(void);
+    virtual ~Pianeta(void);
 
     //SETTERS
     //cose importanti

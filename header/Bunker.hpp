@@ -37,7 +37,7 @@ public:
     Bunker(float x, float y, float angolo, float speed, float size, ListaClasse<Direzione> headDir);
 
     //distruttore
-    /*virtual*/ ~Bunker(void);
+    virtual ~Bunker(void);
 
     //setters
     void setX(float x);

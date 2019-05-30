@@ -22,7 +22,7 @@ public:
     Direzione(float x, float y, float angolo, float speed);
 
     //distruttore
-    /*virtual*/ ~Direzione(void);
+    virtual ~Direzione(void);
 
     //setters
     void setXOrigine(float x);

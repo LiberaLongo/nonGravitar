@@ -21,7 +21,7 @@ public:
     SistemaSolare(ListaClasse<Pianeta> listaPianeti);
     SistemaSolare(struct Elem<Pianeta> * headPianeti);
     //distruttore
-    /*virtual*/ ~SistemaSolare(void);
+    virtual ~SistemaSolare(void);
 
     //SETTERS
     //setta la lista
