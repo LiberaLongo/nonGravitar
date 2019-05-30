@@ -63,7 +63,7 @@ void Punto::draw(sf::RenderWindow &window)
     window.draw(rectangle);
 }
 
-bool Punto::isIn(float x, float y, float size)
+bool Punto::isNear(float x, float y, float size)
 {
     //and
     if (this->x < x - size) //minore di minX
@@ -77,12 +77,12 @@ bool Punto::isIn(float x, float y, float size)
     return true;
 }
 
-bool Punto::isIn(Punto centro, float size)
+bool Punto::isNear(Punto centro, float size)
 {
-    return this->isIn(centro.getX(), centro.getY(), size);
+    return this->isNear(centro.getX(), centro.getY(), size);
 }
 
-sf::Vector2f Punto::getVector(void)
+sf::Vector2f Punto::getPuntoLib(void)
 {
     return sf::Vector2f(this->x, this->y);
 }

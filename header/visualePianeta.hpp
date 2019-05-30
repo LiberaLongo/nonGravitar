@@ -12,6 +12,7 @@
 #include "./SistemaSolare.hpp"
 
 extern SistemaSolare sistemasolare;
+extern Pianeta* pianetaInsideNow;
 
 class visualePianeta : public cScreen
 {

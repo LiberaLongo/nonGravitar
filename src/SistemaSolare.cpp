@@ -112,3 +112,4 @@ void SistemaSolare::genera()
     ma, "keep it simple and stupid"
     */
 }
+

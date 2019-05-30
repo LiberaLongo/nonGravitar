@@ -157,6 +157,6 @@ void Navicella::move(float angolo)
 void Navicella::shoot(Punto mouseclick) {
     this->dir.shoot(mouseclick);
 }
-bool Navicella::isIn(Pianeta planet) {
-    return this->centro.isIn(planet.getX(), planet.getY(), planet.getRaggio());
+bool Navicella::isNear(Pianeta planet) {
+    return this->centro.isNear(planet.getX(), planet.getY(), planet.getRaggio());
 }

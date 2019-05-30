@@ -5,6 +5,8 @@
 //#define DEBUG
 
 SistemaSolare sistemasolare;
+//puntatore al pianeta corrente
+Pianeta* pianetaInsideNow = nullptr;
 
 int Gioco(void)
 {

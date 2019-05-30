@@ -150,13 +150,13 @@ float Pianeta::getRaggio(void)
     return this->raggio;
 }
 //colori
-sf::Color Pianeta::getColore(void)
+sf::Color Pianeta::getColoreLib(void)
 {
-    this->colore.getColor();
+    this->colore.getColorLib();
 }
-sf::Color Pianeta::getOutline(void)
+sf::Color Pianeta::getOutlineLib(void)
 {
-    this->outline.getColor();
+    this->outline.getColorLib();
 }
 //ottengo il puntatore alla testa, non al primo elemento
 struct Elem<Punto> *Pianeta::getHeadSurface(void)
@@ -210,20 +210,44 @@ void Pianeta::draw(sf::RenderWindow &window)
     pianeta.setPosition(x, y);
 
     //colore verde
-    pianeta.setFillColor(this->getColore());
+    pianeta.setFillColor(this->getColoreLib());
     //setta un bordo di 10 all'interno del cerchio
     pianeta.setOutlineThickness(-10.f);
     //colore del bordo giallo
-    pianeta.setOutlineColor(this->getOutline());
+    pianeta.setOutlineColor(this->getOutlineLib());
 
     window.draw(pianeta);
 }
-void Pianeta::drawVisuale(sf::RenderWindow &window)
+void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
 {
-    //deve disegnare la visuale pianeta
-    //il che implica che scorre le liste e disegna le varie cose
-    //e per la superficie inserisce (preferibilmente in maniera ordinata)
-    //i punti in una convex o in un poligono
+    //non è l'indice del while, ma l'indice dei punti nella convex!
+    int indice = 0;
+    //crea una empty shape convex con 3 punti
+    sf::ConvexShape convexSuperficie;
+    convexSuperficie.setPointCount(length);
+
+    //blu
+    convexSuperficie.setFillColor(sf::Color::Blue);
+
+    if (!(this->surface.empty()))
+    {
+        //primo elemento utile non la sentinella
+        struct Elem<Punto> *iter = this->surface.head();
+        //se non vuota e non finita
+        while (!(this->surface.finished(iter)))
+        {
+            //stampo elemento MODIFICATA!
+            Punto disegnato = this->surface.read(iter);
+            //inserisci il punto nella convex shape
+            convexSuperficie.setPoint(indice, disegnato.getPuntoLib());
+            //passo al successivo e stampo freccia
+            iter = this->surface.next(iter);
+            indice++;
+        }
+    }
+
+    //disegna sulla window passata per riferimento
+    window.draw(convexSuperficie);
 }
 //generaPianeta(void);
 void Pianeta::genera(void)

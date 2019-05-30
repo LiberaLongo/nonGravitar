@@ -38,11 +38,11 @@ public:
     void draw(sf::RenderWindow &window);
 
     //è dentro?
-    bool isIn(float x, float y, float size);
-    bool isIn(Punto centro, float size);
+    bool isNear(float x, float y, float size);
+    bool isNear(Punto centro, float size);
 
     //restituisci un vettore della libreria
-    sf::Vector2f getVector(void);
+    sf::Vector2f getPuntoLib(void);
 };
 
 #endif //PUNTO_H

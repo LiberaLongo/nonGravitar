@@ -72,8 +72,8 @@ public:
     float getY(void);
     float getRaggio(void);
     //colori
-    sf::Color getColore(void);
-    sf::Color getOutline(void);
+    sf::Color getColoreLib(void);
+    sf::Color getOutlineLib(void);
     //ottengo il puntatore alla testa, non al primo elemento
     struct Elem<Punto> *getHeadSurface(void);
     struct Elem<Fuel> *getHeadFuel(void);
@@ -85,7 +85,7 @@ public:
     bool confronto(Pianeta p);
     //disegna
     void draw(sf::RenderWindow &window);
-    void drawVisuale(sf::RenderWindow &window);
+    void drawVisuale(sf::RenderWindow &window, int length);
     //genera Pianeta
     void genera(void);
     //altre cose

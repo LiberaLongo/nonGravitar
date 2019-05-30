@@ -10,6 +10,7 @@ visualeSistemaSolare::visualeSistemaSolare(void)
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
 {
     bool Running = true;
+    bool NavicellaMoved = false;
     
     sf::Event event;
 
@@ -23,6 +24,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         //controlla se qualche evento viene scatenato prima del prossimo loop
         while (App.pollEvent(event))
         {
+            NavicellaMoved = false;
             switch (event.type)
             {
             //se la finestra è stata chiusa
@@ -54,52 +56,36 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 					break;
                 //WASD
                 case sf::Keyboard::W:
-#ifdef DEBUG
-                    cout << "W\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(UP);
                     break;
                 case sf::Keyboard::A:
-#ifdef DEBUG
-                    cout << "A\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(LEFT);
                     break;
                 case sf::Keyboard::S:
-#ifdef DEBUG
-                    cout << "S\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(DOWN);
                     break;
                 case sf::Keyboard::D:
-#ifdef DEBUG
-                    cout << "D\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(RIGHT);
                     break;
                 //freccie
                 case sf::Keyboard::Up:
-#ifdef DEBUG
-                    cout << "Up\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(UP);
                     break;
                 case sf::Keyboard::Left:
-#ifdef DEBUG
-                    cout << "Left\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(LEFT);
                     break;
                 case sf::Keyboard::Down:
-#ifdef DEBUG
-                    cout << "Down\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(DOWN);
                     break;
                 case sf::Keyboard::Right:
-#ifdef DEBUG
-                    cout << "Right\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(RIGHT);
                     break;
                 default:
@@ -111,7 +97,10 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             default:
                 break;
             }
-            /*la funzione controlli non va per non si sa quale motivo*/
+            if (NavicellaMoved == true)
+            {
+                cout << "mi sono mossa" << endl;
+            }
         }
 
         //pulisci la finestra colorandola di nero

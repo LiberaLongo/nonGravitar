@@ -65,8 +65,8 @@ public:
     //spara
     void shoot(Punto mouseclick);
 
-    //controlla se è dentro
-    bool isIn(Pianeta planet);
+    //controlla se è dentro il pianeta
+    bool isNear(Pianeta planet);
 };
 
 #endif //NAVICELLA_H

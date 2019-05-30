@@ -60,7 +60,7 @@ void ColoreRGB::print(void)
     cout << "( " << this->red << ", " << this->green << ", " << this->blue << " )";
 }
 
-sf::Color ColoreRGB::getColor(void)
+sf::Color ColoreRGB::getColorLib(void)
 {
     return sf::Color(this->getRed(), this->getGreen(), this->getBlue());
 }

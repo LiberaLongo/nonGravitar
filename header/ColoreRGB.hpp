@@ -36,7 +36,7 @@ public:
     //stampa
     void print(void);
 
-    sf::Color getColor(void);
+    sf::Color getColorLib(void);
 };
 
 #endif //PUNTO_H
