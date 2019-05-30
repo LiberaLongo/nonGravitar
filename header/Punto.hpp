@@ -44,6 +44,9 @@ public:
     bool isNear(float x, float y, float size);
     bool isNear(Punto centro, float size);
 
+    //calcola angolo rispetto al punto corrente
+    float calcolaAngolo(Punto arrivo);
+
     //restituisci un vettore della libreria
     sf::Vector2f getPuntoLib(void);
 };

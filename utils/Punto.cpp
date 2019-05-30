@@ -104,6 +104,49 @@ bool Punto::isNear(Punto centro, float size)
     return this->isNear(centro.getX(), centro.getY(), size);
 }
 
+float Punto::calcolaAngolo(Punto arrivo)
+{
+    float angolo = 0.f;
+
+    //tangente(AB) = (xB - xA ) / (yB - yA);
+    float deltaX = arrivo.getX() - this->y;
+    //la Y va nella direzione opposta
+    float deltaY = -(arrivo.getY() - this->x);
+    if (deltaY != 0)
+    {
+        //se posso fare la divisione
+        float tangente = deltaX / deltaY;
+        double angoloRadianti = atan(tangente);
+        //trasformo l'angolo opportunamente secondo la libreria grafica
+        float angoloGradi = angoloLibreria(angoloRadianti * 180 / M_PI);
+        if (deltaY > 0)
+        {
+            //se arrivo è "sopra" la partenza
+            //la tangente ha segnato l'ancolo corretto
+            angolo = (float)angoloGradi;
+        }
+        else
+        {
+            //altrimenti giralo di un angolo piatto
+            angolo = (float)(angoloGradi + 180.f);
+        }
+#ifdef DEBUG
+        cout << "deltaX = " << arrivo.getX() << " - " << this->x << " = " << deltaX << endl;
+        cout << "deltaY = " << arrivo.getY() << " - " << this->y << " = " << deltaY << endl;
+        cout << "tangente = " << tangente << endl;
+        cout << "angoloRadianti = " << angoloRadianti << endl;
+        cout << "angoloGradi = " << angoloGradi << endl;
+        cout << "this->angolo = " << angolo << endl;
+#endif
+    }
+    else
+    {
+        //comunico che la divisione per 0 non è avventua
+        cout << "Prevenuta divisione per 0 nel calcolo della direzione.\n";
+    }
+    return angolo;
+}
+
 sf::Vector2f Punto::getPuntoLib(void)
 {
     return sf::Vector2f(this->x, this->y);
