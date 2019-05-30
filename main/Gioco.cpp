@@ -2,7 +2,7 @@
 
 #include "../header/Gioco.hpp"
 
-//#define DEBUG
+#define DEBUG
 
 SistemaSolare sistemasolare;
 //puntatore al pianeta corrente
@@ -15,7 +15,9 @@ int Gioco(void)
 	
 	//genero il sistema solare
     sistemasolare.genera();
-    //sistemasolare.print();
+	#ifdef DEBUG
+    sistemasolare.printCentri();
+	#endif
 
     //Applications variables
 	std::vector<cScreen*> Screens;

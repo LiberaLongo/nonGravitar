@@ -118,6 +118,11 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             default:
                 break;
             }
+            if(this->check(NavicellaMoved))
+            {
+                cout << "uscita di emergenza" << endl;
+                return VISUALE_PIANETA;
+            }
         }
 
         //pulisci la finestra colorandola di nero

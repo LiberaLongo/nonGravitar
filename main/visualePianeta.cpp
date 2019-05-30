@@ -136,7 +136,6 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
     return EXIT;
     */
-    //App.clear(sf::Color::Black);
-    //App.display();
+    cout << "sono dentro il pianeta!" << endl;
     return EXIT;
 }

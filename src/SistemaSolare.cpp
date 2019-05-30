@@ -50,6 +50,30 @@ SistemaSolare::print(void)
     this->pianeti.print();
     cout << " }" << endl;
 }
+void SistemaSolare::printCentri(void)
+{
+    cout << "//stampo SOLTANTO i centri dei pianeti" << endl;
+    cout << "SistemaSolare : {" << endl;
+    cout << " : [ ";
+    if (!(this->pianeti.empty()))
+    {
+        //primo elemento utile non la sentinella
+        struct Elem<Pianeta> *iter = this->pianeti.head();
+        //se non vuota e non finita
+        while (!(this->pianeti.finished(iter)))
+        {
+            //stampo elemento MODIFICATA!
+            Pianeta stampato = this->pianeti.read(iter);
+            Punto centro = Punto(stampato.getX(), stampato.getY());
+            centro.print();
+            //passo al successivo e stampo freccia
+            iter = this->pianeti.next(iter);
+            if (!(this->pianeti.finished(iter)))
+                cout << " --> ";
+        }
+    }
+    cout << " ]\n}" << endl;
+}
 //disegna
 void SistemaSolare::draw(sf::RenderWindow &window)
 {
@@ -114,28 +138,40 @@ void SistemaSolare::genera()
 }
 
 //controlla se la navicella è vicina a un pianeta nella lista
-Pianeta* SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
+Pianeta *SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
 {
-    Pianeta* findedPlanet = nullptr;
-	if (!(this->pianeti.empty()))
-	{
-		struct Elem<Pianeta> *iter = this->pianeti.head();
+    Pianeta *findedPlanet = nullptr;
+    if (!(this->pianeti.empty()))
+    {
+#ifdef DEBUG
+        cout << "lista non vuota" << endl;
+#endif
+        struct Elem<Pianeta> *iter = this->pianeti.head();
         //nessun pianeta è vicino prima di scorrere la lista
-		bool vicino = false;
-		while ( !(this->pianeti.finished(iter)) || !vicino )
-		{
-			//se iter è vicino alla navicella
+        bool vicino = false;
+        while (!vicino && !(this->pianeti.finished(iter)))
+        {
+#ifdef DEBUG
+            cout << "non vicino e non finita" << endl;
+#endif
+            //se iter è vicino alla navicella
             Pianeta controllato = this->pianeti.read(iter);
-            if( navicella.isNear(controllato) )
-			{
+            if (navicella.isNear(controllato))
+            {
+#ifdef DEBUG
+                cout << "navicella vicino al pianeta: " << endl;
+#endif
                 //esco dal while
                 vicino = true;
                 //aggiorno findedPlanet all'indirizzo di controllato
                 findedPlanet = &controllato;
-			}
+            }
             //passo al successivo
-			iter = this->pianeti.next(iter);
-		}
-	}
+            iter = this->pianeti.next(iter);
+        }
+    }
+#ifdef DEBUG
+    cout << "esco dal isNavicellaNearAPlanet" << endl;
+#endif
     return findedPlanet;
 }

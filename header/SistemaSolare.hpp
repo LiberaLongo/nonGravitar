@@ -34,6 +34,7 @@ public:
 
     //stampa
     void print(void);
+    void printCentri(void);
     //disegna
     void draw(sf::RenderWindow &window);
     //genera lista di pianeti
