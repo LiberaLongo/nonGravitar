@@ -36,6 +36,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
     //aggiorno coordinate
     this->player.setCoord(WIDTH / 2, HEIGHT / 2);
 
+    //comincia la trattazione della finestra
     bool Running = true;
     bool NavicellaMoved = false;
 
@@ -119,16 +120,19 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             default:
                 break;
             }
-            if(NavicellaMoved){
-            if (this->player.isOutsideScreen()) {
-                cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
-                return EXIT;
-            }
-            if (this->check())
+            if (NavicellaMoved)
             {
-                cout << "uscita di emergenza" << endl;
-                return VISUALE_PIANETA;
-            }}
+                if (this->player.isOutsideScreen())
+                {
+                    cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
+                    return EXIT;
+                }
+                if (this->check())
+                {
+                    cout << "uscita di emergenza" << endl;
+                    return VISUALE_PIANETA;
+                }
+            }
         }
 
         //pulisci la finestra colorandola di nero

@@ -19,23 +19,20 @@ int visualePianeta::Run(sf::RenderWindow &App)
     {
         //stampa
         //pianetaInsideNow è la posizione del pianeta nella lista
-        Pianeta pianeta = sistemasolare.toPtrPlanet(pianetaInsideNow);
+        this->pianetaVisualizzato = sistemasolare.toPtrPlanet(pianetaInsideNow);
 //voglio sapere come dare nome a un oggetto puntato da un puntatore
 #ifdef DEBUG
-        pianeta.print();
+        this->pianetaVisualizzato.print();
 #endif
     }
 #ifdef DEBUG
     cout << "sono dentro il pianeta!" << endl;
 #endif
-    return EXIT;
-    //non fare assolutamente niente
-    /*
-    //codice simile ma da aggiustare
-    //preso da visuale sistema solare
 
+    //comincia la trattazione della finestra
     bool Running = true;
-    
+    bool NavicellaMoved = false;
+
     sf::Event event;
 
     //un punto adibito a mouse click
@@ -48,6 +45,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         //controlla se qualche evento viene scatenato prima del prossimo loop
         while (App.pollEvent(event))
         {
+            NavicellaMoved = false;
             switch (event.type)
             {
             //se la finestra è stata chiusa
@@ -58,11 +56,6 @@ int visualePianeta::Run(sf::RenderWindow &App)
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-#ifdef DEBUG
-                    std::cout << "the left button was pressed" << std::endl;
-                    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-                    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-#endif
                     haCliccato = true;
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
                     this->player.shoot(mouseClick);
@@ -74,57 +67,41 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 switch (event.key.code)
                 {
                 //tasto Esc
-				case sf::Keyboard::Escape:
-					return EXIT;
-					break;
+                case sf::Keyboard::Escape:
+                    return VISUALE_SISTEMA_SOLARE;
+                    break;
                 //WASD
                 case sf::Keyboard::W:
-#ifdef DEBUG
-                    cout << "W\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(UP);
                     break;
                 case sf::Keyboard::A:
-#ifdef DEBUG
-                    cout << "A\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(LEFT);
                     break;
                 case sf::Keyboard::S:
-#ifdef DEBUG
-                    cout << "S\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(DOWN);
                     break;
                 case sf::Keyboard::D:
-#ifdef DEBUG
-                    cout << "D\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(RIGHT);
                     break;
                 //freccie
                 case sf::Keyboard::Up:
-#ifdef DEBUG
-                    cout << "Up\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(UP);
                     break;
                 case sf::Keyboard::Left:
-#ifdef DEBUG
-                    cout << "Left\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(LEFT);
                     break;
                 case sf::Keyboard::Down:
-#ifdef DEBUG
-                    cout << "Down\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(DOWN);
                     break;
                 case sf::Keyboard::Right:
-#ifdef DEBUG
-                    cout << "Right\n";
-#endif
+                    NavicellaMoved = true;
                     this->player.move(RIGHT);
                     break;
                 default:
@@ -136,24 +113,22 @@ int visualePianeta::Run(sf::RenderWindow &App)
             default:
                 break;
             }
+            if (NavicellaMoved)
+            {
+                if (this->player.isOutsideScreen())
+                {
+                    cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
+                    return VISUALE_SISTEMA_SOLARE;
+                }
+            }
         }
 
         //pulisci la finestra colorandola di nero
-        App.clear(sf::Color::Black);
-
-        //disegna qui...
-        sistemasolare.draw(App);
-
+        App.clear(this->pianetaVisualizzato.getAtmosferaLib());
+        
         this->player.draw(App);
-
-        if(haCliccato)
-            mouseClick.draw(App);
-        // App.draw(...);
 
         //fine del frame corrente
         App.display();
     }
-
-    return EXIT;
-    */
 }
