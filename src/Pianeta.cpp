@@ -7,53 +7,25 @@
 //costruttore void
 Pianeta::Pianeta(void)
 {
-    //genera liste?
+    //genera liste vuote
 }
 //costruttori punto
-Pianeta::Pianeta(Punto centro)
+Pianeta::Pianeta(Punto centro, float raggio)
 {
     this->centro = centro;
-    //raggio di default
+    this->raggio = raggio;
 }
-Pianeta::Pianeta(float x, float y)
+Pianeta::Pianeta(float x, float y, float raggio)
 {
     this->centro.setCoord(x, y);
-    //raggio di default
-}
-//costruttori punto e colore
-Pianeta::Pianeta(Punto centro, ColoreRGB colore)
-{
-    this->centro = centro;
-    this->colore = colore;
-    //raggio di default
-}
-Pianeta::Pianeta(float x, float y, int red, int green, int blue)
-{
-    this->centro.setCoord(x, y);
-    this->colore.setRGB(red, green, blue);
-    //raggio di default
-}
-//costruttori punto e colore
-Pianeta::Pianeta(Punto centro, ColoreRGB colore, ColoreRGB outline)
-{
-    this->centro = centro;
-    this->colore = colore;
-    this->outline = outline;
-    //raggio di default
-}
-Pianeta::Pianeta(float x, float y, int red, int green, int blue, int red_o, int green_o, int blue_o)
-{
-    this->centro.setCoord(x, y);
-    this->colore.setRGB(red, green, blue);
-    this->outline.setRGB(red_o, green_o, blue_o);
-    //raggio di default
+    this->raggio = raggio;
 }
 //costruttori completi
 Pianeta::Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker)
 {
     this->centro = centro;
     this->raggio = raggio;
-    this->outline = outline;
+    this->atmosfera = outline;
     this->colore = colore;
     this->surface = listaSurface;
     this->fuel = listaFuel;
@@ -101,13 +73,13 @@ void Pianeta::setColore(int red, int green, int blue)
 {
     this->colore.setRGB(red, green, blue);
 }
-void Pianeta::setOutline(ColoreRGB outline)
+void Pianeta::setAtmosfera(ColoreRGB outline)
 {
-    this->outline = outline;
+    this->atmosfera = outline;
 }
-void Pianeta::setOutline(int red, int green, int blue)
+void Pianeta::setAtmosfera(int red, int green, int blue)
 {
-    this->outline.setRGB(red, green, blue);
+    this->atmosfera.setRGB(red, green, blue);
 }
 //setta la lista
 void Pianeta::setSurface(ListaClasse<Punto> listaSurface)
@@ -156,7 +128,7 @@ sf::Color Pianeta::getColoreLib(void)
 }
 sf::Color Pianeta::getAtmosferaLib(void)
 {
-    this->outline.getColorLib();
+    this->atmosfera.getColorLib();
 }
 //ottengo il puntatore alla testa, non al primo elemento
 struct Elem<Punto> *Pianeta::getHeadSurface(void)
@@ -190,7 +162,7 @@ void Pianeta::print(void)
     cout << "\ncolore = ";
     this->colore.print();
     cout << "\noutline = ";
-    this->outline.print();
+    this->atmosfera.print();
     cout << "\nsuperficie";
     this->surface.print();
     cout << "carburante";

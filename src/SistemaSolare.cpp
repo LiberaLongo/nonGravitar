@@ -108,22 +108,23 @@ void SistemaSolare::genera()
         x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
         y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
 
+        //costruisci pianeta
+        Pianeta newPianeta = Pianeta(x, y, raggio);
 
         //colore
         int r, g, b;
         r = (rand() % LUMUS_MAXIMA);
         g = (rand() % LUMUS_MAXIMA);
         b = (rand() % LUMUS_MAXIMA);
+        newPianeta.setColore(r, g, b);
 
-        //colore outline
+        //colore atmosfera
         int ro, go, bo;
         ro = (rand() % LUMUS_MAXIMA);
         go = (rand() % LUMUS_MAXIMA);
         bo = (rand() % LUMUS_MAXIMA);
+        newPianeta.setAtmosfera(ro, go, bo);
 
-        //costruisci pianeta
-        Pianeta newPianeta = Pianeta(x, y, r, g, b, ro, go, bo);
-        newPianeta.setRaggio(raggio);
         //genera il pianeta
         newPianeta.genera();
         //inserirlo nella lista

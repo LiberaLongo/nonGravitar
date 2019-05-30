@@ -26,21 +26,15 @@ protected:
     ListaClasse<Bunker> bunker;
     //cose grafiche e basta
     ColoreRGB colore;
-    ColoreRGB outline;
+    ColoreRGB atmosfera;
 
 public:
     //COSTRUTTORI
     //costruttore void
     Pianeta(void);
-    //costruttori punto
-    Pianeta(Punto centro);
-    Pianeta(float x, float y);
-    //costruttori punto e colore
-    Pianeta(Punto centro, ColoreRGB colore);
-    Pianeta(float x, float y, int red, int green, int blue);
-    //costruttori punto e colore
-    Pianeta(Punto centro, ColoreRGB colore, ColoreRGB outline);
-    Pianeta(float x, float y, int red, int green, int blue, int red_o, int green_o, int blue_o);
+    //costruttori punto e raggio
+    Pianeta(Punto centro, float raggio);
+    Pianeta(float x, float y, float raggio);
     //costruttori completi
     Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
     Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
@@ -56,8 +50,8 @@ public:
     //colori
     void setColore(ColoreRGB colore);
     void setColore(int red, int green, int blue);
-    void setOutline(ColoreRGB outline);
-    void setOutline(int red, int green, int blue);
+    void setAtmosfera(ColoreRGB outline);
+    void setAtmosfera(int red, int green, int blue);
     //setta la lista
     void setSurface(ListaClasse<Punto> listaSurface);
     void setFuel(ListaClasse<Fuel> listaFuel);
