@@ -136,5 +136,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
     return EXIT;
     */
-    return VISUALE_SISTEMA_SOLARE;
+    //App.clear(sf::Color::Black);
+    //App.display();
+    return EXIT;
 }

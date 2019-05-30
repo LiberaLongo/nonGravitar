@@ -7,6 +7,7 @@
 
 #include "./utils.hpp"
 #include "./Pianeta.hpp"
+#include "./Navicella.hpp"
 
 template class ListaClasse<Pianeta>;
 
@@ -37,6 +38,8 @@ public:
     void draw(sf::RenderWindow &window);
     //genera lista di pianeti
     void genera();
+    //controlla se la navicella è vicina a un pianeta nella lista
+    Pianeta* isNavicellaNearAPlanet(Navicella navicella);
 };
 
 #endif //SISTEMA_SOLARE_HPP

@@ -1,6 +1,32 @@
 //visuale sistema solare codice
 #include "../header/visualeSistemaSolare.hpp"
 
+#define DEBUG //se è definita stampo per debugghing
+
+//privata
+bool visualeSistemaSolare::check(bool move)
+{
+    bool ritorno = false;
+    if (move)
+    {
+        pianetaInsideNow = sistemasolare.isNavicellaNearAPlanet(this->player);
+        //controlla se la navicella è vicina a un pianeta nella lista
+        //e setto pianetaInsideNow con il pianeta in cui si trova la navicella
+        if (pianetaInsideNow != nullptr)
+        {
+            ritorno = true;
+#ifdef DEBUG
+            //stampa
+            Pianeta inside = *pianetaInsideNow; //cosa fa?
+            //voglio sapere come dare nome a un oggetto puntato da un puntatore
+            inside.print();
+#endif
+        }
+    }
+    return ritorno;
+}
+
+//pubbliche
 visualeSistemaSolare::visualeSistemaSolare(void)
 {
     //mia navicella
@@ -11,7 +37,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 {
     bool Running = true;
     bool NavicellaMoved = false;
-    
+
     sf::Event event;
 
     //un punto adibito a mouse click
@@ -35,11 +61,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-#ifdef DEBUG
-                    std::cout << "the left button was pressed" << std::endl;
-                    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-                    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-#endif
                     haCliccato = true;
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
                     this->player.shoot(mouseClick);
@@ -51,9 +72,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 switch (event.key.code)
                 {
                 //tasto Esc
-				case sf::Keyboard::Escape:
-					return EXIT;
-					break;
+                case sf::Keyboard::Escape:
+                    return EXIT;
+                    break;
                 //WASD
                 case sf::Keyboard::W:
                     NavicellaMoved = true;
@@ -97,10 +118,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             default:
                 break;
             }
-            if (NavicellaMoved == true)
-            {
-                cout << "mi sono mossa" << endl;
-            }
         }
 
         //pulisci la finestra colorandola di nero
@@ -111,8 +128,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 
         this->player.draw(App);
 
-        if(haCliccato)
+        if (haCliccato)
             mouseClick.draw(App);
+
         // App.draw(...);
 
         //fine del frame corrente

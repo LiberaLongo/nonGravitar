@@ -63,7 +63,7 @@ void SistemaSolare::draw(sf::RenderWindow &window)
             //stampo elemento MODIFICATA!
             Pianeta disegnato = this->pianeti.read(iter);
             disegnato.draw(window);
-            //passo al successivo e stampo freccia
+            //passo al successivo
             iter = this->pianeti.next(iter);
         }
     }
@@ -78,8 +78,8 @@ void SistemaSolare::genera()
         float x = 0.f, y = 0.f;
         //distanza raggio del pianeta più un pò di spazio per la navicella
         float dist = PIANETA_RAGGIO + 20.f;
-        x = (rand() % (int)(WIDTH - dist*2)) + dist;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - dist*2)) + dist; //tra 0.f e HEIGHT ma che non esca
+        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
+        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
 
         //colore
         int r, g, b;
@@ -97,8 +97,8 @@ void SistemaSolare::genera()
         Pianeta newPianeta = Pianeta(x, y, r, g, b, ro, go, bo);
         //genera il pianeta
         newPianeta.genera();
-//#ifdef DEBUG
-//#endif
+        //#ifdef DEBUG
+        //#endif
         //inserirlo nella lista
         this->pianeti.insert_head(newPianeta);
     }
@@ -113,3 +113,29 @@ void SistemaSolare::genera()
     */
 }
 
+//controlla se la navicella è vicina a un pianeta nella lista
+Pianeta* SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
+{
+    Pianeta* findedPlanet = nullptr;
+	if (!(this->pianeti.empty()))
+	{
+		struct Elem<Pianeta> *iter = this->pianeti.head();
+        //nessun pianeta è vicino prima di scorrere la lista
+		bool vicino = false;
+		while ( !(this->pianeti.finished(iter)) || !vicino )
+		{
+			//se iter è vicino alla navicella
+            Pianeta controllato = this->pianeti.read(iter);
+            if( navicella.isNear(controllato) )
+			{
+                //esco dal while
+                vicino = true;
+                //aggiorno findedPlanet all'indirizzo di controllato
+                findedPlanet = &controllato;
+			}
+            //passo al successivo
+			iter = this->pianeti.next(iter);
+		}
+	}
+    return findedPlanet;
+}

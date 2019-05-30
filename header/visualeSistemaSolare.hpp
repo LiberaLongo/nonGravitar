@@ -21,6 +21,8 @@ class visualeSistemaSolare : public cScreen
 {
 private:
 	Navicella player;
+private:
+	bool check(bool move);
 public:
 	visualeSistemaSolare(void);
 	virtual int Run(sf::RenderWindow &App);

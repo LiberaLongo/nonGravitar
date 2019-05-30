@@ -66,7 +66,7 @@ Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)ListaClasse.hpp
 Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)ListaClasse.hpp $(H)utils.hpp
 	$(COMPILE) $(S)Pianeta.cpp
 
-SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)ListaClasse.hpp $(H)utils.hpp
+SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)ListaClasse.hpp $(H)utils.hpp $(H)Navicella.hpp
 	$(COMPILE) $(S)SistemaSolare.cpp
 
 #cose per gestire le varie visuali di gioco (in ./main)
