@@ -82,7 +82,7 @@ bool Punto::isNear(float x, float y, float width, float height)
         return false;
     return true;
 }
-//se è dentro un quadrato
+//se è dentro un cerchio di raggio size e centro (x, y)
 bool Punto::isNear(float x, float y, float size)
 {
     bool isNear = this->isNear(x, y, size, size);
