@@ -129,7 +129,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 }
                 if (this->check())
                 {
+#ifdef DEBUG
                     cout << "uscita di emergenza" << endl;
+#endif
                     return VISUALE_PIANETA;
                 }
             }

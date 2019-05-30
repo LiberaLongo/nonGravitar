@@ -127,7 +127,9 @@ int visualePianeta::Run(sf::RenderWindow &App)
             {
                 if (this->player.isOutsideScreen())
                 {
-                    cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
+#ifdef DEBUG
+                    cout << "ritornato a sistema solare" << endl;
+#endif
                     return VISUALE_SISTEMA_SOLARE;
                 }
             }
@@ -135,7 +137,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         //pulisci la finestra colorandola di nero
         App.clear(this->pianetaVisualizzato.getAtmosferaLib());
-        
+
         this->pianetaVisualizzato.drawVisuale(App, MAX_SUPERFICE);
         this->player.draw(App);
 

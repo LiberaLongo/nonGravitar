@@ -98,12 +98,16 @@ void SistemaSolare::genera()
     //genera tutti i pianeti all'inizio o man mano?
     for (int i = 0; i < MAX_PLANET; i++)
     {
+        //numero random per la dimensione del pianeta compreso tra min e max
+        float raggio = (rand() % (int)MAX_PIANETA_RAGGIO) + MIN_PIANETA_RAGGIO;
+
         //numero random per le coordinate
         float x = 0.f, y = 0.f;
         //distanza raggio del pianeta più un pò di spazio per la navicella
-        float dist = PIANETA_RAGGIO + 20.f;
+        float dist = raggio + 20.f;
         x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
         y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
+
 
         //colore
         int r, g, b;
@@ -119,10 +123,9 @@ void SistemaSolare::genera()
 
         //costruisci pianeta
         Pianeta newPianeta = Pianeta(x, y, r, g, b, ro, go, bo);
+        newPianeta.setRaggio(raggio);
         //genera il pianeta
         newPianeta.genera();
-        //#ifdef DEBUG
-        //#endif
         //inserirlo nella lista
         this->pianeti.insert_head(newPianeta);
     }

@@ -23,7 +23,11 @@ using namespace std;
 #define FUEL1 100.f
 #define FUEL2 200.f
 #define SPEED 5.f
-#define PIANETA_RAGGIO 50.f
+//raggio di defalut, minimo e massimo di pianeta
+#define PIANETA_RAGGIO 40.f
+#define MIN_PIANETA_RAGGIO 20.f
+#define MAX_PIANETA_RAGGIO 60.f
+//numero di pianeti/punti per sistema solare/pianeta
 #define MAX_SUPERFICE 20 //42, Risposta alla domanda fondamentale sulla vita, l'universo e tutto quanto, (cit. Davoli)
 #define MAX_PLANET 7 //7, numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
 

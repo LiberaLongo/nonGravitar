@@ -207,6 +207,7 @@ bool Pianeta::confronto(Pianeta p)
 //disegna
 void Pianeta::draw(sf::RenderWindow &window)
 {
+    float atmosfera = -(this->raggio/5);
     sf::CircleShape pianeta(this->raggio);
     float x = this->getX() - this->raggio;
     float y = this->getY() - this->raggio;
@@ -215,7 +216,7 @@ void Pianeta::draw(sf::RenderWindow &window)
     //colore verde
     pianeta.setFillColor(this->getColoreLib());
     //setta un bordo di 10 all'interno del cerchio
-    pianeta.setOutlineThickness(-10.f);
+    pianeta.setOutlineThickness(atmosfera);
     //colore del bordo giallo
     pianeta.setOutlineColor(this->getAtmosferaLib());
 
