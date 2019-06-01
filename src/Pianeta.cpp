@@ -2,7 +2,9 @@
 #include "../header/Pianeta.hpp"
 
 //#define DEBUG
-#define DEBUG_ORDINAMENTO
+//#define DEBUG_ORDINAMENTO
+#define ORDINA
+//macro che, se definita, ordina la lista dei punti della superfice
 
 //PRIVATI
 float B[MAX_SUPERFICE];
@@ -293,7 +295,7 @@ void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
 //generaPianeta(void);
 void Pianeta::genera(void)
 {
-    //genera tutti i pianeti all'inizio o man mano?
+    //genera tutti i punti all'inizio
     for (int i = 0; i < MAX_SUPERFICE; i++)
     {
         //numero random per le coordinate
@@ -367,8 +369,10 @@ void Pianeta::ordinaPunti(void)
     }
     cout << "]\n";
 #endif
+#ifdef ORDINA
     //merge-sort
     this->MergeSort(angoli, 0, MAX_SUPERFICE - 1, posizioni);
+#endif
 #ifdef DEBUG_ORDINAMENTO
     cout << "\nvettore dopo MergeSort:  [";
     for (int i = 0; i < MAX_SUPERFICE; i++)
@@ -378,12 +382,16 @@ void Pianeta::ordinaPunti(void)
     cout << "]\n\n";
 #endif
     //ricostruisci la lista della superfice ordinata
+#ifdef ORDINA
     ListaClasse<Punto> ordinata;
     for (int i = 0; i < MAX_SUPERFICE; i++)
     {
         ordinata.insert_head(this->surface.read(posizioni[i]));
+        //NB: uso insert_head per ordinarli dal più grande al più piccolo, in senso orario
+        //uso insert_tail per ordinarli dal più piccolo al più grande, in senso anti-orario
     }
     this->surface.setHead(ordinata.getHead());
+#endif
 #ifdef DEBUG_ORDINAMENTO
     cout << "lista dopo ordinamento";
     this->surface.print();

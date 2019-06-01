@@ -95,7 +95,7 @@ void SistemaSolare::draw(sf::RenderWindow &window)
 //genera lista di pianeti
 void SistemaSolare::genera()
 {
-    //genera tutti i pianeti all'inizio o man mano?
+    //genera tutti i pianeti all'inizio
     for (int i = 0; i < MAX_PLANET; i++)
     {
         //numero random per la dimensione del pianeta compreso tra min e max

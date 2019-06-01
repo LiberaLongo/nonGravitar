@@ -2,7 +2,7 @@
 
 #include "../header/Gioco.hpp"
 
-#define DEBUG
+//#define DEBUG
 
 SistemaSolare sistemasolare;
 //puntatore alla posizione del pianeta corrente
