@@ -23,7 +23,7 @@ void Pianeta::Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Pun
         else
         {
             B[k] = A[j];
-            j += 1;
+            j = j + 1;
         }
         k = k + 1;
     }
@@ -45,9 +45,7 @@ void Pianeta::MergeSort(float A[], int primo, int ultimo, struct Elem<Punto> *po
         //integer mezzo <-- base[(primo + ultimo)/2]
         int mezzo = floor((primo + ultimo) / 2);
         this->MergeSort(A, primo, mezzo, posizioni);
-        //MergeSort(A, mezzo+1, ultimo)
         this->MergeSort(A, mezzo + 1, ultimo, posizioni);
-        //Merge(A, primo, ultimo, mezzo)
         this->Merge(A, primo, ultimo, mezzo, posizioni);
     }
 }
