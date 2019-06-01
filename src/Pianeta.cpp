@@ -6,6 +6,7 @@
 
 //PRIVATI
 float B[MAX_SUPERFICE];
+struct Elem<Punto> *posAux[MAX_SUPERFICE];
 //metodi di ordinamento
 
 //libro di algoritmi: pag 29/30.
@@ -13,29 +14,44 @@ float B[MAX_SUPERFICE];
 void Pianeta::Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Punto> *posizioni[])
 {
     int i = primo, j = mezzo + 1, k = primo, h;
+    //while i <= mezzo and j <= ultimo do
     while ((i <= mezzo) && (j <= ultimo))
     {
         if (A[i] <= A[j])
         {
             B[k] = A[i];
+            //aggiorno il vettore dei puntatori
+            posAux[k] = posizioni[i];
+            //
             i = i + 1;
         }
         else
         {
             B[k] = A[j];
+            //aggiorno il vettore dei puntatori
+            posAux[k] = posizioni[j];
+            //
             j = j + 1;
         }
         k = k + 1;
     }
     j = ultimo;
-    for (h = mezzo; h >= i; h++)
+    //for h <-- mezzo downto i do
+    for (h = mezzo; h >= i; h--)
     {
         A[j] = A[h];
+        //aggiorno il vettore dei puntatori
+        posizioni[j] = posizioni[h];
+        //
         j = j - 1;
     }
+    //for j <-- primo to k-1 do
     for (j = primo; j <= (k - 1); j++)
     {
         A[j] = B[j];
+        //aggiorno il vettore dei puntatori
+        posizioni[j] = posAux[j];
+        //
     }
 }
 void Pianeta::MergeSort(float A[], int primo, int ultimo, struct Elem<Punto> *posizioni[])
@@ -299,6 +315,10 @@ void Pianeta::genera(void)
 //ordina la lista dei punti del pianeta...
 void Pianeta::ordinaPunti(void)
 {
+#ifdef DEBUG_ORDINAMENTO
+    cout << "lista prima dell' ordinamento";
+    this->surface.print();
+#endif
     //non fare niente
     //idea: ordinare i punti in base al loro angolo rispetto al centro
     //inizializzo il punto centrale
@@ -348,8 +368,7 @@ void Pianeta::ordinaPunti(void)
     cout << "]\n";
 #endif
     //merge-sort
-    //this->MergeSort(angoli, 0, MAX_SUPERFICE - 1, posizioni);
-
+    this->MergeSort(angoli, 0, MAX_SUPERFICE - 1, posizioni);
 #ifdef DEBUG_ORDINAMENTO
     cout << "\nvettore dopo MergeSort:  [";
     for (int i = 0; i < MAX_SUPERFICE; i++)
@@ -359,4 +378,14 @@ void Pianeta::ordinaPunti(void)
     cout << "]\n\n";
 #endif
     //ricostruisci la lista della superfice ordinata
+    ListaClasse<Punto> ordinata;
+    for (int i = 0; i < MAX_SUPERFICE; i++)
+    {
+        ordinata.insert_head(this->surface.read(posizioni[i]));
+    }
+    this->surface.setHead(ordinata.getHead());
+#ifdef DEBUG_ORDINAMENTO
+    cout << "lista dopo ordinamento";
+    this->surface.print();
+#endif
 }
