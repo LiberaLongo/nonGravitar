@@ -13,7 +13,7 @@ visualePianeta::visualePianeta(void)
 int visualePianeta::Run(sf::RenderWindow &App)
 {
     //globale lunghezza della superficie
-    //int lengthSuperficie = 0;
+    int lengthSuperficie = 0;
     //aggiorno coordinate
     this->player.setCoord(WIDTH / 4, HEIGHT / 4);
     //aggiorno il pianeta
@@ -24,12 +24,12 @@ int visualePianeta::Run(sf::RenderWindow &App)
         this->pianetaVisualizzato = sistemasolare.toPtrPlanet(pianetaInsideNow);
 
         //conta i punti della superficie
-        //int lengthSuperficie = this->pianetaVisualizzato.lunghezzaSuperfice();
-        //if(lengthSuperficie != MAX_SUPERFICE)
-        //{
-        //    cout << "Errore nella conta o nella generazione della superfice";
-        //    return EXIT;
-        //}
+        lengthSuperficie = this->pianetaVisualizzato.lunghezzaSuperfice();
+        if(lengthSuperficie != MAX_SUPERFICE)
+        {
+            cout << "Errore nella conta o nella generazione della superfice";
+            return EXIT;
+        }
 //voglio sapere come dare nome a un oggetto puntato da un puntatore
 #ifdef DEBUG
         this->pianetaVisualizzato.print();
@@ -138,7 +138,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         //pulisci la finestra colorandola di nero
         App.clear(this->pianetaVisualizzato.getAtmosferaLib());
 
-        this->pianetaVisualizzato.drawVisuale(App, MAX_SUPERFICE);
+        this->pianetaVisualizzato.drawVisuale(App, lengthSuperficie);
         this->player.draw(App);
 
         //fine del frame corrente

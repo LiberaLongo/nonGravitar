@@ -166,7 +166,7 @@ int Lista<Tipo>::lunghezza(void)
 		{
 			//incremento la conta
 			conta++;
-			//passo al successivo e stampo freccia
+			//passo al successivo
 			iter = this->next(iter);
 		}
 	}
