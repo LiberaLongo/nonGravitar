@@ -29,8 +29,8 @@ private:
     ColoreRGB atmosfera;
 private:
     //metodi di ordinamento
-    void Merge(float A[], struct Elem<Punto>* posizioni[], int primo, int ultimo, int mezzo);
-    void MergeSort(float A[], struct Elem<Punto>* posizioni[], int primo, int ultimo);
+    void Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Punto>* posizioni[]);
+    void MergeSort(float A[], int primo, int ultimo, struct Elem<Punto>* posizioni[]);
 public:
     //COSTRUTTORI
     //costruttore void

@@ -7,72 +7,48 @@
 //PRIVATI
 float B[MAX_SUPERFICE];
 //metodi di ordinamento
-void Pianeta::Merge(float A[], struct Elem<Punto> *posizioni[], int primo, int ultimo, int mezzo)
-{
-    //libro di algoritmi: pag 29/30.
-    //ATTENZIONE! il libro non ha il vettore delle posizioni da aggiornare!
 
-    //integer i, j, k h
-    int i, j, k, h;
-    //i <-- primo
-    i = primo;
-    //j <-- mezzo+1
-    j = mezzo + 1;
-    //k <-- primo
-    k = primo;
-    //while i <= mezzo and j <= ultimo do
+//libro di algoritmi: pag 29/30.
+//ATTENZIONE! il libro non ha il vettore delle posizioni da aggiornare!
+void Pianeta::Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Punto> *posizioni[])
+{
+    int i = primo, j = mezzo + 1, k = primo, h;
     while ((i <= mezzo) && (j <= ultimo))
     {
-        //if A[i] <= A[j] then
         if (A[i] <= A[j])
         {
-            //B[k] <-- A[i]
             B[k] = A[i];
-            //i <-- i+1
-            i += 1;
+            i = i + 1;
         }
-        //else
         else
         {
-            //B[k] <-- A[j]
             B[k] = A[j];
-            //j <-- j+1
             j += 1;
         }
-        //k <-- k+1
-        k += 1;
+        k = k + 1;
     }
-    //j <-- ultimo
     j = ultimo;
-    //for h <-- mezzo downto i do
-    for (h = mezzo; h > i; h++)
+    for (h = mezzo; h >= i; h++)
     {
-        //A[j] <-- A[h]
         A[j] = A[h];
-        //j <-- j-1
-        j -= 1;
+        j = j - 1;
     }
-    //for j <-- primo to k-1 do
-    for (i = primo; i < k - 1; i++)
+    for (j = primo; j <= (k - 1); j++)
     {
-        //A[j] <-- B[j]
         A[j] = B[j];
     }
 }
-void Pianeta::MergeSort(float A[], struct Elem<Punto> *posizioni[], int primo, int ultimo)
+void Pianeta::MergeSort(float A[], int primo, int ultimo, struct Elem<Punto> *posizioni[])
 {
-    //libro di algoritmi: pag 29/30.
-    //if primo < ultimo then
     if (primo < ultimo)
     {
         //integer mezzo <-- base[(primo + ultimo)/2]
         int mezzo = floor((primo + ultimo) / 2);
-        //MergeSort(A, primo, mezzo)
-        this->MergeSort(A, posizioni, primo, mezzo);
+        this->MergeSort(A, primo, mezzo, posizioni);
         //MergeSort(A, mezzo+1, ultimo)
-        this->MergeSort(A, posizioni, mezzo + 1, ultimo);
+        this->MergeSort(A, mezzo + 1, ultimo, posizioni);
         //Merge(A, primo, ultimo, mezzo)
-        this->Merge(A, posizioni, primo, ultimo, mezzo);
+        this->Merge(A, primo, ultimo, mezzo, posizioni);
     }
 }
 
@@ -348,7 +324,7 @@ void Pianeta::ordinaPunti(void)
 #ifdef DEBUG_ORDINAMENTO
                 cout << "Punto: ";
                 calcolato.print();
-                cout << ", Angolo: " << angoli[i] << endl;
+                cout << ",\tAngolo: " << angoli[i] << endl;
 #endif
                 //salvo il puntatore
                 posizioni[i] = iter;
@@ -374,8 +350,7 @@ void Pianeta::ordinaPunti(void)
     cout << "]\n";
 #endif
     //merge-sort
-//    this->MergeSort(angoli, posizioni, 0, MAX_SUPERFICE - 1);
-
+    //this->MergeSort(angoli, 0, MAX_SUPERFICE - 1, posizioni);
 
 #ifdef DEBUG_ORDINAMENTO
     cout << "\nvettore dopo MergeSort:  [";
@@ -383,7 +358,7 @@ void Pianeta::ordinaPunti(void)
     {
         cout << angoli[i] << ", ";
     }
-    cout << "]\n\n" ;
+    cout << "]\n\n";
 #endif
     //ricostruisci la lista della superfice ordinata
 }
