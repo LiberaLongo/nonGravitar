@@ -2,6 +2,79 @@
 #include "../header/Pianeta.hpp"
 
 //#define DEBUG
+#define DEBUG_ORDINAMENTO
+
+//PRIVATI
+float B[MAX_SUPERFICE];
+//metodi di ordinamento
+void Pianeta::Merge(float A[], struct Elem<Punto> *posizioni[], int primo, int ultimo, int mezzo)
+{
+    //libro di algoritmi: pag 29/30.
+    //ATTENZIONE! il libro non ha il vettore delle posizioni da aggiornare!
+
+    //integer i, j, k h
+    int i, j, k, h;
+    //i <-- primo
+    i = primo;
+    //j <-- mezzo+1
+    j = mezzo + 1;
+    //k <-- primo
+    k = primo;
+    //while i <= mezzo and j <= ultimo do
+    while ((i <= mezzo) && (j <= ultimo))
+    {
+        //if A[i] <= A[j] then
+        if (A[i] <= A[j])
+        {
+            //B[k] <-- A[i]
+            B[k] = A[i];
+            //i <-- i+1
+            i += 1;
+        }
+        //else
+        else
+        {
+            //B[k] <-- A[j]
+            B[k] = A[j];
+            //j <-- j+1
+            j += 1;
+        }
+        //k <-- k+1
+        k += 1;
+    }
+    //j <-- ultimo
+    j = ultimo;
+    //for h <-- mezzo downto i do
+    for (h = mezzo; h > i; h++)
+    {
+        //A[j] <-- A[h]
+        A[j] = A[h];
+        //j <-- j-1
+        j -= 1;
+    }
+    //for j <-- primo to k-1 do
+    for (i = primo; i < k - 1; i++)
+    {
+        //A[j] <-- B[j]
+        A[j] = B[j];
+    }
+}
+void Pianeta::MergeSort(float A[], struct Elem<Punto> *posizioni[], int primo, int ultimo)
+{
+    //libro di algoritmi: pag 29/30.
+    //if primo < ultimo then
+    if (primo < ultimo)
+    {
+        //integer mezzo <-- base[(primo + ultimo)/2]
+        int mezzo = floor((primo + ultimo) / 2);
+        //MergeSort(A, primo, mezzo)
+        this->MergeSort(A, posizioni, primo, mezzo);
+        //MergeSort(A, mezzo+1, ultimo)
+        this->MergeSort(A, posizioni, mezzo + 1, ultimo);
+        //Merge(A, primo, ultimo, mezzo)
+        this->Merge(A, posizioni, primo, ultimo, mezzo);
+    }
+}
 
 //COSTRUTTORI
 //costruttore void
@@ -149,7 +222,9 @@ Pianeta::getHeadBunker(void)
 }
 
 //conta i punti della superficie
-int Pianeta::lunghezzaSuperfice(void) {
+int
+Pianeta::lunghezzaSuperfice(void)
+{
     return this->surface.lunghezza();
 }
 //stampa
@@ -179,7 +254,7 @@ bool Pianeta::confronto(Pianeta p)
 //disegna
 void Pianeta::draw(sf::RenderWindow &window)
 {
-    float atmosfera = -(this->raggio/5);
+    float atmosfera = -(this->raggio / 5);
     sf::CircleShape pianeta(this->raggio);
     float x = this->getX() - this->raggio;
     float y = this->getY() - this->raggio;
@@ -216,7 +291,7 @@ void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
             Punto disegnato = this->surface.read(iter);
             //inserisci il punto nella convex shape
             convexSuperficie.setPoint(indice, disegnato.getPuntoLib());
-            //passo al successivo e stampo freccia
+            //passo al successivo
             iter = this->surface.next(iter);
             indice++;
         }
@@ -248,8 +323,67 @@ void Pianeta::genera(void)
 }
 
 //ordina la lista dei punti del pianeta...
-void Pianeta::ordinaPunti(void) {
+void Pianeta::ordinaPunti(void)
+{
     //non fare niente
     //idea: ordinare i punti in base al loro angolo rispetto al centro
+    //inizializzo il punto centrale
+    Punto centro = Punto(WIDTH / 2, HEIGHT / 2);
+    //utilizzo quindi un vettore di angoli, un vettore di posizioni e merge-sort
+    float angoli[MAX_SUPERFICE];
+    struct Elem<Punto> *posizioni[MAX_SUPERFICE];
+    //inizializzo l'iteratore della lista
+    struct Elem<Punto> *iter = this->surface.head();
+    //inizializzo i vettori di angoli e di posizioni
+    if (!(this->surface.empty()))
+    {
+        for (int i = 0; i < MAX_SUPERFICE; i++)
+        {
+            if (!(this->surface.finished(iter)))
+            {
+                //leggo l'elemento
+                Punto calcolato = this->surface.read(iter);
+                //calcolo e salvo l'angolo nell'array
+                angoli[i] = centro.calcolaAngolo(calcolato);
+#ifdef DEBUG_ORDINAMENTO
+                cout << "Punto: ";
+                calcolato.print();
+                cout << ", Angolo: " << angoli[i] << endl;
+#endif
+                //salvo il puntatore
+                posizioni[i] = iter;
+                //passo al successivo
+                iter = this->surface.next(iter);
+            }
+            else
+            {
+                cout << "errore lista finita ma vettore più grande";
+            }
+        }
+    }
+    else
+    {
+        cout << "errore lista vuota";
+    }
+#ifdef DEBUG_ORDINAMENTO
+    cout << "\nvettore prima MergeSort: [";
+    for (int i = 0; i < MAX_SUPERFICE; i++)
+    {
+        cout << angoli[i] << ", ";
+    }
+    cout << "]\n";
+#endif
+    //merge-sort
+//    this->MergeSort(angoli, posizioni, 0, MAX_SUPERFICE - 1);
+
+
+#ifdef DEBUG_ORDINAMENTO
+    cout << "\nvettore dopo MergeSort:  [";
+    for (int i = 0; i < MAX_SUPERFICE; i++)
+    {
+        cout << angoli[i] << ", ";
+    }
+    cout << "]\n\n" ;
+#endif
+    //ricostruisci la lista della superfice ordinata
 }
-//altre cose

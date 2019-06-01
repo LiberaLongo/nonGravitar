@@ -18,7 +18,7 @@ template class ListaClasse<Bunker>;
 
 class Pianeta : public DisegnabileI
 {
-protected:
+private:
     Punto centro;
     float raggio = PIANETA_RAGGIO;
     ListaClasse<Punto> surface;
@@ -27,7 +27,10 @@ protected:
     //cose grafiche e basta
     ColoreRGB colore;
     ColoreRGB atmosfera;
-
+private:
+    //metodi di ordinamento
+    void Merge(float A[], struct Elem<Punto>* posizioni[], int primo, int ultimo, int mezzo);
+    void MergeSort(float A[], struct Elem<Punto>* posizioni[], int primo, int ultimo);
 public:
     //COSTRUTTORI
     //costruttore void
