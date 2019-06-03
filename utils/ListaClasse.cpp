@@ -101,7 +101,7 @@ void ListaClasse<Tipo>::draw(sf::RenderWindow &window)
 //libro di algoritmi: pag 29/30.
 //ATTENZIONE! il libro non ha il vettore delle posizioni da aggiornare!
 template <typename Tipo>
-void ListaClasse<Tipo>::Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Tipo> *posizioni[], float B[], struct Elem<Tipo> *posAux[])
+void ListaClasse<Tipo>::Merge(int primo, int ultimo, int mezzo, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[])
 {
 	int i = primo, j = mezzo + 1, k = primo, h;
 	//while i <= mezzo and j <= ultimo do
@@ -145,14 +145,28 @@ void ListaClasse<Tipo>::Merge(float A[], int primo, int ultimo, int mezzo, struc
 	}
 }
 template <typename Tipo>
-void ListaClasse<Tipo>::MergeSort(float A[], int primo, int ultimo, struct Elem<Tipo> *posizioni[], float B[], struct Elem<Tipo> *posAux[])
+void ListaClasse<Tipo>::MergeSort(int primo, int ultimo, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[])
 {
 	if (primo < ultimo)
 	{
 		//integer mezzo <-- base[(primo + ultimo)/2]
 		int mezzo = floor((primo + ultimo) / 2);
-		this->MergeSort(A, primo, mezzo, posizioni, B, posAux);
-		this->MergeSort(A, mezzo + 1, ultimo, posizioni, B, posAux);
-		this->Merge(A, primo, ultimo, mezzo, posizioni, B, posAux);
+		this->MergeSort(primo, mezzo, A, B, posizioni, posAux);
+		this->MergeSort(mezzo + 1, ultimo, A, B, posizioni, posAux);
+		this->Merge(primo, ultimo, mezzo, A, B, posizioni, posAux);
 	}
+}
+template <typename Tipo>
+void ListaClasse<Tipo>::ordina(const int dim, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[])
+{
+    this->MergeSort(0, dim - 1, A, B, posizioni, posAux);
+    //ricostruisci la lista della superfice ordinata
+    ListaClasse<Tipo> ordinata;
+    for (int i = 0; i < dim; i++)
+    {
+        ordinata.insert_head(this->read(posizioni[i]));
+        //NB: uso insert_head per ordinarli dal più grande al più piccolo, in senso orario
+        //uso insert_tail per ordinarli dal più piccolo al più grande, in senso anti-orario
+    }
+    this->setHead(ordinata.getHead());
 }

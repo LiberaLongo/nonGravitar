@@ -24,7 +24,8 @@ public:
 	void draw(sf::RenderWindow &window);
 
 	//metodi di ordinamento
-	void Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Tipo> *posizioni[], float B[], struct Elem<Tipo> *posAux[]);
-	void MergeSort(float A[], int primo, int ultimo, struct Elem<Tipo> *posizioni[], float B[], struct Elem<Tipo> *posAux[]);
+	void Merge(int primo, int ultimo, int mezzo, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[]);
+	void MergeSort(int primo, int ultimo, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[]);
+	void ordina(const int dim, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[]);
 };
 #endif //LISTA_CLASSE_H

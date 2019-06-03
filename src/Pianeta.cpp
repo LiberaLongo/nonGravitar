@@ -5,11 +5,6 @@
 #define ORDINA
 //macro che, se definita, ordina la lista dei punti della superfice
 
-#ifdef ORDINA
-float B[MAX_SUPERFICE];
-struct Elem<Punto> *posAux[MAX_SUPERFICE];
-#endif
-
 //COSTRUTTORI
 //costruttore void
 Pianeta::Pianeta(void)
@@ -270,8 +265,10 @@ void Pianeta::ordinaPunti(void)
     //utilizzo quindi un vettore di angoli, un vettore di posizioni e merge-sort
     float angoli[MAX_SUPERFICE];
     struct Elem<Punto> *posizioni[MAX_SUPERFICE];
+
     //inizializzo l'iteratore della lista
     struct Elem<Punto> *iter = this->surface.head();
+    
     //inizializzo i vettori di angoli e di posizioni
     if (!(this->surface.empty()))
     {
@@ -299,15 +296,10 @@ void Pianeta::ordinaPunti(void)
         cout << "errore lista vuota";
     }
     //merge-sort
-    this->surface.MergeSort(angoli, 0, MAX_SUPERFICE - 1, posizioni, B, posAux);
-    //ricostruisci la lista della superfice ordinata
-    ListaClasse<Punto> ordinata;
-    for (int i = 0; i < MAX_SUPERFICE; i++)
-    {
-        ordinata.insert_head(this->surface.read(posizioni[i]));
-        //NB: uso insert_head per ordinarli dal più grande al più piccolo, in senso orario
-        //uso insert_tail per ordinarli dal più piccolo al più grande, in senso anti-orario
-    }
-    this->surface.setHead(ordinata.getHead());
+    //vettori ausiliari
+    float B[MAX_SUPERFICE];
+    struct Elem<Punto> *posAux[MAX_SUPERFICE];
+    //eseguo algoritmo di ordinamento e sistemo la lista
+    this->surface.ordina(MAX_SUPERFICE, angoli, B, posizioni, posAux);
 #endif //ORDINA
 }
