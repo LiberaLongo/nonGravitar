@@ -1,7 +1,6 @@
 //codice cose utili usate in tutto il codice
 
 #include "../header/utils.hpp"
-#include "../header/Punto.hpp"
 
 //Precondition: prende un angolo in gradi in forma canonica
 //Postcondition: lo trasforma secondo la libreria grafica per ora usata

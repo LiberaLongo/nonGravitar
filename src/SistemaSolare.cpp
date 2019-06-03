@@ -77,20 +77,7 @@ void SistemaSolare::printCentri(void)
 //disegna
 void SistemaSolare::draw(sf::RenderWindow &window)
 {
-    if (!(this->pianeti.empty()))
-    {
-        //primo elemento utile non la sentinella
-        struct Elem<Pianeta> *iter = this->pianeti.head();
-        //se non vuota e non finita
-        while (!(this->pianeti.finished(iter)))
-        {
-            //stampo elemento MODIFICATA!
-            Pianeta disegnato = this->pianeti.read(iter);
-            disegnato.draw(window);
-            //passo al successivo
-            iter = this->pianeti.next(iter);
-        }
-    }
+    this->pianeti.draw(window);
 }
 //genera lista di pianeti
 void SistemaSolare::genera()

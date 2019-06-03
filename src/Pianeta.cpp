@@ -2,71 +2,13 @@
 #include "../header/Pianeta.hpp"
 
 //#define DEBUG
-//#define DEBUG_ORDINAMENTO
 #define ORDINA
 //macro che, se definita, ordina la lista dei punti della superfice
 
-//PRIVATI
+#ifdef ORDINA
 float B[MAX_SUPERFICE];
 struct Elem<Punto> *posAux[MAX_SUPERFICE];
-//metodi di ordinamento
-
-//libro di algoritmi: pag 29/30.
-//ATTENZIONE! il libro non ha il vettore delle posizioni da aggiornare!
-void Pianeta::Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Punto> *posizioni[])
-{
-    int i = primo, j = mezzo + 1, k = primo, h;
-    //while i <= mezzo and j <= ultimo do
-    while ((i <= mezzo) && (j <= ultimo))
-    {
-        if (A[i] <= A[j])
-        {
-            B[k] = A[i];
-            //aggiorno il vettore dei puntatori
-            posAux[k] = posizioni[i];
-            //
-            i = i + 1;
-        }
-        else
-        {
-            B[k] = A[j];
-            //aggiorno il vettore dei puntatori
-            posAux[k] = posizioni[j];
-            //
-            j = j + 1;
-        }
-        k = k + 1;
-    }
-    j = ultimo;
-    //for h <-- mezzo downto i do
-    for (h = mezzo; h >= i; h--)
-    {
-        A[j] = A[h];
-        //aggiorno il vettore dei puntatori
-        posizioni[j] = posizioni[h];
-        //
-        j = j - 1;
-    }
-    //for j <-- primo to k-1 do
-    for (j = primo; j <= (k - 1); j++)
-    {
-        A[j] = B[j];
-        //aggiorno il vettore dei puntatori
-        posizioni[j] = posAux[j];
-        //
-    }
-}
-void Pianeta::MergeSort(float A[], int primo, int ultimo, struct Elem<Punto> *posizioni[])
-{
-    if (primo < ultimo)
-    {
-        //integer mezzo <-- base[(primo + ultimo)/2]
-        int mezzo = floor((primo + ultimo) / 2);
-        this->MergeSort(A, primo, mezzo, posizioni);
-        this->MergeSort(A, mezzo + 1, ultimo, posizioni);
-        this->Merge(A, primo, ultimo, mezzo, posizioni);
-    }
-}
+#endif
 
 //COSTRUTTORI
 //costruttore void
@@ -291,6 +233,9 @@ void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
 
     //disegna sulla window passata per riferimento
     window.draw(convexSuperficie);
+
+    this->fuel.draw(window);
+    this->bunker.draw(window);
 }
 //generaPianeta(void);
 void Pianeta::genera(void)
@@ -317,11 +262,8 @@ void Pianeta::genera(void)
 //ordina la lista dei punti del pianeta...
 void Pianeta::ordinaPunti(void)
 {
-#ifdef DEBUG_ORDINAMENTO
-    cout << "lista prima dell' ordinamento";
-    this->surface.print();
-#endif
-    //non fare niente
+    //non fare niente se ORDINA non è definito
+#ifdef ORDINA
     //idea: ordinare i punti in base al loro angolo rispetto al centro
     //inizializzo il punto centrale
     Punto centro = Punto(WIDTH / 2, HEIGHT / 2);
@@ -341,11 +283,6 @@ void Pianeta::ordinaPunti(void)
                 Punto calcolato = this->surface.read(iter);
                 //calcolo e salvo l'angolo nell'array
                 angoli[i] = centro.calcolaAngolo(calcolato);
-#ifdef DEBUG_ORDINAMENTO
-                cout << "Punto: ";
-                calcolato.print();
-                cout << ",\tAngolo: " << angoli[i] << endl;
-#endif
                 //salvo il puntatore
                 posizioni[i] = iter;
                 //passo al successivo
@@ -361,28 +298,9 @@ void Pianeta::ordinaPunti(void)
     {
         cout << "errore lista vuota";
     }
-#ifdef DEBUG_ORDINAMENTO
-    cout << "\nvettore prima MergeSort: [";
-    for (int i = 0; i < MAX_SUPERFICE; i++)
-    {
-        cout << angoli[i] << ", ";
-    }
-    cout << "]\n";
-#endif
-#ifdef ORDINA
     //merge-sort
-    this->MergeSort(angoli, 0, MAX_SUPERFICE - 1, posizioni);
-#endif
-#ifdef DEBUG_ORDINAMENTO
-    cout << "\nvettore dopo MergeSort:  [";
-    for (int i = 0; i < MAX_SUPERFICE; i++)
-    {
-        cout << angoli[i] << ", ";
-    }
-    cout << "]\n\n";
-#endif
+    this->surface.MergeSort(angoli, 0, MAX_SUPERFICE - 1, posizioni, B, posAux);
     //ricostruisci la lista della superfice ordinata
-#ifdef ORDINA
     ListaClasse<Punto> ordinata;
     for (int i = 0; i < MAX_SUPERFICE; i++)
     {
@@ -391,9 +309,5 @@ void Pianeta::ordinaPunti(void)
         //uso insert_tail per ordinarli dal più piccolo al più grande, in senso anti-orario
     }
     this->surface.setHead(ordinata.getHead());
-#endif
-#ifdef DEBUG_ORDINAMENTO
-    cout << "lista dopo ordinamento";
-    this->surface.print();
-#endif
+#endif //ORDINA
 }

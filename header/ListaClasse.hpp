@@ -2,6 +2,7 @@
 #ifndef LISTA_CLASSE_H
 #define LISTA_CLASSE_H
 
+#include <SFML/Graphics.hpp>
 #include "./Lista.hpp"
 
 template <typename Tipo>
@@ -18,5 +19,12 @@ public:
 	//stampe
     //override
 	void print(void);
+	
+	//disegna elementi
+	void draw(sf::RenderWindow &window);
+
+	//metodi di ordinamento
+	void Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Tipo> *posizioni[], float B[], struct Elem<Tipo> *posAux[]);
+	void MergeSort(float A[], int primo, int ultimo, struct Elem<Tipo> *posizioni[], float B[], struct Elem<Tipo> *posAux[]);
 };
 #endif //LISTA_CLASSE_H
