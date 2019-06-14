@@ -3,7 +3,7 @@
 
 
 //metodo per scorrere la lista e aggiornare i centri
-void Bunker::aggiornaCentriDirezione(ListaClasse<Direzione> headDir)
+void Bunker::aggiornaCentriDirezione(Lista<Direzione> headDir)
 {
     if (!(headDir.empty()))
     {
@@ -39,7 +39,7 @@ Bunker::Bunker(float x, float y)
     this->aggiornaCentriDirezione(this->headDirezioni);
 }
 //costruttore completo
-Bunker::Bunker(Punto centro, float angolo, float speed, float size, ListaClasse<Direzione> headDir)
+Bunker::Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir)
 {
     this->centro = centro;
     this->angle = angolo;
@@ -47,7 +47,7 @@ Bunker::Bunker(Punto centro, float angolo, float speed, float size, ListaClasse<
     this->size = size;
     this->aggiornaCentriDirezione(headDirezioni);
 }
-Bunker::Bunker(float x, float y, float angolo, float speed, float size, ListaClasse<Direzione> headDir)
+Bunker::Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir)
 {
     this->centro.setCoord(x, y);
     this->angle = angolo;

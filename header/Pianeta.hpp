@@ -7,23 +7,23 @@
 #include "./Fuel.hpp"
 #include "./ColoreRGB.hpp"
 
-#include "./ListaClasse.hpp"
+#include "./Lista.hpp"
 
 //ATTENZIONE! cpp sono qui inclusi per classi template
 #include "./Bunker.hpp"
 
-template class ListaClasse<Punto>;
-template class ListaClasse<Fuel>;
-template class ListaClasse<Bunker>;
+template class Lista<Punto>;
+template class Lista<Fuel>;
+template class Lista<Bunker>;
 
 class Pianeta : public DisegnabileI
 {
 private:
     Punto centro;
     float raggio = PIANETA_RAGGIO;
-    ListaClasse<Punto> surface;
-    ListaClasse<Fuel> fuel;
-    ListaClasse<Bunker> bunker;
+    Lista<Punto> surface;
+    Lista<Fuel> fuel;
+    Lista<Bunker> bunker;
     //cose grafiche e basta
     ColoreRGB colore;
     ColoreRGB atmosfera;
@@ -39,8 +39,8 @@ public:
     Pianeta(Punto centro, float raggio);
     Pianeta(float x, float y, float raggio);
     //costruttori completi
-    Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
-    Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker);
+    Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker);
+    Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker);
     //distruttore
     virtual ~Pianeta(void);
 
@@ -56,9 +56,9 @@ public:
     void setAtmosfera(ColoreRGB outline);
     void setAtmosfera(int red, int green, int blue);
     //setta la lista
-    void setSurface(ListaClasse<Punto> listaSurface);
-    void setFuel(ListaClasse<Fuel> listaFuel);
-    void setBunker(ListaClasse<Bunker> listaBunker);
+    void setSurface(Lista<Punto> listaSurface);
+    void setFuel(Lista<Fuel> listaFuel);
+    void setBunker(Lista<Bunker> listaBunker);
     //setta il puntatore della lista
     void setHeadSurface(struct Elem<Punto> *headSurface);
     void setHeadFuel(struct Elem<Fuel> *headFuel);

@@ -9,26 +9,26 @@
 #include "./Pianeta.hpp"
 #include "./Navicella.hpp"
 
-template class ListaClasse<Pianeta>;
+template class Lista<Pianeta>;
 
 class SistemaSolare : public DisegnabileI
 {
 private:
-    ListaClasse<Pianeta> pianeti;
+    Lista<Pianeta> pianeti;
 
 public:
     //COSTRUTTORI
     //costruttore void
     SistemaSolare(void);
     //costruttori completi
-    SistemaSolare(ListaClasse<Pianeta> listaPianeti);
+    SistemaSolare(Lista<Pianeta> listaPianeti);
     SistemaSolare(struct Elem<Pianeta> *headPianeti);
     //distruttore
     virtual ~SistemaSolare(void);
 
     //SETTERS
     //setta la lista
-    void setListaPianeti(ListaClasse<Pianeta> listaPianeti);
+    void setListaPianeti(Lista<Pianeta> listaPianeti);
     //setta il puntatore della lista
     void setHeadPianeti(struct Elem<Pianeta> *headPianeti);
     //GETTERS

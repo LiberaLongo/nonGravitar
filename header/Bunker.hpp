@@ -5,27 +5,27 @@
 #include "./DisegnabileI.hpp"
 #include "./Direzione.hpp"
 
-#include "./ListaClasse.hpp"
+#include "./Lista.hpp"
 
 //ATTENZIONE! cpp inclusi per classi template
+#include "../utils/ListaParent.cpp"
 #include "../utils/Lista.cpp"
-#include "../utils/ListaClasse.cpp"
 
 //per Bunker
-template class ListaClasse<Direzione>;
+template class Lista<Direzione>;
 
 class Bunker : public DisegnabileI
 {
 private:
     //il centro della navicella
     Punto centro; //di default (0,0) in accordo con il default di Punto
-    ListaClasse<Direzione> headDirezioni;
+    Lista<Direzione> headDirezioni;
     //il raggio della circonferenza circoscritta
     float size = 10.f; //ampiezza diviso 4...
     float angle = 0.f; //angolo del cannone
     float speed = 5.f; //velocità degli spari
 private:
-    void aggiornaCentriDirezione(ListaClasse<Direzione> headDir);
+    void aggiornaCentriDirezione(Lista<Direzione> headDir);
 public:
     //costruttore vuoto
     Bunker(void);
@@ -33,8 +33,8 @@ public:
     Bunker(Punto centro);
     Bunker(float x, float y);
     //costruttore completo
-    Bunker(Punto centro, float angolo, float speed, float size, ListaClasse<Direzione> headDir);
-    Bunker(float x, float y, float angolo, float speed, float size, ListaClasse<Direzione> headDir);
+    Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir);
+    Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir);
 
     //distruttore
     virtual ~Bunker(void);

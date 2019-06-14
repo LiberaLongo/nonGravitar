@@ -11,7 +11,7 @@ SistemaSolare::SistemaSolare(void)
     //tutto di default
 }
 //costruttori completi
-SistemaSolare::SistemaSolare(ListaClasse<Pianeta> listaPianeti)
+SistemaSolare::SistemaSolare(Lista<Pianeta> listaPianeti)
 {
     this->pianeti = listaPianeti;
 }
@@ -27,7 +27,7 @@ SistemaSolare::SistemaSolare(struct Elem<Pianeta> *headPianeti)
 
 //SETTERS
 //setta la lista
-void SistemaSolare::setListaPianeti(ListaClasse<Pianeta> listaPianeti)
+void SistemaSolare::setListaPianeti(Lista<Pianeta> listaPianeti)
 {
     this->pianeti = listaPianeti;
 }

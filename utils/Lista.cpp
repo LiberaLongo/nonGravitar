@@ -1,4 +1,6 @@
-//codice liste
+//lista per le classi ereditata
+//quindi non posso usare == o cout<<
+//ma devo usare contronto() e print()
 
 #include "../header/Lista.hpp"
 
@@ -7,16 +9,8 @@
 
 //costruttore e distruttore
 template <typename Tipo>
-Lista<Tipo>::Lista(void)
+Lista<Tipo>::Lista(void) : ListaParent<Tipo>()
 {
-#ifdef DEBUG
-	cout << "costruttore" << endl;
-#endif
-	struct Elem<Tipo> *sentinella = new Elem<Tipo>;
-	sentinella->prev = sentinella;
-	sentinella->next = sentinella;
-	//sentinella.item non ci interessa
-	this->testa = sentinella;
 }
 //
 template <typename Tipo>
@@ -27,189 +21,8 @@ template <typename Tipo>
 #endif
 }
 
-//setters
-template <typename Tipo>
-void Lista<Tipo>::setHead(struct Elem<Tipo> *head)
-{
-#ifdef DEBUG
-	cout << "setta testa" << endl;
-#endif
-	this->testa = head;
-}
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::getHead(void)
-{
-#ifdef DEBUG
-	cout << "ottieni testa" << endl;
-#endif
-	return this->testa;
-}
-
-//metodi
-template <typename Tipo>
-bool Lista<Tipo>::empty(void)
-{
-#ifdef DEBUG
-	cout << "e' vuota?" << endl;
-#endif
-	if (this->testa->next != this->testa->prev)
-		return false;
-	if (this->testa->next != this->testa)
-		return false;
-	return true;
-}
-//
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::head(void)
-{
-#ifdef DEBUG
-	cout << "primo elemento in testa" << endl;
-#endif
-	return this->testa->next;
-}
-//
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::tail(void)
-{
-#ifdef DEBUG
-	cout << "primo elemento in coda" << endl;
-#endif
-	return this->testa->prev;
-}
-//
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::next(struct Elem<Tipo> *p)
-{
-#ifdef DEBUG
-	cout << "next" << endl;
-#endif
-	return p->next;
-}
-//
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::prev(struct Elem<Tipo> *p)
-{
-#ifdef DEBUG
-	cout << "prev" << endl;
-#endif
-	return p->prev;
-}
-//
-template <typename Tipo>
-bool Lista<Tipo>::finished(struct Elem<Tipo> *p)
-{
-#ifdef DEBUG
-	cout << "e' finita?" << endl;
-#endif
-	return (p == this->testa);
-}
-//
-template <typename Tipo>
-Tipo Lista<Tipo>::read(struct Elem<Tipo> *p)
-{
-#ifdef DEBUG
-	cout << "leggi" << endl;
-#endif
-	return p->item;
-}
-//
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::write(struct Elem<Tipo> *p, Tipo v)
-{
-#ifdef DEBUG
-	cout << "scrivi" << endl;
-#endif
-	p->item = v;
-}
-//
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::insert(struct Elem<Tipo> *p, Tipo v)
-{
-#ifdef DEBUG
-	cout << "inserisci" << endl;
-#endif
-	struct Elem<Tipo> *inserito = new Elem<Tipo>;
-	inserito->item = v;
-	inserito->prev = p->prev;
-	inserito->prev->next = inserito;
-	inserito->next = p;
-	p->prev = inserito;
-	return inserito;
-}
-//
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::remove(struct Elem<Tipo> *p)
-{
-#ifdef DEBUG
-	cout << "rimuovi" << endl;
-#endif
-	p->prev->next = p->next;
-	p->next->prev = p->prev;
-	struct Elem<Tipo> *temp = p->next;
-	delete p;
-	return temp;
-}
-
-//metodi ausiliari
-//calcola la lunghezza della lista (e serve per non fare errori)
-template <typename Tipo>
-int Lista<Tipo>::lunghezza(void)
-{
-	//conta il numero di elementi
-	int conta = 0;
-	if (!(this->empty()))
-	{
-		//primo elemento utile non la sentinella
-		struct Elem<Tipo> *iter = this->head();
-		//se non vuota e non finita
-		while (!(this->finished(iter)))
-		{
-			//incremento la conta
-			conta++;
-			//passo al successivo
-			iter = this->next(iter);
-		}
-	}
-	return conta;
-}
-//inserisci in testa
-template <typename Tipo>
-void Lista<Tipo>::insert_head(Tipo v)
-{
-#ifdef DEBUG
-	cout << "inserisci in testa" << endl;
-#endif
-	this->insert(this->head(), v);
-}
-//inserisci in coda
-template <typename Tipo>
-void Lista<Tipo>::insert_tail(Tipo v)
-{
-#ifdef DEBUG
-	cout << "inserisci in coda" << endl;
-#endif
-	this->insert(this->tail(), v);
-}
-//rimuovi in testa
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::remove_head(void)
-{
-#ifdef DEBUG
-	cout << "rimuovi in testa" << endl;
-#endif
-	this->remove(this->head());
-}
-//rimuovi in coda
-template <typename Tipo>
-struct Elem<Tipo> *Lista<Tipo>::remove_tail(void)
-{
-#ifdef DEBUG
-	cout << "rimuovi in coda" << endl;
-#endif
-	this->remove(this->tail());
-}
-
 //cerca v scorrendo la lista
+//override
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 {
@@ -225,7 +38,7 @@ struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 		while (!(this->finished(iter)) || !trovato)
 		{
 			//se lo trovi
-			if (this->read(iter) == v)
+			if (v.confronto(this->read(iter))) //MODIFICATA!
 			{
 				find = iter;
 				trovato = true;
@@ -237,13 +50,14 @@ struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 }
 
 //stampe
+//override
 template <typename Tipo>
 void Lista<Tipo>::print(void)
 {
 #ifdef DEBUG
 	cout << "stampa lista" << endl;
 #endif
-	cout << "Lista : [ ";
+	cout << " : [ ";
 	if (!(this->empty()))
 	{
 		//primo elemento utile non la sentinella
@@ -251,8 +65,9 @@ void Lista<Tipo>::print(void)
 		//se non vuota e non finita
 		while (!(this->finished(iter)))
 		{
-			//stampo elemento
-			cout << this->read(iter);
+			//stampo elemento MODIFICATA!
+			Tipo stampato = this->read(iter);
+			stampato.print();
 			//passo al successivo e stampo freccia
 			iter = this->next(iter);
 			if (!(this->finished(iter)))
@@ -261,9 +76,97 @@ void Lista<Tipo>::print(void)
 	}
 	cout << " ]" << endl;
 }
+//disegna elementi
+template <typename Tipo>
+void Lista<Tipo>::draw(sf::RenderWindow &window)
+{
+	if (!(this->empty()))
+	{
+		//primo elemento utile non la sentinella
+		struct Elem<Tipo> *iter = this->head();
+		//se non vuota e non finita
+		while (!(this->finished(iter)))
+		{
+			//stampo elemento MODIFICATA!
+			Tipo disegnato = this->read(iter);
+			disegnato.draw(window);
+			//passo al successivo
+			iter = this->next(iter);
+		}
+	}
+}
 
-/*
-Nota1: funzioni ispirate al libro algorazmi (lol)
-Nota2: NON sappiamo giocare con i puntatori
-Nota3: deferenziare?
-*/
+//metodi di ordinamento
+
+//libro di algoritmi: pag 29/30.
+//ATTENZIONE! il libro non ha il vettore delle posizioni da aggiornare!
+template <typename Tipo>
+void Lista<Tipo>::Merge(int primo, int ultimo, int mezzo, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[])
+{
+	int i = primo, j = mezzo + 1, k = primo, h;
+	//while i <= mezzo and j <= ultimo do
+	while ((i <= mezzo) && (j <= ultimo))
+	{
+		if (A[i] <= A[j])
+		{
+			B[k] = A[i];
+			//aggiorno il vettore dei puntatori
+			posAux[k] = posizioni[i];
+			//
+			i = i + 1;
+		}
+		else
+		{
+			B[k] = A[j];
+			//aggiorno il vettore dei puntatori
+			posAux[k] = posizioni[j];
+			//
+			j = j + 1;
+		}
+		k = k + 1;
+	}
+	j = ultimo;
+	//for h <-- mezzo downto i do
+	for (h = mezzo; h >= i; h--)
+	{
+		A[j] = A[h];
+		//aggiorno il vettore dei puntatori
+		posizioni[j] = posizioni[h];
+		//
+		j = j - 1;
+	}
+	//for j <-- primo to k-1 do
+	for (j = primo; j <= (k - 1); j++)
+	{
+		A[j] = B[j];
+		//aggiorno il vettore dei puntatori
+		posizioni[j] = posAux[j];
+		//
+	}
+}
+template <typename Tipo>
+void Lista<Tipo>::MergeSort(int primo, int ultimo, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[])
+{
+	if (primo < ultimo)
+	{
+		//integer mezzo <-- base[(primo + ultimo)/2]
+		int mezzo = floor((primo + ultimo) / 2);
+		this->MergeSort(primo, mezzo, A, B, posizioni, posAux);
+		this->MergeSort(mezzo + 1, ultimo, A, B, posizioni, posAux);
+		this->Merge(primo, ultimo, mezzo, A, B, posizioni, posAux);
+	}
+}
+template <typename Tipo>
+void Lista<Tipo>::ordina(const int dim, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[])
+{
+    this->MergeSort(0, dim - 1, A, B, posizioni, posAux);
+    //ricostruisci la lista della superfice ordinata
+    Lista<Tipo> ordinata;
+    for (int i = 0; i < dim; i++)
+    {
+        ordinata.insert_head(this->read(posizioni[i]));
+        //NB: uso insert_head per ordinarli dal più grande al più piccolo, in senso orario
+        //uso insert_tail per ordinarli dal più piccolo al più grande, in senso anti-orario
+    }
+    this->setHead(ordinata.getHead());
+}

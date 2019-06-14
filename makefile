@@ -22,7 +22,7 @@ COMPILE = $(CC) $(CFLAGS)
 #indieme di header molto usati
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = Lista.o ListaClasse.o Punto.o utils.o ColoreRGB.o \
+OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o \
 	Direzione.o Proiettile.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
 	visualePianeta.o visualeSistemaSolare.o Gioco.o main.o
 # Controlli.o
@@ -32,11 +32,11 @@ all: sfml-app
 	./$<
 
 #cose utili (in ./utils)
+ListaParent.o: $(U)ListaParent.cpp $(H)ListaParent.hpp
+	$(COMPILE) $(U)ListaParent.cpp
+
 Lista.o: $(U)Lista.cpp $(H)Lista.hpp
 	$(COMPILE) $(U)Lista.cpp
-
-ListaClasse.o: $(U)ListaClasse.cpp $(H)Lista.hpp
-	$(COMPILE) $(U)ListaClasse.cpp
 
 Punto.o: $(U)Punto.cpp $(H)Punto.hpp
 	$(COMPILE) $(U)Punto.cpp
@@ -60,13 +60,13 @@ Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp
 	$(COMPILE) $(S)Navicella.cpp
 
-Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)ListaClasse.hpp
+Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Lista.hpp
 	$(COMPILE) $(S)Bunker.cpp
 
-Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)ListaClasse.hpp $(H)utils.hpp
+Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Lista.hpp $(H)utils.hpp
 	$(COMPILE) $(S)Pianeta.cpp
 
-SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)ListaClasse.hpp $(H)utils.hpp $(H)Navicella.hpp
+SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)Lista.hpp $(H)utils.hpp $(H)Navicella.hpp
 	$(COMPILE) $(S)SistemaSolare.cpp
 
 #cose per gestire le varie visuali di gioco (in ./main)

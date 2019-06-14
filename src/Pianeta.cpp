@@ -23,7 +23,7 @@ Pianeta::Pianeta(float x, float y, float raggio)
     this->raggio = raggio;
 }
 //costruttori completi
-Pianeta::Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker)
+Pianeta::Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker)
 {
     this->centro = centro;
     this->raggio = raggio;
@@ -33,7 +33,7 @@ Pianeta::Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline
     this->fuel = listaFuel;
     this->bunker = listaBunker;
 }
-Pianeta::Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, ListaClasse<Punto> listaSurface, ListaClasse<Fuel> listaFuel, ListaClasse<Bunker> listaBunker)
+Pianeta::Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker)
 {
     this->centro.setCoord(x, y);
     this->raggio = raggio;
@@ -84,15 +84,15 @@ void Pianeta::setAtmosfera(int red, int green, int blue)
     this->atmosfera.setRGB(red, green, blue);
 }
 //setta la lista
-void Pianeta::setSurface(ListaClasse<Punto> listaSurface)
+void Pianeta::setSurface(Lista<Punto> listaSurface)
 {
     this->surface = listaSurface;
 }
-void Pianeta::setFuel(ListaClasse<Fuel> listaFuel)
+void Pianeta::setFuel(Lista<Fuel> listaFuel)
 {
     this->fuel = listaFuel;
 }
-void Pianeta::setBunker(ListaClasse<Bunker> listaBunker)
+void Pianeta::setBunker(Lista<Bunker> listaBunker)
 {
     this->bunker = listaBunker;
 }
