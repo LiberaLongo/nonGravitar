@@ -1,6 +1,8 @@
 //codice punti
 #include "../header/Punto.hpp"
 
+#define DEBUG
+
 //costruttore
 Punto::Punto(void)
 {

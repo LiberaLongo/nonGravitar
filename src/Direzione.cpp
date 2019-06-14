@@ -40,11 +40,11 @@ Direzione::Direzione(float x, float y, float angolo, float speed)
 }
 
 //setters
-void Direzione::setXOrigine(float x)
+void Direzione::setX_origine(float x)
 {
     this->origine.setX(x);
 }
-void Direzione::setYOrigine(float y)
+void Direzione::setY_origine(float y)
 {
     this->origine.setY(y);
 }
@@ -69,11 +69,11 @@ void Direzione::setAngolo(Punto arrivo)
     this->angolo = this->origine.calcolaAngolo(arrivo);
 }
 //getters
-float Direzione::getXOrigine(void)
+float Direzione::getX_origine(void)
 {
     return this->origine.getX();
 }
-float Direzione::getYOrigine(void)
+float Direzione::getY_origine(void)
 {
     return this->origine.getY();
 }
@@ -99,18 +99,25 @@ void Direzione::print(void)
 //contronto
 bool Direzione::confronto(Direzione dir)
 {
-    return (this->getXOrigine() == dir.getXOrigine() && this->origine.getY() == dir.getYOrigine() && this->speed == dir.getSpeed() && this->angolo == dir.getAngolo());
+    return (this->getX_origine() == dir.getX_origine() && this->origine.getY() == dir.getY_origine() && this->speed == dir.getSpeed() && this->angolo == dir.getAngolo());
 }
 
 //disegna
 void Direzione::draw(sf::RenderWindow &window)
 {
     sf::RectangleShape line(sf::Vector2f(5.f, -150.f));
-    line.setPosition(this->getXOrigine(), this->getYOrigine());
+    line.setPosition(this->getX_origine(), this->getY_origine());
     line.rotate(this->angolo);
     window.draw(line);
 }
 
+bool Direzione::isNear(float x, float y, float width, float height) {
+    return this->origine.isNear(x, y, width, height);
+}
+
+bool Direzione::isNear(float x, float y, float size) {
+    return this->origine.isNear(x, y, size);
+}
 //move
 
 //Precondition: dato l'angolo e l'origine
@@ -131,9 +138,9 @@ void Direzione::move(void)
     cout << "s_y = [speed = " << this->speed << "]*[sin(" << this->angolo << " gradi) = " << (sin(angolo)) << "] = " << s_y << endl;
 #endif
     //a cui viene opportunamente aggiunto le coordinate iniziali
-    this->setXOrigine(this->getXOrigine() + (float)s_x);
+    this->setX_origine(this->getX_origine() + (float)s_x);
     //la y va nella direzione opposta
-    this->setYOrigine(this->getYOrigine() - (float)s_y);
+    this->setY_origine(this->getY_origine() - (float)s_y);
 #ifdef DEBUG
     this->print();
     cout << endl;

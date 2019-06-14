@@ -15,9 +15,8 @@ class Navicella : public DisegnabileI
 {
 private:
     //il centro della navicella
-    Punto centro;   //di default (0,0) in accordo con il default di Punto
+    Direzione dir; //il origine della direzione è il centro della navicella
     Fuel carburante;
-    Direzione dir;
     //il raggio della circonferenza circoscritta
     float size = 10.f; //ampiezza diviso 4...
 
@@ -29,8 +28,8 @@ public:
     Navicella(Punto centro);
     Navicella(float x, float y);
     //costruttori completi
-    Navicella(Punto centro, Fuel carburante, Direzione dir, float size);
-    Navicella(float x, float y, float carburante, float angle, float speed, float size);
+    Navicella(Direzione dir, Fuel carburante, float size);
+    Navicella(float x, float y, float angle, float speed, float carburante, float size);
 
     //distruttori
     virtual ~Navicella(void);

@@ -141,6 +141,8 @@ int visualePianeta::Run(sf::RenderWindow &App)
         this->pianetaVisualizzato.drawVisuale(App, lengthSuperficie);
         this->player.draw(App);
 
+        if (haCliccato)
+            mouseClick.draw(App);
         //fine del frame corrente
         App.display();
     }

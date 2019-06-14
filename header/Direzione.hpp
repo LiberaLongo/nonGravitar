@@ -25,8 +25,8 @@ public:
     virtual ~Direzione(void);
 
     //setters
-    void setXOrigine(float x);
-    void setYOrigine(float y);
+    void setX_origine(float x); //x dell'origine
+    void setY_origine(float y); //y dell'origine
     void setOrigine(Punto origine);
     void setOrigine(float x, float y);
     void setSpeed(float speed);
@@ -34,8 +34,8 @@ public:
     void setAngolo(Punto arrivo);
 
     //getters
-    float getXOrigine(void);
-    float getYOrigine(void);
+    float getX_origine(void);
+    float getY_origine(void);
     float getAngolo(void);
     float getSpeed(void);
 
@@ -47,6 +47,10 @@ public:
 
     //disegna
     void draw(sf::RenderWindow &window);
+
+    bool isNear(float x, float y, float width, float height);
+    bool isNear(float x, float y, float size);
+
     //move
     void move(void);
     //spara

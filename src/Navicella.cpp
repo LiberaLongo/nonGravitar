@@ -12,27 +12,23 @@ Navicella::Navicella(void)
 //costruttori punto
 Navicella::Navicella(Punto centro)
 {
-    this->centro = centro;
     this->dir.setOrigine(centro);
     //default size, dir, carburante
 }
 Navicella::Navicella(float x, float y)
 {
-    this->centro.setCoord(x, y);
     this->dir.setOrigine(x, y);
     //default size, dir, carburante
 }
 //costruttori completi
-Navicella::Navicella(Punto centro, Fuel carburante, Direzione dir, float size)
+Navicella::Navicella(Direzione dir, Fuel carburante, float size)
 {
-    this->centro = centro;
-    this->carburante = carburante;
     this->dir = dir;
+    this->carburante = carburante;
     this->size = size;
 }
-Navicella::Navicella(float x, float y, float carburante, float angle, float speed, float size)
+Navicella::Navicella(float x, float y, float angle, float speed, float carburante, float size)
 {
-    this->centro.setCoord(x, y);
     this->carburante.setQuantita(carburante);
     this->dir.setOrigine(x, y);
     this->dir.setAngolo(angle);
@@ -49,15 +45,14 @@ Navicella::Navicella(float x, float y, float carburante, float angle, float spee
 //setters
 void Navicella::setX(float x)
 {
-    this->centro.setX(x);
+    this->dir.setX_origine(x);
 }
 void Navicella::setY(float y)
 {
-    this->centro.setY(y);
+    this->dir.setY_origine(y);
 }
 void Navicella::setCoord(float x, float y)
 {
-    this->centro.setCoord(x, y);
     this->dir.setOrigine(x, y);
 }
 void Navicella::setSize(float size)
@@ -80,11 +75,11 @@ void Navicella::setFuel(Fuel carburante)
 //getters
 float Navicella::getX(void)
 {
-    return this->centro.getX();
+    return this->dir.getX_origine();
 }
 float Navicella::getY(void)
 {
-    return this->centro.getY();
+    return this->dir.getY_origine();
 }
 float Navicella::getSize(void)
 {
@@ -106,9 +101,9 @@ float Navicella::getFuel(void)
 //stampa
 void Navicella::print(void)
 {
-    cout << "Navicella : { centro = ";
-    this->centro.print();
+    cout << "Navicella : { ";
     this->dir.print();
+    this->carburante.print();
     cout << ", size = " << this->size;
     cout << " } " << endl;
 }
@@ -152,14 +147,13 @@ void Navicella::move(float angolo)
     //WASD
     this->dir.setAngolo(angolo);
     this->dir.move();
-    this->centro.setCoord(this->dir.getXOrigine(), this->dir.getYOrigine());
 }
 void Navicella::shoot(Punto mouseclick) {
     this->dir.shoot(mouseclick);
 }
 bool Navicella::isNear(Pianeta planet) {
-    return this->centro.isNear(planet.getX(), planet.getY(), planet.getRaggio());
+    return this->dir.isNear(planet.getX(), planet.getY(), planet.getRaggio());
 }
 bool Navicella::isOutsideScreen(void) {
-    return !this->centro.isNear(WIDTH/2, HEIGHT/2, WIDTH/2, HEIGHT/2);
+    return this->dir.isNear(WIDTH/2, HEIGHT/2, WIDTH/2, HEIGHT/2);
 }
