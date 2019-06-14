@@ -155,5 +155,5 @@ bool Navicella::isNear(Pianeta planet) {
     return this->dir.isNear(planet.getX(), planet.getY(), planet.getRaggio());
 }
 bool Navicella::isOutsideScreen(void) {
-    return this->dir.isNear(WIDTH/2, HEIGHT/2, WIDTH/2, HEIGHT/2);
+    return !this->dir.isNear(WIDTH/2, HEIGHT/2, WIDTH/2, HEIGHT/2);
 }
