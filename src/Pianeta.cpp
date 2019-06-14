@@ -2,7 +2,7 @@
 #include "../header/Pianeta.hpp"
 
 //#define DEBUG
-//#define ORDINA
+#define ORDINA
 //macro che, se definita, ordina la lista dei punti della superfice
 
 //COSTRUTTORI

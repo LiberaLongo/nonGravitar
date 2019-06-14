@@ -1,7 +1,7 @@
 //codice punti
 #include "../header/Punto.hpp"
 
-#define DEBUG
+//#define DEBUG
 
 //costruttore
 Punto::Punto(void)
@@ -112,9 +112,9 @@ float Punto::calcolaAngolo(Punto arrivo)
     float angolo = 0.f;
 
     //tangente(AB) = (xB - xA ) / (yB - yA);
-    float deltaX = arrivo.getX() - this->y;
+    float deltaX = arrivo.getX() - this->x;
     //la Y va nella direzione opposta
-    float deltaY = -(arrivo.getY() - this->x);
+    float deltaY = -(arrivo.getY() - this->y);
     if (deltaY != 0)
     {
         //se posso fare la divisione
@@ -134,7 +134,11 @@ float Punto::calcolaAngolo(Punto arrivo)
             angolo = (float)(angoloGradi + 180.f);
         }
 #ifdef DEBUG
-        cout << "deltaX = " << arrivo.getX() << " - " << this->x << " = " << deltaX << endl;
+        cout << "\n\t\t\tpunto: ";
+        this->print();
+        cout << "\t\tarrivo: ";
+        arrivo.print();
+        cout << "\ndeltaX = " << arrivo.getX() << " - " << this->x << " = " << deltaX << endl;
         cout << "deltaY = " << arrivo.getY() << " - " << this->y << " = " << deltaY << endl;
         cout << "tangente = " << tangente << endl;
         cout << "angoloRadianti = " << angoloRadianti << endl;
