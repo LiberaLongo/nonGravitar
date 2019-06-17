@@ -10,8 +10,8 @@
 #define MIN_SPEED_NAVICELLA 1.f
 #define MAX_SPEED_NAVICELLA 20.f
 
-
 //dimensioni di DEFAULT
+//dimenzioni dello SCHERMO
 float WIDTH = 900.f;
 float HEIGHT = 600.f;
 //dimensioni della navicella
@@ -46,6 +46,17 @@ void impostazioniGioco(void)
 	//se si vogliono cambiare gestisco ciò
 	if (chose == 'y' || chose == 'Y')
 	{
+		//dimensioni di DEFAULT
+		//dimenzioni dello SCHERMO
+		float width = WIDTH;
+		float height = HEIGHT;
+		//dimensioni della navicella
+		float size_navicella = SIZE_NAVICELLA;
+		float speed_navicella = SPEED_NAVICELLA;
+		//raggio minimo e massimo del pianeta
+		float min_pianeta_raggio = MIN_PIANETA_RAGGIO;
+		float max_pianeta_raggio = MAX_PIANETA_RAGGIO;
+
 		cout << "\nHai deciso di MODIFICARE le impostazioni.\n";
 		cout << "\nPuoi DECIDERE:";
 
@@ -54,17 +65,17 @@ void impostazioniGioco(void)
 		{
 			cout << "\nle dimensioni dello SCHERMO\n";
 			cout << "\tLargezza (>= " << MIN_SCHERMO << ", default = " << WIDTH << " ):\t\t";
-			cin >> WIDTH;
+			cin >> width;
 			cout << "\tAltezza (>= " << MIN_SCHERMO << ", default = " << HEIGHT << " ):\t\t";
-			cin >> HEIGHT;
+			cin >> height;
 			//controllo se c'è un errore
-			errato = (WIDTH < MIN_SCHERMO || HEIGHT < MIN_SCHERMO);
+			errato = (width < MIN_SCHERMO || height < MIN_SCHERMO);
 			//non ho modo di controllare se sono maggiori dello schermo del pc
 			//almeno per ora
 			if (errato)
 			{
 				cout << "\nERRORE! Inserisci delle dimensioni dello schermo corrette";
-				cout <<"\n(comprese tra " << MIN_SCHERMO << " e la dimensione del tuo fullscreen)";
+				cout << "\n(comprese tra " << MIN_SCHERMO << " e la dimensione del tuo fullscreen)";
 			}
 		} while (errato);
 
@@ -74,12 +85,12 @@ void impostazioniGioco(void)
 			cout << "\ndella NAVICELLA\n";
 			cout << "    la dimensione\n";
 			cout << "\tsize (<= " << MAX_SIZE_NAVICELLA << ", default = " << SIZE_NAVICELLA << " ):\t\t\t";
-			cin >> SIZE_NAVICELLA;
+			cin >> size_navicella;
 			cout << "    la velocità\n";
 			cout << "\tspeed ( " << MIN_SPEED_NAVICELLA << " <= speed <= " << MAX_SPEED_NAVICELLA << ", default = " << SPEED_NAVICELLA << " ):\t";
-			cin >> SPEED_NAVICELLA;
+			cin >> speed_navicella;
 			//controllo se c'è un errore
-			errato = ((SIZE_NAVICELLA < 0 || SIZE_NAVICELLA > MAX_SIZE_NAVICELLA) || (SPEED_NAVICELLA < MIN_SPEED_NAVICELLA || SPEED_NAVICELLA > MAX_SPEED_NAVICELLA));
+			errato = ((size_navicella < 0 || size_navicella > MAX_SIZE_NAVICELLA) || (speed_navicella < MIN_SPEED_NAVICELLA || speed_navicella > MAX_SPEED_NAVICELLA));
 			//non ho modo di controllare se sono maggiori dello schermo del pc
 			//almeno per ora
 			if (errato)
@@ -93,21 +104,35 @@ void impostazioniGioco(void)
 		//dimensioni PIANETA
 		do
 		{
-			cout << "\nle dimensioni del PIANETA\n";
+			cout << "\nle dimensioni del PIANETA";
+			cout << "\n    (entrambi maggiori della velocità della navicella = " << speed_navicella << " )\n";
 			cout << "\tminimo (default = " << MIN_PIANETA_RAGGIO << " ):\t\t\t\t";
-			cin >> MIN_PIANETA_RAGGIO;
-			cout << "\tmassimo (default = " << MAX_PIANETA_RAGGIO << " ):\t\t\t"; 
-			cin >> MAX_PIANETA_RAGGIO;
+			cin >> min_pianeta_raggio;
+			cout << "\tmassimo (default = " << MAX_PIANETA_RAGGIO << " ):\t\t\t";
+			cin >> max_pianeta_raggio;
 			//controllo se c'è un errore
-			errato = (MIN_PIANETA_RAGGIO < 0 || MIN_PIANETA_RAGGIO < 0 || MAX_PIANETA_RAGGIO < MIN_PIANETA_RAGGIO);
+			errato = (min_pianeta_raggio < speed_navicella || max_pianeta_raggio < min_pianeta_raggio);
 			//non ho modo di controllare se sono maggiori dello schermo del pc
 			//almeno per ora
 			if (errato)
 			{
 				cout << "\nERRORE! Inserisci delle dimensioni del pianeta corrette";
-				cout << "\n(maggiori di 0, e con minimo < massimo)";
+				cout << "\n(maggiori di " << speed_navicella << ", e con minimo < massimo)";
 			}
 		} while (errato);
+
+		//aggiorno i valori modificati
+
+		//dimensioni di DEFAULT
+		//dimenzioni dello SCHERMO
+		float WIDTH = width;
+		float HEIGHT = height;
+		//dimensioni della navicella
+		float SIZE_NAVICELLA = size_navicella;
+		float SPEED_NAVICELLA = speed_navicella;
+		//raggio minimo e massimo del pianeta
+		float MIN_PIANETA_RAGGIO = min_pianeta_raggio;
+		float MAX_PIANETA_RAGGIO = max_pianeta_raggio;
 	}
 	else
 	{
