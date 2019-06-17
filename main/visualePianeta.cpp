@@ -4,6 +4,8 @@
 
 //#define DEBUG
 
+extern float WIDTH, HEIGHT;
+
 visualePianeta::visualePianeta(void)
 {
     //aggiorno coordinate

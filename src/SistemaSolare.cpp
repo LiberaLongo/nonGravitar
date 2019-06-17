@@ -4,6 +4,8 @@
 
 //#define DEBUG
 
+extern float WIDTH, HEIGHT;
+
 //COSTRUTTORI
 //costruttore void
 SistemaSolare::SistemaSolare(void)

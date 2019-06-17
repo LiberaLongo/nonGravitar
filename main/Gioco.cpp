@@ -4,6 +4,8 @@
 
 //#define DEBUG
 
+extern float WIDTH, HEIGHT;
+
 SistemaSolare sistemasolare;
 //puntatore alla posizione del pianeta corrente
 struct Elem<Pianeta> *pianetaInsideNow = nullptr;

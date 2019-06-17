@@ -3,6 +3,8 @@
 
 //#define DEBUG
 
+extern float WIDTH, HEIGHT;
+
 //COSTRUTTORI
 //costruttore void
 Navicella::Navicella(void)

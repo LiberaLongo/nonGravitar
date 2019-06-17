@@ -3,6 +3,8 @@
 
 //#define DEBUG //se è definita stampo per debugghing
 
+extern float WIDTH, HEIGHT;
+
 //privata
 bool visualeSistemaSolare::check(void)
 {

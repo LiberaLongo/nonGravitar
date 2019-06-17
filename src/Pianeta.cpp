@@ -5,6 +5,8 @@
 #define ORDINA
 //macro che, se definita, ordina la lista dei punti della superfice
 
+extern float WIDTH, HEIGHT;
+
 //COSTRUTTORI
 //costruttore void
 Pianeta::Pianeta(void)

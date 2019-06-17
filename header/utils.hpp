@@ -11,10 +11,6 @@ using namespace std;
 #include <cmath>
 //M_PI pigreco e M_E numero di eulero
 
-//dimensioni
-#define HEIGHT 600.f
-#define WIDTH 900.f
-
 //per i colori
 #define LUMUS_MAXIMA 255 //LUMUS_MAXIMA, citazione Harry Potter, (luminosità RGB)
 
