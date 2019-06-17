@@ -12,6 +12,7 @@
 //ATTENZIONE! cpp sono qui inclusi per classi template
 #include "./Bunker.hpp"
 
+
 template class Lista<Punto>;
 template class Lista<Fuel>;
 template class Lista<Bunker>;
@@ -27,10 +28,6 @@ private:
     //cose grafiche e basta
     ColoreRGB colore;
     ColoreRGB atmosfera;
-private:
-    //metodi di ordinamento
-    void Merge(float A[], int primo, int ultimo, int mezzo, struct Elem<Punto>* posizioni[]);
-    void MergeSort(float A[], int primo, int ultimo, struct Elem<Punto>* posizioni[]);
 public:
     //COSTRUTTORI
     //costruttore void

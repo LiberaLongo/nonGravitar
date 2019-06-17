@@ -244,7 +244,9 @@ void Pianeta::genera(void)
         y = rand() % ((int)HEIGHT); //tra 0.f e HEIGHT
         //costruisci pianeta
         Punto p = Punto(x, y);
-
+#ifdef NOME_PUNTO
+        p.setName(to_string(i));
+#endif
 #ifdef DEBUG
         p.print();
         cout << "\t";

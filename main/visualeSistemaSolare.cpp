@@ -45,7 +45,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
     //un punto adibito a mouse click
     Punto mouseClick;
 #ifdef NOME_PUNTO
-    mouseClick.setName("MOUSE CLICCATO");
+    mouseClick.setName("MOUSE");
 #endif
     bool haCliccato = false;
 
@@ -69,6 +69,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                     haCliccato = true;
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
                     this->player.shoot(mouseClick);
+#ifdef DEBUG
+                    mouseClick.print();
+#endif
                 }
                 break;
             //tasti premuti?

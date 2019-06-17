@@ -54,12 +54,12 @@ string Punto::getName(void)
 {
     return this->name;
 }
-#endif
+#endif //NOME_PUNTO
 
 //stampa
 void Punto::print(void)
 {
-#ifdef NOME
+#ifdef NOME_PUNTO
     cout << this->name;
 #endif
     cout << "( " << this->x << ", " << this->y << " )";
