@@ -18,7 +18,6 @@ using namespace std;
 #define CONSUMO 1.f
 #define FUEL1 100.f
 #define FUEL2 200.f
-#define SPEED 5.f
 //raggio di defalut del pianeta
 #define PIANETA_RAGGIO 40.f
 //numero di pianeti/punti per sistema solare/pianeta

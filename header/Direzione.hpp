@@ -5,12 +5,14 @@
 #include "./DisegnabileI.hpp"
 #include "./Punto.hpp"
 
+extern float SPEED_NAVICELLA;
+
 class Direzione : public DisegnabileI
 {
 protected:
     Punto origine;
     float angolo = 0.f; //angolo canonico studiato in matematica
-    float speed = SPEED;
+    float speed = SPEED_NAVICELLA;
 public:
     //costruttore vuoto
     Direzione(void);
