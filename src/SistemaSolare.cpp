@@ -4,7 +4,10 @@
 
 //#define DEBUG
 
+//dimensioni dello SCHERMO
 extern float WIDTH, HEIGHT;
+//dimensioni minime e massime del pianeta
+extern float MIN_PIANETA_RAGGIO, MAX_PIANETA_RAGGIO;
 
 //COSTRUTTORI
 //costruttore void

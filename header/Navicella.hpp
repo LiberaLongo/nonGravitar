@@ -11,6 +11,8 @@
 #include "./Fuel.hpp"
 #include "./Pianeta.hpp"
 
+extern float SIZE_NAVICELLA;
+
 class Navicella : public DisegnabileI
 {
 private:
@@ -18,7 +20,7 @@ private:
     Direzione dir; //il origine della direzione è il centro della navicella
     Fuel carburante;
     //il raggio della circonferenza circoscritta
-    float size = 10.f; //ampiezza diviso 4...
+    float size = SIZE_NAVICELLA; //ampiezza diviso 4...
 
 public:
     //COSTRUTTORI
