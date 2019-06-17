@@ -43,9 +43,25 @@ float Punto::getY(void)
     return this->y;
 }
 
+#ifdef NOME_PUNTO
+//set nome
+void Punto::setName(string name)
+{
+    this->name = name;
+}
+//get nome
+string Punto::getName(void)
+{
+    return this->name;
+}
+#endif
+
 //stampa
 void Punto::print(void)
 {
+#ifdef NOME
+    cout << this->name;
+#endif
     cout << "( " << this->x << ", " << this->y << " )";
 }
 
@@ -61,8 +77,19 @@ void Punto::draw(sf::RenderWindow &window)
     float size = 10.f;
     sf::RectangleShape rectangle(sf::Vector2f(size, size));
     rectangle.setPosition(this->x - size / 2, this->y - size / 2);
+
+//nome se esiste
+#ifdef NOME_PUNTO
+    sf::Text testo;
+    testo.setString(this->name);
+#endif
+
     //il punto è al centro del rettangolo
     window.draw(rectangle);
+
+#ifdef NOME_PUNTO
+    window.draw(testo);
+#endif
 }
 //distanza
 //distanza tra due punti
@@ -88,7 +115,7 @@ bool Punto::isNear(float x, float y, float width, float height)
 bool Punto::isNear(float x, float y, float size)
 {
     bool isNear = this->isNear(x, y, size, size);
-    
+
     if (isNear)
     {
         //controllo anche la distanza dal centro
@@ -97,7 +124,7 @@ bool Punto::isNear(float x, float y, float size)
             isNear = false;
         }
     }
-    
+
     return isNear;
 }
 

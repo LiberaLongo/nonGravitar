@@ -44,6 +44,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 
     //un punto adibito a mouse click
     Punto mouseClick;
+#ifdef NOME_PUNTO
+    mouseClick.setName("MOUSE CLICCATO");
+#endif
     bool haCliccato = false;
 
     //esegui il programma finchè la finestra è aperta
