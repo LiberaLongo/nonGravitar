@@ -1,7 +1,10 @@
 //codice navicella
 #include "../header/Navicella.hpp"
 
+#define AGGIORNA 100
+
 //#define DEBUG
+//#define DEBUG_PROIETTILI
 
 extern float WIDTH, HEIGHT;
 
@@ -111,7 +114,8 @@ void Navicella::print(void)
 }
 
 //disegna proiettili (privata)
-void Navicella::drawProiettili(sf::RenderWindow &window) {
+void Navicella::drawProiettili(sf::RenderWindow &window)
+{
     this->proiettili.draw(window);
 }
 //disegna
@@ -157,9 +161,11 @@ void Navicella::move(float angolo)
 }
 void Navicella::shoot(Punto mouseclick)
 {
+    //aggiorna la direzione a cui punta la navicella
     this->dir.shoot(mouseclick);
+    //inserisco un proiettile nella lista
     ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-    Proiettile newProiettile = Proiettile(mouseclick, giallo);
+    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), giallo);
     this->proiettili.insert_head(newProiettile);
 }
 bool Navicella::isNear(Pianeta planet)
@@ -172,7 +178,38 @@ bool Navicella::isOutsideScreen(void)
 }
 
 //aggiorno la lista di proiettili
-void aggiornaCoordinateProiettili(sf::Time tempo)
+void Navicella::aggiornaCoordinateProiettili(sf::Time tempo)
 {
-    //
+    int millisecondi = tempo.asMilliseconds();
+    //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
+    if (millisecondi % AGGIORNA == 0)
+    {
+        if (!(this->proiettili.empty()))
+        {
+            //primo elemento utile non la sentinella
+            struct Elem<Proiettile> *iter = this->proiettili.head();
+            //se non vuota e non finita
+            while (!(this->proiettili.finished(iter)))
+            {
+                //leggo il proiettile
+                Proiettile aggiornato = this->proiettili.read(iter);
+                aggiornato.move();
+                if (aggiornato.isOutsideScreen())
+                {
+                    //se il proiettile è uscito dallo schermo devo rimuoverlo
+                    this->proiettili.remove(iter);
+#ifdef DEBUG_PROIETTILI
+                    cout << "un proiettile è uscito" << endl;
+#endif
+                }
+                else
+                {
+                    this->proiettili.write(iter, aggiornato);
+                }
+
+                //passo al successivo
+                iter = this->proiettili.next(iter);
+            }
+        }
+    }
 }

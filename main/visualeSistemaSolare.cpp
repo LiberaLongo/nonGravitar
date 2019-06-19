@@ -155,6 +155,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         sistemasolare.draw(App);
 
         this->player.draw(App);
+        this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime());
 
         if (haCliccato)
             mouseClick.draw(App);

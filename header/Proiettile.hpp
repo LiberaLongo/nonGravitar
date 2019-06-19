@@ -19,7 +19,7 @@ public:
     Proiettile(void);
     //costruttore minimale
     Proiettile(Punto origine, ColoreRGB colore);
-    Proiettile(float x, float y);
+    Proiettile(float x, float y, ColoreRGB colore);
     //costruttore completo
     Proiettile(Punto origine, float angolo, float speed, float size);
     Proiettile(float x, float y, float angolo, float speed, float size);
@@ -27,8 +27,9 @@ public:
     virtual ~Proiettile(void);
 
     //setters
-    float setX(float x);
-    float setY(float y);
+    void setX(float x);
+    void setY(float y);
+    void setCoord(float x, float y);
     //getters
     float getX(void);
     float getY(void);
@@ -38,5 +39,6 @@ public:
     //disegna
     void draw(sf::RenderWindow &window);
     /*spara non esiste... o è uguale a move in questo caso*/
+    bool isOutsideScreen(void);
 };
 #endif //PROIETTILE_H

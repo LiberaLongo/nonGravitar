@@ -143,7 +143,9 @@ int visualePianeta::Run(sf::RenderWindow &App)
         App.clear(this->pianetaVisualizzato.getAtmosferaLib());
 
         this->pianetaVisualizzato.drawVisuale(App, lengthSuperficie);
+        
         this->player.draw(App);
+        this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime());
 
         if (haCliccato)
             mouseClick.draw(App);

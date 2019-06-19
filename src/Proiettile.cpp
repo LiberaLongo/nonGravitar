@@ -1,20 +1,23 @@
 //codice proiettile
 #include "../header/Proiettile.hpp"
 
+extern float WIDTH, HEIGHT;
+
 //costruttore vuoto
 Proiettile::Proiettile(void) : Direzione()
 {
     //tutto fatto nel costruttore di direzione
 }
 //costruttore minimale
-Proiettile::Proiettile(Punto origine, ColoreRGB) : Direzione(origine)
+Proiettile::Proiettile(Punto origine, ColoreRGB colore) : Direzione(origine)
 {
     //costruttore di direzione
     this->colore = colore;
 }
-Proiettile::Proiettile(float x, float y) : Direzione(x, y)
+Proiettile::Proiettile(float x, float y, ColoreRGB colore) : Direzione(x, y)
 {
-    //tutto fatto nel costruttore di direzione
+    //costruttore di direzione
+    this->colore = colore;
 }
 //costruttore completo
 Proiettile::Proiettile(Punto origine, float angolo, float speed, float size) : Direzione(origine, angolo, speed)
@@ -34,13 +37,17 @@ Proiettile::Proiettile(float x, float y, float angolo, float speed, float size) 
 }
 
 //setters
-float Proiettile::setX(float x)
+void Proiettile::setX(float x)
 {
     this->origine.setX(x);
 }
-float Proiettile::setY(float y)
+void Proiettile::setY(float y)
 {
     this->origine.setY(y);
+}
+void Proiettile::setCoord(float x, float y) {
+    this->setX(x);
+    this->setY(y);
 }
 //getters
 float Proiettile::getX(void)
@@ -75,4 +82,8 @@ void Proiettile::draw(sf::RenderWindow &window)
     flowy.setFillColor(this->colore.getColorLib());
 
     window.draw(flowy);
+}
+
+bool Proiettile::isOutsideScreen(void) {
+    return !this->isNear(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
 }
