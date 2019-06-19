@@ -43,8 +43,4 @@ using namespace std;
 //Postcondition: lo trasforma opportunamente secondo la libreria grafica
 float angoloLibreria(float angolo);
 
-//restituisce la distanza tra due punti
-//float distance(Punto a, Punto b);
-//float distance(Punto a, Punto b);
-
 #endif //UTILS_H

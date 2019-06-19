@@ -64,7 +64,10 @@ public:
     void draw(sf::RenderWindow &window);
     
     //spara
-    void shoot(void);
+    void shoot(sf::Time tempo);
+
+    //aggiorno la lista di proiettili
+    void aggiornaCoordinateProiettili(sf::Time tempo);
 };
 
 #endif //BUNKER_H

@@ -19,6 +19,7 @@ class visualePianeta : public cScreen
 private:
 	Navicella player;
 	Pianeta pianetaVisualizzato;
+	sf::Clock orologio;
 public:
 	visualePianeta(void);
 	virtual int Run(sf::RenderWindow &App);

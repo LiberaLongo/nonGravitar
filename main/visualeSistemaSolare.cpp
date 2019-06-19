@@ -23,6 +23,7 @@ bool visualeSistemaSolare::check(void)
         pianeta.print();
 #endif
     }
+    this->orologio.restart();
     return ritorno;
 }
 
@@ -31,12 +32,14 @@ visualeSistemaSolare::visualeSistemaSolare(void)
 {
     //mia navicella
     this->player = Navicella(WIDTH / 2, HEIGHT / 2);
+    this->orologio.restart();
 }
 
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
 {
     //aggiorno coordinate
     this->player.setCoord(WIDTH / 2, HEIGHT / 2);
+    this->orologio.restart();
 
     //comincia la trattazione della finestra
     bool Running = true;

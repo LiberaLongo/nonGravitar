@@ -116,7 +116,7 @@ void Navicella::draw(sf::RenderWindow &window)
 #ifdef DEBUG
     this->dir.draw(window);
 #endif
-    
+
     //centro iniziale della figura prima di fare setPosition
     float x = 0.f, y = 0.f; //centro: (0,0)
     //crea una empty shape convex con 3 punti
@@ -126,20 +126,20 @@ void Navicella::draw(sf::RenderWindow &window)
     triangolo.setPoint(0, sf::Vector2f(x, y - this->size * 3));
     triangolo.setPoint(1, sf::Vector2f(x - this->size, y + this->size));
     triangolo.setPoint(2, sf::Vector2f(x + this->size, y + this->size));
-    
+
     //blu
     triangolo.setFillColor(sf::Color::Blue);
-    
+
     //ruota di angolo, PRIMA! della rotazione
     float angolo = angoloLibreria(this->dir.getAngolo());
     triangolo.setRotation(angolo);
 #ifdef DEBUG
     cout << "angoloCanonico = " << this->dir.getAngolo();
-    cout << ", angoloSFML = " << angolo; 
+    cout << ", angoloSFML = " << angolo;
 #endif
     //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
-    
+
     //disegna sulla window passata per riferimento
     window.draw(triangolo);
 }
@@ -150,12 +150,23 @@ void Navicella::move(float angolo)
     this->dir.setAngolo(angolo);
     this->dir.move();
 }
-void Navicella::shoot(Punto mouseclick) {
+void Navicella::shoot(Punto mouseclick)
+{
     this->dir.shoot(mouseclick);
+    Proiettile newProiettile = Proiettile(mouseclick);
+    this->proiettili.insert_head(newProiettile);
 }
-bool Navicella::isNear(Pianeta planet) {
+bool Navicella::isNear(Pianeta planet)
+{
     return this->dir.isNear(planet.getX(), planet.getY(), planet.getRaggio());
 }
-bool Navicella::isOutsideScreen(void) {
-    return !this->dir.isNear(WIDTH/2, HEIGHT/2, WIDTH/2, HEIGHT/2);
+bool Navicella::isOutsideScreen(void)
+{
+    return !this->dir.isNear(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
+}
+
+//aggiorno la lista di proiettili
+void aggiornaCoordinateProiettili(sf::Time tempo)
+{
+    //
 }

@@ -6,10 +6,12 @@
 
 #include "./DisegnabileI.hpp"
 #include "./utils.hpp"
-#include "./Punto.hpp"
 #include "./Direzione.hpp"
 #include "./Fuel.hpp"
 #include "./Pianeta.hpp"
+#include "./Proiettile.hpp"
+
+template class Lista<Proiettile>;
 
 extern float SIZE_NAVICELLA;
 
@@ -21,6 +23,7 @@ private:
     Fuel carburante;
     //il raggio della circonferenza circoscritta
     float size = SIZE_NAVICELLA; //ampiezza diviso 4...
+    Lista<Proiettile> proiettili;
 
 public:
     //COSTRUTTORI
@@ -70,6 +73,9 @@ public:
     bool isNear(Pianeta planet);
 
     bool isOutsideScreen(void);
+
+    //aggiorno la lista di proiettili
+    void aggiornaCoordinateProiettili(sf::Time tempo);
 };
 
 #endif //NAVICELLA_H

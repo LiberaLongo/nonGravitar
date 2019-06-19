@@ -1,7 +1,6 @@
 //codice bunker
 #include "../header/Bunker.hpp"
 
-
 //metodo per scorrere la lista e aggiornare i centri
 void Bunker::aggiornaCentriDirezione(Lista<Direzione> headDir)
 {
@@ -132,26 +131,33 @@ bool Bunker::confronto(Bunker b)
 }
 
 //disegna
-void Bunker::draw(sf::RenderWindow &window) {
+void Bunker::draw(sf::RenderWindow &window)
+{
     //codice per disegnare in seguito
     sf::CircleShape triangolo(this->size, 3);
 
     //colore rosso
     triangolo.setFillColor(sf::Color::Red);
-    
+
     //ruota di angolo, PRIMA! della rotazione
     float angolo = angoloLibreria(this->angolo);
     triangolo.setRotation(angolo);
 
     //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
-    
+
     //disegna sulla window passata per riferimento
     window.draw(triangolo);
 }
 
 //spara
-void Bunker::shoot(void) {
-    //per ogni Direzione in Lista aggiorna posizione proiettili
-    
+void Bunker::shoot(sf::Time tempo)
+{
+    //inserisci un nuovo colpo da aggiornare
+}
+
+//aggiorno la lista di proiettili
+void Bunker::aggiornaCoordinateProiettili(sf::Time tempo)
+{
+    //
 }

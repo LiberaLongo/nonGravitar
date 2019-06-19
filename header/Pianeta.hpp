@@ -92,6 +92,7 @@ public:
     //ordina la lista dei punti del pianeta...
     void ordinaPunti(void);
 
-    //altre cose
+    //aggiorno la lista di proiettili
+    void aggiornaCoordinateProiettili(sf::Time tempo);
 };
 #endif

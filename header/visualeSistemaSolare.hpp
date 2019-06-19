@@ -21,6 +21,7 @@ class visualeSistemaSolare : public cScreen
 {
 private:
 	Navicella player;
+	sf::Clock orologio;
 
 private:
 	bool check(void);

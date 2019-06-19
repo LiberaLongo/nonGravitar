@@ -290,6 +290,10 @@ void Pianeta::genera(void)
     }
 }
 
+//aggiorno la lista di proiettili
+void Pianeta::aggiornaCoordinateProiettili(sf::Time tempo) {//
+}
+
 //ordina la lista dei punti del pianeta...
 void Pianeta::ordinaPunti(void)
 {
