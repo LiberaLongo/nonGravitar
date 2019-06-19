@@ -159,10 +159,49 @@ void Bunker::draw(sf::RenderWindow &window)
 void Bunker::shoot(sf::Time tempo)
 {
     //inserisci un nuovo colpo da aggiornare
+/*
+    //aggiorna la direzione a cui punta la navicella
+    this->dir.shoot(mouseclick);
+    //inserisco un proiettile nella lista
+    ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
+    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), giallo);
+    this->proiettili.insert_head(newProiettile);
+*/
 }
 
 //aggiorno la lista di proiettili
 void Bunker::aggiornaCoordinateProiettili(sf::Time tempo)
 {
-    //
+    int millisecondi = tempo.asMilliseconds();
+    //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
+    if (millisecondi % AGGIORNA == 0)
+    {
+        if (!(this->proiettili.empty()))
+        {
+            //primo elemento utile non la sentinella
+            struct Elem<Proiettile> *iter = this->proiettili.head();
+            //se non vuota e non finita
+            while (!(this->proiettili.finished(iter)))
+            {
+                //leggo il proiettile
+                Proiettile aggiornato = this->proiettili.read(iter);
+                aggiornato.move();
+                if (aggiornato.isOutsideScreen())
+                {
+                    //se il proiettile è uscito dallo schermo devo rimuoverlo
+                    this->proiettili.remove(iter);
+#ifdef DEBUG_PROIETTILI
+                    cout << "un proiettile è uscito" << endl;
+#endif
+                }
+                else
+                {
+                    this->proiettili.write(iter, aggiornato);
+                }
+
+                //passo al successivo
+                iter = this->proiettili.next(iter);
+            }
+        }
+    }
 }

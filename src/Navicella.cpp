@@ -1,8 +1,6 @@
 //codice navicella
 #include "../header/Navicella.hpp"
 
-#define AGGIORNA 100
-
 //#define DEBUG
 //#define DEBUG_PROIETTILI
 

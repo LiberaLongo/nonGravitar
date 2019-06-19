@@ -37,6 +37,9 @@ using namespace std;
 #define VISUALE_SISTEMA_SOLARE 0
 #define VISUALE_PIANETA 1
 
+//numero di millisecondi dopo i quali aggiornare i proiettil
+#define AGGIORNA 100
+
 //FUNZIONI
 
 //Precondition: prende un angolo in gradi in forma canonica
