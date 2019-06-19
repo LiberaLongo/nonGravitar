@@ -12,7 +12,5 @@
 int main()
 {
 	//chiamo funzione gioco
-	//errore è true se si è presentato un errore, false altrimenti
-	int risultato = Gioco();
-	return risultato;
+	return Gioco();
 }
