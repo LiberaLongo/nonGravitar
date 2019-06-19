@@ -17,6 +17,7 @@ float MIN_PIANETA_RAGGIO = 20.f;
 float MAX_PIANETA_RAGGIO = 60.f;
 //dimensioni della navicella
 float SIZE_NAVICELLA = 10.f;
+float SPEED_NAVICELLA = 5.f;
 
 SistemaSolare sistemasolare;
 //puntatore alla posizione del pianeta corrente
