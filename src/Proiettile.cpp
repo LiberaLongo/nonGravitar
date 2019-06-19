@@ -9,12 +9,12 @@ Proiettile::Proiettile(void) : Direzione()
     //tutto fatto nel costruttore di direzione
 }
 //costruttore minimale
-Proiettile::Proiettile(Punto origine, ColoreRGB colore) : Direzione(origine)
+Proiettile::Proiettile(Punto origine, float angolo, ColoreRGB colore) : Direzione(origine, angolo)
 {
     //costruttore di direzione
     this->colore = colore;
 }
-Proiettile::Proiettile(float x, float y, ColoreRGB colore) : Direzione(x, y)
+Proiettile::Proiettile(float x, float y, float angolo, ColoreRGB colore) : Direzione(x, y, angolo)
 {
     //costruttore di direzione
     this->colore = colore;

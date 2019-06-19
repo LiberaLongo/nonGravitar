@@ -17,8 +17,8 @@ public:
     //costruttore vuoto
     Direzione(void);
     //costruttore minimale
-    Direzione(Punto origine);
-    Direzione(float x, float y);
+    Direzione(Punto origine, float angolo);
+    Direzione(float x, float y, float angolo);
     //costruttore completo
     Direzione(Punto origine, float angolo, float speed);
     Direzione(float x, float y, float angolo, float speed);

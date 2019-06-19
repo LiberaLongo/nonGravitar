@@ -165,7 +165,7 @@ void Navicella::shoot(Punto mouseclick)
     this->dir.shoot(mouseclick);
     //inserisco un proiettile nella lista
     ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), giallo);
+    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), giallo);
     this->proiettili.insert_head(newProiettile);
 }
 bool Navicella::isNear(Pianeta planet)

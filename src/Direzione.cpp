@@ -9,14 +9,16 @@ Direzione::Direzione(void)
     //cose di default
 }
 //costruttore minimale
-Direzione::Direzione(Punto origine)
+Direzione::Direzione(Punto origine, float angolo)
 {
     this->origine = origine;
+    this->angolo = angolo;
     //default angolo e speed
 }
-Direzione::Direzione(float x, float y)
+Direzione::Direzione(float x, float y, float angolo)
 {
     this->origine.setCoord(x, y);
+    this->angolo = angolo;
     //default angolo e speed
 }
 //costruttore completo
