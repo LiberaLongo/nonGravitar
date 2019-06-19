@@ -22,7 +22,7 @@ private:
     Lista<Direzione> headDirezioni;
     //il raggio della circonferenza circoscritta
     float size = 10.f; //ampiezza diviso 4...
-    float angle = 0.f; //angolo del cannone
+    float angolo = 0.f; //angolo del cannone
     float speed = 5.f; //velocità degli spari
 private:
     void aggiornaCentriDirezione(Lista<Direzione> headDir);

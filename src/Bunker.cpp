@@ -42,18 +42,18 @@ Bunker::Bunker(float x, float y)
 Bunker::Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir)
 {
     this->centro = centro;
-    this->angle = angolo;
+    this->angolo = angolo;
     this->speed = speed;
     this->size = size;
-    this->aggiornaCentriDirezione(headDirezioni);
+    this->aggiornaCentriDirezione(headDir);
 }
 Bunker::Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir)
 {
     this->centro.setCoord(x, y);
-    this->angle = angolo;
+    this->angolo = angolo;
     this->speed = speed;
     this->size = size;
-    this->aggiornaCentriDirezione(headDirezioni);
+    this->aggiornaCentriDirezione(headDir);
 }
 
 //distruttore
@@ -80,7 +80,7 @@ void Bunker::setCoord(float x, float y)
 }
 void Bunker::setAngolo(float angolo)
 {
-    this->angle = angolo;
+    this->angolo = angolo;
 }
 void Bunker::setSpeed(float speed)
 {
@@ -102,7 +102,7 @@ float Bunker::getY(void)
 }
 float Bunker::getAngolo(void)
 {
-    return this->angle;
+    return this->angolo;
 }
 float Bunker::getSpeed(void)
 {
@@ -118,7 +118,7 @@ void Bunker::print(void)
 {
     cout << "Bunker : [ centro = ";
     this->centro.print();
-    cout << ", angolo = " << this->angle;
+    cout << ", angolo = " << this->angolo;
     cout << ", speed = " << this->speed;
     cout << ", size = " << this->size;
     this->headDirezioni.print();
@@ -128,15 +128,30 @@ void Bunker::print(void)
 //contronto
 bool Bunker::confronto(Bunker b)
 {
-    return (this->getX() == b.getX() && this->getY() == b.getY() && this->size == b.getSize() && this->angle == b.getAngolo() && this->speed == b.getSpeed());
+    return (this->getX() == b.getX() && this->getY() == b.getY() && this->size == b.getSize() && this->angolo == b.getAngolo() && this->speed == b.getSpeed());
 }
 
 //disegna
 void Bunker::draw(sf::RenderWindow &window) {
     //codice per disegnare in seguito
+    sf::CircleShape triangolo(this->size, 3);
+
+    //colore rosso
+    triangolo.setFillColor(sf::Color::Red);
+    
+    //ruota di angolo, PRIMA! della rotazione
+    float angolo = angoloLibreria(this->angolo);
+    triangolo.setRotation(angolo);
+
+    //spostala  posizione effettiva del centro
+    triangolo.setPosition(this->getX(), this->getY());
+    
+    //disegna sulla window passata per riferimento
+    window.draw(triangolo);
 }
 
 //spara
 void Bunker::shoot(void) {
     //per ogni Direzione in Lista aggiorna posizione proiettili
+    
 }

@@ -9,7 +9,7 @@ extern float WIDTH, HEIGHT;
 visualePianeta::visualePianeta(void)
 {
     //aggiorno coordinate
-    this->player = Navicella(WIDTH / 4, HEIGHT / 4);
+    this->player = Navicella(SIZE_NAVICELLA*4, SIZE_NAVICELLA*4);
 }
 
 int visualePianeta::Run(sf::RenderWindow &App)
@@ -17,7 +17,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
     //globale lunghezza della superficie
     int lengthSuperficie = 0;
     //aggiorno coordinate
-    this->player.setCoord(WIDTH / 4, HEIGHT / 4);
+    this->player.setCoord(SIZE_NAVICELLA*4, SIZE_NAVICELLA*4);
     //aggiorno il pianeta
     if (pianetaInsideNow != nullptr)
     {

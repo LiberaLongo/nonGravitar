@@ -78,6 +78,22 @@ bool Fuel::confronto(Fuel f) {
 //disegna
 void Fuel::draw(sf::RenderWindow &window) {
     //disegna carburante
+    sf::RectangleShape rectangle(sf::Vector2f(size, size));
+    rectangle.setFillColor(sf::Color::Magenta);
+    rectangle.setPosition(this->getX() - size / 2, this->getY() - size / 2);
+
+//nome se esiste
+#ifdef NOME_PUNTO
+    sf::Text testo;
+    testo.setString(this->centro.getName());
+#endif
+
+    //il punto è al centro del rettangolo
+    window.draw(rectangle);
+
+#ifdef NOME_PUNTO
+    window.draw(testo);
+#endif
 }
 
 //consumo carburante

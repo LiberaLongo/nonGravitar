@@ -5,7 +5,7 @@
 #define ORDINA
 //macro che, se definita, ordina la lista dei punti della superfice
 
-extern float WIDTH, HEIGHT;
+extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 
 //COSTRUTTORI
 //costruttore void
@@ -237,24 +237,56 @@ void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
 //generaPianeta(void);
 void Pianeta::genera(void)
 {
-    //genera tutti i punti all'inizio
+    //numero random per le coordinate
+    float x = 0.f, y = 0.f;
+    //distanza dimensione navicella un pò di spazio per la navicella
+    float dist = SIZE_NAVICELLA*7;
+
+    //genera tutti i PUNTI all'inizio
     for (int i = 0; i < MAX_SUPERFICE; i++)
     {
-        //numero random per le coordinate
-        float x = 0.f, y = 0.f;
-        x = rand() % ((int)WIDTH);  //tra 0.f e WIDTH
-        y = rand() % ((int)HEIGHT); //tra 0.f e HEIGHT
-        //costruisci pianeta
+        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
+        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
+
+        //costruisci punto della superfice
         Punto p = Punto(x, y);
 #ifdef NOME_PUNTO
         p.setName(to_string(i));
 #endif
-#ifdef DEBUG
-        p.print();
-        cout << "\t";
-#endif
         //inserirlo nella lista
         this->surface.insert_head(p);
+    }
+
+    //genera tutti i BUNKER all'inizio
+    for (int i = 0; i < MAX_BUNKER; i++)
+    {
+        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
+        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
+
+        //costruisci punto della superfice
+        Punto p = Punto(x, y);
+#ifdef NOME_PUNTO
+        p.setName("Bunker" + to_string(i));
+#endif
+        Bunker cannone = Bunker(p);
+        //inserirlo nella lista
+        this->bunker.insert_head(cannone);
+    }
+
+    //genera tutti i FUEL all'inizio
+    for (int i = 0; i < MAX_FUEL; i++)
+    {
+        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
+        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
+
+        //costruisci punto della superfice
+        Punto p = Punto(x, y);
+#ifdef NOME_PUNTO
+        p.setName("Fuel" + to_string(i));
+#endif
+        Fuel metano = Fuel(p);
+        //inserirlo nella lista
+        this->fuel.insert_head(metano);
     }
 }
 

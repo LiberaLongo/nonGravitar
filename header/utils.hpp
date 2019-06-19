@@ -22,6 +22,8 @@ using namespace std;
 #define PIANETA_RAGGIO 40.f
 //numero di pianeti/punti per sistema solare/pianeta
 #define MAX_SUPERFICE 8 //42, Risposta alla domanda fondamentale sulla vita, l'universo e tutto quanto, (cit. Davoli)
+#define MAX_BUNKER 5
+#define MAX_FUEL 3
 #define MAX_PLANET 7 //7, numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
 
 //direzioni canoniche con angoli studiati in matematica
