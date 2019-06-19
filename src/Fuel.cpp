@@ -78,9 +78,9 @@ bool Fuel::confronto(Fuel f) {
 //disegna
 void Fuel::draw(sf::RenderWindow &window) {
     //disegna carburante
-    sf::RectangleShape rectangle(sf::Vector2f(size, size));
-    rectangle.setFillColor(sf::Color::Magenta);
-    rectangle.setPosition(this->getX() - size / 2, this->getY() - size / 2);
+    sf::RectangleShape rectangle(sf::Vector2f(this->size, this->size));
+    rectangle.setFillColor(sf::Color::Black);
+    rectangle.setPosition(this->getX() - this->size / 2, this->getY() - this->size / 2);
 
 //nome se esiste
 #ifdef NOME_PUNTO

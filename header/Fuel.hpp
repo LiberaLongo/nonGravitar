@@ -11,7 +11,7 @@ class Fuel : public DisegnabileI
 private:
     Punto centro;
     float quantita = FUEL1;
-    float size;
+    float size = 10.f;
 
 public:
     //costruttore vuoto
