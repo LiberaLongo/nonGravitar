@@ -110,6 +110,10 @@ void Navicella::print(void)
     cout << " } " << endl;
 }
 
+//disegna proiettili (privata)
+void Navicella::drawProiettili(sf::RenderWindow &window) {
+    this->proiettili.draw(window);
+}
 //disegna
 void Navicella::draw(sf::RenderWindow &window)
 {
@@ -142,6 +146,7 @@ void Navicella::draw(sf::RenderWindow &window)
 
     //disegna sulla window passata per riferimento
     window.draw(triangolo);
+    this->drawProiettili(window);
 }
 
 void Navicella::move(float angolo)
@@ -153,7 +158,8 @@ void Navicella::move(float angolo)
 void Navicella::shoot(Punto mouseclick)
 {
     this->dir.shoot(mouseclick);
-    Proiettile newProiettile = Proiettile(mouseclick);
+    ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
+    Proiettile newProiettile = Proiettile(mouseclick, giallo);
     this->proiettili.insert_head(newProiettile);
 }
 bool Navicella::isNear(Pianeta planet)

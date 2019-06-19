@@ -7,9 +7,10 @@ Proiettile::Proiettile(void) : Direzione()
     //tutto fatto nel costruttore di direzione
 }
 //costruttore minimale
-Proiettile::Proiettile(Punto origine) : Direzione(origine)
+Proiettile::Proiettile(Punto origine, ColoreRGB) : Direzione(origine)
 {
-    //tutto fatto nel costruttore di direzione
+    //costruttore di direzione
+    this->colore = colore;
 }
 Proiettile::Proiettile(float x, float y) : Direzione(x, y)
 {

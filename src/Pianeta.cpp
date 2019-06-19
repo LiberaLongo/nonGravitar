@@ -182,6 +182,7 @@ bool Pianeta::confronto(Pianeta p)
 {
     return (this->getX() == p.getX() && this->getY() == p.getY());
 }
+
 //disegna
 void Pianeta::draw(sf::RenderWindow &window)
 {

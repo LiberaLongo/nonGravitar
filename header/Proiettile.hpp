@@ -18,7 +18,7 @@ public:
     //costruttore vuoto
     Proiettile(void);
     //costruttore minimale
-    Proiettile(Punto origine);
+    Proiettile(Punto origine, ColoreRGB colore);
     Proiettile(float x, float y);
     //costruttore completo
     Proiettile(Punto origine, float angolo, float speed, float size);

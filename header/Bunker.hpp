@@ -10,9 +10,11 @@
 //ATTENZIONE! cpp inclusi per classi template
 #include "../utils/ListaParent.cpp"
 #include "../utils/Lista.cpp"
+#include "./Proiettile.hpp"
 
 //per Bunker
 template class Lista<Direzione>;
+template class Lista<Proiettile>;
 
 class Bunker : public DisegnabileI
 {
@@ -20,12 +22,14 @@ private:
     //il centro della navicella
     Punto centro; //di default (0,0) in accordo con il default di Punto
     Lista<Direzione> headDirezioni;
+    Lista<Proiettile> proiettili;
     //il raggio della circonferenza circoscritta
     float size = 10.f; //ampiezza diviso 4...
     float angolo = 0.f; //angolo del cannone
     float speed = 5.f; //velocità degli spari
 private:
     void aggiornaCentriDirezione(Lista<Direzione> headDir);
+    void drawProiettili(sf::RenderWindow &window);
 public:
     //costruttore vuoto
     Bunker(void);

@@ -8,10 +8,10 @@
 #include "./utils.hpp"
 #include "./Direzione.hpp"
 #include "./Fuel.hpp"
-#include "./Pianeta.hpp"
 #include "./Proiettile.hpp"
 
-template class Lista<Proiettile>;
+//qui viene incluso i template di bunker
+#include "./Pianeta.hpp"
 
 extern float SIZE_NAVICELLA;
 
@@ -24,6 +24,9 @@ private:
     //il raggio della circonferenza circoscritta
     float size = SIZE_NAVICELLA; //ampiezza diviso 4...
     Lista<Proiettile> proiettili;
+
+private:
+    void drawProiettili(sf::RenderWindow &window);
 
 public:
     //COSTRUTTORI

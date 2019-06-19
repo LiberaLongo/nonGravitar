@@ -130,6 +130,11 @@ bool Bunker::confronto(Bunker b)
     return (this->getX() == b.getX() && this->getY() == b.getY() && this->size == b.getSize() && this->angolo == b.getAngolo() && this->speed == b.getSpeed());
 }
 
+//disegna proiettili (privata)
+void Bunker::drawProiettili(sf::RenderWindow &window) {
+    this->proiettili.draw(window);
+}
+
 //disegna
 void Bunker::draw(sf::RenderWindow &window)
 {
