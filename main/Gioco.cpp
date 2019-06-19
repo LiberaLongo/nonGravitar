@@ -68,20 +68,20 @@ void impostazioniGioco(void)
 		{
 			cout << "\ndella NAVICELLA";
 			cout << "\n    la dimensione";
-			cout << "\n\tsize (1 <= size <= " << MAX_NAVICELLA << ", ora è = " << SIZE_NAVICELLA << " ):\t";
+			cout << "\n\tsize (3 <= size <= " << MAX_NAVICELLA << ", ora è = " << SIZE_NAVICELLA << " ):\t";
 			cin >> SIZE_NAVICELLA;
 			cout << "    la velocità";
 			cout << "\n\tspeed (1 <= speed <= " << MAX_SPEED << ", ora è = " << SPEED_NAVICELLA << " ):\t";
 			cin >> SPEED_NAVICELLA;
 			//controllo se c'è un errore
-			errato = (SIZE_NAVICELLA < 1.f || SIZE_NAVICELLA > MAX_NAVICELLA) || (SPEED_NAVICELLA < 1.f || SPEED_NAVICELLA > MAX_SPEED);
+			errato = (SIZE_NAVICELLA < 3.f || SIZE_NAVICELLA > MAX_NAVICELLA) || (SPEED_NAVICELLA < 1.f || SPEED_NAVICELLA > MAX_SPEED);
 			//non ho modo di controllare se sono maggiori dello schermo del pc
 			//almeno per ora
 			if (errato)
 			{
 				cout << "\nERRORE! Inserisci delle dimensioni della navicella corrette";
 				cout << "\n(dimensioni comprese tra 0 e " << MAX_NAVICELLA << " )";
-				cout << "\n(velocità compresa tra 1 e " << MAX_SPEED << " )";
+				cout << "\n(velocità compresa tra 3 e " << MAX_SPEED << " )";
 			}
 		} while (errato);
 
