@@ -37,7 +37,7 @@ public:
     Pianeta(float x, float y, float raggio);
     //costruttori completi
     Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker);
-    Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker);
+    Pianeta(float x, float y, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker);
     //distruttore
     virtual ~Pianeta(void);
 

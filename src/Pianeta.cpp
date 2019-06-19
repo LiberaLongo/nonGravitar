@@ -29,18 +29,18 @@ Pianeta::Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline
 {
     this->centro = centro;
     this->raggio = raggio;
-    this->atmosfera = outline;
     this->colore = colore;
+    this->atmosfera = outline;
     this->surface = listaSurface;
     this->fuel = listaFuel;
     this->bunker = listaBunker;
 }
-Pianeta::Pianeta(float x, float y, float raggio, int red, int green, int blue, int red_o, int green_o, int blue_o, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker)
+Pianeta::Pianeta(float x, float y, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker)
 {
     this->centro.setCoord(x, y);
     this->raggio = raggio;
-    this->colore.setRGB(red, green, blue);
-    this->colore.setRGB(red_o, green_o, blue_o);
+    this->colore = colore;
+    this->atmosfera = outline;
     this->surface = listaSurface;
     this->fuel = listaFuel;
     this->bunker = listaBunker;
