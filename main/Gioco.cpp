@@ -11,8 +11,8 @@
 
 //dimensioni di DEFAULT
 // 1366 x 768 risoluzione di uno scermo a 11,6 pollici
-float WIDTH = 1300.f;
-float HEIGHT = 700.f;
+float WIDTH = 1200.f;
+float HEIGHT = 600.f;
 //raggio minimo e massimo del pianeta
 float MIN_PIANETA_RAGGIO = 20.f;
 float MAX_PIANETA_RAGGIO = 60.f;
@@ -66,15 +66,15 @@ void impostazioniGioco(void)
 		//NAVICELLA
 		do
 		{
-			cout << "\ndella NAVICELLA\n";
+			cout << "\ndella NAVICELLA";
 			cout << "\n    la dimensione";
-			cout << "\n\tsize (<= " << MAX_NAVICELLA << ", ora è = " << SIZE_NAVICELLA << " ):\t\t";
+			cout << "\n\tsize (1 <= size <= " << MAX_NAVICELLA << ", ora è = " << SIZE_NAVICELLA << " ):\t";
 			cin >> SIZE_NAVICELLA;
-			cout << "\n    la velocità";
-			cout << "\n\tspeed (<= " << MAX_SPEED << ", ora è = " << SPEED_NAVICELLA << " ):\t\t";
+			cout << "    la velocità";
+			cout << "\n\tspeed (1 <= speed <= " << MAX_SPEED << ", ora è = " << SPEED_NAVICELLA << " ):\t";
 			cin >> SPEED_NAVICELLA;
 			//controllo se c'è un errore
-			errato = (SIZE_NAVICELLA < 0 || SIZE_NAVICELLA > MAX_NAVICELLA) || (SPEED_NAVICELLA < 1.f || SPEED_NAVICELLA > MAX_SPEED);
+			errato = (SIZE_NAVICELLA < 1.f || SIZE_NAVICELLA > MAX_NAVICELLA) || (SPEED_NAVICELLA < 1.f || SPEED_NAVICELLA > MAX_SPEED);
 			//non ho modo di controllare se sono maggiori dello schermo del pc
 			//almeno per ora
 			if (errato)
