@@ -10,8 +10,9 @@
 #define MAX_SPEED 20.f
 
 //dimensioni di DEFAULT
-float WIDTH = 900.f;
-float HEIGHT = 600.f;
+// 1366 x 768 risoluzione di uno scermo a 11,6 pollici
+float WIDTH = 1300.f;
+float HEIGHT = 700.f;
 //raggio minimo e massimo del pianeta
 float MIN_PIANETA_RAGGIO = 20.f;
 float MAX_PIANETA_RAGGIO = 60.f;
@@ -27,8 +28,12 @@ void impostazioniGioco(void)
 {
 	char chose;
 	bool errato = true;
+	cout << "\nSETTAGGI DI DEFAULT: ";
+	cout << "\nSchermo (width x height): " << WIDTH << " x " << HEIGHT << ".";
+	cout << "\nNavicella: size = " << SIZE_NAVICELLA << ", speed = " << SPEED_NAVICELLA << ".";
+	cout << "\nPianeti raggio: min = " << MIN_PIANETA_RAGGIO << ", max = " << MAX_PIANETA_RAGGIO << ".";
 
-	cout << "\nVuoi MODIFICARE i settaggi di default?";
+	cout << "\n\nVuoi MODIFICARE i settaggi di default?";
 	cout << "\n(Y/N o un altro tasto per continuare)\t";
 	//chiedo se si vogliono usare le impostazioni di default
 	cin >> chose;
