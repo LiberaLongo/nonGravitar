@@ -89,7 +89,9 @@ void Bunker::setSize(float size)
 {
     this->size = size;
 }
-
+int Bunker::getTipo(void) {
+    return this->tipo;
+}
 //getters
 float Bunker::getX(void)
 {
@@ -115,7 +117,8 @@ float Bunker::getSize(void)
 //stampa
 void Bunker::print(void)
 {
-    cout << "Bunker : [ centro = ";
+    cout << "Bunker : [ tipo = " << this->tipo;
+    cout << "centro = ";
     this->centro.print();
     cout << ", angolo = " << this->angolo;
     cout << ", speed = " << this->speed;
@@ -131,7 +134,8 @@ bool Bunker::confronto(Bunker b)
 }
 
 //disegna proiettili (privata)
-void Bunker::drawProiettili(sf::RenderWindow &window) {
+void Bunker::drawProiettili(sf::RenderWindow &window)
+{
     this->proiettili.draw(window);
 }
 
@@ -141,8 +145,21 @@ void Bunker::draw(sf::RenderWindow &window)
     //codice per disegnare in seguito
     sf::CircleShape triangolo(this->size, 3);
 
-    //colore rosso
     triangolo.setFillColor(sf::Color::Red);
+    ColoreRGB arancio = ColoreRGB(255, 129, 0);
+
+    //colore rosso se di tipo 2 arancione se di tipo 1
+    switch(this->tipo) {
+        case 0:
+            triangolo.setFillColor(sf::Color::Red);
+            break;
+        case 1:
+            triangolo.setFillColor(arancio.getColorLib());
+            break;
+        default:
+            cout << "\nil tipo = " << this->tipo << " del bunker non ha senso\n";
+            break;
+    }
 
     //ruota di angolo, PRIMA! della rotazione
     float angolo = angoloLibreria(this->angolo);
@@ -155,11 +172,17 @@ void Bunker::draw(sf::RenderWindow &window)
     window.draw(triangolo);
 }
 
+//genera
+void Bunker::genera(void)
+{
+    this->tipo = rand()%2;
+}
+
 //spara
 void Bunker::shoot(sf::Time tempo)
 {
     //inserisci un nuovo colpo da aggiornare
-/*
+    /*
     //aggiorna la direzione a cui punta la navicella
     this->dir.shoot(mouseclick);
     //inserisco un proiettile nella lista

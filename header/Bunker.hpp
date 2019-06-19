@@ -19,6 +19,7 @@ template class Lista<Proiettile>;
 class Bunker : public DisegnabileI
 {
 private:
+    int tipo = 0;
     //il centro della navicella
     Punto centro; //di default (0,0) in accordo con il default di Punto
     Lista<Direzione> headDirezioni;
@@ -57,6 +58,7 @@ public:
     float getAngolo(void);
     float getSpeed(void);
     float getSize(void);
+    int getTipo(void);
 
     //stampa
     void print(void);
@@ -66,6 +68,8 @@ public:
 
     //disegna
     void draw(sf::RenderWindow &window);
+
+    void genera(void);
     
     //spara
     void shoot(sf::Time tempo);

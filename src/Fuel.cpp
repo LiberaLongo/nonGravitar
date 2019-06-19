@@ -61,6 +61,9 @@ float Fuel::getQuantita(void) {
 float Fuel::getSize(void) {
     return this->size;
 }
+int Fuel::getTipo(void) {
+    return this->tipo;
+}
 
 //stampa
 void Fuel::print(void) {

@@ -9,6 +9,7 @@
 class Fuel : public DisegnabileI
 {
 private:
+    int tipo = 0;
     Punto centro;
     float quantita = FUEL1;
     float size = 10.f;
@@ -38,6 +39,7 @@ public:
     float getY(void);
     float getQuantita(void);
     float getSize(void);
+    int getTipo(void);
 
     //stampa
     void print(void);

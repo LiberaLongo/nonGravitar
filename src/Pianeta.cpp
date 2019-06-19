@@ -270,6 +270,7 @@ void Pianeta::genera(void)
         p.setName("Bunker" + to_string(i));
 #endif
         Bunker cannone = Bunker(p);
+        cannone.genera();
         //inserirlo nella lista
         this->bunker.insert_head(cannone);
     }
