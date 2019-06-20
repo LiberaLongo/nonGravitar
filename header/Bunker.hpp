@@ -3,6 +3,7 @@
 #define BUNKER_H
 
 #include "./DisegnabileI.hpp"
+#include "./Entity.hpp"
 #include "./Direzione.hpp"
 
 #include "./Lista.hpp"
@@ -10,13 +11,11 @@
 //ATTENZIONE! cpp inclusi per classi template
 #include "../utils/ListaParent.cpp"
 #include "../utils/Lista.cpp"
-#include "./Proiettile.hpp"
 
 //per Bunker
 template class Lista<Direzione>;
-template class Lista<Proiettile>;
 
-class Bunker : public DisegnabileI
+class Bunker : public Entity
 {
 private:
     int tipo = 0;

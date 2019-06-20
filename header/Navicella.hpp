@@ -5,6 +5,7 @@
 //#include <SFML/Graphics.hpp>
 
 #include "./DisegnabileI.hpp"
+#include "./Entity.hpp"
 #include "./utils.hpp"
 #include "./Direzione.hpp"
 #include "./Fuel.hpp"
@@ -15,7 +16,7 @@
 
 extern float SIZE_NAVICELLA;
 
-class Navicella : public DisegnabileI
+class Navicella : public Entity
 {
 private:
     //il centro della navicella
