@@ -23,7 +23,7 @@ COMPILE = $(CC) $(CFLAGS)
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o \
-	Direzione.o Proiettile.o Fuel.o Entity.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
+	Direzione.o Proiettile.o Entity.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
 	visualePianeta.o visualeSistemaSolare.o Gioco.o main.o
 # Controlli.o
 
@@ -54,11 +54,11 @@ Direzione.o: $(S)Direzione.cpp $(HDR)
 Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
 	$(COMPILE) $(S)Proiettile.cpp
 
-Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR) $(H)ColoreRGB.hpp
-	$(COMPILE) $(S)Fuel.cpp
-
 Entity.o: $(S)Entity.cpp $(H)Entity.hpp $(HDR) $(H)Lista.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Entity.cpp
+
+Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR) $(H)ColoreRGB.hpp
+	$(COMPILE) $(S)Fuel.cpp
 
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Entity.hpp $(H)Fuel.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Navicella.cpp
