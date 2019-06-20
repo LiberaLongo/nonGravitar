@@ -32,6 +32,7 @@ public:
     //costruttori punto
     Entity(Direzione dir);
     Entity(float x, float y);
+    Entity(float x, float y, float angolo, float speed, float size);
     //costruttori completi
     Entity(Direzione dir, float size, Lista<Proiettile> proiettili); 
     Entity(float x, float y, float angolo, float speed, float size, Lista<Proiettile> proiettili);
@@ -61,8 +62,13 @@ public:
     //disegna
     void draw(sf::RenderWindow &window);
 
+    //muovi
+    void move(void);
+
     //spara
-    void shoot(Punto mouseclick);
+    void shoot(Punto mouseclick, ColoreRGB colore);
+
+    bool isNear(float x, float y, float size);
 
     bool isOutsideScreen(void);
 

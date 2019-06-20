@@ -6,10 +6,7 @@
 
 #include "./DisegnabileI.hpp"
 #include "./Entity.hpp"
-#include "./utils.hpp"
-#include "./Direzione.hpp"
 #include "./Fuel.hpp"
-#include "./Proiettile.hpp"
 
 //qui viene incluso i template di bunker
 #include "./Pianeta.hpp"
@@ -19,15 +16,7 @@ extern float SIZE_NAVICELLA;
 class Navicella : public Entity
 {
 private:
-    //il centro della navicella
-    Direzione dir; //il origine della direzione è il centro della navicella
     Fuel carburante;
-    //il raggio della circonferenza circoscritta
-    float size = SIZE_NAVICELLA; //ampiezza diviso 4...
-    Lista<Proiettile> proiettili;
-
-private:
-    void drawProiettili(sf::RenderWindow &window);
 
 public:
     //COSTRUTTORI
@@ -38,27 +27,14 @@ public:
     Navicella(float x, float y);
     //costruttori completi
     Navicella(Direzione dir, Fuel carburante, float size);
-    Navicella(float x, float y, float angle, float speed, float carburante, float size);
+    Navicella(float x, float y, float angolo, float speed, float size, float carburante);
 
     //distruttori
     virtual ~Navicella(void);
 
-    //SETTERS
-    //setters coordinate
-    void setX(float x);
-    void setY(float y);
-    void setCoord(float x, float y);
-    //altri setter
-    void setSize(float size);
-    void setAngolo(float angle);
-    void setSpeed(float speed);
+    //setters
     void setFuel(Fuel carburante);
     //getters
-    float getX(void);
-    float getY(void);
-    float getSize(void);
-    float getAngolo(void);
-    float getSpeed(void);
     float getFuel(void);
 
     //stampa
@@ -75,11 +51,6 @@ public:
 
     //controlla se è dentro il pianeta
     bool isNear(Pianeta planet);
-
-    bool isOutsideScreen(void);
-
-    //aggiorno la lista di proiettili
-    void aggiornaCoordinateProiettili(sf::Time tempo);
 };
 
 #endif //NAVICELLA_H

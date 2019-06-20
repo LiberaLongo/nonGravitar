@@ -24,16 +24,24 @@ Entity::Entity(float x, float y)
     this->dir.setOrigine(x, y);
     //default size, dir, carburante
 }
+Entity::Entity(float x, float y, float angolo, float speed, float size)
+{
+    this->dir.setOrigine(x, y);
+    this->dir.setAngolo(angolo);
+    this->dir.setSpeed(speed);
+    this->size = size;
+}
 //costruttori completi
-
-Entity::Entity(Direzione dir, float size, Lista<Proiettile> proiettili) {
+Entity::Entity(Direzione dir, float size, Lista<Proiettile> proiettili)
+{
     this->dir = dir;
     this->size = size;
     this->proiettili = proiettili;
 }
-Entity::Entity(float x, float y, float angle, float speed, float size, Lista<Proiettile> proiettili) {
+Entity::Entity(float x, float y, float angolo, float speed, float size, Lista<Proiettile> proiettili)
+{
     this->dir.setOrigine(x, y);
-    this->dir.setAngolo(angle);
+    this->dir.setAngolo(angolo);
     this->dir.setSpeed(speed);
     this->size = size;
     this->proiettili = proiettili;
@@ -111,17 +119,26 @@ void Entity::drawProiettili(sf::RenderWindow &window)
 //disegna
 void Entity::draw(sf::RenderWindow &window)
 {
-//si disegnano in modo diverso
+    //si disegnano in modo diverso
 }
-void Entity::shoot(Punto mouseclick)
+void Entity::move(void)
+{
+    //WASD
+    this->dir.move();
+}
+void Entity::shoot(Punto mouseclick, ColoreRGB colore)
 {
     //aggiorna la direzione a cui punta la Entity
     this->dir.shoot(mouseclick);
-    //inserisco un proiettile nella lista
-    ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), giallo);
+    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), colore);
     this->proiettili.insert_head(newProiettile);
 }
+
+bool Entity::isNear(float x, float y, float size)
+{
+    return this->dir.isNear(x, y, size);
+}
+
 bool Entity::isOutsideScreen(void)
 {
     return !this->dir.isNear(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);

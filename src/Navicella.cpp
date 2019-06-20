@@ -15,28 +15,23 @@ Navicella::Navicella(void)
 //costruttori punto
 Navicella::Navicella(Punto centro)
 {
-    this->dir.setOrigine(centro);
-    //default size, dir, carburante
+    //default tutto
+    this->setCoord(centro.getX(), centro.getY());
 }
 Navicella::Navicella(float x, float y)
 {
-    this->dir.setOrigine(x, y);
-    //default size, dir, carburante
+    //default tutto
+    this->setCoord(x, y);
 }
 //costruttori completi
-Navicella::Navicella(Direzione dir, Fuel carburante, float size)
+Navicella::Navicella(Direzione dir, Fuel carburante, float size) : Entity(dir)
 {
-    this->dir = dir;
     this->carburante = carburante;
-    this->size = size;
+    this->setSize(size);
 }
-Navicella::Navicella(float x, float y, float angle, float speed, float carburante, float size)
+Navicella::Navicella(float x, float y, float angolo, float speed, float size, float carburante) : Entity(x, y, angolo, speed, size)
 {
     this->carburante.setQuantita(carburante);
-    this->dir.setOrigine(x, y);
-    this->dir.setAngolo(angle);
-    this->dir.setSpeed(speed);
-    this->size = size;
 }
 
 //distruttore
@@ -46,56 +41,12 @@ Navicella::Navicella(float x, float y, float angle, float speed, float carburant
 }
 
 //setters
-void Navicella::setX(float x)
-{
-    this->dir.setX_origine(x);
-}
-void Navicella::setY(float y)
-{
-    this->dir.setY_origine(y);
-}
-void Navicella::setCoord(float x, float y)
-{
-    this->dir.setOrigine(x, y);
-}
-void Navicella::setSize(float size)
-{
-    this->size = size;
-}
-void Navicella::setAngolo(float angle)
-{
-    this->dir.setAngolo(angle);
-}
-void Navicella::setSpeed(float speed)
-{
-    this->dir.setSpeed(speed);
-}
 void Navicella::setFuel(Fuel carburante)
 {
     this->carburante = carburante;
 }
 
 //getters
-float Navicella::getX(void)
-{
-    return this->dir.getX_origine();
-}
-float Navicella::getY(void)
-{
-    return this->dir.getY_origine();
-}
-float Navicella::getSize(void)
-{
-    return this->size;
-}
-float Navicella::getAngolo(void)
-{
-    return this->dir.getAngolo();
-}
-float Navicella::getSpeed(void)
-{
-    return this->dir.getSpeed();
-}
 float Navicella::getFuel(void)
 {
     return this->carburante.getQuantita();
@@ -105,16 +56,10 @@ float Navicella::getFuel(void)
 void Navicella::print(void)
 {
     cout << "Navicella : { ";
-    this->dir.print();
+    //chiamo la print del padre Entity
+    this->Entity::print();
     this->carburante.print();
-    cout << ", size = " << this->size;
     cout << " } " << endl;
-}
-
-//disegna proiettili (privata)
-void Navicella::drawProiettili(sf::RenderWindow &window)
-{
-    this->proiettili.draw(window);
 }
 //disegna
 void Navicella::draw(sf::RenderWindow &window)
@@ -125,19 +70,20 @@ void Navicella::draw(sf::RenderWindow &window)
 
     //centro iniziale della figura prima di fare setPosition
     float x = 0.f, y = 0.f; //centro: (0,0)
+    float size = this->getSize();
     //crea una empty shape convex con 3 punti
     sf::ConvexShape triangolo;
     triangolo.setPointCount(3);
     //definisci i punti rispetto a (0,0)
-    triangolo.setPoint(0, sf::Vector2f(x, y - this->size * 3));
-    triangolo.setPoint(1, sf::Vector2f(x - this->size, y + this->size));
-    triangolo.setPoint(2, sf::Vector2f(x + this->size, y + this->size));
+    triangolo.setPoint(0, sf::Vector2f(x, y - size * 3));
+    triangolo.setPoint(1, sf::Vector2f(x - size, y + size));
+    triangolo.setPoint(2, sf::Vector2f(x + size, y + size));
 
     //blu
     triangolo.setFillColor(sf::Color::Blue);
 
     //ruota di angolo, PRIMA! della rotazione
-    float angolo = angoloLibreria(this->dir.getAngolo());
+    float angolo = angoloLibreria(this->getAngolo());
     triangolo.setRotation(angolo);
 #ifdef DEBUG
     cout << "angoloCanonico = " << this->dir.getAngolo();
@@ -152,63 +98,20 @@ void Navicella::draw(sf::RenderWindow &window)
     window.draw(triangolo);
 }
 
-void Navicella::move(float angolo)
-{
-    //WASD
-    this->dir.setAngolo(angolo);
-    this->dir.move();
+//controlli di movimento
+void Navicella::move(float angle) {
+    this->setAngolo(angle);
+    this->Entity::move();
 }
+
 void Navicella::shoot(Punto mouseclick)
 {
-    //aggiorna la direzione a cui punta la navicella
-    this->dir.shoot(mouseclick);
-    //inserisco un proiettile nella lista
     ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), giallo);
-    this->proiettili.insert_head(newProiettile);
+    //chiamo la shoot del padre Entity
+    this->Entity::shoot(mouseclick, giallo);
 }
+
 bool Navicella::isNear(Pianeta planet)
 {
-    return this->dir.isNear(planet.getX(), planet.getY(), planet.getRaggio());
-}
-bool Navicella::isOutsideScreen(void)
-{
-    return !this->dir.isNear(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
-}
-
-//aggiorno la lista di proiettili
-void Navicella::aggiornaCoordinateProiettili(sf::Time tempo)
-{
-    int millisecondi = tempo.asMilliseconds();
-    //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
-    if (millisecondi % AGGIORNA == 0)
-    {
-        if (!(this->proiettili.empty()))
-        {
-            //primo elemento utile non la sentinella
-            struct Elem<Proiettile> *iter = this->proiettili.head();
-            //se non vuota e non finita
-            while (!(this->proiettili.finished(iter)))
-            {
-                //leggo il proiettile
-                Proiettile aggiornato = this->proiettili.read(iter);
-                aggiornato.move();
-                if (aggiornato.isOutsideScreen())
-                {
-                    //se il proiettile è uscito dallo schermo devo rimuoverlo
-                    this->proiettili.remove(iter);
-#ifdef DEBUG_PROIETTILI
-                    cout << "un proiettile è uscito" << endl;
-#endif
-                }
-                else
-                {
-                    this->proiettili.write(iter, aggiornato);
-                }
-
-                //passo al successivo
-                iter = this->proiettili.next(iter);
-            }
-        }
-    }
+    return this->Entity::isNear(planet.getX(), planet.getY(), planet.getRaggio());
 }
