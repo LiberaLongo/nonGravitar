@@ -61,6 +61,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         while (App.pollEvent(event))
         {
             NavicellaMoved = false;
+            haCliccato = false;
             switch (event.type)
             {
             //se la finestra è stata chiusa

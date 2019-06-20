@@ -35,8 +35,8 @@ public:
     //costruttore vuoto
     Bunker(void);
     //costruttore minimale
-    Bunker(Punto centro);
-    Bunker(float x, float y);
+    Bunker(Punto centro, float angolo);
+    Bunker(float x, float y, float angolo);
     //costruttore completo
     Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir);
     Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir);

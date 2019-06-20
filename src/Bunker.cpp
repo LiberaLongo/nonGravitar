@@ -25,17 +25,22 @@ void Bunker::aggiornaCentriDirezione(Lista<Direzione> headDir)
 Bunker::Bunker(void)
 {
     //tutto di default
+    this->tipo = rand() % 2;
 }
 //costruttore minimale
-Bunker::Bunker(Punto centro)
+Bunker::Bunker(Punto centro, float angolo)
 {
     this->centro = centro;
+    this->angolo = angolo;
     this->aggiornaCentriDirezione(this->headDirezioni);
+    this->tipo = rand() % 2;
 }
-Bunker::Bunker(float x, float y)
+Bunker::Bunker(float x, float y, float angolo)
 {
     this->centro.setCoord(x, y);
     this->aggiornaCentriDirezione(this->headDirezioni);
+    this->angolo = angolo;
+    this->tipo = rand() % 2;
 }
 //costruttore completo
 Bunker::Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir)
@@ -45,6 +50,7 @@ Bunker::Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzi
     this->speed = speed;
     this->size = size;
     this->aggiornaCentriDirezione(headDir);
+    this->tipo = rand() % 2;
 }
 Bunker::Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir)
 {
@@ -53,6 +59,7 @@ Bunker::Bunker(float x, float y, float angolo, float speed, float size, Lista<Di
     this->speed = speed;
     this->size = size;
     this->aggiornaCentriDirezione(headDir);
+    this->tipo = rand() % 2;
 }
 
 //distruttore
@@ -142,13 +149,11 @@ void Bunker::drawProiettili(sf::RenderWindow &window)
 //disegna
 void Bunker::draw(sf::RenderWindow &window)
 {
+    ColoreRGB arancio = ColoreRGB(255, 129, 0);
     //codice per disegnare in seguito
     sf::CircleShape triangolo(this->size, 3);
 
-    triangolo.setFillColor(sf::Color::Red);
-    ColoreRGB arancio = ColoreRGB(255, 129, 0);
-
-    //colore rosso se di tipo 2 arancione se di tipo 1
+    //colore rosso se di tipo 0 arancione se di tipo 1
     switch(this->tipo) {
         case 0:
             triangolo.setFillColor(sf::Color::Red);
@@ -175,7 +180,7 @@ void Bunker::draw(sf::RenderWindow &window)
 //genera
 void Bunker::genera(void)
 {
-    this->tipo = rand()%2;
+    //in base al tipo riempi la lista con 2 o 3 direzioni
 }
 
 //spara

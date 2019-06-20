@@ -4,6 +4,7 @@
 
 #include "./utils.hpp"
 #include "./DisegnabileI.hpp"
+#include "./ColoreRGB.hpp"
 #include "./Punto.hpp"
 
 class Fuel : public DisegnabileI
@@ -13,16 +14,17 @@ private:
     Punto centro;
     float quantita = FUEL1;
     float size = 10.f;
-
+public:
+    void generaTipo(void);
 public:
     //costruttore vuoto
     Fuel(void);
     //costruttore coordinate
     Fuel(Punto centro);
     Fuel(float x, float y);
-    //costruttore completo
-    Fuel(Punto centro, float quantita, float size);
-    Fuel(float x, float y, float quantita, float size);
+    //costruttore completo - la quantita decisa dal tipo
+    Fuel(Punto centro, float size);
+    Fuel(float x, float y, float size);
 
     //distruttore
     virtual ~Fuel(void);

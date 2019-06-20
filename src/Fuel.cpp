@@ -1,72 +1,108 @@
 //codice carburante
 #include "../header/Fuel.hpp"
 
+//PRIVATA
+void Fuel::generaTipo(void)
+{
+    this->tipo = rand() % 2;
+    switch (this->tipo)
+    {
+    case 0:
+        this->quantita = FUEL1;
+        break;
+    case 1:
+        this->quantita = FUEL2;
+        break;
+    default:
+        cout << "\nil tipo = " << this->tipo << " del fuel non ha senso\n";
+        break;
+    }
+}
+
 //costruttore vuoto
 Fuel::Fuel(void)
 {
     //tutto di default
+    this->generaTipo();
 }
 //costruttore coordinate
-Fuel::Fuel(Punto centro) {
+Fuel::Fuel(Punto centro)
+{
     this->centro = centro;
+    this->generaTipo();
 }
-Fuel::Fuel(float x, float y) {
+Fuel::Fuel(float x, float y)
+{
     this->centro.setCoord(x, y);
+    this->generaTipo();
 }
 //costruttore completo
-Fuel::Fuel(Punto centro, float quantita, float size) {
+Fuel::Fuel(Punto centro, float size)
+{
     this->centro = centro;
-    this->quantita = quantita;
     this->size = size;
+    this->generaTipo();
 }
-Fuel::Fuel(float x, float y, float quantita, float size) {
+Fuel::Fuel(float x, float y, float size)
+{
     this->centro.setCoord(x, y);
-    this->quantita = quantita;
-    this->size = size;    
+    this->size = size;
+    this->generaTipo();
 }
 
 //distruttore
-/*virtual*/ Fuel::~Fuel(void) {
+/*virtual*/ Fuel::~Fuel(void)
+{
     //distruttore di default
 }
 
 //setters
-void Fuel::setX(float x) {
+void Fuel::setX(float x)
+{
     this->centro.setX(x);
 }
-void Fuel::setY(float y) {
+void Fuel::setY(float y)
+{
     this->centro.setY(y);
 }
 void Fuel::setCoord(float x, float y)
 {
     this->centro.setCoord(x, y);
 }
-void Fuel::setQuantita(float quantita){
+void Fuel::setQuantita(float quantita)
+{
     this->quantita = quantita;
 }
-void Fuel::setSize(float size) {
+void Fuel::setSize(float size)
+{
     this->size = size;
 }
 
 //getters
-float Fuel::getX(void) {
+float Fuel::getX(void)
+{
     return this->centro.getX();
 }
-float Fuel::getY(void) {
+float Fuel::getY(void)
+{
     return this->centro.getY();
 }
-float Fuel::getQuantita(void) {
+float Fuel::getQuantita(void)
+{
     return this->quantita;
 }
-float Fuel::getSize(void) {
+float Fuel::getSize(void)
+{
     return this->size;
 }
-int Fuel::getTipo(void) {
+int Fuel::getTipo(void)
+{
     return this->tipo;
 }
 
 //stampa
-void Fuel::print(void) {
+void Fuel::print(void)
+{
     cout << "Fuel : [ centro = ";
     this->centro.print();
     cout << ", size = " << this->size;
@@ -74,15 +110,30 @@ void Fuel::print(void) {
 }
 
 //contronto
-bool Fuel::confronto(Fuel f) {
+bool Fuel::confronto(Fuel f)
+{
     return (this->centro.getX() == f.getX() && this->centro.getY() == f.getY() && this->quantita == f.getQuantita() && this->size == f.getSize());
 }
 
 //disegna
-void Fuel::draw(sf::RenderWindow &window) {
+void Fuel::draw(sf::RenderWindow &window)
+{
+    ColoreRGB viola = ColoreRGB(255, 0, 255);
     //disegna carburante
     sf::RectangleShape rectangle(sf::Vector2f(this->size, this->size));
-    rectangle.setFillColor(sf::Color::Black);
+    //colore rosso se di tipo 0 viola se di tipo 1
+    switch (this->tipo)
+    {
+    case 0:
+        rectangle.setFillColor(sf::Color::Black);
+        break;
+    case 1:
+        rectangle.setFillColor(viola.getColorLib());
+        break;
+    default:
+        cout << "\nil tipo = " << this->tipo << " del bunker non ha senso\n";
+        break;
+    }
     rectangle.setPosition(this->getX() - this->size / 2, this->getY() - this->size / 2);
 
 //nome se esiste
@@ -100,6 +151,7 @@ void Fuel::draw(sf::RenderWindow &window) {
 }
 
 //consumo carburante
-float Fuel::consumoFuel(void) {
+float Fuel::consumoFuel(void)
+{
     //consuma fuel
 }

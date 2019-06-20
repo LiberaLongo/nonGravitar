@@ -9,7 +9,7 @@ extern float WIDTH, HEIGHT;
 visualePianeta::visualePianeta(void)
 {
     //aggiorno coordinate
-    this->player = Navicella(SIZE_NAVICELLA*4, SIZE_NAVICELLA*4);
+    this->player = Navicella(SIZE_NAVICELLA * 4, SIZE_NAVICELLA * 4);
     this->orologio.restart();
 }
 
@@ -18,7 +18,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
     //globale lunghezza della superficie
     int lengthSuperficie = 0;
     //aggiorno coordinate
-    this->player.setCoord(SIZE_NAVICELLA*4, SIZE_NAVICELLA*4);
+    this->player.setCoord(SIZE_NAVICELLA * 4, SIZE_NAVICELLA * 4);
     this->orologio.restart();
     //aggiorno il pianeta
     if (pianetaInsideNow != nullptr)
@@ -29,7 +29,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         //conta i punti della superficie
         lengthSuperficie = this->pianetaVisualizzato.lunghezzaSuperfice();
-        if(lengthSuperficie != MAX_SUPERFICE)
+        if (lengthSuperficie != MAX_SUPERFICE)
         {
             cout << "Errore nella conta o nella generazione della superfice";
             return EXIT;
@@ -51,6 +51,9 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
     //un punto adibito a mouse click
     Punto mouseClick;
+#ifdef NOME_PUNTO
+    mouseClick.setName("MOUSE");
+#endif
     bool haCliccato = false;
 
     //esegui il programma finchè la finestra è aperta
@@ -60,6 +63,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         while (App.pollEvent(event))
         {
             NavicellaMoved = false;
+            haCliccato = false;
             switch (event.type)
             {
             //se la finestra è stata chiusa
@@ -143,7 +147,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         App.clear(this->pianetaVisualizzato.getAtmosferaLib());
 
         this->pianetaVisualizzato.drawVisuale(App, lengthSuperficie);
-        
+
         this->player.draw(App);
         this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime());
 

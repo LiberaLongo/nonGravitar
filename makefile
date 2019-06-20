@@ -54,7 +54,7 @@ Direzione.o: $(S)Direzione.cpp $(HDR)
 Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
 	$(COMPILE) $(S)Proiettile.cpp
 
-Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
+Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR) $(H)ColoreRGB.hpp
 	$(COMPILE) $(S)Fuel.cpp
 
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp $(H)Proiettile.hpp

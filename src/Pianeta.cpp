@@ -375,6 +375,8 @@ void Pianeta::generaBunkerFuel()
                 int x_medio = (p1.getX() + p2.getX()) / 2;
                 int y_medio = (p1.getY() + p2.getY()) / 2;
                 pMedio.setCoord(x_medio, y_medio);
+                //calcolo l'angolo...
+                int angolo = 0.f;
                 //se devo generare del fuel e non ho superato il massimo
                 if (cosaGenero == tipo_fuel && numeroFuel < MAX_FUEL)
                 {
@@ -396,7 +398,7 @@ void Pianeta::generaBunkerFuel()
 #ifdef NOME_PUNTO
                     pMedio.setName("Bunker" + to_string(numeroBunker));
 #endif
-                    Bunker cannone = Bunker(pMedio);
+                    Bunker cannone = Bunker(pMedio, angolo);
                     cannone.genera();
                     //inserirlo nella lista
                     this->bunker.insert_head(cannone);
