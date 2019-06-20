@@ -74,21 +74,30 @@ bool Punto::confronto(Punto p)
 //disegna
 void Punto::draw(sf::RenderWindow &window)
 {
-    float size = 10.f;
-    sf::RectangleShape rectangle(sf::Vector2f(size, size));
-    rectangle.setPosition(this->x - size / 2, this->y - size / 2);
+    float size = 5.f;
+    sf::RectangleShape rectangle(sf::Vector2f(size*2, size*2));
+    rectangle.setPosition(this->x - size, this->y - size);
 
 //nome se esiste
 #ifdef NOME_PUNTO
-    sf::Text testo;
-    testo.setString(this->name);
+	sf::Font Font;
+	sf::Text nomePunto;
+
+    if (!Font.loadFromFile("verdanab.ttf"))
+	{
+		cerr << "Error loading verdanab.ttf" << endl;
+	}
+	nomePunto.setFont(Font);
+	nomePunto.setCharacterSize(20);
+	nomePunto.setString(this->name);
+	nomePunto.setPosition(this->x, this->y);
 #endif
 
     //il punto è al centro del rettangolo
     window.draw(rectangle);
 
 #ifdef NOME_PUNTO
-    window.draw(testo);
+    window.draw(nomePunto);
 #endif
 }
 //distanza
@@ -160,18 +169,6 @@ float Punto::calcolaAngolo(Punto arrivo)
             //altrimenti giralo di un angolo piatto
             angolo = (float)(angoloGradi + 180.f);
         }
-#ifdef DEBUG
-        cout << "\n\t\t\tpunto: ";
-        this->print();
-        cout << "\t\tarrivo: ";
-        arrivo.print();
-        cout << "\ndeltaX = " << arrivo.getX() << " - " << this->x << " = " << deltaX << endl;
-        cout << "deltaY = " << arrivo.getY() << " - " << this->y << " = " << deltaY << endl;
-        cout << "tangente = " << tangente << endl;
-        cout << "angoloRadianti = " << angoloRadianti << endl;
-        cout << "angoloGradi = " << angoloGradi << endl;
-        cout << "this->angolo = " << angolo << endl;
-#endif
     }
     else
     {

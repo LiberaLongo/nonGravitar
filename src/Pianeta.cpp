@@ -3,6 +3,9 @@
 
 //#define DEBUG
 #define ORDINA
+
+//dopo questa macro è da togliere!
+//#define NOME_PUNTO_SUPERFICE
 //macro che, se definita, ordina la lista dei punti della superfice
 
 extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
@@ -232,6 +235,9 @@ void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
     //disegna sulla window passata per riferimento
     window.draw(convexSuperficie);
 
+#ifdef NOME_PUNTO_SUPERFICE
+    this->surface.draw(window);
+#endif
     this->fuel.draw(window);
     this->bunker.draw(window);
 }
@@ -253,9 +259,6 @@ void Pianeta::generaPunti(void)
 
         //costruisci punto della superfice
         Punto p = Punto(x, y);
-#ifdef NOME_PUNTO
-        p.setName(to_string(i));
-#endif
         //inserirlo nella lista
         this->surface.insert_head(p);
     }
@@ -288,6 +291,12 @@ void Pianeta::ordinaPunti(void)
                 Punto calcolato = this->surface.read(iter);
                 //calcolo e salvo l'angolo nell'array
                 angoli[i] = centro.calcolaAngolo(calcolato);
+#ifdef NOME_PUNTO_SUPERFICE
+                //setto il nome alla variabile "locale" calcolato
+                calcolato.setName(to_string(angoli[i]));
+                //aggiorno la superfice
+                this->surface.write(iter, calcolato);
+#endif
                 //salvo il puntatore
                 posizioni[i] = iter;
                 //passo al successivo
@@ -309,6 +318,27 @@ void Pianeta::ordinaPunti(void)
     struct Elem<Punto> *posAux[MAX_SUPERFICE];
     //eseguo algoritmo di ordinamento e sistemo la lista
     this->surface.ordina(MAX_SUPERFICE, angoli, B, posizioni, posAux);
+#ifdef NOME_PUNTO_SUPERFICE
+    int conta = 0;
+    if (!(this->surface.empty()))
+    {
+        //primo elemento utile non la sentinella
+        struct Elem<Punto> *iter = this->surface.head();
+        //se non vuota e non finita
+        while (!(this->surface.finished(iter)))
+        {
+            //aggiorno contatore
+            conta++;
+            //setto il nome al punto
+            Punto nominato = this->surface.read(iter);
+            nominato.setName(to_string(conta) + ", " + nominato.getName());
+            this->surface.write(iter, nominato);
+            //passo al successivo
+            iter = this->surface.next(iter);
+        }
+    }
+#endif //NOME_PUNTO_SUPERFICE
+
 #endif //ORDINA
 }
 
@@ -351,7 +381,7 @@ void Pianeta::generaBunkerFuel()
                     //aggiorno il numero di fuel generati
                     numeroFuel++;
 #ifdef NOME_PUNTO
-                        pMedio.setName("Fuel" + to_string(numeroFuel));
+                    pMedio.setName("Fuel" + to_string(numeroFuel));
 #endif
                     //genero il carburante
                     Fuel metano = Fuel(pMedio);
