@@ -119,9 +119,6 @@ void SistemaSolare::genera()
 
         //genera il pianeta
         newPianeta.genera();
-
-        //ordina la lista dei punti del pianeta...
-        newPianeta.ordinaPunti();
         
         //inserirlo nella lista
         this->pianeti.insert_head(newPianeta);

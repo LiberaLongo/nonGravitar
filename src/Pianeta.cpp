@@ -235,13 +235,15 @@ void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
     this->fuel.draw(window);
     this->bunker.draw(window);
 }
+
+//PRIVATE
 //generaPianeta(void);
-void Pianeta::genera(void)
+void Pianeta::generaPunti(void)
 {
     //numero random per le coordinate
     float x = 0.f, y = 0.f;
     //distanza dimensione navicella un pò di spazio per la navicella
-    float dist = SIZE_NAVICELLA*7;
+    float dist = SIZE_NAVICELLA * 7;
 
     //genera tutti i PUNTI all'inizio
     for (int i = 0; i < MAX_SUPERFICE; i++)
@@ -257,45 +259,9 @@ void Pianeta::genera(void)
         //inserirlo nella lista
         this->surface.insert_head(p);
     }
-
-    //genera tutti i BUNKER all'inizio
-    for (int i = 0; i < MAX_BUNKER; i++)
-    {
-        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
-
-        //costruisci punto della superfice
-        Punto p = Punto(x, y);
-#ifdef NOME_PUNTO
-        p.setName("Bunker" + to_string(i));
-#endif
-        Bunker cannone = Bunker(p);
-        cannone.genera();
-        //inserirlo nella lista
-        this->bunker.insert_head(cannone);
-    }
-
-    //genera tutti i FUEL all'inizio
-    for (int i = 0; i < MAX_FUEL; i++)
-    {
-        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
-
-        //costruisci punto della superfice
-        Punto p = Punto(x, y);
-#ifdef NOME_PUNTO
-        p.setName("Fuel" + to_string(i));
-#endif
-        Fuel metano = Fuel(p);
-        //inserirlo nella lista
-        this->fuel.insert_head(metano);
-    }
 }
 
-//aggiorno la lista di proiettili
-void Pianeta::aggiornaCoordinateProiettili(sf::Time tempo) {//
-}
-
+//PRIVATA
 //ordina la lista dei punti del pianeta...
 void Pianeta::ordinaPunti(void)
 {
@@ -310,7 +276,7 @@ void Pianeta::ordinaPunti(void)
 
     //inizializzo l'iteratore della lista
     struct Elem<Punto> *iter = this->surface.head();
-    
+
     //inizializzo i vettori di angoli e di posizioni
     if (!(this->surface.empty()))
     {
@@ -344,4 +310,78 @@ void Pianeta::ordinaPunti(void)
     //eseguo algoritmo di ordinamento e sistemo la lista
     this->surface.ordina(MAX_SUPERFICE, angoli, B, posizioni, posAux);
 #endif //ORDINA
+}
+
+//PRIVATA
+void Pianeta::generaBunkerFuel()
+{
+    int numeroFuel = 0, numeroBunker = 1;
+    const int tipo_niente = 0, tipo_fuel = 1, tipo_bunker = 2;
+    Punto p1, p2, pMedio;
+    if (!(this->surface.empty()))
+    {
+        //primo elemento utile non la sentinella
+        struct Elem<Punto> *iter = this->surface.head();
+        struct Elem<Punto> *sentinella = this->surface.prev(iter);
+        //se non vuota e non finita
+        while (!(this->surface.finished(iter)))
+        {
+            int cosaGenero = rand() % 3;
+            //se devo generare qualcosa
+            if (cosaGenero != tipo_niente)
+            {
+                //stampo elemento MODIFICATA!
+                p1 = this->surface.read(iter);
+                //se il successivo non è la sentinella
+                if (this->surface.next(iter) != sentinella)
+                {
+                    p2 = this->surface.read(this->surface.next(iter));
+                }
+                else
+                {
+                    p2 = this->surface.read(this->surface.tail());
+                }
+                //calcolo il punto medio
+                int x_medio = (p1.getX() + p2.getX()) / 2;
+                int y_medio = (p1.getY() + p2.getY()) / 2;
+                pMedio.setCoord(x_medio, y_medio);
+                //se devo generare del fuel e non ho superato il massimo
+                if (cosaGenero == tipo_fuel && numeroFuel < MAX_FUEL)
+                {
+                    //aggiorno il numero di fuel generati
+                    numeroFuel++;
+#ifdef NOME_PUNTO
+                        pMedio.setName("Fuel" + to_string(numeroFuel));
+#endif
+                    //genero il carburante
+                    Fuel metano = Fuel(pMedio);
+                    //inserirlo nella lista
+                    this->fuel.insert_head(metano);
+                }
+                //se devo generare un bunker e non ho superato il massimo
+                if (cosaGenero == tipo_bunker && numeroBunker < MAX_BUNKER)
+                {
+                    //aggiorno il numero di bunker generati
+                    numeroBunker++;
+#ifdef NOME_PUNTO
+                    pMedio.setName("Bunker" + to_string(numeroBunker));
+#endif
+                    Bunker cannone = Bunker(pMedio);
+                    cannone.genera();
+                    //inserirlo nella lista
+                    this->bunker.insert_head(cannone);
+                }
+            }
+            //passo al successivo
+            iter = this->surface.next(iter);
+        }
+    }
+}
+
+//PUBBLICA
+void Pianeta::genera(void)
+{
+    this->generaPunti();
+    this->ordinaPunti();
+    this->generaBunkerFuel();
 }

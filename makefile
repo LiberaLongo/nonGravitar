@@ -57,10 +57,10 @@ Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR)
 	$(COMPILE) $(S)Fuel.cpp
 
-Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp
+Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Fuel.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Navicella.cpp
 
-Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Lista.hpp
+Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Lista.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Bunker.cpp
 
 Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Lista.hpp $(H)utils.hpp

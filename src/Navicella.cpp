@@ -146,9 +146,10 @@ void Navicella::draw(sf::RenderWindow &window)
     //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
 
-    //disegna sulla window passata per riferimento
-    window.draw(triangolo);
+    //i proiettilo sono disegnati prima della navicella
     this->drawProiettili(window);
+    //disegna la navicella
+    window.draw(triangolo);
 }
 
 void Navicella::move(float angolo)

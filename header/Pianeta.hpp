@@ -28,6 +28,12 @@ private:
     //cose grafiche e basta
     ColoreRGB colore;
     ColoreRGB atmosfera;
+
+private:
+    void generaPunti(void);
+    void ordinaPunti(void);
+    void generaBunkerFuel(void);
+
 public:
     //COSTRUTTORI
     //costruttore void
@@ -88,11 +94,5 @@ public:
 
     //genera Pianeta
     void genera(void);
-
-    //ordina la lista dei punti del pianeta...
-    void ordinaPunti(void);
-
-    //aggiorno la lista di proiettili
-    void aggiornaCoordinateProiettili(sf::Time tempo);
 };
 #endif

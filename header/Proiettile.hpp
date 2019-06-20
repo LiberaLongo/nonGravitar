@@ -12,7 +12,7 @@
 class Proiettile : public Direzione //disegnabile
 {
 private:
-    float size = 1.f;
+    float size = 2.f;
     ColoreRGB colore = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
 public:
     //costruttore vuoto
