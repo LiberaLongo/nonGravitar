@@ -30,10 +30,12 @@ public:
     //costruttore void
     Entity(void);
     //costruttori punto
-    Entity(Direzione dir);
+    Entity(Punto centro);
     Entity(float x, float y);
-    Entity(float x, float y, float angolo, float speed, float size);
+    Entity(Direzione dir, float size);
     //costruttori completi
+    Entity(Punto centro, float angolo, float speed, float size);
+    Entity(float x, float y, float angolo, float speed, float size);
     Entity(Direzione dir, float size, Lista<Proiettile> proiettili); 
     Entity(float x, float y, float angolo, float speed, float size, Lista<Proiettile> proiettili);
     //distruttori

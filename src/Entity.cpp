@@ -14,15 +14,27 @@ Entity::Entity(void)
     //default tutto
 }
 //costruttori Direzione
-Entity::Entity(Direzione dir)
+Entity::Entity(Punto centro)
 {
-    this->dir = dir;
-    //default size, dir, carburante
+    //default tutto
+    this->dir.setOrigine(centro.getX(), centro.getY());
 }
 Entity::Entity(float x, float y)
 {
+    //default tutto
     this->dir.setOrigine(x, y);
-    //default size, dir, carburante
+}
+Entity::Entity(Direzione dir, float size) {
+    this->dir = dir;
+    this->size = size;
+}
+//costruttori completi
+Entity::Entity(Punto centro, float angolo, float speed, float size)
+{
+    this->dir.setOrigine(centro.getX(), centro.getY());
+    this->dir.setAngolo(angolo);
+    this->dir.setSpeed(speed);    
+    this->size = size;
 }
 Entity::Entity(float x, float y, float angolo, float speed, float size)
 {
@@ -31,7 +43,6 @@ Entity::Entity(float x, float y, float angolo, float speed, float size)
     this->dir.setSpeed(speed);
     this->size = size;
 }
-//costruttori completi
 Entity::Entity(Direzione dir, float size, Lista<Proiettile> proiettili)
 {
     this->dir = dir;

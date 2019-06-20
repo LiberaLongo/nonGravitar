@@ -13,21 +13,18 @@ Navicella::Navicella(void)
     //default tutto
 }
 //costruttori punto
-Navicella::Navicella(Punto centro)
+Navicella::Navicella(Punto centro) : Entity(centro)
 {
     //default tutto
-    this->setCoord(centro.getX(), centro.getY());
 }
-Navicella::Navicella(float x, float y)
+Navicella::Navicella(float x, float y) : Entity(x, y)
 {
     //default tutto
-    this->setCoord(x, y);
 }
 //costruttori completi
-Navicella::Navicella(Direzione dir, Fuel carburante, float size) : Entity(dir)
+Navicella::Navicella(Direzione dir, Fuel carburante, float size) : Entity(dir, size)
 {
     this->carburante = carburante;
-    this->setSize(size);
 }
 Navicella::Navicella(float x, float y, float angolo, float speed, float size, float carburante) : Entity(x, y, angolo, speed, size)
 {

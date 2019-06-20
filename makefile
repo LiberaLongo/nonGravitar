@@ -63,7 +63,7 @@ Entity.o: $(S)Entity.cpp $(H)Entity.hpp $(HDR) $(H)Lista.hpp $(H)Proiettile.hpp
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Entity.hpp $(H)Fuel.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Navicella.cpp
 
-Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Lista.hpp $(H)Proiettile.hpp
+Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Entity.hpp $(H)Lista.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Bunker.cpp
 
 Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Lista.hpp $(H)utils.hpp
