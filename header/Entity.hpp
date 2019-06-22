@@ -11,6 +11,10 @@
 #include "./Lista.hpp"
 #include "./Proiettile.hpp"
 
+//ATTENZIONE! cpp inclusi per classi template
+#include "../utils/ListaParent.cpp"
+#include "../utils/Lista.cpp"
+
 template class Lista<Proiettile>;
 
 extern float SIZE_NAVICELLA;

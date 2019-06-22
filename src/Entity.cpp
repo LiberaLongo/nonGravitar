@@ -3,7 +3,7 @@
 #include "../header/Entity.hpp"
 
 //#define DEBUG
-//#define DEBUG_PROIETTILI
+#define DEBUG_PROIETTILI
 
 extern float WIDTH, HEIGHT;
 
@@ -24,7 +24,8 @@ Entity::Entity(float x, float y)
     //default tutto
     this->dir.setOrigine(x, y);
 }
-Entity::Entity(Direzione dir, float size) {
+Entity::Entity(Direzione dir, float size)
+{
     this->dir = dir;
     this->size = size;
 }
@@ -33,7 +34,7 @@ Entity::Entity(Punto centro, float angolo, float speed, float size)
 {
     this->dir.setOrigine(centro.getX(), centro.getY());
     this->dir.setAngolo(angolo);
-    this->dir.setSpeed(speed);    
+    this->dir.setSpeed(speed);
     this->size = size;
 }
 Entity::Entity(float x, float y, float angolo, float speed, float size)
@@ -158,6 +159,7 @@ bool Entity::isOutsideScreen(void)
 //aggiorno la lista di proiettili
 void Entity::aggiornaCoordinateProiettili(sf::Time tempo)
 {
+    
     int millisecondi = tempo.asMilliseconds();
     //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
     if (millisecondi % AGGIORNA == 0)
@@ -169,24 +171,28 @@ void Entity::aggiornaCoordinateProiettili(sf::Time tempo)
             //se non vuota e non finita
             while (!(this->proiettili.finished(iter)))
             {
+                
                 //leggo il proiettile
                 Proiettile aggiornato = this->proiettili.read(iter);
                 aggiornato.move();
+                
                 if (aggiornato.isOutsideScreen())
                 {
                     //se il proiettile è uscito dallo schermo devo rimuoverlo
-                    this->proiettili.remove(iter);
+                    iter = this->proiettili.remove(iter);
 #ifdef DEBUG_PROIETTILI
                     cout << "un proiettile è uscito" << endl;
 #endif
                 }
                 else
                 {
+#ifdef DEBUG_PROIETTILI
+                    cout << "un proiettile è aggiornato" << endl;
+#endif
                     this->proiettili.write(iter, aggiornato);
+                    //passo al successivo
+                    iter = this->proiettili.next(iter);
                 }
-
-                //passo al successivo
-                iter = this->proiettili.next(iter);
             }
         }
     }

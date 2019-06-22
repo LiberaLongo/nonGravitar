@@ -4,13 +4,6 @@
 
 #include "./DisegnabileI.hpp"
 #include "./Entity.hpp"
-#include "./Direzione.hpp"
-
-#include "./Lista.hpp"
-
-//ATTENZIONE! cpp inclusi per classi template
-#include "../utils/ListaParent.cpp"
-#include "../utils/Lista.cpp"
 
 //per Bunker
 template class Lista<Direzione>;
