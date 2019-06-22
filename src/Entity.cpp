@@ -3,7 +3,7 @@
 #include "../header/Entity.hpp"
 
 //#define DEBUG
-#define DEBUG_PROIETTILI
+//#define DEBUG_PROIETTILI
 
 extern float WIDTH, HEIGHT;
 
