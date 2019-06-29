@@ -40,4 +40,4 @@ compilare
 (per pulire: `make clean`, ma non è necessario per ricompilare)
 
 eventualmente rilanciare il gioco (rieseguendo il programma)
-`./sfml-app`
+`./app`

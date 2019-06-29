@@ -15,9 +15,10 @@ S = ./src/
 U = ./utils/
 
 #comando per compilare
-CC = g++
-LINK = g++
-CFLAGS = -c -std=c++11
+CC = c1.exe
+LINK = link.exe
+CFLAGS = /c
+# -std=c++11
 COMPILE = $(CC) $(CFLAGS)
 
 #indieme di header molto usati
@@ -31,69 +32,67 @@ OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o \
 all: app
 #lancia l'app in automatico
 	./$<
-
 #cose utili (in ./utils)
 ListaParent.o: $(U)ListaParent.cpp $(H)ListaParent.hpp
-	$(COMPILE) $(U)ListaParent.cpp -o ListaParent.o
+	$(COMPILE) $(U)ListaParent.cpp /ListaParent.o
 
 Lista.o: $(U)Lista.cpp $(H)Lista.hpp
-	$(COMPILE) $(U)Lista.cpp -o Lista.o
+	$(COMPILE) $(U)Lista.cpp /Lista.o
 
 Punto.o: $(U)Punto.cpp $(H)Punto.hpp
-	$(COMPILE) $(U)Punto.cpp -o Punto.o
+	$(COMPILE) $(U)Punto.cpp /Punto.o
 
 utils.o: $(U)utils.cpp $(H)utils.hpp $(H)Punto.hpp
-	$(COMPILE) $(U)utils.cpp -o utils.o
+	$(COMPILE) $(U)utils.cpp /utils.o
 
 ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 	$(COMPILE) $(U)ColoreRGB.cpp
 
 #oggetti del gioco (in ./src)
 Direzione.o: $(S)Direzione.cpp $(HDR)
-	$(COMPILE) $(S)Direzione.cpp -o Direzione.o
+	$(COMPILE) $(S)Direzione.cpp /Direzione.o
 
 Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
-	$(COMPILE) $(S)Proiettile.cpp -o Proiettile.o
+	$(COMPILE) $(S)Proiettile.cpp /Proiettile.o
 
 Entity.o: $(S)Entity.cpp $(H)Entity.hpp $(HDR) $(H)Lista.hpp $(H)Proiettile.hpp
-	$(COMPILE) $(S)Entity.cpp -o Entity.o
+	$(COMPILE) $(S)Entity.cpp /Entity.o
 
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR) $(H)ColoreRGB.hpp
 	$(COMPILE) $(S)Fuel.cpp
 
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Entity.hpp $(H)Fuel.hpp $(H)Proiettile.hpp
-	$(COMPILE) $(S)Navicella.cpp -o Navicella.o
+	$(COMPILE) $(S)Navicella.cpp /Navicella.o
 
 Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Entity.hpp $(H)Lista.hpp $(H)Proiettile.hpp
-	$(COMPILE) $(S)Bunker.cpp -o Bunker.o
+	$(COMPILE) $(S)Bunker.cpp /Bunker.o
 
 Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Lista.hpp $(H)utils.hpp
-	$(COMPILE) $(S)Pianeta.cpp -o Pianeta.o
+	$(COMPILE) $(S)Pianeta.cpp /Pianeta.o
 
 SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)Lista.hpp $(H)utils.hpp $(H)Navicella.hpp
-	$(COMPILE) $(S)SistemaSolare.cpp -o SistemaSolare.o
+	$(COMPILE) $(S)SistemaSolare.cpp /SistemaSolare.o
 
 #cose per gestire le varie visuali di gioco (in ./main)
 
 visualePianeta.o: $(M)visualePianeta.cpp $(H)visualePianeta.hpp $(H)cScreen.hpp $(H)utils.hpp $(H)SistemaSolare.hpp
-	$(COMPILE) $(M)visualePianeta.cpp -o visualePianeta.o
+	$(COMPILE) $(M)visualePianeta.cpp /visualePianeta.o
 
 visualeSistemaSolare.o: $(M)visualeSistemaSolare.cpp $(H)visualeSistemaSolare.hpp $(H)cScreen.hpp $(H)Navicella.hpp $(H)SistemaSolare.hpp
-	$(COMPILE) $(M)visualeSistemaSolare.cpp -o visualeSistemaSolare.o
+	$(COMPILE) $(M)visualeSistemaSolare.cpp /visualeSistemaSolare.o
 
 Gioco.o: $(M)Gioco.cpp $(H)Gioco.hpp $(H)visualeSistemaSolare.hpp $(H)visualePianeta.hpp
-	$(COMPILE) $(M)Gioco.cpp -o Gioco.o
+	$(COMPILE) $(M)Gioco.cpp /Gioco.o
 
 main.o: $(M)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp
-	$(COMPILE) $(M)main.cpp -o main.o
+	$(COMPILE) $(M)main.cpp /main.o
 
 #link all into an executable
 app: $(OBJ)
 #	linkiamo tutti gli object e la grafica SFML
-	$(LINK) $(OBJ) -o app $(LINK_SFML)
+	$(LINK) $(LINK_SFML) /OUT:app.exe $(OBJ)
 
 #clean target
-.PHONY: clean
 
 clean:
-	rm -rf *.o app
+	del *.o app.exe
