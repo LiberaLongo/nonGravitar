@@ -46,7 +46,7 @@ utils.o: $(U)utils.cpp $(H)utils.hpp $(H)Punto.hpp
 	$(COMPILE) $(U)utils.cpp /utils.o
 
 ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
-	$(COMPILE) $(U)ColoreRGB.cpp
+	$(COMPILE) $(U)ColoreRGB.cpp /ColoreRGB.o
 
 #oggetti del gioco (in ./src)
 Direzione.o: $(S)Direzione.cpp $(HDR)
@@ -59,7 +59,7 @@ Entity.o: $(S)Entity.cpp $(H)Entity.hpp $(HDR) $(H)Lista.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Entity.cpp /Entity.o
 
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR) $(H)ColoreRGB.hpp
-	$(COMPILE) $(S)Fuel.cpp
+	$(COMPILE) $(S)Fuel.cpp /Fuel.o
 
 Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Entity.hpp $(H)Fuel.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Navicella.cpp /Navicella.o
