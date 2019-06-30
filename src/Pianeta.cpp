@@ -345,7 +345,7 @@ void Pianeta::ordinaPunti(void)
 //PRIVATA
 void Pianeta::generaBunkerFuel()
 {
-    int numeroFuel = 0, numeroBunker = 1;
+    int numeroFuel = 0, numeroBunker = 0;
     const int tipo_niente = 0, tipo_fuel = 1, tipo_bunker = 2;
     Punto p1, p2, pMedio;
     if (!(this->surface.empty()))
@@ -375,8 +375,6 @@ void Pianeta::generaBunkerFuel()
                 int x_medio = (p1.getX() + p2.getX()) / 2;
                 int y_medio = (p1.getY() + p2.getY()) / 2;
                 pMedio.setCoord(x_medio, y_medio);
-                //calcolo l'angolo...
-                int angolo = 0.f;
                 //se devo generare del fuel e non ho superato il massimo
                 if (cosaGenero == tipo_fuel && numeroFuel < MAX_FUEL)
                 {
@@ -393,6 +391,8 @@ void Pianeta::generaBunkerFuel()
                 //se devo generare un bunker e non ho superato il massimo
                 if (cosaGenero == tipo_bunker && numeroBunker < MAX_BUNKER)
                 {
+                    //calcolo l'angolo...
+                    int angolo = p1.calcolaAngolo(p2)+90.f;
                     //aggiorno il numero di bunker generati
                     numeroBunker++;
 #ifdef NOME_PUNTO

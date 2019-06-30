@@ -63,7 +63,17 @@ void Bunker::draw(sf::RenderWindow &window)
 {
     ColoreRGB arancio = ColoreRGB(255, 129, 0);
     //codice per disegnare in seguito
-    sf::CircleShape triangolo(this->getSize(), 3);
+    //centro iniziale della figura prima di fare setPosition
+    float x = 0.f, y = 0.f; //centro: (0,0)
+    float size = this->getSize();
+    //crea una empty shape convex con 3 punti
+    sf::ConvexShape triangolo;
+    triangolo.setPointCount(3);
+    //definisci i punti rispetto a (0,0)
+    triangolo.setPoint(0, sf::Vector2f(x, y - size)); //(x, y - altezza)
+    triangolo.setPoint(1, sf::Vector2f(x - size, y));
+    triangolo.setPoint(2, sf::Vector2f(x + size, y));
+    //sf::CircleShape triangolo(this->getSize(), 3);
 
     //colore rosso se di tipo 0 arancione se di tipo 1
     switch(this->tipo) {
