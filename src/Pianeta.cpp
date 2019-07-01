@@ -346,7 +346,7 @@ void Pianeta::ordinaPunti(void)
 void Pianeta::generaBunkerFuel()
 {
     int numeroFuel = 0, numeroBunker = 0;
-    const int tipo_niente = 0, tipo_fuel = 1, tipo_bunker = 2;
+    enum {tipo_niente, tipo_fuel, tipo_bunker};
     Punto p1, p2, pMedio;
     if (!(this->surface.empty()))
     {
