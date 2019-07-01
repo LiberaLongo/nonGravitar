@@ -55,6 +55,8 @@ public:
 
     //distanza tra due punti
     float distance(float x, float y);
+    float distance(Punto p);
+    
     //è dentro?
     bool isNear(float x, float y, float width, float height);
     bool isNear(float x, float y, float size);

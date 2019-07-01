@@ -389,7 +389,7 @@ void Pianeta::generaBunkerFuel()
                     this->fuel.insert_head(metano);
                 }
                 //se devo generare un bunker e non ho superato il massimo
-                if (cosaGenero == tipo_bunker && numeroBunker < MAX_BUNKER)
+                if (cosaGenero == tipo_bunker && numeroBunker < MAX_BUNKER && p1.distance(p2) > SIZE_BUNKER*2)
                 {
                     //calcolo l'angolo...
                     int angolo = p1.calcolaAngolo(p2)+90.f;

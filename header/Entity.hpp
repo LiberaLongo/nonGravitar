@@ -23,8 +23,11 @@ class Entity
 {
 private:
     Direzione dir;
-    float size = SIZE_NAVICELLA;
+    float size = SIZE_BUNKER;
     Lista<Proiettile> proiettili;
+    int vita = 1; //il bunker ha 1 vita, la navicella ha 5 vite
+    int tipo = 1; //il bunker ha tipo 1, la navicella ha tipo 0
+    //NB: questo tipo differenzia navicella e bunker non i due tipi di bunker
 
 public:
     void drawProiettili(sf::RenderWindow &window);
@@ -34,14 +37,14 @@ public:
     //costruttore void
     Entity(void);
     //costruttori punto
-    Entity(Punto centro);
-    Entity(float x, float y);
-    Entity(Direzione dir, float size);
+    Entity(Punto centro, int vita, int tipo);
+    Entity(float x, float y, int vita, int tipo);
+    Entity(Direzione dir, float size, int vita, int tipo);
     //costruttori completi
-    Entity(Punto centro, float angolo, float speed, float size);
-    Entity(float x, float y, float angolo, float speed, float size);
-    Entity(Direzione dir, float size, Lista<Proiettile> proiettili); 
-    Entity(float x, float y, float angolo, float speed, float size, Lista<Proiettile> proiettili);
+    Entity(Punto centro, float angolo, float speed, float size, int vita, int tipo);
+    Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo);
+    Entity(Direzione dir, float size, int vita, int tipo, Lista<Proiettile> proiettili); 
+    Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo, Lista<Proiettile> proiettili);
     //distruttori
     virtual ~Entity(void);
 
@@ -60,6 +63,7 @@ public:
     float getAngolo(void);
     float getSpeed(void);
     float getSize(void);
+    int getVita(void);
     struct Elem<Proiettile> * getHead(void);
 
     //stampa
@@ -77,6 +81,9 @@ public:
     bool isNear(float x, float y, float size);
 
     bool isOutsideScreen(void);
+
+    //vita
+    void muori(void);
 
     //aggiorno la lista di proiettili
     void aggiornaCoordinateProiettili(sf::Time tempo);

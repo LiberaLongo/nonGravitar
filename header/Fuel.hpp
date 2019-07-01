@@ -12,8 +12,8 @@ class Fuel : public DisegnabileI
 private:
     int tipo = 0;
     Punto centro;
-    float quantita = FUEL1;
-    float size = 10.f;
+    float quantita = FUEL_1_QUANTITA;
+    float size = SIZE_FUEL;
 public:
     void generaTipo(void);
 public:

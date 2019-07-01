@@ -8,10 +8,10 @@ void Fuel::generaTipo(void)
     switch (this->tipo)
     {
     case 0:
-        this->quantita = FUEL1;
+        this->quantita = FUEL_1_QUANTITA;
         break;
     case 1:
-        this->quantita = FUEL2;
+        this->quantita = FUEL_2_QUANTITA;
         break;
     default:
         cout << "\nil tipo = " << this->tipo << " del fuel non ha senso\n";

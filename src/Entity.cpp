@@ -14,48 +14,62 @@ Entity::Entity(void)
     //default tutto
 }
 //costruttori Direzione
-Entity::Entity(Punto centro)
+Entity::Entity(Punto centro, int vita, int tipo)
 {
     //default tutto
     this->dir.setOrigine(centro.getX(), centro.getY());
+    this->vita = vita;
+    this->tipo = tipo;
 }
-Entity::Entity(float x, float y)
+Entity::Entity(float x, float y, int vita, int tipo)
 {
     //default tutto
     this->dir.setOrigine(x, y);
+    this->vita = vita;
+    this->tipo = tipo;
 }
-Entity::Entity(Direzione dir, float size)
+Entity::Entity(Direzione dir, float size, int vita, int tipo)
 {
     this->dir = dir;
     this->size = size;
+    this->vita = vita;
+    this->tipo = tipo;
 }
 //costruttori completi
-Entity::Entity(Punto centro, float angolo, float speed, float size)
+Entity::Entity(Punto centro, float angolo, float speed, float size, int vita, int tipo)
 {
     this->dir.setOrigine(centro.getX(), centro.getY());
     this->dir.setAngolo(angolo);
     this->dir.setSpeed(speed);
     this->size = size;
+    this->vita = vita;
+    this->tipo = tipo;
 }
-Entity::Entity(float x, float y, float angolo, float speed, float size)
+Entity::Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo)
 {
     this->dir.setOrigine(x, y);
     this->dir.setAngolo(angolo);
     this->dir.setSpeed(speed);
     this->size = size;
+    this->vita = vita;
+    this->tipo = tipo;
 }
-Entity::Entity(Direzione dir, float size, Lista<Proiettile> proiettili)
+Entity::Entity(Direzione dir, float size, int vita, int tipo, Lista<Proiettile> proiettili)
 {
     this->dir = dir;
     this->size = size;
+    this->vita = vita;
+    this->tipo = tipo;
     this->proiettili = proiettili;
 }
-Entity::Entity(float x, float y, float angolo, float speed, float size, Lista<Proiettile> proiettili)
+Entity::Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo, Lista<Proiettile> proiettili)
 {
     this->dir.setOrigine(x, y);
     this->dir.setAngolo(angolo);
     this->dir.setSpeed(speed);
     this->size = size;
+    this->vita = vita;
+    this->tipo = tipo;
     this->proiettili = proiettili;
 }
 
@@ -112,7 +126,10 @@ float Entity::getSize(void)
 {
     return this->size;
 }
-
+int Entity::getVita(void)
+{
+    return this->vita;
+}
 //stampa
 void Entity::print(void)
 {
@@ -156,10 +173,15 @@ bool Entity::isOutsideScreen(void)
     return !this->dir.isNear(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
 }
 
+void Entity::muori(void)
+{
+    this->vita--;
+}
+
 //aggiorno la lista di proiettili
 void Entity::aggiornaCoordinateProiettili(sf::Time tempo)
 {
-    
+
     int millisecondi = tempo.asMilliseconds();
     //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
     if (millisecondi % AGGIORNA == 0)
@@ -171,11 +193,11 @@ void Entity::aggiornaCoordinateProiettili(sf::Time tempo)
             //se non vuota e non finita
             while (!(this->proiettili.finished(iter)))
             {
-                
+
                 //leggo il proiettile
                 Proiettile aggiornato = this->proiettili.read(iter);
                 aggiornato.move();
-                
+
                 if (aggiornato.isOutsideScreen())
                 {
                     //se il proiettile è uscito dallo schermo devo rimuoverlo

@@ -8,23 +8,23 @@ Bunker::Bunker(void)
     this->tipo = rand() % 2;
 }
 //costruttore minimale
-Bunker::Bunker(Punto centro, float angolo) : Entity(centro)
+Bunker::Bunker(Punto centro, float angolo) : Entity(centro, VITA_BUNKER, TIPO_BUNKER)
 {
     this->setAngolo(angolo);
     this->tipo = rand() % 2;
 }
-Bunker::Bunker(float x, float y, float angolo) : Entity(x, y)
+Bunker::Bunker(float x, float y, float angolo) : Entity(x, y, VITA_BUNKER, TIPO_BUNKER)
 {
     this->setAngolo(angolo);
     this->tipo = rand() % 2;
 }
 //costruttore completo
-Bunker::Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir) : Entity(centro, angolo, speed, size)
+Bunker::Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir) : Entity(centro, angolo, speed, size, VITA_BUNKER, TIPO_BUNKER)
 {
     this->tipo = rand() % 2;
     //head dir
 }
-Bunker::Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir) : Entity(x, y, angolo, speed, size)
+Bunker::Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir) : Entity(x, y, angolo, speed, size, VITA_BUNKER, TIPO_BUNKER)
 {
     this->tipo = rand() % 2;
     //head dir

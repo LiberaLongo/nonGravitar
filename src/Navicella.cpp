@@ -4,29 +4,32 @@
 //#define DEBUG
 //#define DEBUG_PROIETTILI
 
-extern float WIDTH, HEIGHT;
+extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 
 //COSTRUTTORI
 //costruttore void
 Navicella::Navicella(void)
 {
     //default tutto
+    Entity::setSize(SIZE_NAVICELLA);
 }
 //costruttori punto
-Navicella::Navicella(Punto centro) : Entity(centro)
+Navicella::Navicella(Punto centro) : Entity(centro, VITA_NAVICELLA, TIPO_NAVICELLA)
 {
     //default tutto
+    Entity::setSize(SIZE_NAVICELLA);
 }
-Navicella::Navicella(float x, float y) : Entity(x, y)
+Navicella::Navicella(float x, float y) : Entity(x, y, VITA_NAVICELLA, TIPO_NAVICELLA)
 {
     //default tutto
+    Entity::setSize(SIZE_NAVICELLA);
 }
 //costruttori completi
-Navicella::Navicella(Direzione dir, Fuel carburante, float size) : Entity(dir, size)
+Navicella::Navicella(Direzione dir, Fuel carburante, float size) : Entity(dir, size, VITA_NAVICELLA, TIPO_NAVICELLA)
 {
     this->carburante = carburante;
 }
-Navicella::Navicella(float x, float y, float angolo, float speed, float size, float carburante) : Entity(x, y, angolo, speed, size)
+Navicella::Navicella(float x, float y, float angolo, float speed, float size, float carburante) : Entity(x, y, angolo, speed, size, VITA_NAVICELLA, TIPO_NAVICELLA)
 {
     this->carburante.setQuantita(carburante);
 }

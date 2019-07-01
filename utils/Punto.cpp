@@ -75,22 +75,22 @@ bool Punto::confronto(Punto p)
 void Punto::draw(sf::RenderWindow &window)
 {
     float size = 5.f;
-    sf::RectangleShape rectangle(sf::Vector2f(size*2, size*2));
+    sf::RectangleShape rectangle(sf::Vector2f(size * 2, size * 2));
     rectangle.setPosition(this->x - size, this->y - size);
 
 //nome se esiste
 #ifdef NOME_PUNTO
-	sf::Font Font;
-	sf::Text nomePunto;
+    sf::Font Font;
+    sf::Text nomePunto;
 
     if (!Font.loadFromFile("verdanab.ttf"))
-	{
-		cerr << "Error loading verdanab.ttf" << endl;
-	}
-	nomePunto.setFont(Font);
-	nomePunto.setCharacterSize(20);
-	nomePunto.setString(this->name);
-	nomePunto.setPosition(this->x, this->y);
+    {
+        cerr << "Error loading verdanab.ttf" << endl;
+    }
+    nomePunto.setFont(Font);
+    nomePunto.setCharacterSize(20);
+    nomePunto.setString(this->name);
+    nomePunto.setPosition(this->x, this->y);
 #endif
 
     //il punto è al centro del rettangolo
@@ -106,6 +106,11 @@ float Punto::distance(float x, float y)
 {
     return (float)sqrt(pow(this->getX() - x, 2) + pow(this->getY() - y, 2));
 }
+float Punto::distance(Punto p)
+{
+    return this->distance(p.getX(), p.getY());
+}
+
 //il punto è dentro un rettangolo con centro x y e dimensioni "raddoppiate"
 bool Punto::isNear(float x, float y, float width, float height)
 {
