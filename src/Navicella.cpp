@@ -84,7 +84,8 @@ void Navicella::draw(sf::RenderWindow &window)
 }
 
 //controlli di movimento
-void Navicella::move(float angle) {
+void Navicella::move(float angle)
+{
     this->setAngolo(angle);
     this->Entity::move();
 }
@@ -104,4 +105,74 @@ void Navicella::shoot(Punto mouseclick)
 bool Navicella::isNear(Pianeta planet)
 {
     return this->Entity::isNear(planet.getX(), planet.getY(), planet.getRaggio());
+}
+
+void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita)
+{
+    Lista<Bunker> listaEntita;
+    listaEntita.setHead(headEntita);
+
+    int millisecondi = tempo.asMilliseconds();
+    //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
+    if (millisecondi % AGGIORNA == 0)
+    {
+        if (!(this->proiettili.empty()))
+        {
+            //primo elemento utile non la sentinella
+            struct Elem<Proiettile> *iterProiettile = this->proiettili.head();
+            //se non vuota e non finita
+            while (!(this->proiettili.finished(iterProiettile)))
+            {
+
+                //leggo il proiettile
+                Proiettile aggiornato = this->proiettili.read(iterProiettile);
+                aggiornato.move();
+
+                if (aggiornato.isOutsideScreen())
+                {
+                    //se il proiettile è uscito dallo schermo devo rimuoverlo
+                    iterProiettile = this->proiettili.remove(iterProiettile);
+#ifdef DEBUG_PROIETTILI
+                    cout << "un proiettile è uscito" << endl;
+#endif
+                }
+                else
+                {
+                    bool colpitoQualcosa = false;
+                    //controllo se il proiettile è troppo vicino al centro di un altra entità
+
+                    if (!listaEntita.empty())
+                    {
+                        //primo elemento utile non la sentinella
+                        struct Elem<Bunker> *iterEntita = listaEntita.head();
+                        while (!listaEntita.finished(iterEntita))
+                        {
+                            float size;
+                            Bunker controllataEntita = listaEntita.read(iterEntita);
+                            Punto centroEntita = Punto(controllataEntita.getX(), controllataEntita.getY());
+                            Punto centroProiettile = Punto(aggiornato.getX(), aggiornato.getY());
+                            if (centroProiettile.isNear(centroEntita, this->getSize()))
+                            {
+                                colpitoQualcosa = true;
+                            }
+                            //passo al successivo
+                            iterEntita = listaEntita.next(iterEntita);
+                        }
+                    }
+
+                    if (colpitoQualcosa)
+                    {
+                        //rimuovo il proiettile
+                        iterProiettile = this->proiettili.next(iterProiettile);
+                    }
+                    else
+                    {
+                        this->proiettili.write(iterProiettile, aggiornato);
+                        //passo al successivo
+                        iterProiettile = this->proiettili.next(iterProiettile);
+                    }
+                }
+            }
+        }
+    }
 }

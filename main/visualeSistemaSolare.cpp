@@ -68,6 +68,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             case sf::Event::Closed:
                 return EXIT;
                 break;
+            /*
             //mouse cliccato
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
@@ -80,6 +81,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 #endif
                 }
                 break;
+            */
             //tasti premuti?
             case sf::Event::KeyPressed:
                 //...
@@ -89,10 +91,12 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 case sf::Keyboard::Escape:
                     return EXIT;
                     break;
+                /*
                 //tasto Spazio
                 case sf::Keyboard::Space:
                     this->player.shoot();                    
                     break;
+                */
                 //WASD
                 case sf::Keyboard::W:
                     NavicellaMoved = true;
@@ -160,8 +164,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         sistemasolare.draw(App);
 
         this->player.draw(App);
+        /*
         this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime());
-
+        */
         if (haCliccato)
             mouseClick.draw(App);
 

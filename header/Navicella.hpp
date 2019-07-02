@@ -50,6 +50,9 @@ public:
 
     //controlla se è dentro il pianeta
     bool isNear(Pianeta planet);
+
+    //override aggiornaProiettili di Entity
+    void aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita);
 };
 
 #endif //NAVICELLA_H

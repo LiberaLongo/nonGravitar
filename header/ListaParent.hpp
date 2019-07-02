@@ -32,6 +32,7 @@ public:
 
 	//metodi
 	bool empty(void);
+	//primo elemento della lista esclusa sentinella
 	struct Elem<Tipo>* head(void);
 	struct Elem<Tipo>* tail(void);
 	struct Elem<Tipo>* next(struct Elem<Tipo>* p);

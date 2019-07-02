@@ -24,10 +24,12 @@ class Entity
 private:
     Direzione dir;
     float size = SIZE_BUNKER;
-    Lista<Proiettile> proiettili;
     int vita = 1; //il bunker ha 1 vita, la navicella ha 5 vite
     int tipo = 1; //il bunker ha tipo 1, la navicella ha tipo 0
     //NB: questo tipo differenzia navicella e bunker non i due tipi di bunker
+
+protected:
+    Lista<Proiettile> proiettili;
 
 public:
     void drawProiettili(sf::RenderWindow &window);
@@ -81,7 +83,7 @@ public:
     void muori(void);
 
     //aggiorno la lista di proiettili
-    void aggiornaCoordinateProiettili(sf::Time tempo);
+    void aggiornaCoordinateProiettili(sf::Time tempo, Punto centroNavicella);
 };
 
 #endif //NAVICELLA_H

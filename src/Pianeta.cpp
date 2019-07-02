@@ -129,6 +129,14 @@ struct Elem<Bunker> *
 Pianeta::getHeadBunker(void)
 {
     return this->bunker.getHead();
+} struct Elem<Punto> *
+
+/*ATTENZIONE!
+Serve la lista dei centri dei bunker
+per controllare i proiettili di entity*/
+Pianeta::getHeadCentriBunker(void)
+{
+    return this->centriBunker.getHead();
 }
 
 //conta i punti della superficie
@@ -322,7 +330,12 @@ void Pianeta::ordinaPunti(void)
 void Pianeta::generaBunkerFuel()
 {
     int numeroFuel = 0, numeroBunker = 0;
-    enum {tipo_niente, tipo_fuel, tipo_bunker};
+    enum
+    {
+        tipo_niente,
+        tipo_fuel,
+        tipo_bunker
+    };
     Punto p1, p2, pMedio;
     if (!(this->surface.empty()))
     {
@@ -365,10 +378,10 @@ void Pianeta::generaBunkerFuel()
                     this->fuel.insert_head(metano);
                 }
                 //se devo generare un bunker e non ho superato il massimo
-                if (cosaGenero == tipo_bunker && numeroBunker < MAX_BUNKER && p1.distance(p2) > SIZE_BUNKER*2)
+                if (cosaGenero == tipo_bunker && numeroBunker < MAX_BUNKER && p1.distance(p2) > SIZE_BUNKER * 2)
                 {
                     //calcolo l'angolo...
-                    int angolo = p1.calcolaAngolo(p2)+90.f;
+                    int angolo = p1.calcolaAngolo(p2) + 90.f;
                     //aggiorno il numero di bunker generati
                     numeroBunker++;
 #ifdef NOME_PUNTO
@@ -378,6 +391,12 @@ void Pianeta::generaBunkerFuel()
                     cannone.genera();
                     //inserirlo nella lista
                     this->bunker.insert_head(cannone);
+
+                    /*ATTENZIONE!
+                    Serve la lista dei centri dei bunker
+                    per controllare i proiettili di entity*/
+                    //inserisco nella lista dei centri
+                    this->centriBunker.insert_head(pMedio);
                 }
             }
             //passo al successivo

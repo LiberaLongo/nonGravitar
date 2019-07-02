@@ -22,12 +22,18 @@ class Pianeta : public DisegnabileI
 private:
     Punto centro;
     float raggio = PIANETA_RAGGIO;
-    Lista<Punto> surface;
-    Lista<Fuel> fuel;
-    Lista<Bunker> bunker;
     //cose grafiche e basta
     ColoreRGB colore;
     ColoreRGB atmosfera;
+
+    //liste
+    Lista<Punto> surface;
+    Lista<Fuel> fuel;
+    Lista<Bunker> bunker;
+    /*ATTENZIONE!
+    Serve la lista dei centri dei bunker
+    per controllare i proiettili di entity*/
+    Lista<Punto> centriBunker;
 
 private:
     void generaPunti(void);
@@ -76,6 +82,10 @@ public:
     struct Elem<Punto> *getHeadSurface(void);
     struct Elem<Fuel> *getHeadFuel(void);
     struct Elem<Bunker> *getHeadBunker(void);
+    /*ATTENZIONE!
+    Serve la lista dei centri dei bunker
+    per controllare i proiettili di entity*/
+    struct Elem<Punto> *getHeadCentriBunker();
 
     //conta i punti della superficie
     int lunghezzaSuperfice(void);

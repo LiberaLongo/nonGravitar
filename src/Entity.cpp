@@ -135,9 +135,8 @@ void Entity::muori(void)
 }
 
 //aggiorno la lista di proiettili
-void Entity::aggiornaCoordinateProiettili(sf::Time tempo)
+void Entity::aggiornaCoordinateProiettili(sf::Time tempo, Punto centroNavicella)
 {
-
     int millisecondi = tempo.asMilliseconds();
     //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
     if (millisecondi % AGGIORNA == 0)
@@ -145,31 +144,38 @@ void Entity::aggiornaCoordinateProiettili(sf::Time tempo)
         if (!(this->proiettili.empty()))
         {
             //primo elemento utile non la sentinella
-            struct Elem<Proiettile> *iter = this->proiettili.head();
+            struct Elem<Proiettile> *iterProiettile = this->proiettili.head();
             //se non vuota e non finita
-            while (!(this->proiettili.finished(iter)))
+            while (!(this->proiettili.finished(iterProiettile)))
             {
 
                 //leggo il proiettile
-                Proiettile aggiornato = this->proiettili.read(iter);
+                Proiettile aggiornato = this->proiettili.read(iterProiettile);
                 aggiornato.move();
 
                 if (aggiornato.isOutsideScreen())
                 {
                     //se il proiettile è uscito dallo schermo devo rimuoverlo
-                    iter = this->proiettili.remove(iter);
+                    iterProiettile = this->proiettili.remove(iterProiettile);
 #ifdef DEBUG_PROIETTILI
                     cout << "un proiettile è uscito" << endl;
 #endif
                 }
                 else
                 {
-#ifdef DEBUG_PROIETTILI
-                    cout << "un proiettile è aggiornato" << endl;
-#endif
-                    this->proiettili.write(iter, aggiornato);
+                    Punto centroEntita = Punto (this->getX(), this->getY());
+                    if (centroEntita.isNear(centroNavicella, this->size))
+                    {
+                        //rimuovo il proiettile se il bunker colpisce la navicella
+                        iterProiettile = this->proiettili.remove(iterProiettile);
+                    }
+                    else
+                    {
+                        //aggiorno il proiettile
+                        this->proiettili.write(iterProiettile, aggiornato);
+                    }
                     //passo al successivo
-                    iter = this->proiettili.next(iter);
+                    iterProiettile = this->proiettili.next(iterProiettile);
                 }
             }
         }
