@@ -33,13 +33,13 @@ public:
     void drawProiettili(sf::RenderWindow &window);
 
 public:
-    //COSTRUTTORI
-    //costruttore void
+    //costruttore vuoto
     Entity(void);
+    //altri costruttori
     Entity(Punto centro, int vita, int tipo);
     Entity(float x, float y, int vita, int tipo);
     
-    //distruttori
+    //distruttore
     virtual ~Entity(void) {};
 
     //SETTERS
@@ -70,6 +70,7 @@ public:
     void move(void);
 
     //spara
+    void shoot(ColoreRGB colore);
     void shoot(Punto mouseclick, ColoreRGB colore);
 
     bool isNear(float x, float y, float size);

@@ -130,9 +130,3 @@ void Direzione::move(void)
     cout << endl;
 #endif
 }
-
-void Direzione::shoot(Punto mouseclick)
-{
-    this->setAngolo(mouseclick);
-    //se abbiamo bisogno restituiamo l'angolo
-}

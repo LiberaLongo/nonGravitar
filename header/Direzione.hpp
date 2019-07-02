@@ -54,8 +54,6 @@ public:
 
     //move
     void move(void);
-    //spara
-    void shoot(Punto mouseclick);
 };
 
 #endif

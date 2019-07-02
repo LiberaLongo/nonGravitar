@@ -12,6 +12,7 @@ class Bunker : public Entity
 {
 private:
     int tipo = 0;
+    ColoreRGB coloreProiettile = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
     Lista<Direzione> headDirezioni;
 
 public:

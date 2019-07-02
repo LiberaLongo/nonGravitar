@@ -17,6 +17,7 @@ class Navicella : public Entity
 {
 private:
     Fuel carburante;
+    ColoreRGB coloreProiettile = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
 
 public:
     //costruttore vuoto
@@ -26,7 +27,7 @@ public:
     //non usato, ma simile
     Navicella(Punto centro);
 
-    //distruttori
+    //distruttore
     virtual ~Navicella(void) {};
 
     //setters
@@ -44,7 +45,8 @@ public:
     void move(float angle);
 
     //spara
-    void shoot(Punto mouseclick);
+    void shoot(void); //sparo nella mia direzione
+    void shoot(Punto mouseclick); //sparo nella direzione del mouse
 
     //controlla se è dentro il pianeta
     bool isNear(Pianeta planet);

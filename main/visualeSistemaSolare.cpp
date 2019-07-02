@@ -89,6 +89,10 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 case sf::Keyboard::Escape:
                     return EXIT;
                     break;
+                //tasto Spazio
+                case sf::Keyboard::Space:
+                    this->player.shoot();                    
+                    break;
                 //WASD
                 case sf::Keyboard::W:
                     NavicellaMoved = true;

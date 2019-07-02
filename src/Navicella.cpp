@@ -89,11 +89,16 @@ void Navicella::move(float angle) {
     this->Entity::move();
 }
 
+void Navicella::shoot(void)
+{
+    //chiamo la shoot del padre Entity
+    this->Entity::shoot(this->coloreProiettile);
+}
+
 void Navicella::shoot(Punto mouseclick)
 {
-    ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
     //chiamo la shoot del padre Entity
-    this->Entity::shoot(mouseclick, giallo);
+    this->Entity::shoot(mouseclick, this->coloreProiettile);
 }
 
 bool Navicella::isNear(Pianeta planet)

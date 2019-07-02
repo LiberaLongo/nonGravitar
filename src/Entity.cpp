@@ -105,12 +105,18 @@ void Entity::move(void)
     //WASD
     this->dir.move();
 }
+void Entity::shoot(ColoreRGB colore)
+{
+    //creo un nuovo proiettile e lo aggiungo alla lista
+    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), colore);
+    this->proiettili.insert_head(newProiettile);
+}
 void Entity::shoot(Punto mouseclick, ColoreRGB colore)
 {
     //aggiorna la direzione a cui punta la Entity
-    this->dir.shoot(mouseclick);
-    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), colore);
-    this->proiettili.insert_head(newProiettile);
+    this->dir.setAngolo(mouseclick);
+    //e spara
+    this->shoot(colore);
 }
 
 bool Entity::isNear(float x, float y, float size)
