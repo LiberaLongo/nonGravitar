@@ -145,7 +145,7 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
                     {
                         //primo elemento utile non la sentinella
                         struct Elem<Bunker> *iterEntita = listaEntita.head();
-                        while (!listaEntita.finished(iterEntita))
+                        while (!listaEntita.finished(iterEntita) && !colpitoQualcosa)
                         {
                             float size;
                             Bunker controllataEntita = listaEntita.read(iterEntita);
@@ -154,18 +154,17 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
                             if (centroProiettile.isNear(centroEntita, this->getSize()))
                             {
                                 colpitoQualcosa = true;
+                                //rimuovo il proiettile
+                                iterProiettile = this->proiettili.remove(iterProiettile);
+                                //rimuovo il bunker
+                                iterEntita = listaEntita.remove(iterEntita);
                             }
                             //passo al successivo
                             iterEntita = listaEntita.next(iterEntita);
                         }
                     }
 
-                    if (colpitoQualcosa)
-                    {
-                        //rimuovo il proiettile
-                        iterProiettile = this->proiettili.next(iterProiettile);
-                    }
-                    else
+                    if (!colpitoQualcosa)
                     {
                         this->proiettili.write(iterProiettile, aggiornato);
                         //passo al successivo
