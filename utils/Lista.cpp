@@ -12,14 +12,6 @@ template <typename Tipo>
 Lista<Tipo>::Lista(void) : ListaParent<Tipo>()
 {
 }
-//
-template <typename Tipo>
-/*virtual*/ Lista<Tipo>::~Lista(void)
-{
-#ifdef DEBUG
-	cout << "distruttore" << endl;
-#endif
-}
 
 //cerca v scorrendo la lista
 //override

@@ -19,15 +19,13 @@ public:
 public:
     //costruttore vuoto
     Fuel(void);
-    //costruttore coordinate
+    //altri costruttori
     Fuel(Punto centro);
+    //non usato, ma simile
     Fuel(float x, float y);
-    //costruttore completo - la quantita decisa dal tipo
-    Fuel(Punto centro, float size);
-    Fuel(float x, float y, float size);
 
     //distruttore
-    virtual ~Fuel(void);
+    virtual ~Fuel(void) {};
 
     //setters
     void setX(float x);

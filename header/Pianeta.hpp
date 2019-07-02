@@ -35,17 +35,15 @@ private:
     void generaBunkerFuel(void);
 
 public:
-    //COSTRUTTORI
-    //costruttore void
+    //costruttore vuoto
     Pianeta(void);
-    //costruttori punto e raggio
-    Pianeta(Punto centro, float raggio);
+    //altri costruttori
     Pianeta(float x, float y, float raggio);
-    //costruttori completi
-    Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker);
-    Pianeta(float x, float y, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker);
+    //non usato, ma simile
+    Pianeta(Punto centro, float raggio);
+
     //distruttore
-    virtual ~Pianeta(void);
+    virtual ~Pianeta(void) {};
 
     //SETTERS
     //cose importanti

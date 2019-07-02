@@ -6,38 +6,23 @@
 
 extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 
-//COSTRUTTORI
-//costruttore void
+//costruttore vuoto
 Navicella::Navicella(void)
 {
     //default tutto
     Entity::setSize(SIZE_NAVICELLA);
 }
-//costruttori punto
-Navicella::Navicella(Punto centro) : Entity(centro, VITA_NAVICELLA, TIPO_NAVICELLA)
-{
-    //default tutto
-    Entity::setSize(SIZE_NAVICELLA);
-}
+//altri costruttori
 Navicella::Navicella(float x, float y) : Entity(x, y, VITA_NAVICELLA, TIPO_NAVICELLA)
 {
     //default tutto
     Entity::setSize(SIZE_NAVICELLA);
 }
-//costruttori completi
-Navicella::Navicella(Direzione dir, Fuel carburante, float size) : Entity(dir, size, VITA_NAVICELLA, TIPO_NAVICELLA)
+//non usato, ma simile
+Navicella::Navicella(Punto centro) : Entity(centro, VITA_NAVICELLA, TIPO_NAVICELLA)
 {
-    this->carburante = carburante;
-}
-Navicella::Navicella(float x, float y, float angolo, float speed, float size, float carburante) : Entity(x, y, angolo, speed, size, VITA_NAVICELLA, TIPO_NAVICELLA)
-{
-    this->carburante.setQuantita(carburante);
-}
-
-//distruttore
-/*virtual*/ Navicella::~Navicella(void)
-{
-    //distruttore vuoto
+    //default tutto
+    Entity::setSize(SIZE_NAVICELLA);
 }
 
 //setters

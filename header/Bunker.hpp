@@ -13,18 +13,17 @@ class Bunker : public Entity
 private:
     int tipo = 0;
     Lista<Direzione> headDirezioni;
+
 public:
     //costruttore vuoto
     Bunker(void);
-    //costruttore minimale
+    //altri costruttori
     Bunker(Punto centro, float angolo);
+    //non usato, ma simile
     Bunker(float x, float y, float angolo);
-    //costruttore completo
-    Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir);
-    Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir);
 
     //distruttore
-    virtual ~Bunker(void);
+    virtual ~Bunker(void) {};
 
     //setters
 

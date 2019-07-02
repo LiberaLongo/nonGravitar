@@ -16,43 +16,19 @@ Pianeta::Pianeta(void)
 {
     //genera liste vuote
 }
-//costruttori punto
-Pianeta::Pianeta(Punto centro, float raggio)
-{
-    this->centro = centro;
-    this->raggio = raggio;
-}
+//altri costruttori
 Pianeta::Pianeta(float x, float y, float raggio)
 {
     this->centro.setCoord(x, y);
     this->raggio = raggio;
 }
-//costruttori completi
-Pianeta::Pianeta(Punto centro, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker)
+//non usato, ma simile
+Pianeta::Pianeta(Punto centro, float raggio)
 {
     this->centro = centro;
     this->raggio = raggio;
-    this->colore = colore;
-    this->atmosfera = outline;
-    this->surface = listaSurface;
-    this->fuel = listaFuel;
-    this->bunker = listaBunker;
 }
-Pianeta::Pianeta(float x, float y, float raggio, ColoreRGB colore, ColoreRGB outline, Lista<Punto> listaSurface, Lista<Fuel> listaFuel, Lista<Bunker> listaBunker)
-{
-    this->centro.setCoord(x, y);
-    this->raggio = raggio;
-    this->colore = colore;
-    this->atmosfera = outline;
-    this->surface = listaSurface;
-    this->fuel = listaFuel;
-    this->bunker = listaBunker;
-}
-//distruttori
-/*virtual*/ Pianeta::~Pianeta(void)
-{
-    //distruttore vuoto
-}
+
 //SETTERS
 //cose importanti
 void Pianeta::setX(float x)

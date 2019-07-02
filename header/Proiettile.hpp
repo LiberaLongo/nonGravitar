@@ -14,17 +14,17 @@ class Proiettile : public Direzione //disegnabile
 private:
     float size = 2.f;
     ColoreRGB colore = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
+
 public:
     //costruttore vuoto
     Proiettile(void);
-    //costruttore minimale
-    Proiettile(Punto origine, float angolo, ColoreRGB colore);
+    //altri costruttori
     Proiettile(float x, float y, float angolo, ColoreRGB colore);
-    //costruttore completo
-    Proiettile(Punto origine, float angolo, float speed, float size);
-    Proiettile(float x, float y, float angolo, float speed, float size);
+    //non usato, ma simile
+    Proiettile(Punto origine, float angolo, ColoreRGB colore);
+
     //distruttore
-    virtual ~Proiettile(void);
+    virtual ~Proiettile(void) {};
 
     //setters
     void setX(float x);

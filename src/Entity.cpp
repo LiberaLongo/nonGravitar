@@ -7,13 +7,12 @@
 
 extern float WIDTH, HEIGHT;
 
-//COSTRUTTORI
-//costruttore void
+//costruttore vuoto
 Entity::Entity(void)
 {
     //default tutto
 }
-//costruttori Direzione
+//altri costruttori
 Entity::Entity(Punto centro, int vita, int tipo)
 {
     //default tutto
@@ -21,62 +20,13 @@ Entity::Entity(Punto centro, int vita, int tipo)
     this->vita = vita;
     this->tipo = tipo;
 }
+
 Entity::Entity(float x, float y, int vita, int tipo)
 {
     //default tutto
     this->dir.setOrigine(x, y);
     this->vita = vita;
     this->tipo = tipo;
-}
-Entity::Entity(Direzione dir, float size, int vita, int tipo)
-{
-    this->dir = dir;
-    this->size = size;
-    this->vita = vita;
-    this->tipo = tipo;
-}
-//costruttori completi
-Entity::Entity(Punto centro, float angolo, float speed, float size, int vita, int tipo)
-{
-    this->dir.setOrigine(centro.getX(), centro.getY());
-    this->dir.setAngolo(angolo);
-    this->dir.setSpeed(speed);
-    this->size = size;
-    this->vita = vita;
-    this->tipo = tipo;
-}
-Entity::Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo)
-{
-    this->dir.setOrigine(x, y);
-    this->dir.setAngolo(angolo);
-    this->dir.setSpeed(speed);
-    this->size = size;
-    this->vita = vita;
-    this->tipo = tipo;
-}
-Entity::Entity(Direzione dir, float size, int vita, int tipo, Lista<Proiettile> proiettili)
-{
-    this->dir = dir;
-    this->size = size;
-    this->vita = vita;
-    this->tipo = tipo;
-    this->proiettili = proiettili;
-}
-Entity::Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo, Lista<Proiettile> proiettili)
-{
-    this->dir.setOrigine(x, y);
-    this->dir.setAngolo(angolo);
-    this->dir.setSpeed(speed);
-    this->size = size;
-    this->vita = vita;
-    this->tipo = tipo;
-    this->proiettili = proiettili;
-}
-
-//distruttore
-/*virtual*/ Entity::~Entity(void)
-{
-    //distruttore vuoto
 }
 
 //setters

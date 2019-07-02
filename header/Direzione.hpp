@@ -13,18 +13,17 @@ protected:
     Punto origine;
     float angolo = 0.f; //angolo canonico studiato in matematica
     float speed = SPEED_NAVICELLA;
+
 public:
     //costruttore vuoto
     Direzione(void);
-    //costruttore minimale
-    Direzione(Punto origine, float angolo);
+    //altri costruttori
     Direzione(float x, float y, float angolo);
-    //costruttore completo
-    Direzione(Punto origine, float angolo, float speed);
-    Direzione(float x, float y, float angolo, float speed);
+    //non usato ma simile
+    Direzione(Punto origine, float angolo);
 
     //distruttore
-    virtual ~Direzione(void);
+    virtual ~Direzione(void) {};
 
     //setters
     void setX_origine(float x); //x dell'origine

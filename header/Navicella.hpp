@@ -19,18 +19,15 @@ private:
     Fuel carburante;
 
 public:
-    //COSTRUTTORI
-    //costruttore void
+    //costruttore vuoto
     Navicella(void);
-    //costruttori punto
-    Navicella(Punto centro);
+    //altri costruttori
     Navicella(float x, float y);
-    //costruttori completi
-    Navicella(Direzione dir, Fuel carburante, float size);
-    Navicella(float x, float y, float angolo, float speed, float size, float carburante);
+    //non usato, ma simile
+    Navicella(Punto centro);
 
     //distruttori
-    virtual ~Navicella(void);
+    virtual ~Navicella(void) {};
 
     //setters
     void setFuel(Fuel carburante);

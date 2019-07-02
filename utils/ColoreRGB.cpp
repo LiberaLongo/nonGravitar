@@ -14,11 +14,6 @@ ColoreRGB::ColoreRGB(int red, int green, int blue)
     this->green = green;
     this->blue = blue;
 }
-//distruttore
-/*virtual*/ ColoreRGB::~ColoreRGB(void)
-{
-    //distruttore vuoto
-}
 
 //setters
 void ColoreRGB::setRed(int red)

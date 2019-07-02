@@ -18,14 +18,6 @@ ListaParent<Tipo>::ListaParent(void)
 	//sentinella.item non ci interessa
 	this->testa = sentinella;
 }
-//
-template <typename Tipo>
-/*virtual*/ ListaParent<Tipo>::~ListaParent(void)
-{
-#ifdef DEBUG
-	cout << "distruttore" << endl;
-#endif
-}
 
 //setters
 template <typename Tipo>

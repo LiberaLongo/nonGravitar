@@ -7,33 +7,17 @@ Bunker::Bunker(void)
     //tutto di default
     this->tipo = rand() % 2;
 }
-//costruttore minimale
+//altri costruttori
 Bunker::Bunker(Punto centro, float angolo) : Entity(centro, VITA_BUNKER, TIPO_BUNKER)
 {
     this->setAngolo(angolo);
     this->tipo = rand() % 2;
 }
+//non usato, ma simile
 Bunker::Bunker(float x, float y, float angolo) : Entity(x, y, VITA_BUNKER, TIPO_BUNKER)
 {
     this->setAngolo(angolo);
     this->tipo = rand() % 2;
-}
-//costruttore completo
-Bunker::Bunker(Punto centro, float angolo, float speed, float size, Lista<Direzione> headDir) : Entity(centro, angolo, speed, size, VITA_BUNKER, TIPO_BUNKER)
-{
-    this->tipo = rand() % 2;
-    //head dir
-}
-Bunker::Bunker(float x, float y, float angolo, float speed, float size, Lista<Direzione> headDir) : Entity(x, y, angolo, speed, size, VITA_BUNKER, TIPO_BUNKER)
-{
-    this->tipo = rand() % 2;
-    //head dir
-}
-
-//distruttore
-/*virtual*/ Bunker::~Bunker(void)
-{
-    //distruttore di default
 }
 
 //setters

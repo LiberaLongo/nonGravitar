@@ -8,32 +8,17 @@ Proiettile::Proiettile(void) : Direzione()
 {
     //tutto fatto nel costruttore di direzione
 }
-//costruttore minimale
-Proiettile::Proiettile(Punto origine, float angolo, ColoreRGB colore) : Direzione(origine, angolo)
-{
-    //costruttore di direzione
-    this->colore = colore;
-}
+//altri costruttori
 Proiettile::Proiettile(float x, float y, float angolo, ColoreRGB colore) : Direzione(x, y, angolo)
 {
     //costruttore di direzione
     this->colore = colore;
 }
-//costruttore completo
-Proiettile::Proiettile(Punto origine, float angolo, float speed, float size) : Direzione(origine, angolo, speed)
+//non usato, ma simile
+Proiettile::Proiettile(Punto origine, float angolo, ColoreRGB colore) : Direzione(origine, angolo)
 {
     //costruttore di direzione
-    this->size = size;
-}
-Proiettile::Proiettile(float x, float y, float angolo, float speed, float size) : Direzione(x, y, angolo, speed)
-{
-    //costruttore di direzione
-    this->size = size;
-}
-//distruttore
-/*virtual*/ Proiettile::~Proiettile(void)
-{
-    //distruttore vuoto
+    this->colore = colore;
 }
 
 //setters

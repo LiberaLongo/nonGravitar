@@ -24,7 +24,7 @@ private:
 public:
 	//costruttore e distruttore
 	ListaParent(void);
-	virtual ~ListaParent(void);
+	virtual ~ListaParent(void) {};
 
 	//setters
 	void setHead(struct Elem<Tipo>* head);

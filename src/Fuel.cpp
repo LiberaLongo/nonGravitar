@@ -25,7 +25,6 @@ Fuel::Fuel(void)
     //tutto di default
     this->generaTipo();
 }
-//costruttore coordinate
 Fuel::Fuel(Punto centro)
 {
     this->centro = centro;
@@ -35,25 +34,6 @@ Fuel::Fuel(float x, float y)
 {
     this->centro.setCoord(x, y);
     this->generaTipo();
-}
-//costruttore completo
-Fuel::Fuel(Punto centro, float size)
-{
-    this->centro = centro;
-    this->size = size;
-    this->generaTipo();
-}
-Fuel::Fuel(float x, float y, float size)
-{
-    this->centro.setCoord(x, y);
-    this->size = size;
-    this->generaTipo();
-}
-
-//distruttore
-/*virtual*/ Fuel::~Fuel(void)
-{
-    //distruttore di default
 }
 
 //setters

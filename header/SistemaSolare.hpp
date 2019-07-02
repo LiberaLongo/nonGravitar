@@ -17,14 +17,11 @@ private:
     Lista<Pianeta> pianeti;
 
 public:
-    //COSTRUTTORI
-    //costruttore void
+    //costruttore vuoto
     SistemaSolare(void);
-    //costruttori completi
-    SistemaSolare(Lista<Pianeta> listaPianeti);
-    SistemaSolare(struct Elem<Pianeta> *headPianeti);
+
     //distruttore
-    virtual ~SistemaSolare(void);
+    virtual ~SistemaSolare(void) {};
 
     //SETTERS
     //setta la lista

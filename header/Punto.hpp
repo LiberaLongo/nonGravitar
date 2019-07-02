@@ -26,7 +26,7 @@ public:
     //cotruttore completo
     Punto(float x, float y);
     //distruttore
-    virtual ~Punto(void);
+    virtual ~Punto(void) {};
 
     //setters
     void setX(float x);

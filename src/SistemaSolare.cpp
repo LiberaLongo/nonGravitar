@@ -9,25 +9,10 @@ extern float WIDTH, HEIGHT;
 //dimensioni minime e massime del pianeta
 extern float MIN_PIANETA_RAGGIO, MAX_PIANETA_RAGGIO;
 
-//COSTRUTTORI
-//costruttore void
+//costruttore vuoto
 SistemaSolare::SistemaSolare(void)
 {
     //tutto di default
-}
-//costruttori completi
-SistemaSolare::SistemaSolare(Lista<Pianeta> listaPianeti)
-{
-    this->pianeti = listaPianeti;
-}
-SistemaSolare::SistemaSolare(struct Elem<Pianeta> *headPianeti)
-{
-    this->pianeti.setHead(headPianeti);
-}
-//distruttore
-/*virtual*/ SistemaSolare::~SistemaSolare(void)
-{
-    //distruttore vuoto
 }
 
 //SETTERS

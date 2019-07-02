@@ -12,11 +12,6 @@ Punto::Punto(float x, float y)
     this->x = x;
     this->y = y;
 }
-//distruttore
-/*virtual*/ Punto::~Punto(void)
-{
-    //nothing to to
-}
 
 //setters
 void Punto::setX(float x)

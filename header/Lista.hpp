@@ -10,7 +10,7 @@ class Lista : public ListaParent<Tipo> {
 public:
 	//costruttore e distruttore
 	Lista(void);
-	virtual ~Lista(void);
+	virtual ~Lista(void) {};
 
     //cerca v scorrendo la lista
     //override

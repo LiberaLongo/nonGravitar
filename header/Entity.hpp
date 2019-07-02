@@ -36,17 +36,11 @@ public:
     //COSTRUTTORI
     //costruttore void
     Entity(void);
-    //costruttori punto
     Entity(Punto centro, int vita, int tipo);
     Entity(float x, float y, int vita, int tipo);
-    Entity(Direzione dir, float size, int vita, int tipo);
-    //costruttori completi
-    Entity(Punto centro, float angolo, float speed, float size, int vita, int tipo);
-    Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo);
-    Entity(Direzione dir, float size, int vita, int tipo, Lista<Proiettile> proiettili); 
-    Entity(float x, float y, float angolo, float speed, float size, int vita, int tipo, Lista<Proiettile> proiettili);
+    
     //distruttori
-    virtual ~Entity(void);
+    virtual ~Entity(void) {};
 
     //SETTERS
     //setters coordinate
