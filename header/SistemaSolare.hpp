@@ -38,10 +38,17 @@ public:
     void draw(sf::RenderWindow &window);
     //genera lista di pianeti
     void genera();
+
+    //elimina il pianeta dalla lista
+    void eliminaPianeta(struct Elem<Pianeta>* pianetaEliminato);
+    //restituisce true se la sua lista è vuota
+    bool emptyPianeti(void);
+
     //restituisce il puntatore al pianeta ricevendo la sua posizione nella lista
     Pianeta toPtrPlanet(struct Elem<Pianeta>* posizionePianeta);
     //controlla se la navicella è vicina a un pianeta nella lista
     struct Elem<Pianeta> *isNavicellaNearAPlanet(Navicella navicella);
+
 };
 
 #endif //SISTEMA_SOLARE_HPP

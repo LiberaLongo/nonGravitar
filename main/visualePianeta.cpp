@@ -90,7 +90,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
                     break;
                 //tasto Spazio
                 case sf::Keyboard::Space:
-                    this->player.shoot();                    
+                    this->player.shoot();
                     break;
                 //WASD
                 case sf::Keyboard::W:
@@ -154,6 +154,12 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         this->player.draw(App);
         this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->pianetaVisualizzato.getHeadBunker());
+        if (this->pianetaVisualizzato.emptyBunker()) {
+            //distruggi il pianeta
+            sistemasolare.eliminaPianeta(pianetaInsideNow);
+            //ritorna alla visuale sistema solare
+            return VISUALE_SISTEMA_SOLARE;
+        }
 
         if (haCliccato)
             mouseClick.draw(App);

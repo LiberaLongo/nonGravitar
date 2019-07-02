@@ -13,16 +13,14 @@ Navicella::Navicella(void)
     Entity::setSize(SIZE_NAVICELLA);
 }
 //altri costruttori
-Navicella::Navicella(float x, float y) : Entity(x, y, VITA_NAVICELLA, TIPO_NAVICELLA)
+Navicella::Navicella(float x, float y) : Entity(x, y, SIZE_NAVICELLA)
 {
     //default tutto
-    Entity::setSize(SIZE_NAVICELLA);
 }
 //non usato, ma simile
-Navicella::Navicella(Punto centro) : Entity(centro, VITA_NAVICELLA, TIPO_NAVICELLA)
+Navicella::Navicella(Punto centro) : Entity(centro, SIZE_NAVICELLA)
 {
     //default tutto
-    Entity::setSize(SIZE_NAVICELLA);
 }
 
 //setters
@@ -35,6 +33,10 @@ void Navicella::setFuel(Fuel carburante)
 float Navicella::getFuel(void)
 {
     return this->carburante.getQuantita();
+}
+int Navicella::getVita(void)
+{
+    return this->vita;
 }
 
 //stampa
@@ -107,6 +109,12 @@ bool Navicella::isNear(Pianeta planet)
     return this->Entity::isNear(planet.getX(), planet.getY(), planet.getRaggio());
 }
 
+void Navicella::muori(void)
+{
+    this->vita--;
+}
+
+//restituisce true se il pianeta deve essere distrutto
 void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita)
 {
     Lista<Bunker> listaEntita;
@@ -145,7 +153,7 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
                     {
                         //primo elemento utile non la sentinella
                         struct Elem<Bunker> *iterEntita = listaEntita.head();
-                        while (!listaEntita.finished(iterEntita) && !colpitoQualcosa)
+                        while (!(listaEntita.finished(iterEntita) || colpitoQualcosa))
                         {
                             float size;
                             Bunker controllataEntita = listaEntita.read(iterEntita);
@@ -163,6 +171,14 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
                             iterEntita = listaEntita.next(iterEntita);
                         }
                     }
+                    /*
+                    else
+                    {
+                        cout << "lista bunker vuota\n";
+                        //se la lista di bunker è vuota devo distruggere il pianeta
+                        return true;
+                    }
+                    */
 
                     if (!colpitoQualcosa)
                     {
@@ -174,4 +190,8 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
             }
         }
     }
+    /*
+    //non devo ancora distruggere il pianeta
+    return false;
+    */
 }

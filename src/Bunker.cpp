@@ -8,13 +8,13 @@ Bunker::Bunker(void)
     this->tipo = rand() % 2;
 }
 //altri costruttori
-Bunker::Bunker(Punto centro, float angolo) : Entity(centro, VITA_BUNKER, TIPO_BUNKER)
+Bunker::Bunker(Punto centro, float angolo) : Entity(centro, SIZE_BUNKER)
 {
     this->setAngolo(angolo);
     this->tipo = rand() % 2;
 }
 //non usato, ma simile
-Bunker::Bunker(float x, float y, float angolo) : Entity(x, y, VITA_BUNKER, TIPO_BUNKER)
+Bunker::Bunker(float x, float y, float angolo) : Entity(x, y, SIZE_BUNKER)
 {
     this->setAngolo(angolo);
     this->tipo = rand() % 2;

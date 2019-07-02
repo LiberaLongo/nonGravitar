@@ -412,3 +412,7 @@ void Pianeta::genera(void)
     this->ordinaPunti();
     this->generaBunkerFuel();
 }
+bool Pianeta::emptyBunker(void)
+{
+    return this->bunker.empty();
+}

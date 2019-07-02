@@ -102,5 +102,8 @@ public:
 
     //genera Pianeta
     void genera(void);
+
+    //restituisce true se la lista dei bunker è vuota
+    bool emptyBunker(void); 
 };
 #endif

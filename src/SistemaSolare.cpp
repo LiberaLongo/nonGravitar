@@ -119,6 +119,10 @@ void SistemaSolare::genera()
     */
 }
 
+void SistemaSolare::eliminaPianeta(struct Elem<Pianeta>* pianetaEliminato) {
+    this->pianeti.remove(pianetaEliminato);
+}
+
 //restituisce il puntatore al pianeta ricevendo la sua posizione nella lista
 Pianeta SistemaSolare::toPtrPlanet(struct Elem<Pianeta> *posizionePianeta)
 {
@@ -162,4 +166,8 @@ struct Elem<Pianeta> *SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
     cout << "esco dal isNavicellaNearAPlanet" << endl;
 #endif
     return findedPlanet;
+}
+bool SistemaSolare::emptyPianeti(void)
+{
+    return this->pianeti.empty();
 }

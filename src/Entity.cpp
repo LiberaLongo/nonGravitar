@@ -13,20 +13,18 @@ Entity::Entity(void)
     //default tutto
 }
 //altri costruttori
-Entity::Entity(Punto centro, int vita, int tipo)
+Entity::Entity(Punto centro, float size)
 {
     //default tutto
     this->dir.setOrigine(centro.getX(), centro.getY());
-    this->vita = vita;
-    this->tipo = tipo;
+    this->size = size;
 }
 
-Entity::Entity(float x, float y, int vita, int tipo)
+Entity::Entity(float x, float y, float size)
 {
     //default tutto
     this->dir.setOrigine(x, y);
-    this->vita = vita;
-    this->tipo = tipo;
+    this->size = size;
 }
 
 //setters
@@ -76,10 +74,6 @@ float Entity::getSize(void)
 {
     return this->size;
 }
-int Entity::getVita(void)
-{
-    return this->vita;
-}
 //stampa
 void Entity::print(void)
 {
@@ -127,11 +121,6 @@ bool Entity::isNear(float x, float y, float size)
 bool Entity::isOutsideScreen(void)
 {
     return !this->dir.isNear(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
-}
-
-void Entity::muori(void)
-{
-    this->vita--;
 }
 
 //aggiorno la lista di proiettili
