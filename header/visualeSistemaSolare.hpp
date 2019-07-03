@@ -7,8 +7,6 @@
 #include <ctime>
 #include <cstdlib>
 
-#include <SFML/Graphics.hpp>
-
 #include "cScreen.hpp"
 
 #include "../header/Navicella.hpp"

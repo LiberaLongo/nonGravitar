@@ -41,12 +41,9 @@ using namespace std;
 #define VITA_NAVICELLA 5
 #define VITA_BUNKER 1
 
-//macro per gestire il tipo di entità
-enum tipo_entity {TIPO_NAVICELLA, TIPO_BUNKER};
-
 //macro per gestire opportunamente le visuali
 #define EXIT -1
-enum visuale {VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
+enum visuale {VISUALE_MENU, VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
 
 //numero di millisecondi dopo i quali aggiornare i proiettil
 #define AGGIORNA 100

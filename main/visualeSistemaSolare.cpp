@@ -4,6 +4,7 @@
 //#define DEBUG //se è definita stampo per debugghing
 
 extern float WIDTH, HEIGHT;
+extern bool generaSistema;
 
 //privata
 bool visualeSistemaSolare::check(void)
@@ -33,6 +34,7 @@ visualeSistemaSolare::visualeSistemaSolare(void)
     //mia navicella
     this->player = Navicella(WIDTH / 2, HEIGHT / 2);
     this->orologio.restart();
+    generaSistema = false;
 }
 
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
@@ -89,7 +91,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 {
                 //tasto Esc
                 case sf::Keyboard::Escape:
-                    return EXIT;
+                    return VISUALE_MENU;
                     break;
                 /*
                 //tasto Spazio
@@ -144,8 +146,8 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             {
                 if (this->player.isOutsideScreen())
                 {
-                    cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
-                    return EXIT;
+                    //cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
+                    return VISUALE_MENU;
                 }
                 if (this->check())
                 {
@@ -161,7 +163,13 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         App.clear(sf::Color::Black);
 
         //disegna qui...
-        sistemasolare.draw(App);
+        if(!sistemasolare.emptyPianeti()) {
+            sistemasolare.draw(App);
+        }
+        else {
+            generaSistema = true;
+            return VISUALE_MENU;
+        }
 
         this->player.draw(App);
         /*

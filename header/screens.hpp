@@ -6,6 +6,7 @@
 #include "./cScreen.hpp"
 
 //Including each screen of application
+#include "./visualeMenu.hpp"
 #include "./visualeSistemaSolare.hpp"
 #include "./visualePianeta.hpp"
 

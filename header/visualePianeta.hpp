@@ -4,11 +4,8 @@
 
 #include <iostream>
 
-#include <SFML/Graphics.hpp>
-
 #include "./cScreen.hpp"
 
-#include "./utils.hpp"
 #include "./SistemaSolare.hpp"
 
 extern SistemaSolare sistemasolare;

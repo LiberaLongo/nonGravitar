@@ -120,8 +120,6 @@ int Gioco(void)
 	//seme per i numeri casuali
 	srand(time(NULL));
 
-	//genero il sistema solare
-	sistemasolare.genera();
 #ifdef DEBUG
 	sistemasolare.printCentri();
 #endif
@@ -137,12 +135,14 @@ int Gioco(void)
 	//App.setMouseCursorVisible(true);
 
 	//Screens preparations
+	visualeMenu vM;
+	Screens.push_back(&vM);
 	visualeSistemaSolare vS;
 	Screens.push_back(&vS);
-	//indirizzo visuale sistema solare nel vettore 0
+	//indirizzo visuale sistema solare nel vettore 1
 	visualePianeta vP;
 	Screens.push_back(&vP);
-	//indirizzo visuale pianeta nel vettore 1
+	//indirizzo visuale pianeta nel vettore 2
 	//se questi indirizzi vengono modificati bisogna modificare anche VISUALE_... di utils.hpp
 
 	//Main loop
