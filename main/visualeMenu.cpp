@@ -3,7 +3,7 @@
 #include "../header/visualeMenu.hpp"
 
 extern float WIDTH, HEIGHT;
-bool generaSistema = true, haiVinto = false;
+bool generaSistema = false, haiVinto = false;
 
 visualeMenu::visualeMenu(void)
 {

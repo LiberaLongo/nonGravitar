@@ -120,6 +120,9 @@ int Gioco(void)
 	//seme per i numeri casuali
 	srand(time(NULL));
 
+	//genero il sistema solare la prima volta
+	sistemasolare.genera();
+
 #ifdef DEBUG
 	sistemasolare.printCentri();
 #endif
