@@ -3,7 +3,7 @@
 #include "../header/visualeMenu.hpp"
 
 extern float WIDTH, HEIGHT;
-bool generaSistema = true;
+bool generaSistema = true, haiVinto = false;
 
 visualeMenu::visualeMenu(void)
 {
@@ -19,24 +19,45 @@ int visualeMenu::Run(sf::RenderWindow &App)
     float dist = HEIGHT/8;
     int charSize = HEIGHT/10;
     float x = WIDTH/2 - charSize;
-    float y = HEIGHT/2 - charSize;
+    float y = HEIGHT/2 - charSize/2;
+    //focalizzato
+    ColoreRGB rosso = ColoreRGB(LUMUS_MAXIMA, 0, 0);
+    //non focalizzato
+    ColoreRGB bianco = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, LUMUS_MAXIMA);
+    //colore della vittoria
+    ColoreRGB coloreHaiVinto = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
 
     sf::Event Event;
     bool Running = true;
     sf::Font Font;
+    sf::Text testoHaiVinto;
+    sf::Text testoGioco;
     sf::Text buttonPlay;
     sf::Text buttonExit;
     sf::Text buttonContinue;
     int menu = 0;
+
     if (!Font.loadFromFile("verdanab.ttf"))
     {
         std::cerr << "Error loading verdanab.ttf" << std::endl;
         return EXIT;
     }
+    testoHaiVinto.setFont(Font);
+    testoHaiVinto.setCharacterSize(charSize);
+    testoHaiVinto.setString("HAI VINTO!");
+    testoHaiVinto.setPosition({x - dist*2, y - dist});
+    testoHaiVinto.setFillColor(coloreHaiVinto.getColorLib());
+
+    testoGioco.setFont(Font);
+    testoGioco.setCharacterSize(charSize);
+    testoGioco.setString("Non Gravitar");
+    testoGioco.setPosition({x - dist*2, y - dist});
+    testoGioco.setFillColor(coloreHaiVinto.getColorLib());
+
     buttonPlay.setFont(Font);
     buttonPlay.setCharacterSize(charSize);
     buttonPlay.setString("Play");
-    buttonPlay.setPosition({x, y - dist});
+    buttonPlay.setPosition({x, y});
 
     buttonExit.setFont(Font);
     buttonExit.setCharacterSize(charSize);
@@ -46,7 +67,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
     buttonContinue.setFont(Font);
     buttonContinue.setCharacterSize(charSize);
     buttonContinue.setString("Continue");
-    buttonContinue.setPosition({x, y - dist});
+    buttonContinue.setPosition({x - dist, y});
 
     while (Running)
     {
@@ -76,13 +97,14 @@ int visualeMenu::Run(sf::RenderWindow &App)
                 case sf::Keyboard::Return:
                     if (menu == 0)
                     {
-                        //Let's get play !
+                        //giochiamo!
                         playing = true;
+                        haiVinto = false;
                         return VISUALE_SISTEMA_SOLARE;
                     }
                     else
                     {
-                        //Let's get work...
+                        //fine dei giochi, si torna a lavoro...
                         return EXIT;
                     }
                     break;
@@ -93,15 +115,15 @@ int visualeMenu::Run(sf::RenderWindow &App)
         }
         if (menu == 0)
         {
-            buttonPlay.setFillColor(sf::Color(255, 0, 0, 255));
-            buttonExit.setFillColor(sf::Color(255, 255, 255, 255));
-            buttonContinue.setFillColor(sf::Color(255, 0, 0, 255));
+            buttonPlay.setFillColor(rosso.getColorLib());
+            buttonExit.setFillColor(bianco.getColorLib());
+            buttonContinue.setFillColor(rosso.getColorLib());
         }
         else
         {
-            buttonPlay.setFillColor(sf::Color(255, 255, 255, 255));
-            buttonExit.setFillColor(sf::Color(255, 0, 0, 255));
-            buttonContinue.setFillColor(sf::Color(255, 255, 255, 255));
+            buttonPlay.setFillColor(bianco.getColorLib());
+            buttonExit.setFillColor(rosso.getColorLib());
+            buttonContinue.setFillColor(bianco.getColorLib());
         }
 
         //Clearing screen
@@ -114,6 +136,12 @@ int visualeMenu::Run(sf::RenderWindow &App)
         else
         {
             App.draw(buttonPlay);
+        }
+        if(haiVinto) {
+            App.draw(testoHaiVinto);
+        }
+        else{
+            App.draw(testoGioco);
         }
         App.draw(buttonExit);
         App.display();

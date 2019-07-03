@@ -4,7 +4,7 @@
 //#define DEBUG //se è definita stampo per debugghing
 
 extern float WIDTH, HEIGHT;
-extern bool generaSistema;
+extern bool generaSistema, haiVinto;
 
 //privata
 bool visualeSistemaSolare::check(void)
@@ -35,6 +35,7 @@ visualeSistemaSolare::visualeSistemaSolare(void)
     this->player = Navicella(WIDTH / 2, HEIGHT / 2);
     this->orologio.restart();
     generaSistema = false;
+    haiVinto = false;
 }
 
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
@@ -91,6 +92,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 {
                 //tasto Esc
                 case sf::Keyboard::Escape:
+                    haiVinto = false;
                     return VISUALE_MENU;
                     break;
                 /*
@@ -147,6 +149,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 if (this->player.isOutsideScreen())
                 {
                     //cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
+                    haiVinto = false;
                     return VISUALE_MENU;
                 }
                 if (this->check())
@@ -168,6 +171,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         }
         else {
             generaSistema = true;
+            haiVinto = true;
             return VISUALE_MENU;
         }
 
