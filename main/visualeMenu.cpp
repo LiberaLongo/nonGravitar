@@ -12,14 +12,15 @@ visualeMenu::visualeMenu(void)
 
 int visualeMenu::Run(sf::RenderWindow &App)
 {
-    if (generaSistema) {
+    if (generaSistema)
+    {
         sistemasolare.genera();
         generaSistema = false;
     }
-    float dist = HEIGHT/8;
-    int charSize = HEIGHT/10;
-    float x = WIDTH/2 - charSize;
-    float y = HEIGHT/2 - charSize/2;
+    float dist = HEIGHT / 8;
+    int charSize = HEIGHT / 10;
+    float x = WIDTH / 2 - charSize;
+    float y = HEIGHT / 2 - charSize / 2;
     //focalizzato
     ColoreRGB rosso = ColoreRGB(LUMUS_MAXIMA, 0, 0);
     //non focalizzato
@@ -30,11 +31,9 @@ int visualeMenu::Run(sf::RenderWindow &App)
     sf::Event Event;
     bool Running = true;
     sf::Font Font;
-    sf::Text testoHaiVinto;
-    sf::Text testoGioco;
-    sf::Text buttonPlay;
+    sf::Text testoHaiVinto, testoGioco;
+    sf::Text buttonPlay, buttonContinue, buttonNewGame;
     sf::Text buttonExit;
-    sf::Text buttonContinue;
     int menu = 0;
 
     if (!Font.loadFromFile("verdanab.ttf"))
@@ -45,13 +44,13 @@ int visualeMenu::Run(sf::RenderWindow &App)
     testoHaiVinto.setFont(Font);
     testoHaiVinto.setCharacterSize(charSize);
     testoHaiVinto.setString("HAI VINTO!");
-    testoHaiVinto.setPosition({x - dist*2, y - dist});
+    testoHaiVinto.setPosition({x - dist * 2, y - dist});
     testoHaiVinto.setFillColor(coloreHaiVinto.getColorLib());
 
     testoGioco.setFont(Font);
     testoGioco.setCharacterSize(charSize);
     testoGioco.setString("Non Gravitar");
-    testoGioco.setPosition({x - dist*2, y - dist});
+    testoGioco.setPosition({x - dist * 2, y - dist});
     testoGioco.setFillColor(coloreHaiVinto.getColorLib());
 
     buttonPlay.setFont(Font);
@@ -59,15 +58,20 @@ int visualeMenu::Run(sf::RenderWindow &App)
     buttonPlay.setString("Play");
     buttonPlay.setPosition({x, y});
 
-    buttonExit.setFont(Font);
-    buttonExit.setCharacterSize(charSize);
-    buttonExit.setString("Exit");
-    buttonExit.setPosition({x, y + dist});
-
     buttonContinue.setFont(Font);
     buttonContinue.setCharacterSize(charSize);
     buttonContinue.setString("Continue");
     buttonContinue.setPosition({x - dist, y});
+
+    buttonNewGame.setFont(Font);
+    buttonNewGame.setCharacterSize(charSize);
+    buttonNewGame.setString("New Game");
+    buttonNewGame.setPosition({x - dist, y});
+
+    buttonExit.setFont(Font);
+    buttonExit.setCharacterSize(charSize);
+    buttonExit.setString("Exit");
+    buttonExit.setPosition({x, y + dist});
 
     while (Running)
     {
@@ -116,14 +120,18 @@ int visualeMenu::Run(sf::RenderWindow &App)
         if (menu == 0)
         {
             buttonPlay.setFillColor(rosso.getColorLib());
-            buttonExit.setFillColor(bianco.getColorLib());
             buttonContinue.setFillColor(rosso.getColorLib());
+            buttonNewGame.setFillColor(rosso.getColorLib());
+
+            buttonExit.setFillColor(bianco.getColorLib());
         }
         else
         {
             buttonPlay.setFillColor(bianco.getColorLib());
-            buttonExit.setFillColor(rosso.getColorLib());
             buttonContinue.setFillColor(bianco.getColorLib());
+            buttonNewGame.setFillColor(bianco.getColorLib());
+
+            buttonExit.setFillColor(rosso.getColorLib());
         }
 
         //Clearing screen
@@ -131,17 +139,21 @@ int visualeMenu::Run(sf::RenderWindow &App)
         //Drawing
         if (playing)
         {
-            App.draw(buttonContinue);
+            if (haiVinto)
+            {
+                App.draw(testoHaiVinto);
+                App.draw(buttonNewGame);
+            }
+            else
+            {
+                App.draw(testoGioco);
+                App.draw(buttonContinue);
+            }
         }
         else
         {
-            App.draw(buttonPlay);
-        }
-        if(haiVinto) {
-            App.draw(testoHaiVinto);
-        }
-        else{
             App.draw(testoGioco);
+            App.draw(buttonPlay);
         }
         App.draw(buttonExit);
         App.display();

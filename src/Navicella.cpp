@@ -167,8 +167,11 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
                                 //rimuovo il bunker
                                 iterEntita = listaEntita.remove(iterEntita);
                             }
-                            //passo al successivo
-                            iterEntita = listaEntita.next(iterEntita);
+                            else
+                            {
+                                //passo al successivo
+                                iterEntita = listaEntita.next(iterEntita);
+                            }
                         }
                     }
                     /*

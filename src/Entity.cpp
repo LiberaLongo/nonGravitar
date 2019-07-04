@@ -129,37 +129,40 @@ void Entity::aggiornaCoordinateProiettili(float x, float y)
     if (!(this->proiettili.empty()))
     {
         //primo elemento utile non la sentinella
-        struct Elem<Proiettile> *iterProiettile = this->proiettili.head();
+        struct Elem<Proiettile> *iter = this->proiettili.head();
         //se non vuota e non finita
-        while (!(this->proiettili.finished(iterProiettile)))
+        while (!(this->proiettili.finished(iter)))
         {
             //leggo il proiettile
-            Proiettile aggiornato = this->proiettili.read(iterProiettile);
+            Proiettile aggiornato = this->proiettili.read(iter);
             aggiornato.move();
 
             if (aggiornato.isOutsideScreen())
             {
                 //se il proiettile è uscito dallo schermo devo rimuoverlo
-                iterProiettile = this->proiettili.remove(iterProiettile);
+                iter = this->proiettili.remove(iter);
 #ifdef DEBUG_PROIETTILI
-                cout << "un proiettile è uscito" << endl;
+                cout << "uscito";
 #endif
             }
             else
             {
-                Punto centroEntita = Punto(this->getX(), this->getY());
-                if (centroEntita.isNear(x, y, this->size))
+                Punto centroProiettile = Punto(aggiornato.getX(), aggiornato.getY());
+                if (centroProiettile.isNear(x, y, SIZE_NAVICELLA))
                 {
                     //rimuovo il proiettile se il bunker colpisce la navicella
-                    iterProiettile = this->proiettili.remove(iterProiettile);
+                    iter = this->proiettili.remove(iter);
+#ifdef DEBUG_PROIETTILI
+                    cout << "un proiettile ha colpito la navicella" << endl;
+#endif
                 }
                 else
                 {
                     //aggiorno il proiettile
-                    this->proiettili.write(iterProiettile, aggiornato);
+                    this->proiettili.write(iter, aggiornato);
+                    //passo al successivo
+                    iter = this->proiettili.next(iter);
                 }
-                //passo al successivo
-                iterProiettile = this->proiettili.next(iterProiettile);
             }
         }
     }
