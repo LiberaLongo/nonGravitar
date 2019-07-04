@@ -441,7 +441,7 @@ void Pianeta::shoot(sf::Time tempo)
 }
 
 //aggiorna coordinate dei proiettili sparati dai bunker
-void Pianeta::aggiornaCoordinateProiettili(sf::Time tempo, float x, float y)
+int Pianeta::aggiornaCoordinateProiettili(sf::Time tempo, float x, float y, int vita)
 {
     int millisecondi = tempo.asMilliseconds();
     //se sono passati 300millisecondi dal reset o dal ultimo sparo
@@ -455,10 +455,11 @@ void Pianeta::aggiornaCoordinateProiettili(sf::Time tempo, float x, float y)
             while (!(this->bunker.finished(iter)))
             {
                 Bunker cannoneAggiorna = this->bunker.read(iter);
-                cannoneAggiorna.aggiornaCoordinateProiettili(x, y);
+                vita = cannoneAggiorna.aggiornaCoordinateProiettili(x, y, vita);
                 //passo al successivo
                 iter = this->bunker.next(iter);
             }
         }
     }
+    return vita;
 }

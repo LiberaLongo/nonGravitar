@@ -28,7 +28,10 @@ void Navicella::setFuel(Fuel carburante)
 {
     this->carburante = carburante;
 }
-
+void Navicella::setVita(int vita)
+{
+    this->vita = vita;
+}
 //getters
 float Navicella::getFuel(void)
 {
@@ -107,11 +110,6 @@ void Navicella::shoot(Punto mouseclick)
 bool Navicella::isNear(Pianeta planet)
 {
     return this->Entity::isNear(planet.getX(), planet.getY(), planet.getRaggio());
-}
-
-void Navicella::muori(void)
-{
-    this->vita--;
 }
 
 //restituisce true se il pianeta deve essere distrutto

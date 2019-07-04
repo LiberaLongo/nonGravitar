@@ -99,6 +99,7 @@ void Entity::move(void)
     //WASD
     this->dir.move();
 }
+
 void Entity::shoot(ColoreRGB colore)
 {
     //creo un nuovo proiettile e lo aggiungo alla lista
@@ -124,7 +125,7 @@ bool Entity::isOutsideScreen(void)
 }
 
 //aggiorno la lista di proiettili
-void Entity::aggiornaCoordinateProiettili(float x, float y)
+int Entity::aggiornaCoordinateProiettili(float x, float y, int vita)
 {
     if (!(this->proiettili.empty()))
     {
@@ -152,6 +153,8 @@ void Entity::aggiornaCoordinateProiettili(float x, float y)
                 {
                     //rimuovo il proiettile se il bunker colpisce la navicella
                     iter = this->proiettili.remove(iter);
+                    //faccio scendere la vita della navicella
+                    vita--;
 #ifdef DEBUG_PROIETTILI
                     cout << "un proiettile ha colpito la navicella" << endl;
 #endif
@@ -166,4 +169,5 @@ void Entity::aggiornaCoordinateProiettili(float x, float y)
             }
         }
     }
+    return vita;
 }

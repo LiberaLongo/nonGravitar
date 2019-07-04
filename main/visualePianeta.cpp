@@ -5,6 +5,8 @@
 //#define DEBUG
 
 extern float WIDTH, HEIGHT;
+extern bool generaSistema, haiPerso;
+int vita;
 
 visualePianeta::visualePianeta(void)
 {
@@ -154,7 +156,8 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         this->player.draw(App);
         this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->pianetaVisualizzato.getHeadBunker());
-        if (this->pianetaVisualizzato.emptyBunker()) {
+        if (this->pianetaVisualizzato.emptyBunker())
+        {
             //distruggi il pianeta
             sistemasolare.eliminaPianeta(pianetaInsideNow);
             //ritorna alla visuale sistema solare
@@ -163,8 +166,24 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         //faccio sparare i bunker del pianeta
         this->pianetaVisualizzato.shoot(this->orologio.getElapsedTime());
-        this->pianetaVisualizzato.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->player.getX(), this->player.getY());
-
+        vita = this->pianetaVisualizzato.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->player.getX(), this->player.getY(), this->player.getVita());
+        if (vita <= 0)
+        {
+            //resetto la vita per la prossima partita
+            this->player.setVita(VITA_NAVICELLA);
+            //aggiorno i booleani
+            haiPerso = true;
+            generaSistema = true;
+            //torno al menù
+            return VISUALE_MENU;
+        }
+        else if (vita < this->player.getVita())
+        {
+            //aggiorno la vita
+            this->player.setVita(vita);
+            //ritorno al sistema solare
+            return VISUALE_SISTEMA_SOLARE;
+        }
         if (haCliccato)
             mouseClick.draw(App);
         //fine del frame corrente

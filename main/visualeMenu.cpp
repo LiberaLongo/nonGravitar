@@ -3,7 +3,8 @@
 #include "../header/visualeMenu.hpp"
 
 extern float WIDTH, HEIGHT;
-bool generaSistema = false, haiVinto = false;
+bool generaSistema = false;
+bool haiVinto = false, haiPerso = false;
 
 visualeMenu::visualeMenu(void)
 {
@@ -12,11 +13,6 @@ visualeMenu::visualeMenu(void)
 
 int visualeMenu::Run(sf::RenderWindow &App)
 {
-    if (generaSistema)
-    {
-        sistemasolare.genera();
-        generaSistema = false;
-    }
     float dist = HEIGHT / 8;
     int charSize = HEIGHT / 10;
     float x = WIDTH / 2 - charSize;
@@ -26,12 +22,12 @@ int visualeMenu::Run(sf::RenderWindow &App)
     //non focalizzato
     ColoreRGB bianco = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, LUMUS_MAXIMA);
     //colore della vittoria
-    ColoreRGB coloreHaiVinto = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
+    ColoreRGB coloreTesto = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
 
     sf::Event Event;
     bool Running = true;
     sf::Font Font;
-    sf::Text testoHaiVinto, testoGioco;
+    sf::Text testoGioco, testoHaiVinto, testoHaiPerso;
     sf::Text buttonPlay, buttonContinue, buttonNewGame;
     sf::Text buttonExit;
     int menu = 0;
@@ -45,13 +41,19 @@ int visualeMenu::Run(sf::RenderWindow &App)
     testoHaiVinto.setCharacterSize(charSize);
     testoHaiVinto.setString("HAI VINTO!");
     testoHaiVinto.setPosition({x - dist * 2, y - dist});
-    testoHaiVinto.setFillColor(coloreHaiVinto.getColorLib());
+    testoHaiVinto.setFillColor(coloreTesto.getColorLib());
+
+    testoHaiPerso.setFont(Font);
+    testoHaiPerso.setCharacterSize(charSize);
+    testoHaiPerso.setString("HAI PERSO!");
+    testoHaiPerso.setPosition({x - dist * 2, y - dist});
+    testoHaiPerso.setFillColor(coloreTesto.getColorLib());
 
     testoGioco.setFont(Font);
     testoGioco.setCharacterSize(charSize);
     testoGioco.setString("Non Gravitar");
     testoGioco.setPosition({x - dist * 2, y - dist});
-    testoGioco.setFillColor(coloreHaiVinto.getColorLib());
+    testoGioco.setFillColor(coloreTesto.getColorLib());
 
     buttonPlay.setFont(Font);
     buttonPlay.setCharacterSize(charSize);
@@ -104,6 +106,11 @@ int visualeMenu::Run(sf::RenderWindow &App)
                         //giochiamo!
                         playing = true;
                         haiVinto = false;
+                        if (generaSistema)
+                        {
+                            sistemasolare.genera();
+                            generaSistema = false;
+                        }
                         return VISUALE_SISTEMA_SOLARE;
                     }
                     else
@@ -142,6 +149,11 @@ int visualeMenu::Run(sf::RenderWindow &App)
             if (haiVinto)
             {
                 App.draw(testoHaiVinto);
+                App.draw(buttonNewGame);
+            }
+            else if (haiPerso)
+            {
+                App.draw(testoHaiPerso);
                 App.draw(buttonNewGame);
             }
             else

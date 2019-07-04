@@ -16,7 +16,7 @@ extern float SIZE_NAVICELLA;
 class Navicella : public Entity
 {
 private:
-    int vita = 5;
+    int vita = VITA_NAVICELLA;
     Fuel carburante;
     ColoreRGB coloreProiettile = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
 
@@ -33,6 +33,7 @@ public:
 
     //setters
     void setFuel(Fuel carburante);
+    void setVita(int vita);
     //getters
     float getFuel(void);
     int getVita(void);
@@ -52,9 +53,6 @@ public:
 
     //controlla se è dentro il pianeta
     bool isNear(Pianeta planet);
-
-    //vita
-    void muori(void);
 
     //override aggiornaProiettili di Entity
     void aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita);

@@ -110,6 +110,6 @@ public:
     void shoot(sf::Time tempo);
 
     //aggiorna coordinate dei proiettili sparati dai bunker
-    void aggiornaCoordinateProiettili(sf::Time tempo, float x, float y);
+    int aggiornaCoordinateProiettili(sf::Time tempo, float x, float y, int vita);
 };
 #endif //PIANETA_H

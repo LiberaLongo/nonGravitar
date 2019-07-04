@@ -76,7 +76,7 @@ public:
     bool isOutsideScreen(void);
 
     //aggiorno la lista di proiettili
-    void aggiornaCoordinateProiettili(float x, float y);
+    int aggiornaCoordinateProiettili(float x, float y, int vita);
 };
 
 #endif //ENTITA_H
