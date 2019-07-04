@@ -51,7 +51,7 @@ enum visuale {VISUALE_MENU, VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
 //numero di millisecondi dopo i quali aggiornare i proiettil
 #define AGGIORNA 100
 //numero di millisecondi dopo cui il bunker spara in tutte le sue direzioni
-#define SPARA 300
+#define SPARA 1000
 
 //FUNZIONI
 
