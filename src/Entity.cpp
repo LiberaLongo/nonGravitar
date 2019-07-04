@@ -124,48 +124,42 @@ bool Entity::isOutsideScreen(void)
 }
 
 //aggiorno la lista di proiettili
-void Entity::aggiornaCoordinateProiettili(sf::Time tempo, Punto centroNavicella)
+void Entity::aggiornaCoordinateProiettili(float x, float y)
 {
-    int millisecondi = tempo.asMilliseconds();
-    //se sono passati 100millisecondi dal reset o dal ultimo aggiorna
-    if (millisecondi % AGGIORNA == 0)
+    if (!(this->proiettili.empty()))
     {
-        if (!(this->proiettili.empty()))
+        //primo elemento utile non la sentinella
+        struct Elem<Proiettile> *iterProiettile = this->proiettili.head();
+        //se non vuota e non finita
+        while (!(this->proiettili.finished(iterProiettile)))
         {
-            //primo elemento utile non la sentinella
-            struct Elem<Proiettile> *iterProiettile = this->proiettili.head();
-            //se non vuota e non finita
-            while (!(this->proiettili.finished(iterProiettile)))
+            //leggo il proiettile
+            Proiettile aggiornato = this->proiettili.read(iterProiettile);
+            aggiornato.move();
+
+            if (aggiornato.isOutsideScreen())
             {
-
-                //leggo il proiettile
-                Proiettile aggiornato = this->proiettili.read(iterProiettile);
-                aggiornato.move();
-
-                if (aggiornato.isOutsideScreen())
-                {
-                    //se il proiettile è uscito dallo schermo devo rimuoverlo
-                    iterProiettile = this->proiettili.remove(iterProiettile);
+                //se il proiettile è uscito dallo schermo devo rimuoverlo
+                iterProiettile = this->proiettili.remove(iterProiettile);
 #ifdef DEBUG_PROIETTILI
-                    cout << "un proiettile è uscito" << endl;
+                cout << "un proiettile è uscito" << endl;
 #endif
+            }
+            else
+            {
+                Punto centroEntita = Punto(this->getX(), this->getY());
+                if (centroEntita.isNear(x, y, this->size))
+                {
+                    //rimuovo il proiettile se il bunker colpisce la navicella
+                    iterProiettile = this->proiettili.remove(iterProiettile);
                 }
                 else
                 {
-                    Punto centroEntita = Punto (this->getX(), this->getY());
-                    if (centroEntita.isNear(centroNavicella, this->size))
-                    {
-                        //rimuovo il proiettile se il bunker colpisce la navicella
-                        iterProiettile = this->proiettili.remove(iterProiettile);
-                    }
-                    else
-                    {
-                        //aggiorno il proiettile
-                        this->proiettili.write(iterProiettile, aggiornato);
-                    }
-                    //passo al successivo
-                    iterProiettile = this->proiettili.next(iterProiettile);
+                    //aggiorno il proiettile
+                    this->proiettili.write(iterProiettile, aggiornato);
                 }
+                //passo al successivo
+                iterProiettile = this->proiettili.next(iterProiettile);
             }
         }
     }

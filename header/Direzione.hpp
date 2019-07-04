@@ -56,4 +56,4 @@ public:
     void move(void);
 };
 
-#endif
+#endif //DIREZIONE_H

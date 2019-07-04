@@ -19,6 +19,9 @@ using namespace std;
 #define FUEL_1_QUANTITA 100.f
 #define FUEL_2_QUANTITA 200.f
 
+//angolo di differenza per la sparatoria del bunker
+#define ANGOLO_BUNKER 30.f
+
 //dimensioni non modificabili
 #define SIZE_FUEL 10.f
 #define SIZE_BUNKER 10.f
@@ -47,6 +50,8 @@ enum visuale {VISUALE_MENU, VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
 
 //numero di millisecondi dopo i quali aggiornare i proiettil
 #define AGGIORNA 100
+//numero di millisecondi dopo cui il bunker spara in tutte le sue direzioni
+#define SPARA 300
 
 //FUNZIONI
 

@@ -13,7 +13,7 @@ class Bunker : public Entity
 private:
     int tipo = 0;
     ColoreRGB coloreProiettile = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-    Lista<Direzione> headDirezioni;
+    Lista<Direzione> direzioni;
 
 public:
     //costruttore vuoto
@@ -43,7 +43,7 @@ public:
     void genera(void);
     
     //spara
-    void shoot(sf::Time tempo);
+    void shoot(void);
 };
 
 #endif //BUNKER_H

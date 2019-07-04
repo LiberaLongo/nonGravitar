@@ -405,14 +405,60 @@ void Pianeta::generaBunkerFuel()
     }
 }
 
-//PUBBLICA
 void Pianeta::genera(void)
 {
     this->generaPunti();
     this->ordinaPunti();
     this->generaBunkerFuel();
 }
+
 bool Pianeta::emptyBunker(void)
 {
     return this->bunker.empty();
+}
+
+//fa sparare i bunker
+void Pianeta::shoot(sf::Time tempo)
+{
+    int millisecondi = tempo.asMilliseconds();
+    //se sono passati 300millisecondi dal reset o dal ultimo sparo
+    if (millisecondi % SPARA == 0)
+    {
+        if (!(this->bunker.empty()))
+        {
+            //primo elemento utile non la sentinella
+            struct Elem<Bunker> *iter = this->bunker.head();
+            //se non vuota e non finita
+            while (!(this->bunker.finished(iter)))
+            {
+                Bunker cannoneSpara = this->bunker.read(iter);
+                cannoneSpara.shoot();
+                //passo al successivo
+                iter = this->bunker.next(iter);
+            }
+        }
+    }
+}
+
+//aggiorna coordinate dei proiettili sparati dai bunker
+void Pianeta::aggiornaCoordinateProiettili(sf::Time tempo, float x, float y)
+{
+    int millisecondi = tempo.asMilliseconds();
+    //se sono passati 300millisecondi dal reset o dal ultimo sparo
+    if (millisecondi % AGGIORNA == 0)
+    {
+        if (!(this->bunker.empty()))
+        {
+            //primo elemento utile non la sentinella
+            struct Elem<Bunker> *iter = this->bunker.head();
+            //se non vuota e non finita
+            while (!(this->bunker.finished(iter)))
+            {
+                Bunker cannoneAggiorna = this->bunker.read(iter);
+                cannoneAggiorna.aggiornaCoordinateProiettili(x, y);
+                //passo al successivo
+                iter = this->bunker.next(iter);
+            }
+        }
+    }
 }

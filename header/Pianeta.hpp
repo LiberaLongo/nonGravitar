@@ -105,5 +105,11 @@ public:
 
     //restituisce true se la lista dei bunker è vuota
     bool emptyBunker(void); 
+
+    //fa sparare i bunker
+    void shoot(sf::Time tempo);
+
+    //aggiorna coordinate dei proiettili sparati dai bunker
+    void aggiornaCoordinateProiettili(sf::Time tempo, float x, float y);
 };
-#endif
+#endif //PIANETA_H

@@ -76,7 +76,7 @@ public:
     bool isOutsideScreen(void);
 
     //aggiorno la lista di proiettili
-    void aggiornaCoordinateProiettili(sf::Time tempo, Punto centroNavicella);
+    void aggiornaCoordinateProiettili(float x, float y);
 };
 
-#endif //NAVICELLA_H
+#endif //ENTITA_H

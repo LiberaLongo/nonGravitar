@@ -20,9 +20,9 @@ public:
     Proiettile(void);
     //altri costruttori
     Proiettile(float x, float y, float angolo, ColoreRGB colore);
-    //non usato, ma simile
-    Proiettile(Punto origine, float angolo, ColoreRGB colore);
-
+    //ho già la direzione in cui sparare (ad esempio per i bunker)
+    Proiettile(Direzione dir, ColoreRGB colore);
+    
     //distruttore
     virtual ~Proiettile(void) {};
 

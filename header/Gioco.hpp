@@ -11,4 +11,4 @@ int Gioco(void);
 //restituisce TRUE se cè un errore
 //resittuisce FALSE altrimenti (è andato tutto a buon fine)
 
-#endif
+#endif //GIOCO_H

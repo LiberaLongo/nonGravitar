@@ -23,7 +23,8 @@ Bunker::Bunker(float x, float y, float angolo) : Entity(x, y, SIZE_BUNKER)
 //setters
 
 //getters
-int Bunker::getTipo(void) {
+int Bunker::getTipo(void)
+{
     return this->tipo;
 }
 
@@ -32,7 +33,7 @@ void Bunker::print(void)
 {
     cout << "Bunker : [ tipo = " << this->tipo;
     this->Entity::print();
-    this->headDirezioni.print();
+    this->direzioni.print();
     cout << " ]" << endl;
 }
 
@@ -60,16 +61,17 @@ void Bunker::draw(sf::RenderWindow &window)
     //sf::CircleShape triangolo(this->getSize(), 3);
 
     //colore rosso se di tipo 0 arancione se di tipo 1
-    switch(this->tipo) {
-        case 0:
-            triangolo.setFillColor(sf::Color::Red);
-            break;
-        case 1:
-            triangolo.setFillColor(arancio.getColorLib());
-            break;
-        default:
-            cout << "\nil tipo = " << this->tipo << " del bunker non ha senso\n";
-            break;
+    switch (this->tipo)
+    {
+    case 0: //2 direzioni
+        triangolo.setFillColor(arancio.getColorLib());
+        break;
+    case 1: //3 direzioni
+        triangolo.setFillColor(sf::Color::Red);
+        break;
+    default:
+        cout << "\nil tipo = " << this->tipo << " del bunker non ha senso\n";
+        break;
     }
 
     //ruota di angolo, PRIMA! della rotazione
@@ -80,6 +82,7 @@ void Bunker::draw(sf::RenderWindow &window)
     triangolo.setPosition(this->getX(), this->getY());
 
     //disegna sulla window passata per riferimento
+    this->drawProiettili(window);
     window.draw(triangolo);
 }
 
@@ -87,18 +90,39 @@ void Bunker::draw(sf::RenderWindow &window)
 void Bunker::genera(void)
 {
     //in base al tipo riempi la lista con 2 o 3 direzioni
+
+    //i = 0 left, i = 1 right (i=2 centro)
+    for (int i = -1; i < (this->tipo + 1)*2; i += 2)
+    {
+        //calcolo l'angolo generando bene solo sinistra e destra
+        float angolo = this->getAngolo() + i * ANGOLO_BUNKER;
+        Direzione dirCannoni = Direzione(this->getX(), this->getY(), angolo);
+        //se sto generando la 3a direzione risetto all'angolo mettendolo centrale
+        if (i == 3)
+        {
+            dirCannoni.setAngolo(this->getAngolo());
+        }
+        this->direzioni.insert_head(dirCannoni);
+    }
 }
 
 //spara
-void Bunker::shoot(sf::Time tempo)
+void Bunker::shoot(void)
 {
-    //inserisci un nuovo colpo da aggiornare
-    /*
-    //aggiorna la direzione a cui punta la navicella
-    this->dir.shoot(mouseclick);
-    //inserisco un proiettile nella lista
-    ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-    Proiettile newProiettile = Proiettile(this->getX(), this->getY(), this->getAngolo(), giallo);
-    this->proiettili.insert_head(newProiettile);
-*/
+    if (!(this->direzioni.empty()))
+    {
+        ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
+        //primo elemento utile non la sentinella
+        struct Elem<Direzione> *iter = this->direzioni.head();
+        //se non vuota e non finita
+        while (!(this->direzioni.finished(iter)))
+        {
+            Direzione dirInCuiSparo = this->direzioni.read(iter);
+            //inserisci un nuovo colpo da aggiornare
+            Proiettile newProiettile = Proiettile(dirInCuiSparo, giallo);
+            this->proiettili.insert_head(newProiettile);
+            //passo al successivo
+            iter = this->direzioni.next(iter);
+        }
+    }
 }

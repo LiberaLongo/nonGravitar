@@ -161,6 +161,10 @@ int visualePianeta::Run(sf::RenderWindow &App)
             return VISUALE_SISTEMA_SOLARE;
         }
 
+        //faccio sparare i bunker del pianeta
+        this->pianetaVisualizzato.shoot(this->orologio.getElapsedTime());
+        this->pianetaVisualizzato.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->player.getX(), this->player.getY());
+
         if (haCliccato)
             mouseClick.draw(App);
         //fine del frame corrente

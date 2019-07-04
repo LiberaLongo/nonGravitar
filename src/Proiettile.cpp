@@ -14,10 +14,12 @@ Proiettile::Proiettile(float x, float y, float angolo, ColoreRGB colore) : Direz
     //costruttore di direzione
     this->colore = colore;
 }
-//non usato, ma simile
-Proiettile::Proiettile(Punto origine, float angolo, ColoreRGB colore) : Direzione(origine, angolo)
+//ho già la direzione in cui sparare (ad esempio per i bunker)
+Proiettile::Proiettile(Direzione dir, ColoreRGB colore)
 {
     //costruttore di direzione
+    this->Direzione::setOrigine(dir.getX_origine(), dir.getY_origine());
+    this->Direzione::setAngolo(dir.getAngolo());
     this->colore = colore;
 }
 

@@ -39,4 +39,4 @@ public:
     sf::Color getColorLib(void);
 };
 
-#endif //PUNTO_H
+#endif //COLORE_H
