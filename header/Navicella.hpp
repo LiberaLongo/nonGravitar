@@ -45,11 +45,11 @@ public:
     void draw(sf::RenderWindow &window);
 
     //controlli di movimento
-    void move(float angle);
+    bool move(float angle);
 
     //spara
-    void shoot(void); //sparo nella mia direzione
-    void shoot(Punto mouseclick); //sparo nella direzione del mouse
+    bool shoot(void); //sparo nella mia direzione
+    bool shoot(Punto mouseclick); //sparo nella direzione del mouse
 
     //controlla se è dentro il pianeta
     bool isNear(Pianeta planet);
@@ -57,9 +57,6 @@ public:
     //override aggiornaProiettili di Entity
     void aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita);
     //restituisce true se il pianeta deve essere distrutto
-
-    //cose da sistemare prima di finire in un altra visuale quando si ha perso
-    bool lose(void);
 };
 
 #endif //NAVICELLA_H

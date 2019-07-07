@@ -96,25 +96,25 @@ void Navicella::draw(sf::RenderWindow &window)
 }
 
 //controlli di movimento
-void Navicella::move(float angle)
+bool Navicella::move(float angle)
 {
     this->setAngolo(angle);
     this->Entity::move();
-    this->carburante.consumoFuel();
+    return this->carburante.consumoFuel();
 }
 
-void Navicella::shoot(void)
+bool Navicella::shoot(void)
 {
     //chiamo la shoot del padre Entity
     this->Entity::shoot(this->coloreProiettile);
-    this->carburante.consumoFuel();
+    return this->carburante.consumoFuel();
 }
 
-void Navicella::shoot(Punto mouseclick)
+bool Navicella::shoot(Punto mouseclick)
 {
     //chiamo la shoot del padre Entity
     this->Entity::shoot(mouseclick, this->coloreProiettile);
-    this->carburante.consumoFuel();
+    return this->carburante.consumoFuel();
 }
 
 bool Navicella::isNear(Pianeta planet)
@@ -205,23 +205,4 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
     //non devo ancora distruggere il pianeta
     return false;
     */
-}
-
-bool Navicella::lose(void)
-{
-    if (this->carburante.getQuantita() <= 0)
-    {
-        //resetto la vita e il fuel per la prossima partita
-        vita = VITA_NAVICELLA;
-        fuel = FUEL_NAVICELLA;
-        //this->setVita(vita);
-        //this->setFuel(fuel);
-        //aggiorno i booleani
-        haiPerso = true;
-        generaSistema = true;
-        //è VERO che ho perso
-        return true;
-    }
-    //è FALSO, non ho ancora perso!
-    return false;
 }

@@ -50,6 +50,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
     //comincia la trattazione della finestra
     bool Running = true;
     bool NavicellaMoved = false;
+    bool carburanteFinito = false;
 
     sf::Event event;
 
@@ -126,36 +127,36 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 //WASD
                 case sf::Keyboard::W:
                     NavicellaMoved = true;
-                    this->player.move(UP);
+                    carburanteFinito = this->player.move(UP);
                     break;
                 case sf::Keyboard::A:
                     NavicellaMoved = true;
-                    this->player.move(LEFT);
+                    carburanteFinito = this->player.move(LEFT);
                     break;
                 case sf::Keyboard::S:
                     NavicellaMoved = true;
-                    this->player.move(DOWN);
+                    carburanteFinito = this->player.move(DOWN);
                     break;
                 case sf::Keyboard::D:
                     NavicellaMoved = true;
-                    this->player.move(RIGHT);
+                    carburanteFinito = this->player.move(RIGHT);
                     break;
                 //freccie
                 case sf::Keyboard::Up:
                     NavicellaMoved = true;
-                    this->player.move(UP);
+                    carburanteFinito = this->player.move(UP);
                     break;
                 case sf::Keyboard::Left:
                     NavicellaMoved = true;
-                    this->player.move(LEFT);
+                    carburanteFinito = this->player.move(LEFT);
                     break;
                 case sf::Keyboard::Down:
                     NavicellaMoved = true;
-                    this->player.move(DOWN);
+                    carburanteFinito = this->player.move(DOWN);
                     break;
                 case sf::Keyboard::Right:
                     NavicellaMoved = true;
-                    this->player.move(RIGHT);
+                    carburanteFinito = this->player.move(RIGHT);
                     break;
                 default:
                     break;
@@ -179,8 +180,17 @@ int visualePianeta::Run(sf::RenderWindow &App)
             //aggiorno la variabile globale
             fuel = this->player.getFuel();
             testoFuel.setString("fuel: " + to_string(fuel));
-            if(this->player.lose())
+            if (carburanteFinito)
             {
+                //resetto la vita e il fuel per la prossima partita
+                vita = VITA_NAVICELLA;
+                fuel = FUEL_NAVICELLA;
+                //this->setVita(vita);
+                //this->setFuel(fuel);
+                //aggiorno i booleani
+                haiPerso = true;
+                generaSistema = true;
+                //torno al menù
                 return VISUALE_MENU;
             }
         }
