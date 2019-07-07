@@ -12,7 +12,7 @@ class Fuel : public DisegnabileI
 private:
     int tipo = 0;
     Punto centro;
-    float quantita = FUEL_1_QUANTITA;
+    int quantita = FUEL_1_QUANTITA;
     float size = SIZE_FUEL;
 public:
     void generaTipo(void);
@@ -37,8 +37,8 @@ public:
     //getters
     float getX(void);
     float getY(void);
-    float getQuantita(void);
     float getSize(void);
+    int getQuantita(void);
     int getTipo(void);
 
     //stampa
@@ -51,6 +51,6 @@ public:
     void draw(sf::RenderWindow &window);
 
     //consumo carburante
-    float consumoFuel(void);
+    bool consumoFuel(void);
 };
 #endif //FUEL_H

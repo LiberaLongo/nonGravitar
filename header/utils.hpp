@@ -18,6 +18,7 @@ using namespace std;
 #define CONSUMO 1.f
 #define FUEL_1_QUANTITA 100.f
 #define FUEL_2_QUANTITA 200.f
+#define FUEL_NAVICELLA 500
 
 //angolo di differenza per la sparatoria del bunker
 #define ANGOLO_BUNKER 30.f

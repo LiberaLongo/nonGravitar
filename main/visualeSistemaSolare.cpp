@@ -5,6 +5,7 @@
 
 extern float WIDTH, HEIGHT;
 extern bool generaSistema, haiVinto;
+int vita = VITA_NAVICELLA, fuel;
 
 //privata
 bool visualeSistemaSolare::check(void)
@@ -36,10 +37,15 @@ visualeSistemaSolare::visualeSistemaSolare(void)
     this->orologio.restart();
     generaSistema = false;
     haiVinto = false;
+    //inizializzo fuel
+    fuel = this->player.getFuel();
 }
 
 int visualeSistemaSolare::Run(sf::RenderWindow &App)
 {
+    //aggiorno la vita e il fuel
+    this->player.setVita(vita);
+    this->player.setFuel(fuel);
     //aggiorno coordinate
     this->player.setCoord(WIDTH / 2, HEIGHT / 2);
     this->orologio.restart();
@@ -49,6 +55,33 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
     bool NavicellaMoved = false;
 
     sf::Event event;
+
+    //testo
+    float dist = HEIGHT / 8;
+    int charSize = HEIGHT / 20;
+    float x_testo = 0.f, y_testo = 0.f, dist_testo = WIDTH - charSize * 7;
+    sf::Font Font;
+    sf::Text testoVite;
+    sf::Text testoFuel;
+    ColoreRGB coloreTesto = ColoreRGB(255, 255, 255);
+
+    //inizializzo il testo
+    if (!Font.loadFromFile("verdanab.ttf"))
+    {
+        std::cerr << "Error loading verdanab.ttf" << std::endl;
+        return EXIT;
+    }
+    testoVite.setFont(Font);
+    testoVite.setCharacterSize(charSize);
+    testoVite.setString("vite: " + to_string(vita));
+    testoVite.setPosition({x_testo, y_testo});
+    testoVite.setFillColor(coloreTesto.getColorLib());
+
+    testoFuel.setFont(Font);
+    testoFuel.setCharacterSize(charSize);
+    testoFuel.setString("fuel: " + to_string(fuel));
+    testoFuel.setPosition({x_testo + dist_testo, y_testo});
+    testoFuel.setFillColor(coloreTesto.getColorLib());
 
     //un punto adibito a mouse click
     Punto mouseClick;
@@ -160,16 +193,27 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                     return VISUALE_PIANETA;
                 }
             }
+            //aggiorno la variabile globale
+            fuel = this->player.getFuel();
+            testoFuel.setString("fuel: " + to_string(fuel));
+            if(this->player.lose())
+            {
+                return VISUALE_MENU;
+            }
         }
 
         //pulisci la finestra colorandola di nero
         App.clear(sf::Color::Black);
 
         //disegna qui...
-        if(!sistemasolare.emptyPianeti()) {
+        if (!sistemasolare.emptyPianeti())
+        {
             sistemasolare.draw(App);
         }
-        else {
+        else
+        {
+            vita = VITA_NAVICELLA;
+            fuel = FUEL_NAVICELLA;
             generaSistema = true;
             haiVinto = true;
             return VISUALE_MENU;
@@ -182,7 +226,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         if (haCliccato)
             mouseClick.draw(App);
 
-        // App.draw(...);
+        //testo
+        App.draw(testoVite);
+        App.draw(testoFuel);
 
         //fine del frame corrente
         App.display();

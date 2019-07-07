@@ -6,7 +6,7 @@
 
 extern float WIDTH, HEIGHT;
 extern bool generaSistema, haiPerso;
-int vita;
+extern int vita, fuel;
 
 visualePianeta::visualePianeta(void)
 {
@@ -17,6 +17,8 @@ visualePianeta::visualePianeta(void)
 
 int visualePianeta::Run(sf::RenderWindow &App)
 {
+    //aggiorno il fuel
+    this->player.setFuel(fuel);
     //globale lunghezza della superficie
     int lengthSuperficie = 0;
     //aggiorno coordinate
@@ -50,6 +52,33 @@ int visualePianeta::Run(sf::RenderWindow &App)
     bool NavicellaMoved = false;
 
     sf::Event event;
+
+    //testo
+    float dist = HEIGHT / 8;
+    int charSize = HEIGHT / 20;
+    float x_testo = 0.f, y_testo = 0.f, dist_testo = WIDTH - charSize * 7;
+    sf::Font Font;
+    sf::Text testoVite;
+    sf::Text testoFuel;
+    ColoreRGB coloreTesto = ColoreRGB(255, 255, 255);
+
+    //inizializzo il testo
+    if (!Font.loadFromFile("verdanab.ttf"))
+    {
+        std::cerr << "Error loading verdanab.ttf" << std::endl;
+        return EXIT;
+    }
+    testoVite.setFont(Font);
+    testoVite.setCharacterSize(charSize);
+    testoVite.setString("vite: " + to_string(vita));
+    testoVite.setPosition({x_testo, y_testo});
+    testoVite.setFillColor(coloreTesto.getColorLib());
+
+    testoFuel.setFont(Font);
+    testoFuel.setCharacterSize(charSize);
+    testoFuel.setString("fuel: " + to_string(fuel));
+    testoFuel.setPosition({x_testo + dist_testo, y_testo});
+    testoFuel.setFillColor(coloreTesto.getColorLib());
 
     //un punto adibito a mouse click
     Punto mouseClick;
@@ -147,6 +176,13 @@ int visualePianeta::Run(sf::RenderWindow &App)
                     return VISUALE_SISTEMA_SOLARE;
                 }
             }
+            //aggiorno la variabile globale
+            fuel = this->player.getFuel();
+            testoFuel.setString("fuel: " + to_string(fuel));
+            if(this->player.lose())
+            {
+                return VISUALE_MENU;
+            }
         }
 
         //pulisci la finestra colorandola di nero
@@ -170,7 +206,8 @@ int visualePianeta::Run(sf::RenderWindow &App)
         if (vita <= 0)
         {
             //resetto la vita per la prossima partita
-            this->player.setVita(VITA_NAVICELLA);
+            vita = VITA_NAVICELLA;
+            fuel = FUEL_NAVICELLA;
             //aggiorno i booleani
             haiPerso = true;
             generaSistema = true;
@@ -187,6 +224,11 @@ int visualePianeta::Run(sf::RenderWindow &App)
         if (haCliccato)
             mouseClick.draw(App);
         //fine del frame corrente
+
+        //testo
+        App.draw(testoVite);
+        App.draw(testoFuel);
+
         App.display();
     }
 }

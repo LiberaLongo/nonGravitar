@@ -72,6 +72,10 @@ void SistemaSolare::draw(sf::RenderWindow &window)
 //genera lista di pianeti
 void SistemaSolare::genera()
 {
+    //prima che vengono generati i pianeti rimuovo tutti i pianeti eventualmente rimasti
+    while (!this->pianeti.empty()) {
+        this->pianeti.remove_head();
+    }
     //genera tutti i pianeti all'inizio
     for (int i = 0; i < MAX_PLANET; i++)
     {

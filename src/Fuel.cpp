@@ -67,13 +67,13 @@ float Fuel::getY(void)
 {
     return this->centro.getY();
 }
-float Fuel::getQuantita(void)
-{
-    return this->quantita;
-}
 float Fuel::getSize(void)
 {
     return this->size;
+}
+int Fuel::getQuantita(void)
+{
+    return this->quantita;
 }
 int Fuel::getTipo(void)
 {
@@ -131,7 +131,12 @@ void Fuel::draw(sf::RenderWindow &window)
 }
 
 //consumo carburante
-float Fuel::consumoFuel(void)
+bool Fuel::consumoFuel(void)
 {
     //consuma fuel
+    this->quantita -= CONSUMO;
+    if(this->quantita > 0)
+        return false;
+    else
+        return true;
 }

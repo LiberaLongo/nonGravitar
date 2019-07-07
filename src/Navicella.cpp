@@ -6,34 +6,41 @@
 
 extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 
+//per gestire hai perso
+extern bool generaSistema, haiPerso;
+extern int vita, fuel;
+
 //costruttore vuoto
 Navicella::Navicella(void)
 {
     //default tutto
     Entity::setSize(SIZE_NAVICELLA);
+    this->setFuel(FUEL_NAVICELLA);
 }
 //altri costruttori
 Navicella::Navicella(float x, float y) : Entity(x, y, SIZE_NAVICELLA)
 {
     //default tutto
+    this->setFuel(FUEL_NAVICELLA);
 }
 //non usato, ma simile
 Navicella::Navicella(Punto centro) : Entity(centro, SIZE_NAVICELLA)
 {
     //default tutto
+    this->setFuel(FUEL_NAVICELLA);
 }
 
 //setters
-void Navicella::setFuel(Fuel carburante)
+void Navicella::setFuel(int quantita)
 {
-    this->carburante = carburante;
+    this->carburante.setQuantita(quantita);
 }
 void Navicella::setVita(int vita)
 {
     this->vita = vita;
 }
 //getters
-float Navicella::getFuel(void)
+int Navicella::getFuel(void)
 {
     return this->carburante.getQuantita();
 }
@@ -93,18 +100,21 @@ void Navicella::move(float angle)
 {
     this->setAngolo(angle);
     this->Entity::move();
+    this->carburante.consumoFuel();
 }
 
 void Navicella::shoot(void)
 {
     //chiamo la shoot del padre Entity
     this->Entity::shoot(this->coloreProiettile);
+    this->carburante.consumoFuel();
 }
 
 void Navicella::shoot(Punto mouseclick)
 {
     //chiamo la shoot del padre Entity
     this->Entity::shoot(mouseclick, this->coloreProiettile);
+    this->carburante.consumoFuel();
 }
 
 bool Navicella::isNear(Pianeta planet)
@@ -195,4 +205,23 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
     //non devo ancora distruggere il pianeta
     return false;
     */
+}
+
+bool Navicella::lose(void)
+{
+    if (this->carburante.getQuantita() <= 0)
+    {
+        //resetto la vita e il fuel per la prossima partita
+        vita = VITA_NAVICELLA;
+        fuel = FUEL_NAVICELLA;
+        //this->setVita(vita);
+        //this->setFuel(fuel);
+        //aggiorno i booleani
+        haiPerso = true;
+        generaSistema = true;
+        //è VERO che ho perso
+        return true;
+    }
+    //è FALSO, non ho ancora perso!
+    return false;
 }

@@ -32,10 +32,10 @@ public:
     virtual ~Navicella(void) {};
 
     //setters
-    void setFuel(Fuel carburante);
+    void setFuel(int quantita);
     void setVita(int vita);
     //getters
-    float getFuel(void);
+    int getFuel(void);
     int getVita(void);
 
     //stampa
@@ -57,6 +57,9 @@ public:
     //override aggiornaProiettili di Entity
     void aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita);
     //restituisce true se il pianeta deve essere distrutto
+
+    //cose da sistemare prima di finire in un altra visuale quando si ha perso
+    bool lose(void);
 };
 
 #endif //NAVICELLA_H
