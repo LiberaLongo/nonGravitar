@@ -120,9 +120,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 //Esc per uscire
                 if (event.key.code == sf::Keyboard::Escape)
                     return VISUALE_MENU;
-                //Space per sparare
-                else if (event.key.code == sf::Keyboard::Space)
-                    this->player.shoot();
                 //Enter per muoversi nella direzione precedente
                 else if (event.key.code == sf::Keyboard::Return)
                 {

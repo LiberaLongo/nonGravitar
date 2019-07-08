@@ -112,7 +112,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 {
                     haCliccato = true;
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
-                    this->player.shoot(mouseClick);
+                    carburanteFinito = this->player.shoot(mouseClick);
                 }
                 break;
             //tasti premuti?
@@ -122,7 +122,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
                     return VISUALE_SISTEMA_SOLARE;
                 //Space per sparare
                 else if (event.key.code == sf::Keyboard::Space)
-                    this->player.shoot();
+                    carburanteFinito = this->player.shoot();
                 //shift sinistro (o destro) per raggio traente
                 else if (event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift)
                 {
