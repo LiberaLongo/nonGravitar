@@ -6,10 +6,21 @@
 
 extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 
-//per gestire hai perso
-extern bool generaSistema, haiPerso;
-extern int vita, fuel;
+//PRIVATE
+void Navicella::aggiornaCentroRaggioTraente(void)
+{
+    //calcoli per il centro del raggio traente
+    float distanza = this->getSize() * 4;
+    //l'angolo punta nel senso opposto dell'angolo della navicella
+    float angolo = this->getAngolo() + 180.f;
+    //trasformo l'angolo in gradi in un angolo adatto a cmath
+    angolo = (double)angolo * M_PI / 180;
+    //calcolo il centro del raggio traente
+    this->centroRaggioTraente.setX(this->getX() + distanza * (cos(angolo)));
+    this->centroRaggioTraente.setY(this->getY() - distanza * (sin(angolo)));
+}
 
+//PUBBLICHE
 //costruttore vuoto
 Navicella::Navicella(void)
 {
@@ -58,6 +69,7 @@ void Navicella::print(void)
     this->carburante.print();
     cout << " } " << endl;
 }
+
 //disegna
 void Navicella::draw(sf::RenderWindow &window)
 {
@@ -98,9 +110,18 @@ void Navicella::draw(sf::RenderWindow &window)
 void Navicella::drawRaggioTraente(sf::RenderWindow &window)
 {
     //disegna raggio traente
+    sf::CircleShape cerchioRaggioTraente(this->distanzaNavicellaRaggio);
+    //viola
+    ColoreRGB viola = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
+    cerchioRaggioTraente.setFillColor(viola.getColorLib());
+    //posizione
+    cerchioRaggioTraente.setPosition(this->centroRaggioTraente.getPuntoLib());
+    //disegno
+    window.draw(cerchioRaggioTraente);
 }
 void Navicella::draw(sf::RenderWindow &window, bool raggio)
 {
+    this->aggiornaCentroRaggioTraente();
     this->drawRaggioTraente(window);
     this->draw(window);
 }
@@ -226,18 +247,7 @@ void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
     {
         //se trovo il fuel corrispondente non devo cercare gli altri
         bool trovato = false;
-
-        //calcoli per il centro del raggio traente
-        float distanza = this->getSize() * 4;
-        //l'angolo punta nel senso opposto dell'angolo della navicella
-        float angolo = this->getAngolo() + 180.f;
-        //trasformo l'angolo in gradi in un angolo adatto a cmath
-        angolo = (double)angolo * M_PI / 180;
-        //calcolo il centro del raggio traente
-        double r_x = this->getX() + distanza * (cos(angolo));
-        double r_y = this->getY() - distanza * (sin(angolo));
-        Punto centroRaggio = Punto(r_x, r_y);
-
+        aggiornaCentroRaggioTraente();
         //primo elemento utile non la sentinella
         struct Elem<Fuel> *iter = listaFuel.head();
         //se non vuota e non finita
@@ -247,7 +257,7 @@ void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
             Fuel controllato = listaFuel.read(iter);
             //calcolo il centro
             Punto centroFuel = Punto(controllato.getX(), controllato.getY());
-            if (centroRaggio.isNear(centroFuel, distanza))
+            if (this->centroRaggioTraente.isNear(centroFuel, this->distanzaNavicellaRaggio))
             {
                 //cout << "ho trovato il fuel!\n";
                 trovato = true;
@@ -255,7 +265,8 @@ void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
                 //rimuovo il fuel
                 iter = listaFuel.remove(iter);
             }
-            else {
+            else
+            {
 
                 //cout << "NON ho trovato il fuel!\n";
                 //passo al successivo

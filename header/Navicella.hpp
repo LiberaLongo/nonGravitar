@@ -19,7 +19,11 @@ private:
     int vita = VITA_NAVICELLA;
     Fuel carburante;
     ColoreRGB coloreProiettile = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
+    Punto centroRaggioTraente;
+    float distanzaNavicellaRaggio = SIZE_NAVICELLA * 4;
 
+private:
+    void aggiornaCentroRaggioTraente(void);
 public:
     //costruttore vuoto
     Navicella(void);
