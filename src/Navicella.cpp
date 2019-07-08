@@ -10,14 +10,17 @@ extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 void Navicella::aggiornaCentroRaggioTraente(void)
 {
     //calcoli per il centro del raggio traente
-    float distanza = this->getSize() * 4;
     //l'angolo punta nel senso opposto dell'angolo della navicella
     float angolo = this->getAngolo() + 180.f;
-    //trasformo l'angolo in gradi in un angolo adatto a cmath
+    //rendo l'angolo comprensibile alle funzioni di cmath
     angolo = (double)angolo * M_PI / 180;
-    //calcolo il centro del raggio traente
-    this->centroRaggioTraente.setX(this->getX() + distanza * (cos(angolo)));
-    this->centroRaggioTraente.setY(this->getY() - distanza * (sin(angolo)));
+    //calcolo la distanza relativa
+    double r_x = this->distanzaNavicellaRaggio * (cos(angolo));
+    double r_y = this->distanzaNavicellaRaggio * (sin(angolo));
+    //cout << "r_x = " << r_x << ", r_y = " << r_y << endl;
+    //aggiorno il centro
+    this->centroRaggioTraente.setX(this->getX() + (float)r_x);
+    this->centroRaggioTraente.setY(this->getY() - (float)r_y);
 }
 
 //PUBBLICHE
@@ -112,10 +115,12 @@ void Navicella::drawRaggioTraente(sf::RenderWindow &window)
     //disegna raggio traente
     sf::CircleShape cerchioRaggioTraente(this->distanzaNavicellaRaggio);
     //viola
-    ColoreRGB viola = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
+    ColoreRGB viola = ColoreRGB(128, 0, 255);
     cerchioRaggioTraente.setFillColor(viola.getColorLib());
-    //posizione
-    cerchioRaggioTraente.setPosition(this->centroRaggioTraente.getPuntoLib());
+    //posizione (ricordo che se disegno un cerchio a 0,0 questo ha il centro a raggio,raggio)
+    float x = this->centroRaggioTraente.getX() - this->distanzaNavicellaRaggio;
+    float y = this->centroRaggioTraente.getY() - this->distanzaNavicellaRaggio;
+    cerchioRaggioTraente.setPosition(sf::Vector2f(x, y));
     //disegno
     window.draw(cerchioRaggioTraente);
 }
@@ -123,7 +128,7 @@ void Navicella::draw(sf::RenderWindow &window, bool raggio)
 {
     if (raggio)
     {
-        this->aggiornaCentroRaggioTraente();
+        //this->aggiornaCentroRaggioTraente();
         this->drawRaggioTraente(window);
     }
     this->draw(window);

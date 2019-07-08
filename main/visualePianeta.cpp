@@ -123,8 +123,8 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 //Space per sparare
                 else if (event.key.code == sf::Keyboard::Space)
                     this->player.shoot();
-                //R o shift (destro o sinistro) per raggio traente
-                else if (event.key.code == sf::Keyboard::LShift)
+                //shift sinistro (o destro) per raggio traente
+                else if (event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift)
                 {
                     raggio = true;
                     this->player.raggioTraente(this->pianetaVisualizzato.getHeadFuel());
