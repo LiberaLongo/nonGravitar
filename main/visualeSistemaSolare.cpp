@@ -121,56 +121,32 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             */
             //tasti premuti?
             case sf::Event::KeyPressed:
-                //...
-                switch (event.key.code)
+                //Esc per uscire
+                if (event.key.code == sf::Keyboard::Escape)
+                    return VISUALE_SISTEMA_SOLARE;
+                //Space per sparare
+                else if (event.key.code == sf::Keyboard::Space)
+                    this->player.shoot();
+                //WASD o freccie per muoversi
+                else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
                 {
-                //tasto Esc
-                case sf::Keyboard::Escape:
-                    haiVinto = false;
-                    return VISUALE_MENU;
-                    break;
-                /*
-                //tasto Spazio
-                case sf::Keyboard::Space:
-                    this->player.shoot();                    
-                    break;
-                */
-                //WASD
-                case sf::Keyboard::W:
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(UP);
-                    break;
-                case sf::Keyboard::A:
+                }
+                else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left)
+                {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(LEFT);
-                    break;
-                case sf::Keyboard::S:
+                }
+                else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down)
+                {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(DOWN);
-                    break;
-                case sf::Keyboard::D:
+                }
+                else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right)
+                {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(RIGHT);
-                    break;
-                //freccie
-                case sf::Keyboard::Up:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(UP);
-                    break;
-                case sf::Keyboard::Left:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(LEFT);
-                    break;
-                case sf::Keyboard::Down:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(DOWN);
-                    break;
-                case sf::Keyboard::Right:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(RIGHT);
-                    break;
-                default:
-                    break;
                 }
                 break;
 

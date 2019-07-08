@@ -95,6 +95,16 @@ void Navicella::draw(sf::RenderWindow &window)
     window.draw(triangolo);
 }
 
+void Navicella::drawRaggioTraente(sf::RenderWindow &window)
+{
+    //disegna raggio traente
+}
+void Navicella::draw(sf::RenderWindow &window, bool raggio)
+{
+    this->drawRaggioTraente(window);
+    this->draw(window);
+}
+
 //controlli di movimento
 bool Navicella::move(float angle)
 {
@@ -205,4 +215,52 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
     //non devo ancora distruggere il pianeta
     return false;
     */
+}
+
+void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
+{
+    //lista di fuel per fare le operazioni
+    Lista<Fuel> listaFuel;
+    listaFuel.setHead(headFuel);
+    if (!listaFuel.empty())
+    {
+        //se trovo il fuel corrispondente non devo cercare gli altri
+        bool trovato = false;
+
+        //calcoli per il centro del raggio traente
+        float distanza = this->getSize() * 4;
+        //l'angolo punta nel senso opposto dell'angolo della navicella
+        float angolo = this->getAngolo() + 180.f;
+        //trasformo l'angolo in gradi in un angolo adatto a cmath
+        angolo = (double)angolo * M_PI / 180;
+        //calcolo il centro del raggio traente
+        double r_x = this->getX() + distanza * (cos(angolo));
+        double r_y = this->getY() - distanza * (sin(angolo));
+        Punto centroRaggio = Punto(r_x, r_y);
+
+        //primo elemento utile non la sentinella
+        struct Elem<Fuel> *iter = listaFuel.head();
+        //se non vuota e non finita
+        while (!(listaFuel.finished(iter) || trovato))
+        {
+            //leggo il fuel
+            Fuel controllato = listaFuel.read(iter);
+            //calcolo il centro
+            Punto centroFuel = Punto(controllato.getX(), controllato.getY());
+            if (centroRaggio.isNear(centroFuel, distanza))
+            {
+                //cout << "ho trovato il fuel!\n";
+                trovato = true;
+                this->setFuel(this->getFuel() + controllato.getQuantita());
+                //rimuovo il fuel
+                iter = listaFuel.remove(iter);
+            }
+            else {
+
+                //cout << "NON ho trovato il fuel!\n";
+                //passo al successivo
+                iter = listaFuel.next(iter);
+            }
+        }
+    }
 }

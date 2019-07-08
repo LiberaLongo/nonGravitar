@@ -43,6 +43,8 @@ public:
 
     //disegna
     void draw(sf::RenderWindow &window);
+    void drawRaggioTraente(sf::RenderWindow &window);
+    void draw(sf::RenderWindow &window, bool raggio);
 
     //controlli di movimento
     bool move(float angle);
@@ -57,6 +59,8 @@ public:
     //override aggiornaProiettili di Entity
     void aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita);
     //restituisce true se il pianeta deve essere distrutto
+
+    void raggioTraente(struct Elem<Fuel> * headFuel);
 };
 
 #endif //NAVICELLA_H

@@ -51,6 +51,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
     bool Running = true;
     bool NavicellaMoved = false;
     bool carburanteFinito = false;
+    bool raggio = false;
 
     sf::Event event;
 
@@ -94,8 +95,11 @@ int visualePianeta::Run(sf::RenderWindow &App)
         //controlla se qualche evento viene scatenato prima del prossimo loop
         while (App.pollEvent(event))
         {
+            //aggiorno i booleani
             NavicellaMoved = false;
             haCliccato = false;
+            raggio = false;
+            
             switch (event.type)
             {
             //se la finestra è stata chiusa
@@ -113,56 +117,39 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 break;
             //tasti premuti?
             case sf::Event::KeyPressed:
-                //...
-                switch (event.key.code)
-                {
-                //tasto Esc
-                case sf::Keyboard::Escape:
+                //Esc per uscire
+                if (event.key.code == sf::Keyboard::Escape)
                     return VISUALE_SISTEMA_SOLARE;
-                    break;
-                //tasto Spazio
-                case sf::Keyboard::Space:
+                //Space per sparare
+                else if (event.key.code == sf::Keyboard::Space)
                     this->player.shoot();
-                    break;
-                //WASD
-                case sf::Keyboard::W:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(UP);
-                    break;
-                case sf::Keyboard::A:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(LEFT);
-                    break;
-                case sf::Keyboard::S:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(DOWN);
-                    break;
-                case sf::Keyboard::D:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(RIGHT);
-                    break;
-                //freccie
-                case sf::Keyboard::Up:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(UP);
-                    break;
-                case sf::Keyboard::Left:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(LEFT);
-                    break;
-                case sf::Keyboard::Down:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(DOWN);
-                    break;
-                case sf::Keyboard::Right:
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move(RIGHT);
-                    break;
-                default:
-                    break;
+                //R o shift (destro o sinistro) per raggio traente
+                else if (event.key.code == sf::Keyboard::R || event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift)
+                {
+                    raggio = true;
+                    this->player.raggioTraente(this->pianetaVisualizzato.getHeadFuel());
                 }
-                break;
-
+                //WASD o freccie per muoversi
+                else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
+                {
+                    NavicellaMoved = true;
+                    carburanteFinito = this->player.move(UP);
+                }
+                else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left)
+                {
+                    NavicellaMoved = true;
+                    carburanteFinito = this->player.move(LEFT);
+                }
+                else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down)
+                {
+                    NavicellaMoved = true;
+                    carburanteFinito = this->player.move(DOWN);
+                }
+                else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right)
+                {
+                    NavicellaMoved = true;
+                    carburanteFinito = this->player.move(RIGHT);
+                }
             //noi non controlliamo gli altri tipi di evento
             default:
                 break;
@@ -200,7 +187,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         this->pianetaVisualizzato.drawVisuale(App, lengthSuperficie);
 
-        this->player.draw(App);
+        this->player.draw(App, raggio);
         this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->pianetaVisualizzato.getHeadBunker());
         if (this->pianetaVisualizzato.emptyBunker())
         {
