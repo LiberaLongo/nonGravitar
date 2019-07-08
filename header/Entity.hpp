@@ -47,6 +47,7 @@ public:
     void setY(float y);
     void setCoord(float x, float y);
     void setAngolo(float angolo);
+    void setAngolo(Punto mouseclick);
     void setSpeed(float speed);
     void setSize(float size);
     void setHead(struct Elem<Proiettile> * head);

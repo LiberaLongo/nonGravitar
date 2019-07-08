@@ -99,7 +99,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
             NavicellaMoved = false;
             haCliccato = false;
             raggio = false;
-            
+
             switch (event.type)
             {
             //se la finestra è stata chiusa
@@ -124,10 +124,16 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 else if (event.key.code == sf::Keyboard::Space)
                     this->player.shoot();
                 //R o shift (destro o sinistro) per raggio traente
-                else if (event.key.code == sf::Keyboard::R || event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift)
+                else if (event.key.code == sf::Keyboard::LShift)
                 {
                     raggio = true;
                     this->player.raggioTraente(this->pianetaVisualizzato.getHeadFuel());
+                }
+                //Enter per muoversi nella direzione precedente
+                else if (event.key.code == sf::Keyboard::Return)
+                {
+                    NavicellaMoved = true;
+                    carburanteFinito = this->player.move();
                 }
                 //WASD o freccie per muoversi
                 else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)

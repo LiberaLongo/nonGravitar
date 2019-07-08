@@ -105,28 +105,30 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             case sf::Event::Closed:
                 return EXIT;
                 break;
-            /*
+
             //mouse cliccato
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
                     haCliccato = true;
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
-                    this->player.shoot(mouseClick);
-#ifdef DEBUG
-                    mouseClick.print();
-#endif
+                    this->player.setAngolo(mouseClick);
                 }
                 break;
-            */
             //tasti premuti?
             case sf::Event::KeyPressed:
                 //Esc per uscire
                 if (event.key.code == sf::Keyboard::Escape)
-                    return VISUALE_SISTEMA_SOLARE;
+                    return VISUALE_MENU;
                 //Space per sparare
                 else if (event.key.code == sf::Keyboard::Space)
                     this->player.shoot();
+                //Enter per muoversi nella direzione precedente
+                else if (event.key.code == sf::Keyboard::Return)
+                {
+                    NavicellaMoved = true;
+                    carburanteFinito = this->player.move();
+                }
                 //WASD o freccie per muoversi
                 else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
                 {
@@ -173,7 +175,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             //aggiorno la variabile globale
             fuel = this->player.getFuel();
             testoFuel.setString("fuel: " + to_string(fuel));
-            if(carburanteFinito)
+            if (carburanteFinito)
             {
                 //resetto la vita e il fuel per la prossima partita
                 vita = VITA_NAVICELLA;

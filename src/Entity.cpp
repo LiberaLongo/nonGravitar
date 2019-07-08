@@ -44,6 +44,10 @@ void Entity::setAngolo(float angle)
 {
     this->dir.setAngolo(angle);
 }
+void Entity::setAngolo(Punto mouseclick)
+{
+    this->dir.setAngolo(mouseclick);
+}
 void Entity::setSpeed(float speed)
 {
     this->dir.setSpeed(speed);
@@ -109,7 +113,7 @@ void Entity::shoot(ColoreRGB colore)
 void Entity::shoot(Punto mouseclick, ColoreRGB colore)
 {
     //aggiorna la direzione a cui punta la Entity
-    this->dir.setAngolo(mouseclick);
+    this->setAngolo(mouseclick);
     //e spara
     this->shoot(colore);
 }

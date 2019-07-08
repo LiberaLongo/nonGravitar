@@ -121,19 +121,28 @@ void Navicella::drawRaggioTraente(sf::RenderWindow &window)
 }
 void Navicella::draw(sf::RenderWindow &window, bool raggio)
 {
-    this->aggiornaCentroRaggioTraente();
-    this->drawRaggioTraente(window);
+    if (raggio)
+    {
+        this->aggiornaCentroRaggioTraente();
+        this->drawRaggioTraente(window);
+    }
     this->draw(window);
 }
 
 //controlli di movimento
-bool Navicella::move(float angle)
+bool Navicella::move(void)
 {
-    this->setAngolo(angle);
+
     this->Entity::move();
     return this->carburante.consumoFuel();
 }
+bool Navicella::move(float angle)
+{
+    this->setAngolo(angle);
+    return this->move();
+}
 
+//spara
 bool Navicella::shoot(void)
 {
     //chiamo la shoot del padre Entity

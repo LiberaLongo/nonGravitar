@@ -51,6 +51,7 @@ public:
     void draw(sf::RenderWindow &window, bool raggio);
 
     //controlli di movimento
+    bool move(void);
     bool move(float angle);
 
     //spara
