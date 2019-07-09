@@ -2,18 +2,12 @@
 #ifndef PIANETA_H
 #define PIANETA_H
 
-#include "./DisegnabileI.hpp"
-#include "./Punto.hpp"
 #include "./Fuel.hpp"
-#include "./ColoreRGB.hpp"
-
-#include "./Lista.hpp"
+#include "./Poligono.hpp"
 
 //ATTENZIONE! cpp sono qui inclusi per classi template
 #include "./Bunker.hpp"
 
-
-template class Lista<Punto>;
 template class Lista<Fuel>;
 template class Lista<Bunker>;
 
@@ -23,21 +17,16 @@ private:
     Punto centro;
     float raggio = PIANETA_RAGGIO;
     //cose grafiche e basta
-    ColoreRGB colore;
     ColoreRGB atmosfera;
 
+    //il poligono è una lista di punti
+    Poligono poligono;
+
     //liste
-    Lista<Punto> surface;
     Lista<Fuel> fuel;
     Lista<Bunker> bunker;
-    /*ATTENZIONE!
-    Serve la lista dei centri dei bunker
-    per controllare i proiettili di entity*/
-    Lista<Punto> centriBunker;
 
 private:
-    void generaPunti(void);
-    void ordinaPunti(void);
     void generaBunkerFuel(void);
 
 public:
@@ -82,10 +71,6 @@ public:
     struct Elem<Punto> *getHeadSurface(void);
     struct Elem<Fuel> *getHeadFuel(void);
     struct Elem<Bunker> *getHeadBunker(void);
-    /*ATTENZIONE!
-    Serve la lista dei centri dei bunker
-    per controllare i proiettili di entity*/
-    struct Elem<Punto> *getHeadCentriBunker();
 
     //conta i punti della superficie
     int lunghezzaSuperfice(void);

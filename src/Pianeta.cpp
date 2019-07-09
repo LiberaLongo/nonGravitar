@@ -4,10 +4,6 @@
 //#define DEBUG
 #define ORDINA
 
-//dopo questa macro è da togliere!
-//#define NOME_PUNTO_SUPERFICE
-//macro che, se definita, ordina la lista dei punti della superfice
-
 extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 
 //COSTRUTTORI
@@ -50,11 +46,11 @@ void Pianeta::setRaggio(float raggio)
 //colori
 void Pianeta::setColore(ColoreRGB colore)
 {
-    this->colore = colore;
+    this->poligono.setColore(colore);
 }
 void Pianeta::setColore(int red, int green, int blue)
 {
-    this->colore.setRGB(red, green, blue);
+    this->poligono.setColore(red, green, blue);
 }
 void Pianeta::setAtmosfera(ColoreRGB outline)
 {
@@ -67,7 +63,7 @@ void Pianeta::setAtmosfera(int red, int green, int blue)
 //setta la lista
 void Pianeta::setSurface(Lista<Punto> listaSurface)
 {
-    this->surface = listaSurface;
+    this->poligono.setLista(listaSurface);
 }
 void Pianeta::setFuel(Lista<Fuel> listaFuel)
 {
@@ -80,7 +76,7 @@ void Pianeta::setBunker(Lista<Bunker> listaBunker)
 //setta il puntatore della lista
 void Pianeta::setHeadSurface(struct Elem<Punto> *headSurface)
 {
-    this->surface.setHead(headSurface);
+    this->poligono.setHead(headSurface);
 }
 void Pianeta::setHeadFuel(struct Elem<Fuel> *headFuel)
 {
@@ -107,7 +103,7 @@ float Pianeta::getRaggio(void)
 //colori
 sf::Color Pianeta::getColoreLib(void)
 {
-    this->colore.getColorLib();
+    this->poligono.getColoreLib();
 }
 sf::Color Pianeta::getAtmosferaLib(void)
 {
@@ -116,7 +112,7 @@ sf::Color Pianeta::getAtmosferaLib(void)
 //ottengo il puntatore alla testa, non al primo elemento
 struct Elem<Punto> *Pianeta::getHeadSurface(void)
 {
-    return this->surface.getHead();
+    return this->poligono.getHead();
 }
 //
 struct Elem<Fuel> *
@@ -129,21 +125,13 @@ struct Elem<Bunker> *
 Pianeta::getHeadBunker(void)
 {
     return this->bunker.getHead();
-} struct Elem<Punto> *
-
-/*ATTENZIONE!
-Serve la lista dei centri dei bunker
-per controllare i proiettili di entity*/
-Pianeta::getHeadCentriBunker(void)
-{
-    return this->centriBunker.getHead();
 }
 
 //conta i punti della superficie
 int
 Pianeta::lunghezzaSuperfice(void)
 {
-    return this->surface.lunghezza();
+    return this->poligono.numPunti();
 }
 //stampa
 void Pianeta::print(void)
@@ -153,11 +141,11 @@ void Pianeta::print(void)
     this->centro.print();
     cout << "\nraggio = " << this->raggio;
     cout << "\ncolore = ";
-    this->colore.print();
+    this->poligono.printColore();
     cout << "\noutline = ";
     this->atmosfera.print();
     cout << "\nsuperficie";
-    this->surface.print();
+    this->poligono.print();
     cout << "carburante";
     this->fuel.print();
     cout << "bunker";
@@ -190,145 +178,16 @@ void Pianeta::draw(sf::RenderWindow &window)
 }
 void Pianeta::drawVisuale(sf::RenderWindow &window, int length)
 {
-    //non è l'indice del while, ma l'indice dei punti nella convex!
-    int indice = 0;
-    //crea una empty shape convex con 3 punti
-    sf::ConvexShape convexSuperficie;
-    convexSuperficie.setPointCount(length);
-
-    //blu
-    convexSuperficie.setFillColor(this->getColoreLib());
-
-    if (!(this->surface.empty()))
-    {
-        //primo elemento utile non la sentinella
-        struct Elem<Punto> *iter = this->surface.head();
-        //se non vuota e non finita
-        while (!(this->surface.finished(iter)))
-        {
-            //stampo elemento MODIFICATA!
-            Punto disegnato = this->surface.read(iter);
-            //inserisci il punto nella convex shape
-            convexSuperficie.setPoint(indice, disegnato.getPuntoLib());
-            //passo al successivo
-            iter = this->surface.next(iter);
-            indice++;
-        }
-    }
-
-    //disegna sulla window passata per riferimento
-    window.draw(convexSuperficie);
-
-#ifdef NOME_PUNTO_SUPERFICE
-    this->surface.draw(window);
-#endif
+    this->poligono.draw(window);
     this->fuel.draw(window);
     this->bunker.draw(window);
-}
-
-//PRIVATE
-//generaPianeta(void);
-void Pianeta::generaPunti(void)
-{
-    //numero random per le coordinate
-    float x = 0.f, y = 0.f;
-    //distanza dimensione navicella un pò di spazio per la navicella
-    float dist = SIZE_NAVICELLA * 7;
-
-    //genera tutti i PUNTI all'inizio
-    for (int i = 0; i < MAX_SUPERFICE; i++)
-    {
-        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
-
-        //costruisci punto della superfice
-        Punto p = Punto(x, y);
-        //inserirlo nella lista
-        this->surface.insert_head(p);
-    }
-}
-
-//PRIVATA
-//ordina la lista dei punti del pianeta...
-void Pianeta::ordinaPunti(void)
-{
-    //non fare niente se ORDINA non è definito
-#ifdef ORDINA
-    //idea: ordinare i punti in base al loro angolo rispetto al centro
-    //inizializzo il punto centrale
-    Punto centro = Punto(WIDTH / 2, HEIGHT / 2);
-    //utilizzo quindi un vettore di angoli, un vettore di posizioni e merge-sort
-    float angoli[MAX_SUPERFICE];
-    struct Elem<Punto> *posizioni[MAX_SUPERFICE];
-
-    //inizializzo l'iteratore della lista
-    struct Elem<Punto> *iter = this->surface.head();
-
-    //inizializzo i vettori di angoli e di posizioni
-    if (!(this->surface.empty()))
-    {
-        for (int i = 0; i < MAX_SUPERFICE; i++)
-        {
-            if (!(this->surface.finished(iter)))
-            {
-                //leggo l'elemento
-                Punto calcolato = this->surface.read(iter);
-                //calcolo e salvo l'angolo nell'array
-                angoli[i] = centro.calcolaAngolo(calcolato);
-#ifdef NOME_PUNTO_SUPERFICE
-                //setto il nome alla variabile "locale" calcolato
-                calcolato.setName(to_string(angoli[i]));
-                //aggiorno la superfice
-                this->surface.write(iter, calcolato);
-#endif
-                //salvo il puntatore
-                posizioni[i] = iter;
-                //passo al successivo
-                iter = this->surface.next(iter);
-            }
-            else
-            {
-                cout << "errore lista finita ma vettore più grande";
-            }
-        }
-    }
-    else
-    {
-        cout << "errore lista vuota";
-    }
-    //merge-sort
-    //vettori ausiliari
-    float B[MAX_SUPERFICE];
-    struct Elem<Punto> *posAux[MAX_SUPERFICE];
-    //eseguo algoritmo di ordinamento e sistemo la lista
-    this->surface.ordina(MAX_SUPERFICE, angoli, B, posizioni, posAux);
-#ifdef NOME_PUNTO_SUPERFICE
-    int conta = 0;
-    if (!(this->surface.empty()))
-    {
-        //primo elemento utile non la sentinella
-        struct Elem<Punto> *iter = this->surface.head();
-        //se non vuota e non finita
-        while (!(this->surface.finished(iter)))
-        {
-            //aggiorno contatore
-            conta++;
-            //setto il nome al punto
-            Punto nominato = this->surface.read(iter);
-            nominato.setName(to_string(conta) + ", " + nominato.getName());
-            this->surface.write(iter, nominato);
-            //passo al successivo
-            iter = this->surface.next(iter);
-        }
-    }
-#endif //NOME_PUNTO_SUPERFICE
-
-#endif //ORDINA
 }
 
 //PRIVATA
 void Pianeta::generaBunkerFuel()
 {
+    Lista<Punto> surface;
+    surface.setHead(this->poligono.getHead());
     int numeroFuel = 0, numeroBunker = 0;
     enum
     {
@@ -337,28 +196,28 @@ void Pianeta::generaBunkerFuel()
         tipo_bunker
     };
     Punto p1, p2, pMedio;
-    if (!(this->surface.empty()))
+    if (!(surface.empty()))
     {
         //primo elemento utile non la sentinella
-        struct Elem<Punto> *iter = this->surface.head();
-        struct Elem<Punto> *sentinella = this->surface.prev(iter);
+        struct Elem<Punto> *iter = surface.head();
+        struct Elem<Punto> *sentinella = surface.prev(iter);
         //se non vuota e non finita
-        while (!(this->surface.finished(iter)))
+        while (!(surface.finished(iter)))
         {
             int cosaGenero = rand() % 3;
             //se devo generare qualcosa
             if (cosaGenero != tipo_niente)
             {
                 //stampo elemento MODIFICATA!
-                p1 = this->surface.read(iter);
+                p1 = surface.read(iter);
                 //se il successivo non è la sentinella
-                if (this->surface.next(iter) != sentinella)
+                if (surface.next(iter) != sentinella)
                 {
-                    p2 = this->surface.read(this->surface.next(iter));
+                    p2 = surface.read(surface.next(iter));
                 }
                 else
                 {
-                    p2 = this->surface.read(this->surface.tail());
+                    p2 = surface.read(surface.tail());
                 }
                 //calcolo il punto medio
                 int x_medio = (p1.getX() + p2.getX()) / 2;
@@ -391,24 +250,20 @@ void Pianeta::generaBunkerFuel()
                     cannone.genera();
                     //inserirlo nella lista
                     this->bunker.insert_head(cannone);
-
-                    /*ATTENZIONE!
-                    Serve la lista dei centri dei bunker
-                    per controllare i proiettili di entity*/
-                    //inserisco nella lista dei centri
-                    this->centriBunker.insert_head(pMedio);
                 }
             }
             //passo al successivo
-            iter = this->surface.next(iter);
+            iter = surface.next(iter);
         }
     }
 }
 
 void Pianeta::genera(void)
 {
-    this->generaPunti();
-    this->ordinaPunti();
+    this->poligono.genera();
+#ifdef ORDINA
+    this->poligono.ordina();
+#endif
     this->generaBunkerFuel();
 }
 

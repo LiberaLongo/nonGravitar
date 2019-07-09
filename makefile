@@ -23,8 +23,8 @@ COMPILE = $(CC) $(CFLAGS)
 #indieme di header molto usati
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o \
-	Direzione.o Proiettile.o Entity.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
+OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o Direzione.o Poligono.o\
+	Proiettile.o Entity.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
 	visualeMenu.o visualeSistemaSolare.o visualePianeta.o Gioco.o main.o
 # Controlli.o
 
@@ -48,9 +48,13 @@ utils.o: $(U)utils.cpp $(H)utils.hpp $(H)Punto.hpp
 ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 	$(COMPILE) $(U)ColoreRGB.cpp -o ColoreRGB.o
 
+Direzione.o: $(U)Direzione.cpp $(HDR)
+	$(COMPILE) $(U)Direzione.cpp -o Direzione.o
+
+Poligono.o: $(U)Poligono.cpp $(HDR) $(H)ColoreRGB.hpp
+	$(COMPILE) $(U)Poligono.cpp -o Poligono.o
+
 #oggetti del gioco (in ./src)
-Direzione.o: $(S)Direzione.cpp $(HDR)
-	$(COMPILE) $(S)Direzione.cpp -o Direzione.o
 
 Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
 	$(COMPILE) $(S)Proiettile.cpp -o Proiettile.o
@@ -67,7 +71,7 @@ Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Entity.hpp $(H)Fuel.
 Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Entity.hpp $(H)Lista.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Bunker.cpp -o Bunker.o
 
-Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Lista.hpp $(H)utils.hpp
+Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Poligono.hpp $(H)Lista.hpp $(H)utils.hpp
 	$(COMPILE) $(S)Pianeta.cpp -o Pianeta.o
 
 SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)Lista.hpp $(H)utils.hpp $(H)Navicella.hpp
