@@ -1,9 +1,12 @@
 //header bunker
-#ifndef BUNKER_H
-#define BUNKER_H
+#ifndef BUNKER_HPP
+#define BUNKER_HPP
 
 #include "./DisegnabileI.hpp"
 #include "./Entity.hpp"
+
+//ATTENZIONE! cpp inclusi per classi template
+#include "./includeTemplate.hpp"
 
 //per Bunker
 template class Lista<Direzione>;
@@ -46,4 +49,4 @@ public:
     void shoot(void);
 };
 
-#endif //BUNKER_H
+#endif //BUNKER_HPP

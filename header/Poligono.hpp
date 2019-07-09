@@ -1,10 +1,13 @@
 //Poligono header
-#ifndef POLIGONO_H
-#define POLIGONO_H
+#ifndef POLIGONO_HPP
+#define POLIGONO_HPP
 
 #include "./Punto.hpp"
 #include "./ColoreRGB.hpp"
 #include "./Lista.hpp"
+
+//ATTENZIONE! cpp inclusi per classi template
+#include "./includeTemplate.hpp"
 
 template class Lista<Punto>;
 
@@ -48,4 +51,4 @@ public:
     void genera(void);
 };
 
-#endif
+#endif //POLIGONO_HPP

@@ -1,6 +1,6 @@
 // visuale sistema solare header
-#ifndef VISUALE_SISTEMA_SOLARE_H
-#define VISUALE_SISTEMA_SOLARE_H
+#ifndef VISUALE_SISTEMA_SOLARE_HPP
+#define VISUALE_SISTEMA_SOLARE_HPP
 
 #include <iostream>
 
@@ -28,4 +28,4 @@ public:
 	visualeSistemaSolare(void);
 	virtual int Run(sf::RenderWindow &App);
 };
-#endif //VISUALE_SISTEMA_SOLARE_H
+#endif //VISUALE_SISTEMA_SOLARE_HPP

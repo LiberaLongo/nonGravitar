@@ -1,5 +1,5 @@
-#ifndef DISEGNABILE_INTERFACCIA_H
-#define DISEGNABILE_INTERFACCIA_H
+#ifndef DISEGNABILE_INTERFACCIA_HPP
+#define DISEGNABILE_INTERFACCIA_HPP
 
 #include <SFML/Graphics.hpp>
 
@@ -9,4 +9,4 @@ public:
     //disegna
     void draw(sf::RenderWindow &window);
 };
-#endif //DISEGNABILE_INTERFACCIA_H
+#endif //DISEGNABILE_INTERFACCIA_HPP

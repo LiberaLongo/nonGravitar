@@ -1,6 +1,6 @@
 //header colori
-#ifndef COLORE_H
-#define COLORE_H
+#ifndef COLORE_HPP
+#define COLORE_HPP
 
 #include <SFML/Graphics.hpp>
 
@@ -39,4 +39,4 @@ public:
     sf::Color getColorLib(void);
 };
 
-#endif //COLORE_H
+#endif //COLORE_HPP

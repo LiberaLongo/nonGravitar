@@ -1,6 +1,6 @@
 //header gioco
-#ifndef GIOCO_H
-#define GIOCO_H
+#ifndef GIOCO_HPP
+#define GIOCO_HPP
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -11,4 +11,4 @@ int Gioco(void);
 //restituisce TRUE se cè un errore
 //resittuisce FALSE altrimenti (è andato tutto a buon fine)
 
-#endif //GIOCO_H
+#endif //GIOCO_HPP

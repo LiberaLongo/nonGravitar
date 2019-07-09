@@ -1,6 +1,6 @@
 //header carburante
-#ifndef FUEL_H
-#define FUEL_H
+#ifndef FUEL_HPP
+#define FUEL_HPP
 
 #include "./utils.hpp"
 #include "./DisegnabileI.hpp"
@@ -53,4 +53,4 @@ public:
     //consumo carburante
     bool consumoFuel(void);
 };
-#endif //FUEL_H
+#endif //FUEL_HPP

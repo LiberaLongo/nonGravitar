@@ -1,7 +1,7 @@
 //navicella e bunker sono entità
 
-#ifndef ENTITA_H
-#define ENTITA_H
+#ifndef ENTITA_HPP
+#define ENTITA_HPP
 
 //#include <SFML/Graphics.hpp>
 
@@ -12,8 +12,7 @@
 #include "./Proiettile.hpp"
 
 //ATTENZIONE! cpp inclusi per classi template
-#include "../utils/ListaParent.cpp"
-#include "../utils/Lista.cpp"
+#include "./includeTemplate.hpp"
 
 template class Lista<Proiettile>;
 
@@ -80,4 +79,4 @@ public:
     int aggiornaCoordinateProiettili(float x, float y, int vita);
 };
 
-#endif //ENTITA_H
+#endif //ENTITA_HPP

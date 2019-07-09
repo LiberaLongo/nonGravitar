@@ -1,5 +1,5 @@
-#ifndef VISUALE_MENU_H
-#define VISUALE_MENU_H
+#ifndef VISUALE_MENU_HPP
+#define VISUALE_MENU_HPP
 
 #include <iostream>
 
@@ -18,4 +18,4 @@ public:
 	virtual int Run(sf::RenderWindow &App);
 };
 
-#endif //VISUALE_MENU_H
+#endif //VISUALE_MENU_HPP

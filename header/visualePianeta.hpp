@@ -1,6 +1,6 @@
 //visuale pianeta header
-#ifndef VISUALE_PIANETA_H
-#define VISUALE_PIANETA_H
+#ifndef VISUALE_PIANETA_HPP
+#define VISUALE_PIANETA_HPP
 
 #include <iostream>
 
@@ -22,4 +22,4 @@ public:
 	virtual int Run(sf::RenderWindow &App);
 };
 
-#endif //VISUALE_PIANETA_H
+#endif //VISUALE_PIANETA_HPP

@@ -1,6 +1,6 @@
 //header proiettile
-#ifndef PROIETTILE_H
-#define PROIETTILE_H
+#ifndef PROIETTILE_HPP
+#define PROIETTILE_HPP
 
 #include <ctime>
 #include <cstdlib>
@@ -41,4 +41,4 @@ public:
     /*spara non esiste... o è uguale a move in questo caso*/
     bool isOutsideScreen(void);
 };
-#endif //PROIETTILE_H
+#endif //PROIETTILE_HPP

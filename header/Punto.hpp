@@ -1,6 +1,6 @@
 //header punti
-#ifndef PUNTO_H
-#define PUNTO_H
+#ifndef PUNTO_HPP
+#define PUNTO_HPP
 
 #include "./utils.hpp"
 #include "./DisegnabileI.hpp"
@@ -69,4 +69,4 @@ public:
     sf::Vector2f getPuntoLib(void);
 };
 
-#endif //PUNTO_H
+#endif //PUNTO_HPP

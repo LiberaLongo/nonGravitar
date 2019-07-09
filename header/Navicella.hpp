@@ -1,6 +1,6 @@
 //header navicella
-#ifndef NAVICELLA_H
-#define NAVICELLA_H
+#ifndef NAVICELLA_HPP
+#define NAVICELLA_HPP
 
 //#include <SFML/Graphics.hpp>
 

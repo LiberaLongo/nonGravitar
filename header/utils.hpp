@@ -1,6 +1,6 @@
 //header cose utili in tutto il codice ausiliarie
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
 //input e ouput
 #include <iostream>
@@ -60,4 +60,4 @@ enum visuale {VISUALE_MENU, VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
 //Postcondition: lo trasforma opportunamente secondo la libreria grafica
 float angoloLibreria(float angolo);
 
-#endif //UTILS_H
+#endif //UTILS_HPP

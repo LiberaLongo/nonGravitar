@@ -1,12 +1,13 @@
 //header pianeta
-#ifndef PIANETA_H
-#define PIANETA_H
+#ifndef PIANETA_HPP
+#define PIANETA_HPP
 
 #include "./Fuel.hpp"
 #include "./Poligono.hpp"
-
-//ATTENZIONE! cpp sono qui inclusi per classi template
 #include "./Bunker.hpp"
+
+//ATTENZIONE! cpp inclusi per classi template
+#include "./includeTemplate.hpp"
 
 template class Lista<Fuel>;
 template class Lista<Bunker>;
@@ -97,4 +98,4 @@ public:
     //aggiorna coordinate dei proiettili sparati dai bunker
     int aggiornaCoordinateProiettili(sf::Time tempo, float x, float y, int vita);
 };
-#endif //PIANETA_H
+#endif //PIANETA_HPP

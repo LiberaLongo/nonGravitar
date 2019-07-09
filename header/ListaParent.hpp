@@ -1,6 +1,6 @@
 //header liste
-#ifndef LISTA_PARENT_H
-#define LISTA_PARENT_H
+#ifndef LISTA_PARENT_HPP
+#define LISTA_PARENT_HPP
 
 #include "./utils.hpp"
 
@@ -62,4 +62,4 @@ public:
 	void print(void);
 };
 
-#endif //LISTA_PARENT_H
+#endif //LISTA_PARENT_HPP

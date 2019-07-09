@@ -1,5 +1,5 @@
-#ifndef DIREZIONE_H
-#define DIREZIONE_H
+#ifndef DIREZIONE_HPP
+#define DIREZIONE_HPP
 
 #include "./utils.hpp"
 #include "./DisegnabileI.hpp"
@@ -56,4 +56,4 @@ public:
     void move(void);
 };
 
-#endif //DIREZIONE_H
+#endif //DIREZIONE_HPP

@@ -9,6 +9,9 @@
 #include "./Pianeta.hpp"
 #include "./Navicella.hpp"
 
+//ATTENZIONE! cpp inclusi per classi template
+#include "./includeTemplate.hpp"
+
 template class Lista<Pianeta>;
 
 class SistemaSolare : public DisegnabileI

@@ -1,6 +1,6 @@
 //lista per le classi ereditata
-#ifndef LISTA_H
-#define LISTA_H
+#ifndef LISTA_HPP
+#define LISTA_HPP
 
 #include <SFML/Graphics.hpp>
 #include "./ListaParent.hpp"
@@ -28,4 +28,4 @@ public:
 	void MergeSort(int primo, int ultimo, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[]);
 	void ordina(const int dim, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[]);
 };
-#endif //LISTA_H
+#endif //LISTA_HPP
