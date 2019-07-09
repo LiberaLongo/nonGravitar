@@ -84,10 +84,8 @@ void SistemaSolare::genera()
 
         //numero random per le coordinate
         float x = 0.f, y = 0.f;
-        //distanza raggio del pianeta più un pò di spazio per la navicella
-        float dist = raggio + 20.f;
-        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
+        x = (rand() % (int)(WIDTH - DISTANCE * 2)) + DISTANCE;  //tra 0.f e WIDTH ma che non esca
+        y = (rand() % (int)(HEIGHT - DISTANCE * 2)) + DISTANCE; //tra 0.f e HEIGHT ma che non esca
 
         //costruisci pianeta
         Pianeta newPianeta = Pianeta(x, y, raggio);

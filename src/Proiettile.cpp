@@ -7,12 +7,14 @@ extern float WIDTH, HEIGHT;
 Proiettile::Proiettile(void) : Direzione()
 {
     //tutto fatto nel costruttore di direzione
+    this->setSpeed(SPEED_PROIETTILI);
 }
 //altri costruttori
 Proiettile::Proiettile(float x, float y, float angolo, ColoreRGB colore) : Direzione(x, y, angolo)
 {
     //costruttore di direzione
     this->colore = colore;
+    this->setSpeed(SPEED_PROIETTILI);
 }
 //ho già la direzione in cui sparare (ad esempio per i bunker)
 Proiettile::Proiettile(Direzione dir, ColoreRGB colore)
@@ -21,6 +23,7 @@ Proiettile::Proiettile(Direzione dir, ColoreRGB colore)
     this->Direzione::setOrigine(dir.getX_origine(), dir.getY_origine());
     this->Direzione::setAngolo(dir.getAngolo());
     this->colore = colore;
+    this->setSpeed(SPEED_PROIETTILI);
 }
 
 //setters

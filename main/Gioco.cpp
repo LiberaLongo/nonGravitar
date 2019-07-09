@@ -5,7 +5,7 @@
 //#define DEBUG
 
 //condizioni di esistenza per evitare bug eccessivi nel gioco
-#define MIN_SCHERMO 100.f
+#define MIN_SCHERMO 300.f
 #define MAX_NAVICELLA 20.f
 #define MAX_SPEED 20.f
 

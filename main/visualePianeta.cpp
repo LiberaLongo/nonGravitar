@@ -114,6 +114,12 @@ int visualePianeta::Run(sf::RenderWindow &App)
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
                     carburanteFinito = this->player.shoot(mouseClick);
                 }
+                else if (event.mouseButton.button == sf::Mouse::Right)
+                {
+                    haCliccato = true;
+                    mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                    this->player.setAngolo(mouseClick);
+                }
                 break;
             //tasti premuti?
             case sf::Event::KeyPressed:

@@ -108,7 +108,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 
             //mouse cliccato
             case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left)
+                if (event.mouseButton.button == sf::Mouse::Left || event.mouseButton.button == sf::Mouse::Right)
                 {
                     haCliccato = true;
                     mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);

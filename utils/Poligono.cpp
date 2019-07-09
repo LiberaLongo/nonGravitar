@@ -189,14 +189,11 @@ void Poligono::genera(void)
 {
     //numero random per le coordinate
     float x = 0.f, y = 0.f;
-    //distanza dimensione navicella un pò di spazio per la navicella
-    float dist = SIZE_NAVICELLA * 7;
-
     //genera tutti i PUNTI all'inizio
     for (int i = 0; i < MAX_SUPERFICE; i++)
     {
-        x = (rand() % (int)(WIDTH - dist * 2)) + dist;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - dist * 2)) + dist; //tra 0.f e HEIGHT ma che non esca
+        x = (rand() % (int)(WIDTH - DISTANCE * 2)) + DISTANCE;  //tra 0.f e WIDTH ma che non esca
+        y = (rand() % (int)(HEIGHT - DISTANCE * 2)) + DISTANCE; //tra 0.f e HEIGHT ma che non esca
 
         //costruisci punto della superfice
         Punto p = Punto(x, y);
