@@ -17,6 +17,22 @@ private:
     ColoreRGB colore;
     Lista<Punto> surface;
 
+private:
+    //Dati 3 punti allineati la funzione controlla se
+    //il punto P giace sul segmento AB.
+    bool onSegment(Punto A, Punto P, Punto B);
+
+    //Per trovare l'orientamento della tripletta ordinata (P, Q, R)
+    //La funzione ritorna i seguenti valori
+    //0 --> P, Q, R sono allineati
+    //1 --> senso orario (clockwise, right turn)
+    //2 --> senso antiorario (counterclockwise, left turn)
+    int orientation(Punto P, Punto Q, Punto R);
+
+    //La funzione ritorna true se
+    //il segmento AB interseca il segmento CD.
+    bool doIntersect(Punto A, Punto B, Punto C, Punto D);
+
 public:
     //costruttore
     Poligono(void);
@@ -49,6 +65,9 @@ public:
     void ordina(void);
     //genera
     void genera(void);
+
+    //return true se il punto P giace dentro il poligono
+    bool PointIsInside(Punto P);
 };
 
 #endif //POLIGONO_HPP
