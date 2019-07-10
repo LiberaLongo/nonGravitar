@@ -170,10 +170,9 @@ float Punto::calcolaAngolo(Punto arrivo)
             angolo = (float)(angoloGradi + 180.f);
         }
     }
-    else
+    else if (deltaX < 0)
     {
-        //comunico che la divisione per 0 non è avventua
-        cout << "Prevenuta divisione per 0 nel calcolo della direzione.\n";
+        angolo = 180.f;
     }
     return angolo;
 }
