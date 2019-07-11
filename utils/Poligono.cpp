@@ -53,6 +53,17 @@ struct Elem<Punto> *Poligono::getHead(void)
     this->surface.getHead();
 }
 
+//inserisce in testa
+void Poligono::insert(Punto P) {
+    this->surface.insert_head(P);
+}
+
+//inserisce in testa
+void Poligono::insert(float x, float y) {
+    Punto p = Punto(x, y);
+    this->insert(p);
+}
+
 //numero punti
 int
 Poligono::numPunti(void)
@@ -208,10 +219,7 @@ void Poligono::genera(void)
 //il punto P giace sul segmento AB.
 bool Poligono::onSegment(Punto A, Punto P, Punto B)
 {
-    if(P.getX() <= max(A.getX(), B.getX())
-    && P.getX() >= min(A.getX(), B.getX())
-    && P.getY() <= max(A.getY(), B.getY())
-    && P.getY() >= min(A.getY(), B.getY()))
+    if (P.getX() <= max(A.getX(), B.getX()) && P.getX() >= min(A.getX(), B.getX()) && P.getY() <= max(A.getY(), B.getY()) && P.getY() >= min(A.getY(), B.getY()))
         return true;
     return false;
 }
@@ -225,38 +233,43 @@ int Poligono::orientation(Punto P, Punto Q, Punto R)
 {
     int val = (Q.getY() - P.getY()) * (R.getX() - Q.getX()) -
               (Q.getX() - P.getX()) * (R.getY() - Q.getY());
-    if (val == 0) return 0; //allineati
-    return (val > 0)? 1: 2; //senso orario o antiorario
+    if (val == 0)
+        return 0;             //allineati
+    return (val > 0) ? 1 : 2; //senso orario o antiorario
 }
 
 //La funzione ritorna true se
 //il segmento AB interseca il segmento CD.
 bool Poligono::doIntersect(Punto A, Punto B, Punto C, Punto D)
 {
-    // Find the four orientations needed for general and 
-    // special cases 
-    int o1 = orientation(A, B, C); 
-    int o2 = orientation(A, B, D); 
-    int o3 = orientation(C, D, A); 
-    int o4 = orientation(C, D, B); 
-  
-    // caso generale 
-    if (o1 != o2 && o3 != o4) 
-        return true; 
-  
-    // casi speciali 
-    // A, B e C sono allineati e C giace sul segmento AB 
-    if (o1 == 0 && onSegment(A, C, B)) return true; 
-  
-    // A, B e C sono allineati e D giace sul segmento AB 
-    if (o2 == 0 && onSegment(A, D, B)) return true; 
-  
-    // C, D e A sono allineati e A giace sul segmento CD 
-    if (o3 == 0 && onSegment(C, A, D)) return true; 
-  
-     // C, D e B sono allineati e B giace sul segmento CD 
-    if (o4 == 0 && onSegment(C, B, D)) return true; 
-  
+    // Find the four orientations needed for general and
+    // special cases
+    int o1 = orientation(A, B, C);
+    int o2 = orientation(A, B, D);
+    int o3 = orientation(C, D, A);
+    int o4 = orientation(C, D, B);
+
+    // caso generale
+    if (o1 != o2 && o3 != o4)
+        return true;
+
+    // casi speciali
+    // A, B e C sono allineati e C giace sul segmento AB
+    if (o1 == 0 && onSegment(A, C, B))
+        return true;
+
+    // A, B e C sono allineati e D giace sul segmento AB
+    if (o2 == 0 && onSegment(A, D, B))
+        return true;
+
+    // C, D e A sono allineati e A giace sul segmento CD
+    if (o3 == 0 && onSegment(C, A, D))
+        return true;
+
+    // C, D e B sono allineati e B giace sul segmento CD
+    if (o4 == 0 && onSegment(C, B, D))
+        return true;
+
     return false; // Non si cade in nessuno dei precedenti casi
 }
 
@@ -265,13 +278,38 @@ bool Poligono::doIntersect(Punto A, Punto B, Punto C, Punto D)
 //return true se il punto giace dentro il poligono
 bool Poligono::PointIsInside(Punto P)
 {
+    int n = this->numPunti();
     //Ci devono essere almeno 3 vertici per il poligono
+    if (n < 3)
+        return false;
     //Crea un punto per fare il segmento da p a infinito
+    Punto extreme = Punto(INFINITO, P.getY());
     //Conta le intersezioni della linea precedente con i lati del poligono
+    int count = 0;
+    //iteratore, primo elemento esclusa la sentinella
+    struct Elem<Punto> *iter = this->surface.head();
+    Punto current = this->surface.read(iter);
+    do
+    {
+        //int next = (prev+1)%n;
+        if (!this->surface.finished(iter))
+            iter = this->surface.next(iter);
+        else
+            iter = this->surface.tail();
+        Punto next = this->surface.read(iter);
         //Controlla se le linee del segmento da P a infinito intersecano
-        //con la linea del segmento da i a next
-            //Se il punto P è allineato con il segmento 'i-next'
+        //con la linea del segmento da current a next
+        if (doIntersect(current, next, P, extreme))
+        {
+            //Se il punto P è allineato con il segmento 'current-next'
             //Allora controlla se esso giace sul segmento.
             //Se ci giace, ritorna VERO, altrimenti FALSO.
+            if (orientation(current, P, next) == 0)
+                return onSegment(current, P, next);
+            count++;
+        }
+        current = next;
+    } while (!this->surface.finished(iter)); //prev != 0
     //Ritorna VERO se conta è dispari, altrimenti FALSO.
+    return (count % 2 == 1);
 }

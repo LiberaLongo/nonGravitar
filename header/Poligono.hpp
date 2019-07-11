@@ -48,6 +48,10 @@ public:
     //setta il puntatore alla lista
     void setHead(struct Elem<Punto> *headSurface);
 
+    //insersici un punto in testa
+    void insert(Punto P);
+    void insert(float x, float y);
+
     //getters
     sf::Color getColoreLib(void);
     //ottengo il puntatore alla testa, non al primo elemento
