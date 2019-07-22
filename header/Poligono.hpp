@@ -71,7 +71,8 @@ public:
     void genera(void);
 
     //return true se il punto P giace dentro il poligono
-    bool PointIsInside(Punto P);
+    //precondition n è il numero di punti del poligono
+    bool PointIsInside(Punto P, int n);
 };
 
 #endif //POLIGONO_HPP

@@ -54,19 +54,21 @@ struct Elem<Punto> *Poligono::getHead(void)
 }
 
 //inserisce in testa
-void Poligono::insert(Punto P) {
+void
+Poligono::insert(Punto P)
+{
     this->surface.insert_head(P);
 }
 
 //inserisce in testa
-void Poligono::insert(float x, float y) {
+void Poligono::insert(float x, float y)
+{
     Punto p = Punto(x, y);
     this->insert(p);
 }
 
 //numero punti
-int
-Poligono::numPunti(void)
+int Poligono::numPunti(void)
 {
     return this->surface.lunghezza();
 }
@@ -276,9 +278,8 @@ bool Poligono::doIntersect(Punto A, Punto B, Punto C, Punto D)
 //PUBBLICA
 
 //return true se il punto giace dentro il poligono
-bool Poligono::PointIsInside(Punto P)
+bool Poligono::PointIsInside(Punto P, int n)
 {
-    int n = this->numPunti();
     //Ci devono essere almeno 3 vertici per il poligono
     if (n < 3)
         return false;
@@ -292,10 +293,14 @@ bool Poligono::PointIsInside(Punto P)
     do
     {
         //int next = (prev+1)%n;
-        if (!this->surface.finished(iter))
+        if (iter != this->surface.tail())
+        {
             iter = this->surface.next(iter);
+        }
         else
-            iter = this->surface.tail();
+        {
+            iter = this->surface.head();
+        }
         Punto next = this->surface.read(iter);
         //Controlla se le linee del segmento da P a infinito intersecano
         //con la linea del segmento da current a next
@@ -305,11 +310,14 @@ bool Poligono::PointIsInside(Punto P)
             //Allora controlla se esso giace sul segmento.
             //Se ci giace, ritorna VERO, altrimenti FALSO.
             if (orientation(current, P, next) == 0)
+            {
                 return onSegment(current, P, next);
+            }
             count++;
         }
         current = next;
-    } while (!this->surface.finished(iter)); //prev != 0
+
+    } while (iter != this->surface.head()); //prev != 0
     //Ritorna VERO se conta è dispari, altrimenti FALSO.
     return (count % 2 == 1);
 }

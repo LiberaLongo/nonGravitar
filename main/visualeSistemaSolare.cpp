@@ -120,13 +120,15 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 //Esc per uscire
                 if (event.key.code == sf::Keyboard::Escape)
                     return VISUALE_MENU;
-                //Enter per muoversi nella direzione precedente
-                else if (event.key.code == sf::Keyboard::Return)
+                //Space per muoversi nella direzione precedente
+                else if (event.key.code == sf::Keyboard::Space)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move();
                 }
-                //WASD o freccie per muoversi
+                //Enter per sparare
+                else if (event.key.code == sf::Keyboard::Return)
+                    carburanteFinito = this->player.shoot();//WASD o freccie per muoversi
                 else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
                 {
                     NavicellaMoved = true;

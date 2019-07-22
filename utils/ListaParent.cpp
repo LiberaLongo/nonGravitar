@@ -180,7 +180,7 @@ void ListaParent<Tipo>::insert_tail(Tipo v)
 #ifdef DEBUG
 	cout << "inserisci in coda" << endl;
 #endif
-	this->insert(this->tail(), v);
+	this->insert(this->next(this->tail()), v);
 }
 //rimuovi in testa
 template <typename Tipo>

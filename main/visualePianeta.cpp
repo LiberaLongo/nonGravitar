@@ -126,21 +126,21 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 //Esc per uscire
                 if (event.key.code == sf::Keyboard::Escape)
                     return VISUALE_SISTEMA_SOLARE;
-                //Space per sparare
+                //Space per muoversi nella direzione precedente
                 else if (event.key.code == sf::Keyboard::Space)
-                    carburanteFinito = this->player.shoot();
+                {
+                    NavicellaMoved = true;
+                    carburanteFinito = this->player.move();
+                }
                 //shift sinistro (o destro) per raggio traente
                 else if (event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift)
                 {
                     raggio = true;
                     this->player.raggioTraente(this->pianetaVisualizzato.getHeadFuel());
                 }
-                //Enter per muoversi nella direzione precedente
+                //Enter per sparare
                 else if (event.key.code == sf::Keyboard::Return)
-                {
-                    NavicellaMoved = true;
-                    carburanteFinito = this->player.move();
-                }
+                    carburanteFinito = this->player.shoot();
                 //WASD o freccie per muoversi
                 else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
                 {

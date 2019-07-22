@@ -212,13 +212,9 @@ void Pianeta::generaBunkerFuel()
                 p1 = surface.read(iter);
                 //se il successivo non è la sentinella
                 if (surface.next(iter) != sentinella)
-                {
                     p2 = surface.read(surface.next(iter));
-                }
                 else
-                {
-                    p2 = surface.read(surface.tail());
-                }
+                    p2 = surface.read(surface.head());
                 //calcolo il punto medio
                 int x_medio = (p1.getX() + p2.getX()) / 2;
                 int y_medio = (p1.getY() + p2.getY()) / 2;

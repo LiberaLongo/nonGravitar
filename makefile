@@ -51,7 +51,7 @@ ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 Direzione.o: $(U)Direzione.cpp $(HDR)
 	$(COMPILE) $(U)Direzione.cpp -o Direzione.o
 
-Poligono.o: $(U)Poligono.cpp $(HDR) $(H)ColoreRGB.hpp
+Poligono.o: $(U)Poligono.cpp $(H)Poligono.hpp $(HDR) $(H)ColoreRGB.hpp $(U)ListaParent.cpp
 	$(COMPILE) $(U)Poligono.cpp -o Poligono.o
 
 #oggetti del gioco (in ./src)
@@ -59,7 +59,7 @@ Poligono.o: $(U)Poligono.cpp $(HDR) $(H)ColoreRGB.hpp
 Proiettile.o: $(S)Proiettile.cpp $(H)Proiettile.hpp $(H)Direzione.hpp
 	$(COMPILE) $(S)Proiettile.cpp -o Proiettile.o
 
-Entity.o: $(S)Entity.cpp $(H)Entity.hpp $(HDR) $(H)Lista.hpp $(H)Proiettile.hpp
+Entity.o: $(S)Entity.cpp $(H)Entity.hpp $(HDR) $(H)Lista.hpp $(H)Proiettile.hpp $(U)ListaParent.cpp
 	$(COMPILE) $(S)Entity.cpp -o Entity.o
 
 Fuel.o: $(S)Fuel.cpp $(H)Fuel.hpp $(HDR) $(H)ColoreRGB.hpp
@@ -71,10 +71,10 @@ Navicella.o: $(S)Navicella.cpp $(H)Navicella.hpp $(HDR) $(H)Entity.hpp $(H)Fuel.
 Bunker.o: $(S)Bunker.cpp $(H)Bunker.hpp $(H)Entity.hpp $(H)Lista.hpp $(H)Proiettile.hpp
 	$(COMPILE) $(S)Bunker.cpp -o Bunker.o
 
-Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Poligono.hpp $(H)Lista.hpp $(H)utils.hpp
+Pianeta.o: $(S)Pianeta.cpp $(HDR) $(H)Pianeta.hpp $(H)Fuel.hpp $(H)Bunker.hpp $(H)Poligono.hpp $(H)Lista.hpp $(H)utils.hpp $(U)ListaParent.cpp
 	$(COMPILE) $(S)Pianeta.cpp -o Pianeta.o
 
-SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)Lista.hpp $(H)utils.hpp $(H)Navicella.hpp
+SistemaSolare.o: $(S)SistemaSolare.cpp $(H)SistemaSolare.hpp $(H)Pianeta.hpp $(H)Lista.hpp $(H)utils.hpp $(H)Navicella.hpp $(U)ListaParent.cpp
 	$(COMPILE) $(S)SistemaSolare.cpp -o SistemaSolare.o
 
 #cose per gestire le varie visuali di gioco (in ./main)
