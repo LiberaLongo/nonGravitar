@@ -41,20 +41,26 @@ int visualeMenu::Run(sf::RenderWindow &App)
     testoHaiVinto.setCharacterSize(charSize);
     testoHaiVinto.setString("HAI VINTO!");
     testoHaiVinto.setPosition({x - dist * 2, y - dist});
-    testoHaiVinto.setFillColor(coloreTesto.getColorLib());
 
     testoHaiPerso.setFont(Font);
     testoHaiPerso.setCharacterSize(charSize);
     testoHaiPerso.setString("HAI PERSO!");
     testoHaiPerso.setPosition({x - dist * 2, y - dist});
-    testoHaiPerso.setFillColor(coloreTesto.getColorLib());
 
     testoGioco.setFont(Font);
     testoGioco.setCharacterSize(charSize);
     testoGioco.setString("Non Gravitar");
     testoGioco.setPosition({x - dist * 2, y - dist});
+#ifndef NON_FUNZIONA_FILL_COLOR
+    testoHaiVinto.setFillColor(coloreTesto.getColorLib());
+    testoHaiPerso.setFillColor(coloreTesto.getColorLib());
     testoGioco.setFillColor(coloreTesto.getColorLib());
-
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+    testoHaiVinto.setColor(coloreTesto.getColorLib());
+    testoHaiPerso.setColor(coloreTesto.getColorLib());
+    testoGioco.setColor(coloreTesto.getColorLib());
+#endif
     buttonPlay.setFont(Font);
     buttonPlay.setCharacterSize(charSize);
     buttonPlay.setString("Play");
@@ -126,19 +132,37 @@ int visualeMenu::Run(sf::RenderWindow &App)
         }
         if (menu == 0)
         {
+#ifndef NON_FUNZIONA_FILL_COLOR
             buttonPlay.setFillColor(rosso.getColorLib());
             buttonContinue.setFillColor(rosso.getColorLib());
             buttonNewGame.setFillColor(rosso.getColorLib());
 
             buttonExit.setFillColor(bianco.getColorLib());
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+            buttonPlay.setColor(rosso.getColorLib());
+            buttonContinue.setColor(rosso.getColorLib());
+            buttonNewGame.setColor(rosso.getColorLib());
+
+            buttonExit.setColor(bianco.getColorLib());
+#endif
         }
         else
         {
+#ifndef NON_FUNZIONA_FILL_COLOR
             buttonPlay.setFillColor(bianco.getColorLib());
             buttonContinue.setFillColor(bianco.getColorLib());
             buttonNewGame.setFillColor(bianco.getColorLib());
 
             buttonExit.setFillColor(rosso.getColorLib());
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+            buttonPlay.setColor(bianco.getColorLib());
+            buttonContinue.setColor(bianco.getColorLib());
+            buttonNewGame.setColor(bianco.getColorLib());
+
+            buttonExit.setColor(rosso.getColorLib());
+#endif
         }
 
         //Clearing screen

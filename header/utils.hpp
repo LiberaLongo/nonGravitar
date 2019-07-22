@@ -56,6 +56,10 @@ enum visuale {VISUALE_MENU, VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
 //numero di millisecondi dopo cui il bunker spara in tutte le sue direzioni
 #define SPARA 1000
 
+//define per il codice, a volte non funziona fillColor
+//di default dovrebbe essere non dichiarata, da modificare altrimenti
+//#define NON_FUNZIONA_FILL_COLOR
+
 //FUNZIONI
 
 //Precondition: prende un angolo in gradi in forma canonica

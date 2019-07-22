@@ -74,13 +74,23 @@ int visualePianeta::Run(sf::RenderWindow &App)
     testoVite.setCharacterSize(charSize);
     testoVite.setString("vite: " + to_string(vita));
     testoVite.setPosition({x_testo, y_testo});
+#ifndef NON_FUNZIONA_FILL_COLOR
     testoVite.setFillColor(coloreTesto.getColorLib());
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+    testoVite.setColor(coloreTesto.getColorLib();
+#endif
 
     testoFuel.setFont(Font);
     testoFuel.setCharacterSize(charSize);
     testoFuel.setString("fuel: " + to_string(fuel));
     testoFuel.setPosition({x_testo + dist_testo, y_testo});
+#ifndef NON_FUNZIONA_FILL_COLOR
     testoFuel.setFillColor(coloreTesto.getColorLib());
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+    testoFuel.setColor(coloreTesto.getColorLib());
+#endif
 
     //un punto adibito a mouse click
     Punto mouseClick;
