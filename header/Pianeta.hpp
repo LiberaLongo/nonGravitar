@@ -72,6 +72,8 @@ public:
     struct Elem<Punto> *getHeadSurface(void);
     struct Elem<Fuel> *getHeadFuel(void);
     struct Elem<Bunker> *getHeadBunker(void);
+    //provo a ottenre il poligono
+    Poligono getPoligono(void);
 
     //conta i punti della superficie
     int lunghezzaSuperfice(void);

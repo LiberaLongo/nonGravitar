@@ -137,7 +137,6 @@ void Navicella::draw(sf::RenderWindow &window, bool raggio)
 //controlli di movimento
 bool Navicella::move(void)
 {
-
     this->Entity::move();
     return this->carburante.consumoFuel();
 }
@@ -146,7 +145,6 @@ bool Navicella::move(float angle)
     this->setAngolo(angle);
     return this->move();
 }
-
 //spara
 bool Navicella::shoot(void)
 {
@@ -288,4 +286,9 @@ void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
             }
         }
     }
+}
+
+bool Navicella::isInsidePoligon(Poligono p) {
+    Punto centroNavicella = Punto(this->getX(), this->getY());
+    return p.PointIsInside(centroNavicella, MAX_SUPERFICE);
 }

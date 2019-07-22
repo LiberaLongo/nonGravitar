@@ -175,6 +175,30 @@ int visualePianeta::Run(sf::RenderWindow &App)
 #endif
                     return VISUALE_SISTEMA_SOLARE;
                 }
+                if (this->player.isInsidePoligon(this->pianetaVisualizzato.getPoligono()))
+                {
+                    /*
+                    //perdo una vita
+                    vita --;
+                    this->player.setVita(vita);
+                    if (vita <= 0)
+                    {
+                        //resetto la vita per la prossima partita
+                        vita = VITA_NAVICELLA;
+                        fuel = FUEL_NAVICELLA;
+                        //aggiorno i booleani
+                        haiPerso = true;
+                        generaSistema = true;
+                        //torno al menù
+                        return VISUALE_MENU;
+                    }
+                    */
+#ifdef DEBUG
+                    cout << "entrato nel pianeta" << endl;
+#endif
+                    
+                    return VISUALE_SISTEMA_SOLARE;
+                }
             }
             //aggiorno la variabile globale
             fuel = this->player.getFuel();

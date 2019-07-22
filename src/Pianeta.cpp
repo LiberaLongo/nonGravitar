@@ -126,6 +126,11 @@ Pianeta::getHeadBunker(void)
 {
     return this->bunker.getHead();
 }
+//provo a ottenre il poligono
+Poligono Pianeta::getPoligono(void) {
+    return this->poligono;
+}
+
 
 //conta i punti della superficie
 int

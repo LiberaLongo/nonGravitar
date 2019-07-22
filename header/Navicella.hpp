@@ -66,6 +66,9 @@ public:
     //restituisce true se il pianeta deve essere distrutto
 
     void raggioTraente(struct Elem<Fuel> * headFuel);
+
+    //controlla se è dentro il poligono
+    bool isInsidePoligon(Poligono p);
 };
 
 #endif //NAVICELLA_H
