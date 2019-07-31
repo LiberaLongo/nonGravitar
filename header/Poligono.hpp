@@ -17,7 +17,8 @@ private:
     ColoreRGB colore;
     Lista<Punto> surface;
 
-private:
+//private:
+public:
     //Dati 3 punti allineati la funzione controlla se
     //il punto P giace sul segmento AB.
     bool onSegment(Punto A, Punto P, Punto B);

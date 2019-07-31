@@ -81,7 +81,7 @@ void Poligono::print(void)
 {
     cout << "Poligono: {";
     this->surface.print();
-    cout << "}";
+    cout << "}\n";
 }
 //disegna
 void Poligono::draw(sf::RenderWindow &window)
