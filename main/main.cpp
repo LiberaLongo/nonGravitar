@@ -1,6 +1,6 @@
 #include "../header/Gioco.hpp"
 
-#define DIM 5
+//#define DIM 5
 #define INFINITO 10000.f
 
 bool InsidePoligono(Punto poligono[], int n, Punto P)
@@ -60,10 +60,14 @@ int main()
 	float x, y;
 	char fine;
 	Punto p;
-	int n = DIM;
+	int n;
 	Poligono pol;
 	//si sa che non andrebbe fatto ma è un test...
-	Punto poligonoVettore[DIM];
+	//Punto poligonoVettore[DIM];
+	do {
+		cout << "quanti vertici? (>0)";
+		cin >> n;
+	} while (n <= 0);
 
 	do
 	{
@@ -76,7 +80,7 @@ int main()
 		//decremento
 		n --;
 		//inserisco nel vettore
-		poligonoVettore[n] = p;
+		//poligonoVettore[n] = p;
 		//e nella lista
 		pol.insert(p);
 	} while (n > 0);
@@ -84,8 +88,8 @@ int main()
 	cout << "\n\n";
 	pol.print();
 
-	//int n = pol.numPunti();
-	n = DIM;
+	n = pol.numPunti();
+	//n = DIM;
 	do
 	{
 		cout << "\ninsert x :\t";
@@ -97,8 +101,8 @@ int main()
 		cout << "\t";
 
 		//è dentro il poligono per il vettore?
-		cout << "\nVettore: ";
-		InsidePoligono(poligonoVettore, n, p)? cout << "yes" : cout << "no";
+		//cout << "\nVettore: ";
+		//InsidePoligono(poligonoVettore, n, p)? cout << "yes" : cout << "no";
 
 		//è dentro il poligono per la lista?
 		cout << "\t\tLista: ";
