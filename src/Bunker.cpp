@@ -92,7 +92,9 @@ void Bunker::draw(sf::RenderWindow &window)
 void Bunker::genera(void)
 {
     //in base al tipo riempi la lista con 2 o 3 direzioni
+#ifdef DEBUG
     cout << "\ngenera Bunker";
+#endif
     //i = 0 left, i = 1 right (i=2 centro)
     for (int i = -1 ; i < (this->tipo + 1)*2; i += 2)
     {
@@ -104,9 +106,7 @@ void Bunker::genera(void)
         {
             dirCannoni.setAngolo(this->getAngolo());
         }
-        int indice = (i+1)/2;
-        cout << "\ti = " << i << ", indice = " << indice;
-        this->direzioni[indice] = dirCannoni;
+        this->direzioni[(i+1)/2] = dirCannoni;
     }
 }
 
@@ -116,7 +116,9 @@ void Bunker::shoot(void)
     ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
     //genero una direzione random dipendente dal tipo
     int randomDir = rand() % (this->tipo + 2);
+#ifdef DEBUG
     cout << "randomDir = " << randomDir << endl;
+#endif
     Direzione dirInCuiSparo = this->direzioni[randomDir];
     //inserisci un nuovo colpo da aggiornare
     Proiettile newProiettile = Proiettile(dirInCuiSparo, giallo);
