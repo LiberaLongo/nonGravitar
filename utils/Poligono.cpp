@@ -284,9 +284,11 @@ bool Poligono::PointIsInside(Punto P, int n)
     if (n < 3)
         return false;
     //Crea un punto per fare il segmento da p a infinito
-    Punto extreme = Punto(INFINITO, P.getY());
+    Punto extremoDestro = Punto(INFINITO, P.getY());
+    Punto extremoSinistro = Punto(-INFINITO, P.getY());
     //Conta le intersezioni della linea precedente con i lati del poligono
-    int count = 0;
+    int countDestra = 0;
+    int countSinistra = 0;
     //iteratore, primo elemento esclusa la sentinella
     struct Elem<Punto> *iter = this->surface.head();
     Punto current = this->surface.read(iter);
@@ -304,7 +306,8 @@ bool Poligono::PointIsInside(Punto P, int n)
         Punto next = this->surface.read(iter);
         //Controlla se le linee del segmento da P a infinito intersecano
         //con la linea del segmento da current a next
-        if (doIntersect(current, next, P, extreme))
+        //estremo destro
+        if (doIntersect(current, next, P, extremoDestro))
         {
             //Se il punto P è allineato con il segmento 'current-next'
             //Allora controlla se esso giace sul segmento.
@@ -313,11 +316,27 @@ bool Poligono::PointIsInside(Punto P, int n)
             {
                 return onSegment(current, P, next);
             }
-            count++;
+            countDestra++;
         }
+        //estremo sinistro
+        if (doIntersect(current, next, P, extremoSinistro))
+        {
+            //Se il punto P è allineato con il segmento 'current-next'
+            //Allora controlla se esso giace sul segmento.
+            //Se ci giace, ritorna VERO, altrimenti FALSO.
+            if (orientation(current, P, next) == 0)
+            {
+                return onSegment(current, P, next);
+            }
+            countSinistra++;
+        }
+        //aggiorno
         current = next;
 
     } while (iter != this->surface.head()); //prev != 0
     //Ritorna VERO se conta è dispari, altrimenti FALSO.
-    return (count % 2 == 1);
+    if(countSinistra > 0)
+        return (countDestra % 2 == 1);
+    else
+        return false;
 }

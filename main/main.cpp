@@ -1,6 +1,7 @@
 #include "../header/Gioco.hpp"
 
-//#define DIM 5;
+#define DIM 5
+#define INFINITO 10000.f
 
 bool InsidePoligono(Punto poligono[], int n, Punto P)
 {
@@ -9,7 +10,7 @@ bool InsidePoligono(Punto poligono[], int n, Punto P)
     if (n < 3)
         return false;
     //Crea un punto per fare il segmento da p a infinito
-    Punto extreme = Punto(10000.f, P.getY());
+    Punto extreme = Punto(INFINITO, P.getY());
     //Conta le intersezioni della linea precedente con i lati del poligono
     int count = 0, current = 0;
     //iteratore, primo elemento esclusa la sentinella
@@ -45,6 +46,7 @@ bool InsidePoligono(Punto poligono[], int n, Punto P)
         current = next;
 
 	} while (current != 0);
+	cout << "\ncount = " << count;
     //} while (iter != this->surface.head()); //prev != 0
     //Ritorna VERO se conta è dispari, altrimenti FALSO.
     return (count % 2 == 1);
@@ -55,15 +57,13 @@ int main()
 	//chiamo funzione gioco
 	//return Gioco();
 
-
 	float x, y;
 	char fine;
 	Punto p;
-	int dim = 4;
-	int n = dim;
+	int n = DIM;
 	Poligono pol;
 	//si sa che non andrebbe fatto ma è un test...
-	Punto poligonoVettore[dim];
+	Punto poligonoVettore[DIM];
 
 	do
 	{
@@ -82,10 +82,10 @@ int main()
 	} while (n > 0);
 
 	cout << "\n\n";
-	//pol.print();
+	pol.print();
 
 	//int n = pol.numPunti();
-	n = dim;
+	n = DIM;
 	do
 	{
 		cout << "\ninsert x :\t";
