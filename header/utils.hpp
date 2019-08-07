@@ -11,6 +11,10 @@ using namespace std;
 #include <cmath>
 //M_PI pigreco e M_E numero di eulero
 
+//define per il codice, a volte non funziona fillColor di sf::Text
+//di default dovrebbe essere non dichiarata, da modificare altrimenti
+//#define NON_FUNZIONA_FILL_COLOR
+
 //per i colori
 #define LUMUS_MAXIMA 255 //LUMUS_MAXIMA, citazione Harry Potter, (luminosità RGB)
 
@@ -57,10 +61,6 @@ enum visuale {VISUALE_MENU, VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
 #define AGGIORNA 100
 //numero di millisecondi dopo cui il bunker spara in tutte le sue direzioni
 #define SPARA 1000
-
-//define per il codice, a volte non funziona fillColor
-//di default dovrebbe essere non dichiarata, da modificare altrimenti
-//#define NON_FUNZIONA_FILL_COLOR
 
 //FUNZIONI
 

@@ -33,7 +33,9 @@ void Bunker::print(void)
 {
     cout << "Bunker : [ tipo = " << this->tipo;
     this->Entity::print();
-    this->direzioni.print();
+    for (int i = 0; i < MAX_DIREZIONI; i++) {
+        this->direzioni[i].print();
+    }
     cout << " ]" << endl;
 }
 
@@ -90,9 +92,9 @@ void Bunker::draw(sf::RenderWindow &window)
 void Bunker::genera(void)
 {
     //in base al tipo riempi la lista con 2 o 3 direzioni
-
+    cout << "\ngenera Bunker";
     //i = 0 left, i = 1 right (i=2 centro)
-    for (int i = -1; i < (this->tipo + 1)*2; i += 2)
+    for (int i = -1 ; i < (this->tipo + 1)*2; i += 2)
     {
         //calcolo l'angolo generando bene solo sinistra e destra
         float angolo = this->getAngolo() + i * ANGOLO_BUNKER;
@@ -102,27 +104,21 @@ void Bunker::genera(void)
         {
             dirCannoni.setAngolo(this->getAngolo());
         }
-        this->direzioni.insert_head(dirCannoni);
+        int indice = (i+1)/2;
+        cout << "\ti = " << i << ", indice = " << indice;
+        this->direzioni[indice] = dirCannoni;
     }
 }
 
 //spara
 void Bunker::shoot(void)
 {
-    if (!(this->direzioni.empty()))
-    {
-        ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-        //primo elemento utile non la sentinella
-        struct Elem<Direzione> *iter = this->direzioni.head();
-        //se non vuota e non finita
-        while (!(this->direzioni.finished(iter)))
-        {
-            Direzione dirInCuiSparo = this->direzioni.read(iter);
-            //inserisci un nuovo colpo da aggiornare
-            Proiettile newProiettile = Proiettile(dirInCuiSparo, giallo);
-            this->proiettili.insert_head(newProiettile);
-            //passo al successivo
-            iter = this->direzioni.next(iter);
-        }
-    }
+    ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
+    //genero una direzione random dipendente dal tipo
+    int randomDir = rand() % (this->tipo + 2);
+    cout << "randomDir = " << randomDir << endl;
+    Direzione dirInCuiSparo = this->direzioni[randomDir];
+    //inserisci un nuovo colpo da aggiornare
+    Proiettile newProiettile = Proiettile(dirInCuiSparo, giallo);
+    this->proiettili.insert_head(newProiettile);
 }

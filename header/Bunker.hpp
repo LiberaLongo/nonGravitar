@@ -6,17 +6,19 @@
 #include "./Entity.hpp"
 
 //ATTENZIONE! cpp inclusi per classi template
-#include "./includeTemplate.hpp"
+//#include "./includeTemplate.hpp"
 
 //per Bunker
-template class Lista<Direzione>;
+//template class Lista<Direzione>;
+#define MAX_DIREZIONI 3
 
 class Bunker : public Entity
 {
 private:
     int tipo = 0;
     ColoreRGB coloreProiettile = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
-    Lista<Direzione> direzioni;
+    //Lista<Direzione> direzioni;
+    Direzione direzioni[MAX_DIREZIONI]; //ci sono al massimo 3 direzioni
 
 public:
     //costruttore vuoto
