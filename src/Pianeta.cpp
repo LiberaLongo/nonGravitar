@@ -311,7 +311,7 @@ int Pianeta::aggiornaCoordinateProiettili(sf::Time tempo, float x, float y, int 
             while (!(this->bunker.finished(iter)))
             {
                 Bunker cannoneAggiorna = this->bunker.read(iter);
-                vita = cannoneAggiorna.aggiornaCoordinateProiettili(x, y, vita);
+                vita = cannoneAggiorna.aggiornaCoordinateProiettili(x, y, vita, this->getPoligono(), MAX_SUPERFICE);
                 //passo al successivo
                 iter = this->bunker.next(iter);
             }

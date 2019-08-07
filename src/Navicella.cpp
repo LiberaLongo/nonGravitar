@@ -166,7 +166,7 @@ bool Navicella::isNear(Pianeta planet)
 }
 
 //restituisce true se il pianeta deve essere distrutto
-void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita)
+void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita, Poligono pol, int n)
 {
     Lista<Bunker> listaEntita;
     listaEntita.setHead(headEntita);
@@ -194,6 +194,14 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
 #ifdef DEBUG_PROIETTILI
                     cout << "un proiettile è uscito" << endl;
 #endif
+                }                
+                if (aggiornato.isInsidePlanet(pol, n))
+                {
+                    //se il proiettile è entrato nel pianeta devo rimuoverlo
+                    iterProiettile = this->proiettili.remove(iterProiettile);
+    #ifdef DEBUG_PROIETTILI
+                    cout << "entrato nel pianeta" << endl;
+    #endif
                 }
                 else
                 {
@@ -288,7 +296,6 @@ void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
     }
 }
 
-bool Navicella::isInsidePoligon(Poligono p) {
-    Punto centroNavicella = Punto(this->getX(), this->getY());
-    return p.PointIsInside(centroNavicella, MAX_SUPERFICE);
+bool Navicella::isInsidePoligon(Poligono p, int n) {
+    return p.PointIsInside(this->getX(), this->getY(), n);
 }

@@ -77,3 +77,6 @@ void Proiettile::draw(sf::RenderWindow &window)
 bool Proiettile::isOutsideScreen(void) {
     return !this->isNear(WIDTH / 2, HEIGHT / 2, WIDTH / 2, HEIGHT / 2);
 }
+bool Proiettile::isInsidePlanet(Poligono p, int n) {
+    return p.PointIsInside(this->getX(), this->getY(), n);
+}

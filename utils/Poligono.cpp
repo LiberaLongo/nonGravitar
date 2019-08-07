@@ -340,3 +340,7 @@ bool Poligono::PointIsInside(Punto P, int n)
     else
         return false;
 }
+bool Poligono::PointIsInside(float x, float y, int n) {
+    Punto p = Punto(x, y);
+    return this->PointIsInside(p, n);
+}

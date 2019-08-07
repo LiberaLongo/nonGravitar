@@ -129,7 +129,7 @@ bool Entity::isOutsideScreen(void)
 }
 
 //aggiorno la lista di proiettili
-int Entity::aggiornaCoordinateProiettili(float x, float y, int vita)
+int Entity::aggiornaCoordinateProiettili(float x, float y, int vita, Poligono pol, int n)
 {
     if (!(this->proiettili.empty()))
     {
@@ -147,7 +147,15 @@ int Entity::aggiornaCoordinateProiettili(float x, float y, int vita)
                 //se il proiettile è uscito dallo schermo devo rimuoverlo
                 iter = this->proiettili.remove(iter);
 #ifdef DEBUG_PROIETTILI
-                cout << "uscito";
+                cout << "uscito" << endl;
+#endif
+            }
+            if (aggiornato.isInsidePlanet(pol, n))
+            {
+                //se il proiettile è entrato nel pianeta devo rimuoverlo
+                iter = this->proiettili.remove(iter);
+#ifdef DEBUG_PROIETTILI
+                cout << "entrato nel pianeta" << endl;
 #endif
             }
             else

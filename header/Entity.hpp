@@ -76,7 +76,7 @@ public:
     bool isOutsideScreen(void);
 
     //aggiorno la lista di proiettili
-    int aggiornaCoordinateProiettili(float x, float y, int vita);
+    int aggiornaCoordinateProiettili(float x, float y, int vita, Poligono pol, int n);
 };
 
 #endif //ENTITA_HPP

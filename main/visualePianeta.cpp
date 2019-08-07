@@ -38,6 +38,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
             cout << "Errore nella conta o nella generazione della superfice";
             return EXIT;
         }
+    //Poligono pol = this->pianetaVisualizzato.getPoligono();
 //voglio sapere come dare nome a un oggetto puntato da un puntatore
 #ifdef DEBUG
         this->pianetaVisualizzato.print();
@@ -185,7 +186,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
 #endif
                     return VISUALE_SISTEMA_SOLARE;
                 }
-                if (this->player.isInsidePoligon(this->pianetaVisualizzato.getPoligono()))
+                if (this->player.isInsidePoligon(this->pianetaVisualizzato.getPoligono(), lengthSuperficie))
                 {
                     /*
                     //perdo una vita
@@ -234,7 +235,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         this->pianetaVisualizzato.drawVisuale(App, lengthSuperficie);
 
         this->player.draw(App, raggio);
-        this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->pianetaVisualizzato.getHeadBunker());
+        this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->pianetaVisualizzato.getHeadBunker(), this->pianetaVisualizzato.getPoligono(), MAX_SUPERFICE);
         if (this->pianetaVisualizzato.emptyBunker())
         {
             //distruggi il pianeta

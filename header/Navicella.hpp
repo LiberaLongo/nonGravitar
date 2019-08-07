@@ -62,13 +62,13 @@ public:
     bool isNear(Pianeta planet);
 
     //override aggiornaProiettili di Entity
-    void aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita);
+    void aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker> *headEntita, Poligono pol, int n);
     //restituisce true se il pianeta deve essere distrutto
 
     void raggioTraente(struct Elem<Fuel> * headFuel);
 
     //controlla se è dentro il poligono
-    bool isInsidePoligon(Poligono p);
+    bool isInsidePoligon(Poligono p, int n);
 };
 
 #endif //NAVICELLA_H

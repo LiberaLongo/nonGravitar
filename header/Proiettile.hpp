@@ -8,6 +8,7 @@
 #include "./Direzione.hpp"
 #include "./DisegnabileI.hpp"
 #include "./ColoreRGB.hpp"
+#include "./Poligono.hpp"
 
 class Proiettile : public Direzione //disegnabile
 {
@@ -40,5 +41,7 @@ public:
     void draw(sf::RenderWindow &window);
     /*spara non esiste... o è uguale a move in questo caso*/
     bool isOutsideScreen(void);
+    bool isInsidePlanet(Poligono p, int n);
+    
 };
 #endif //PROIETTILE_HPP

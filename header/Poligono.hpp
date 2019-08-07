@@ -74,6 +74,7 @@ public:
     //return true se il punto P giace dentro il poligono
     //precondition n è il numero di punti del poligono
     bool PointIsInside(Punto P, int n);
+    bool PointIsInside(float x, float y, int n);
 };
 
 #endif //POLIGONO_HPP
