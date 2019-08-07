@@ -188,22 +188,11 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 }
                 if (this->player.isInsidePoligon(this->pianetaVisualizzato.getPoligono(), lengthSuperficie))
                 {
-                    /*
                     //perdo una vita
                     vita --;
                     this->player.setVita(vita);
-                    if (vita <= 0)
-                    {
-                        //resetto la vita per la prossima partita
-                        vita = VITA_NAVICELLA;
-                        fuel = FUEL_NAVICELLA;
-                        //aggiorno i booleani
-                        haiPerso = true;
-                        generaSistema = true;
-                        //torno al menù
-                        return VISUALE_MENU;
-                    }
-                    */
+                    //if (vita <= 0)
+                    
 #ifdef DEBUG
                     cout << "entrato nel pianeta" << endl;
 #endif
@@ -214,19 +203,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
             //aggiorno la variabile globale
             fuel = this->player.getFuel();
             testoFuel.setString("fuel: " + to_string(fuel));
-            if (carburanteFinito)
-            {
-                //resetto la vita e il fuel per la prossima partita
-                vita = VITA_NAVICELLA;
-                fuel = FUEL_NAVICELLA;
-                //this->setVita(vita);
-                //this->setFuel(fuel);
-                //aggiorno i booleani
-                haiPerso = true;
-                generaSistema = true;
-                //torno al menù
-                return VISUALE_MENU;
-            }
+            //if (carburanteFinito)
         }
 
         //pulisci la finestra colorandola di nero
@@ -247,11 +224,13 @@ int visualePianeta::Run(sf::RenderWindow &App)
         //faccio sparare i bunker del pianeta
         this->pianetaVisualizzato.shoot(this->orologio.getElapsedTime());
         vita = this->pianetaVisualizzato.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->player.getX(), this->player.getY(), this->player.getVita());
-        if (vita <= 0)
+        if (vita <= 0 || carburanteFinito)
         {
             //resetto la vita per la prossima partita
             vita = VITA_NAVICELLA;
             fuel = FUEL_NAVICELLA;
+            this->player.setVita(vita);
+            this->player.setFuel(fuel);
             //aggiorno i booleani
             haiPerso = true;
             generaSistema = true;

@@ -15,10 +15,12 @@ using namespace std;
 #define LUMUS_MAXIMA 255 //LUMUS_MAXIMA, citazione Harry Potter, (luminosità RGB)
 
 //alcune costanti nella costruzione delle varie parti del gioco
-#define CONSUMO 1.f
-#define FUEL_1_QUANTITA 100.f
-#define FUEL_2_QUANTITA 200.f
+//costanti di quantità di fuel
+#define CONSUMO 1
+#define FUEL_1_QUANTITA 200
+#define FUEL_2_QUANTITA 400
 #define FUEL_NAVICELLA 500
+//costanti
 #define DISTANCE 100.f
 #define SPEED_PROIETTILI 5.f
 

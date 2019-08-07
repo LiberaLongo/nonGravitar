@@ -184,7 +184,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             //aggiorno la variabile globale
             fuel = this->player.getFuel();
             testoFuel.setString("fuel: " + to_string(fuel));
-            if (carburanteFinito)
+            if (vita <= 0 || carburanteFinito)
             {
                 //resetto la vita e il fuel per la prossima partita
                 vita = VITA_NAVICELLA;
