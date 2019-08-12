@@ -6,6 +6,7 @@
 #include "cScreen.hpp"
 
 #include "./SistemaSolare.hpp"
+#include "./Button.hpp"
 
 extern SistemaSolare sistemasolare;
 

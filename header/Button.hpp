@@ -12,7 +12,7 @@ class Button : public DisegnabileI
 {
 private:
     bool checked = false; //se true "colora inversamente" testo e sfondo
-    int charSize = 20;
+    int charSize = HEIGHT / 10;
     Punto position; //default (0,0)
     float width = WIDTH/2;
     float height = HEIGHT/8;

@@ -15,13 +15,6 @@ void Button::settaFontTesto(void)
     this->buttonText.setCharacterSize(this->charSize);
     this->buttonText.setString(this->testo);
     this->buttonText.setPosition({this->getX(), this->getY()});
-    //colore
-#ifndef NON_FUNZIONA_FILL_COLOR
-    this->buttonText.setFillColor(this->coloreTesto.getColorLib());
-#endif
-#ifdef NON_FUNZIONA_FILL_COLOR
-    this->buttonText.setColor(this->coloreTesto.getColorLib());
-#endif
 }
 
 //PUBBLICHE
@@ -99,12 +92,6 @@ void Button::setDimensions(float width, float height)
 void Button::setColoreTesto(ColoreRGB coloreTesto)
 {
     this->coloreTesto = coloreTesto;
-#ifndef NON_FUNZIONA_FILL_COLOR
-    this->buttonText.setFillColor(this->coloreTesto.getColorLib());
-#endif
-#ifdef NON_FUNZIONA_FILL_COLOR
-    this->buttonText.setColor(this->coloreTesto.getColorLib());
-#endif
 }
 void Button::setColoreSfondo(ColoreRGB coloreSfondo)
 {
@@ -213,8 +200,16 @@ void Button::draw(sf::RenderWindow &window)
     rettangolo.setPosition({this->getX(), this->getY()});
     if (!this->checked)
     {
-        //rettangolo del colore di sfondo
+        //se il rettangolo NON è checked è tutto normale...
+        //... il rettangolo del colore di sfondo
         rettangolo.setFillColor(this->coloreSfondo.getColorLib());
+        //... e il testo del colore del testo
+#ifndef NON_FUNZIONA_FILL_COLOR
+        this->buttonText.setFillColor(this->coloreTesto.getColorLib());
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+        this->buttonText.setColor(this->coloreTesto.getColorLib());
+#endif
     }
     else
     {
