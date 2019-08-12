@@ -20,7 +20,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
     //colore della vittoria
     ColoreRGB coloreTesto = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
 
-    sf::Event Event;
+    sf::Event event;
     bool Running = true;
     sf::Font Font;
     sf::Text testoGioco, testoHaiVinto, testoHaiPerso;
@@ -57,26 +57,53 @@ int visualeMenu::Run(sf::RenderWindow &App)
 #endif
     //bottoni
     //prima linea
-    Button buttonPlay = Button (x, y, "Play");
-    Button buttonContinue = Button (x, y, "Continue");
-    Button buttonNewGame = Button (x, y, "New Game");
+    Button buttonPlay = Button(x, y, "Play");
+    Button buttonContinue = Button(x, y, "Continue");
+    Button buttonNewGame = Button(x, y, "New Game");
     //seconda linea
-    Button buttonExit = Button (x, y + dist, "Exit");
+    Button buttonExit = Button(x, y + dist, "Exit");
 
+    //un punto adibito a mouse click
+    Punto mouseClick;
+#ifdef NOME_PUNTO
+    mouseClick.setName("MOUSE");
+#endif
     while (Running)
     {
         //Verifying events
-        while (App.pollEvent(Event))
+        while (App.pollEvent(event))
         {
             // Window closed
-            if (Event.type == sf::Event::Closed)
+            switch (event.type)
             {
+            case sf::Event::Closed:
                 return EXIT;
-            }
-            //Key pressed
-            if (Event.type == sf::Event::KeyPressed)
-            {
-                switch (Event.key.code)
+                break;
+            case sf::Event::MouseButtonPressed:
+                mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                if (buttonExit.checkMouse(mouseClick))
+                {
+                    //fine dei giochi, si torna a lavoro...
+                    return EXIT;
+                }
+                //buttonPlay, buttonContinue, buttonNewGame
+                //hanno tutti stessa x, y, widht, height
+                //e non è necessario controllarne più di uno
+                else if (buttonPlay.checkMouse(mouseClick))
+                {
+                    //giochiamo!
+                    playing = true;
+                    haiVinto = false;
+                    if (generaSistema)
+                    {
+                        sistemasolare.genera();
+                        generaSistema = false;
+                    }
+                    return VISUALE_SISTEMA_SOLARE;
+                }
+                break;
+            case sf::Event::KeyPressed:
+                switch (event.key.code)
                 {
                 //tasto Esc
                 case sf::Keyboard::Escape:
@@ -110,6 +137,8 @@ int visualeMenu::Run(sf::RenderWindow &App)
                 default:
                     break;
                 }
+            default:
+                break;
             }
         }
         if (menu == 0)
