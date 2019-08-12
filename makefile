@@ -23,7 +23,7 @@ COMPILE = $(CC) $(CFLAGS)
 #indieme di header molto usati
 HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
-OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o Direzione.o Poligono.o\
+OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o Button.o Direzione.o Poligono.o\
 	Proiettile.o Entity.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
 	visualeMenu.o visualeSistemaSolare.o visualePianeta.o Gioco.o main.o
 # Controlli.o
@@ -47,6 +47,9 @@ utils.o: $(U)utils.cpp $(H)utils.hpp $(H)Punto.hpp
 
 ColoreRGB.o: $(U)ColoreRGB.cpp $(H)ColoreRGB.hpp
 	$(COMPILE) $(U)ColoreRGB.cpp -o ColoreRGB.o
+
+Button.o: $(U)Button.cpp $(H)Button.hpp $(H)Punto.hpp $(H)ColoreRGB.hpp
+	$(COMPILE) $(U)Button.cpp -o Button.o
 
 Direzione.o: $(U)Direzione.cpp $(HDR)
 	$(COMPILE) $(U)Direzione.cpp -o Direzione.o
