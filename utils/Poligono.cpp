@@ -103,7 +103,6 @@ void Poligono::draw(sf::RenderWindow &window)
         //se non vuota e non finita
         while (!(this->surface.finished(iter)))
         {
-            //stampo elemento MODIFICATA!
             Punto disegnato = this->surface.read(iter);
             //inserisci il punto nella convex shape
             convexSuperficie.setPoint(indice, disegnato.getPuntoLib());
@@ -335,12 +334,13 @@ bool Poligono::PointIsInside(Punto P, int n)
 
     } while (iter != this->surface.head()); //prev != 0
     //Ritorna VERO se conta è dispari, altrimenti FALSO.
-    if(countSinistra > 0)
+    if (countSinistra > 0)
         return (countDestra % 2 == 1);
     else
         return false;
 }
-bool Poligono::PointIsInside(float x, float y, int n) {
+bool Poligono::PointIsInside(float x, float y, int n)
+{
     Punto p = Punto(x, y);
     return this->PointIsInside(p, n);
 }

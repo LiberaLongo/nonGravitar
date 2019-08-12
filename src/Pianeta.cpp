@@ -127,14 +127,14 @@ Pianeta::getHeadBunker(void)
     return this->bunker.getHead();
 }
 //provo a ottenre il poligono
-Poligono Pianeta::getPoligono(void) {
+Poligono
+Pianeta::getPoligono(void)
+{
     return this->poligono;
 }
 
-
 //conta i punti della superficie
-int
-Pianeta::lunghezzaSuperfice(void)
+int Pianeta::lunghezzaSuperfice(void)
 {
     return this->poligono.numPunti();
 }
@@ -213,7 +213,6 @@ void Pianeta::generaBunkerFuel()
             //se devo generare qualcosa
             if (cosaGenero != tipo_niente)
             {
-                //stampo elemento MODIFICATA!
                 p1 = surface.read(iter);
                 //se il successivo non è la sentinella
                 if (surface.next(iter) != sentinella)

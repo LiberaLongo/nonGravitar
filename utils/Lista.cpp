@@ -57,7 +57,6 @@ void Lista<Tipo>::print(void)
 		//se non vuota e non finita
 		while (!(this->finished(iter)))
 		{
-			//stampo elemento MODIFICATA!
 			Tipo stampato = this->read(iter);
 			stampato.print();
 			//passo al successivo e stampo freccia
@@ -79,7 +78,6 @@ void Lista<Tipo>::draw(sf::RenderWindow &window)
 		//se non vuota e non finita
 		while (!(this->finished(iter)))
 		{
-			//stampo elemento MODIFICATA!
 			Tipo disegnato = this->read(iter);
 			disegnato.draw(window);
 			//passo al successivo
@@ -151,14 +149,14 @@ void Lista<Tipo>::MergeSort(int primo, int ultimo, float A[], float B[], struct 
 template <typename Tipo>
 void Lista<Tipo>::ordina(const int dim, float A[], float B[], struct Elem<Tipo> *posizioni[], struct Elem<Tipo> *posAux[])
 {
-    this->MergeSort(0, dim - 1, A, B, posizioni, posAux);
-    //ricostruisci la lista della superfice ordinata
-    Lista<Tipo> ordinata;
-    for (int i = 0; i < dim; i++)
-    {
-        ordinata.insert_head(this->read(posizioni[i]));
-        //NB: uso insert_head per ordinarli dal più grande al più piccolo, in senso orario
-        //uso insert_tail per ordinarli dal più piccolo al più grande, in senso anti-orario
-    }
-    this->setHead(ordinata.getHead());
+	this->MergeSort(0, dim - 1, A, B, posizioni, posAux);
+	//ricostruisci la lista della superfice ordinata
+	Lista<Tipo> ordinata;
+	for (int i = 0; i < dim; i++)
+	{
+		ordinata.insert_head(this->read(posizioni[i]));
+		//NB: uso insert_head per ordinarli dal più grande al più piccolo, in senso orario
+		//uso insert_tail per ordinarli dal più piccolo al più grande, in senso anti-orario
+	}
+	this->setHead(ordinata.getHead());
 }

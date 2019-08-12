@@ -5,7 +5,7 @@
 
 extern float WIDTH, HEIGHT;
 extern bool generaSistema, haiVinto, haiPerso;
-int vita = VITA_NAVICELLA, fuel;
+int vita = VITA_NAVICELLA, fuel, punteggio = 0;
 
 //privata
 bool visualeSistemaSolare::check(void)
@@ -60,10 +60,11 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
     //testo
     float dist = HEIGHT / 8;
     int charSize = HEIGHT / 20;
-    float x_testo = 0.f, y_testo = 0.f, dist_testo = WIDTH - charSize * 7;
+    float x_testo = 10.f, y_testo = 0.f, dist_testo = WIDTH / 4;
     sf::Font Font;
     sf::Text testoVite;
     sf::Text testoFuel;
+    sf::Text testoPunti;
     ColoreRGB coloreTesto = ColoreRGB(255, 255, 255);
 
     //inizializzo il testo
@@ -74,7 +75,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
     }
     testoVite.setFont(Font);
     testoVite.setCharacterSize(charSize);
-    testoVite.setString("vite: " + to_string(vita));
+    testoVite.setString("vite: " + to_string(vita) +
+                        "  (new live: " + to_string(NEW_LIVE) +
+                        "k, bonus: " + to_string(BONUS) + "k)");
     testoVite.setPosition({x_testo, y_testo});
 #ifndef NON_FUNZIONA_FILL_COLOR
     testoVite.setFillColor(coloreTesto.getColorLib());
@@ -86,12 +89,23 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
     testoFuel.setFont(Font);
     testoFuel.setCharacterSize(charSize);
     testoFuel.setString("fuel: " + to_string(fuel));
-    testoFuel.setPosition({x_testo + dist_testo, y_testo});
+    testoFuel.setPosition({x_testo + dist_testo * 2, y_testo});
 #ifndef NON_FUNZIONA_FILL_COLOR
     testoFuel.setFillColor(coloreTesto.getColorLib());
 #endif
 #ifdef NON_FUNZIONA_FILL_COLOR
     testoFuel.setColor(coloreTesto.getColorLib());
+#endif
+
+    testoPunti.setFont(Font);
+    testoPunti.setCharacterSize(charSize);
+    testoPunti.setString("punteggio: " + to_string(punteggio) + "k");
+    testoPunti.setPosition({x_testo + dist_testo * 3, y_testo});
+#ifndef NON_FUNZIONA_FILL_COLOR
+    testoPunti.setFillColor(coloreTesto.getColorLib());
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+    testoPunti.setColor(coloreTesto.getColorLib());
 #endif
 
     //un punto adibito a mouse click
@@ -138,7 +152,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 }
                 //Enter per sparare
                 else if (event.key.code == sf::Keyboard::Return)
-                    carburanteFinito = this->player.shoot();//WASD o freccie per muoversi
+                    carburanteFinito = this->player.shoot(); //WASD o freccie per muoversi
                 else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
                 {
                     NavicellaMoved = true;
@@ -186,14 +200,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             testoFuel.setString("fuel: " + to_string(fuel));
             if (vita <= 0 || carburanteFinito)
             {
-                //resetto la vita e il fuel per la prossima partita
-                vita = VITA_NAVICELLA;
-                fuel = FUEL_NAVICELLA;
-                //this->setVita(vita);
-                //this->setFuel(fuel);
-                //aggiorno i booleani
-                haiPerso = true;
-                generaSistema = true;
+                reset();
                 //torno al menù
                 return VISUALE_MENU;
             }
@@ -209,10 +216,8 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         }
         else
         {
-            vita = VITA_NAVICELLA;
-            fuel = FUEL_NAVICELLA;
-            generaSistema = true;
-            haiVinto = true;
+            reset();
+            //torno al menù
             return VISUALE_MENU;
         }
 
@@ -226,6 +231,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         //testo
         App.draw(testoVite);
         App.draw(testoFuel);
+        App.draw(testoPunti);
 
         //fine del frame corrente
         App.display();

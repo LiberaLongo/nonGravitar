@@ -44,10 +44,10 @@ using namespace std;
 #define MAX_PLANET 7 //7, numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
 
 //direzioni canoniche con angoli studiati in matematica
-#define RIGHT   0.f
-#define UP      90.f
-#define LEFT    180.f
-#define DOWN    270.f
+#define RIGHT 0.f
+#define UP 90.f
+#define LEFT 180.f
+#define DOWN 270.f
 
 //vita delle entità
 #define VITA_NAVICELLA 5
@@ -55,17 +55,27 @@ using namespace std;
 
 //macro per gestire opportunamente le visuali
 #define EXIT -1
-enum visuale {VISUALE_MENU, VISUALE_SISTEMA_SOLARE, VISUALE_PIANETA};
+enum visuale
+{
+    VISUALE_MENU,
+    VISUALE_SISTEMA_SOLARE,
+    VISUALE_PIANETA
+};
 
 //numero di millisecondi dopo i quali aggiornare i proiettil
 #define AGGIORNA 100
 //numero di millisecondi dopo cui il bunker spara in tutte le sue direzioni
 #define SPARA 1000
 
+//bonus alla distruzione del pianeta
+#define BONUS 4
+//punti per avere una nuova vita
+#define NEW_LIVE 10
 //FUNZIONI
 
 //Precondition: prende un angolo in gradi in forma canonica
 //Postcondition: lo trasforma opportunamente secondo la libreria grafica
 float angoloLibreria(float angolo);
+void reset();
 
 #endif //UTILS_HPP

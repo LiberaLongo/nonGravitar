@@ -53,6 +53,7 @@ void SistemaSolare::printCentri(void)
         while (!(this->pianeti.finished(iter)))
         {
             //stampo elemento MODIFICATA!
+            //ora stampo solo i centri e non tutte le info dei pianeti
             Pianeta stampato = this->pianeti.read(iter);
             Punto centro = Punto(stampato.getX(), stampato.getY());
             centro.print();
@@ -73,7 +74,8 @@ void SistemaSolare::draw(sf::RenderWindow &window)
 void SistemaSolare::genera()
 {
     //prima che vengono generati i pianeti rimuovo tutti i pianeti eventualmente rimasti
-    while (!this->pianeti.empty()) {
+    while (!this->pianeti.empty())
+    {
         this->pianeti.remove_head();
     }
     //genera tutti i pianeti all'inizio
@@ -106,7 +108,7 @@ void SistemaSolare::genera()
 
         //genera il pianeta
         newPianeta.genera();
-        
+
         //inserirlo nella lista
         this->pianeti.insert_head(newPianeta);
     }
@@ -121,7 +123,8 @@ void SistemaSolare::genera()
     */
 }
 
-void SistemaSolare::eliminaPianeta(struct Elem<Pianeta>* pianetaEliminato) {
+void SistemaSolare::eliminaPianeta(struct Elem<Pianeta> *pianetaEliminato)
+{
     this->pianeti.remove(pianetaEliminato);
 }
 

@@ -6,7 +6,7 @@
 
 extern float WIDTH, HEIGHT;
 extern bool generaSistema, haiPerso;
-extern int vita, fuel;
+extern int vita, fuel, punteggio;
 
 visualePianeta::visualePianeta(void)
 {
@@ -38,7 +38,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
             cout << "Errore nella conta o nella generazione della superfice";
             return EXIT;
         }
-    //Poligono pol = this->pianetaVisualizzato.getPoligono();
+        //Poligono pol = this->pianetaVisualizzato.getPoligono();
 //voglio sapere come dare nome a un oggetto puntato da un puntatore
 #ifdef DEBUG
         this->pianetaVisualizzato.print();
@@ -59,10 +59,11 @@ int visualePianeta::Run(sf::RenderWindow &App)
     //testo
     float dist = HEIGHT / 8;
     int charSize = HEIGHT / 20;
-    float x_testo = 0.f, y_testo = 0.f, dist_testo = WIDTH - charSize * 7;
+    float x_testo = 10.f, y_testo = 0.f, dist_testo = WIDTH / 4;
     sf::Font Font;
     sf::Text testoVite;
     sf::Text testoFuel;
+    sf::Text testoPunti;
     ColoreRGB coloreTesto = ColoreRGB(255, 255, 255);
 
     //inizializzo il testo
@@ -73,7 +74,9 @@ int visualePianeta::Run(sf::RenderWindow &App)
     }
     testoVite.setFont(Font);
     testoVite.setCharacterSize(charSize);
-    testoVite.setString("vite: " + to_string(vita));
+    testoVite.setString("vite: " + to_string(vita) +
+                        "  (new live: " + to_string(NEW_LIVE) +
+                        "k, bonus: " + to_string(BONUS) + "k)");
     testoVite.setPosition({x_testo, y_testo});
 #ifndef NON_FUNZIONA_FILL_COLOR
     testoVite.setFillColor(coloreTesto.getColorLib());
@@ -85,12 +88,23 @@ int visualePianeta::Run(sf::RenderWindow &App)
     testoFuel.setFont(Font);
     testoFuel.setCharacterSize(charSize);
     testoFuel.setString("fuel: " + to_string(fuel));
-    testoFuel.setPosition({x_testo + dist_testo, y_testo});
+    testoFuel.setPosition({x_testo + dist_testo*2, y_testo});
 #ifndef NON_FUNZIONA_FILL_COLOR
     testoFuel.setFillColor(coloreTesto.getColorLib());
 #endif
 #ifdef NON_FUNZIONA_FILL_COLOR
     testoFuel.setColor(coloreTesto.getColorLib());
+#endif
+
+    testoPunti.setFont(Font);
+    testoPunti.setCharacterSize(charSize);
+    testoPunti.setString("punteggio: " + to_string(punteggio) + "k");
+    testoPunti.setPosition({x_testo + dist_testo*3, y_testo});
+#ifndef NON_FUNZIONA_FILL_COLOR
+    testoPunti.setFillColor(coloreTesto.getColorLib());
+#endif
+#ifdef NON_FUNZIONA_FILL_COLOR
+    testoPunti.setColor(coloreTesto.getColorLib());
 #endif
 
     //un punto adibito a mouse click
@@ -189,14 +203,14 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 if (this->player.isInsidePoligon(this->pianetaVisualizzato.getPoligono(), lengthSuperficie))
                 {
                     //perdo una vita
-                    vita --;
+                    vita--;
                     this->player.setVita(vita);
                     //if (vita <= 0)
-                    
+
 #ifdef DEBUG
                     cout << "entrato nel pianeta" << endl;
 #endif
-                    
+
                     return VISUALE_SISTEMA_SOLARE;
                 }
             }
@@ -217,6 +231,13 @@ int visualePianeta::Run(sf::RenderWindow &App)
         {
             //distruggi il pianeta
             sistemasolare.eliminaPianeta(pianetaInsideNow);
+            //incrementa il punteggio di BONUS, ed eventualmente incrementa la vita
+            punteggio += BONUS;
+            if (punteggio >= NEW_LIVE)
+            {
+                punteggio -= NEW_LIVE;
+                vita++;
+            }
             //ritorna alla visuale sistema solare
             return VISUALE_SISTEMA_SOLARE;
         }
@@ -226,14 +247,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         vita = this->pianetaVisualizzato.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->player.getX(), this->player.getY(), this->player.getVita());
         if (vita <= 0 || carburanteFinito)
         {
-            //resetto la vita per la prossima partita
-            vita = VITA_NAVICELLA;
-            fuel = FUEL_NAVICELLA;
-            this->player.setVita(vita);
-            this->player.setFuel(fuel);
-            //aggiorno i booleani
-            haiPerso = true;
-            generaSistema = true;
+            reset();
             //torno al menù
             return VISUALE_MENU;
         }
@@ -251,6 +265,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         //testo
         App.draw(testoVite);
         App.draw(testoFuel);
+        App.draw(testoPunti);
 
         App.display();
     }
