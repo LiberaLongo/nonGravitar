@@ -3,8 +3,14 @@
 #include "../header/visualeMenu.hpp"
 
 extern float WIDTH, HEIGHT;
+
+//variabili condivise tra le visuali
 bool generaSistema = false;
-bool haiVinto = false, haiPerso = false;
+bool haiVinto = false;
+bool haiPerso = false;
+int vita = VITA_NAVICELLA;
+int fuel = FUEL_NAVICELLA;
+int punteggio = 0;
 
 visualeMenu::visualeMenu(void)
 {
@@ -13,7 +19,7 @@ visualeMenu::visualeMenu(void)
 
 void visualeMenu::startGame()
 {
-    playing = true;
+    this->playing = true;
     haiVinto = false;
     if (generaSistema)
     {
@@ -34,7 +40,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
     sf::Event event;
     bool Running = true;
     sf::Font Font;
-    sf::Text testoGioco, testoHaiVinto, testoHaiPerso;
+    sf::Text testo;
     int menu = 0;
 
     if (!Font.loadFromFile("verdanab.ttf"))
@@ -42,35 +48,20 @@ int visualeMenu::Run(sf::RenderWindow &App)
         std::cerr << "Error loading verdanab.ttf" << std::endl;
         return EXIT;
     }
-    testoHaiVinto.setFont(Font);
-    testoHaiVinto.setCharacterSize(charSize);
-    testoHaiVinto.setString("HAI VINTO!");
-    testoHaiVinto.setPosition({x, y - dist});
 
-    testoHaiPerso.setFont(Font);
-    testoHaiPerso.setCharacterSize(charSize);
-    testoHaiPerso.setString("HAI PERSO!");
-    testoHaiPerso.setPosition({x, y - dist});
-
-    testoGioco.setFont(Font);
-    testoGioco.setCharacterSize(charSize);
-    testoGioco.setString("Non Gravitar");
-    testoGioco.setPosition({x, y - dist});
+    testo.setFont(Font);
+    testo.setCharacterSize(charSize);
+    testo.setString("Non Gravitar");
+    testo.setPosition({x, y - dist});
 #ifndef NON_FUNZIONA_FILL_COLOR
-    testoHaiVinto.setFillColor(coloreTesto.getColorLib());
-    testoHaiPerso.setFillColor(coloreTesto.getColorLib());
-    testoGioco.setFillColor(coloreTesto.getColorLib());
+    testo.setFillColor(coloreTesto.getColorLib());
 #endif
 #ifdef NON_FUNZIONA_FILL_COLOR
-    testoHaiVinto.setColor(coloreTesto.getColorLib());
-    testoHaiPerso.setColor(coloreTesto.getColorLib());
-    testoGioco.setColor(coloreTesto.getColorLib());
+    testo.setColor(coloreTesto.getColorLib());
 #endif
     //bottoni
     //prima linea
     Button buttonPlay = Button(x, y, "Play");
-    Button buttonContinue = Button(x, y, "Continue");
-    Button buttonNewGame = Button(x, y, "New Game");
     //seconda linea
     Button buttonOptions = Button(x, y + dist, "Options");
     //terza linea
@@ -162,35 +153,26 @@ int visualeMenu::Run(sf::RenderWindow &App)
         case 0:
             //prima linea focalizzata
             buttonPlay.setChecked(true);
-            buttonContinue.setChecked(true);
-            buttonNewGame.setChecked(true);
-            //le altre no
             //seconda
             buttonOptions.setChecked(false);
             //terza
             buttonExit.setChecked(false);
             break;
         case 1:
-            //seconda linea focalizzata
-            buttonOptions.setChecked(true);
-            //le altre no
             //prima
             buttonPlay.setChecked(false);
-            buttonContinue.setChecked(false);
-            buttonNewGame.setChecked(false);
+            //seconda linea focalizzata
+            buttonOptions.setChecked(true);
             //terza
             buttonExit.setChecked(false);
             break;
         case 2:
-            //terza linea focalizzata
-            buttonExit.setChecked(true);
-            //le altre no
             //prima
             buttonPlay.setChecked(false);
-            buttonContinue.setChecked(false);
-            buttonNewGame.setChecked(false);
             //seconda
             buttonOptions.setChecked(false);
+            //terza linea focalizzata
+            buttonExit.setChecked(true);
             break;
         default:
             cout << "menuError" << endl;
@@ -199,32 +181,36 @@ int visualeMenu::Run(sf::RenderWindow &App)
 
         //Clearing screen
         App.clear();
-        //Drawing
+        //setto la stringa giusta a testo e buttonPlay
         if (playing)
         {
             if (haiVinto)
             {
-                App.draw(testoHaiVinto);
-                buttonNewGame.draw(App);
+                testo.setString("HAI VINTO!");
+                buttonPlay.setString("New Game");
             }
             else if (haiPerso)
             {
-                App.draw(testoHaiPerso);
-                buttonNewGame.draw(App);
+                testo.setString("HAI PERSO!");
+                buttonPlay.setString("New Game");
             }
             else
             {
-                App.draw(testoGioco);
-                buttonContinue.draw(App);
+                testo.setString("Non Gravitar");
+                buttonPlay.setString("Continue");
             }
         }
         else
         {
-            App.draw(testoGioco);
-            buttonPlay.draw(App);
+            testo.setString("Non Gravitar");
+            buttonPlay.setString("Play");
         }
+        //Drawing
+        App.draw(testo);
+        buttonPlay.draw(App);
         buttonOptions.draw(App);
         buttonExit.draw(App);
+        //Showing
         App.display();
     }
 

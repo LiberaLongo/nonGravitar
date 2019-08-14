@@ -6,6 +6,10 @@
 
 extern float WIDTH, HEIGHT;
 
+//variabili condivise tra le visuali
+extern bool generaSistema, haiVinto, haiPerso;
+extern int vita, fuel, punteggio;
+
 //tastiera
 extern int MOVE_UP_1, MOVE_UP_2;
 extern int MOVE_LEFT_1, MOVE_LEFT_2;

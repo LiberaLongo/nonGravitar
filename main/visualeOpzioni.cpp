@@ -120,7 +120,7 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
     //reset button
     Button buttonReset = Button(0.f, HEIGHT - dist, "Reset");
     //exit button
-    Button buttonBack = Button(WIDTH * 2 / 3, HEIGHT - dist, "Exit");
+    Button buttonBack = Button(WIDTH * 2 / 3, HEIGHT - dist, "Back");
 
     //mouseShape
     // define a circle

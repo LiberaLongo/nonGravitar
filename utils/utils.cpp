@@ -15,3 +15,17 @@ float angoloLibreria(float angolo)
     //ci devo aggiungere 90 gradi ma stando attenta al modulo
     return (-angolo + 90.f);
 }
+
+//variabili condivise tra le visuali
+extern bool generaSistema, haiVinto, haiPerso;
+extern int vita, fuel, punteggio;
+void reset(void)
+{
+    //resetto la vita per la prossima partita
+    vita = VITA_NAVICELLA;
+    fuel = FUEL_NAVICELLA;
+    punteggio = 0;
+    //aggiorno i booleani
+    haiPerso = true;
+    generaSistema = true;
+}
