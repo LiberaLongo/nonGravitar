@@ -25,7 +25,7 @@ HDR = $(H)DisegnabileI.hpp $(H)utils.hpp $(H)Punto.hpp $(H)Direzione.hpp
 #insieme di oggetti che vogliono essere lanciati (chiamati da main)
 OBJ = ListaParent.o Lista.o Punto.o utils.o ColoreRGB.o Button.o Direzione.o Poligono.o\
 	Proiettile.o Entity.o Fuel.o Navicella.o Bunker.o Pianeta.o SistemaSolare.o\
-	visualeMenu.o visualeSistemaSolare.o visualePianeta.o Gioco.o main.o
+	visualeMenu.o visualeSistemaSolare.o visualePianeta.o visualeOpzioni.o Gioco.o main.o
 # Controlli.o
 
 all: app
@@ -91,7 +91,10 @@ visualeSistemaSolare.o: $(M)visualeSistemaSolare.cpp $(H)visualeSistemaSolare.hp
 visualePianeta.o: $(M)visualePianeta.cpp $(H)visualePianeta.hpp $(H)cScreen.hpp $(H)SistemaSolare.hpp
 	$(COMPILE) $(M)visualePianeta.cpp -o visualePianeta.o
 
-Gioco.o: $(M)Gioco.cpp $(H)Gioco.hpp $(H)visualeSistemaSolare.hpp $(H)visualePianeta.hpp
+visualeOpzioni.o: $(M)visualeOpzioni.cpp $(H)visualeOpzioni.hpp $(H)cScreen.hpp
+	$(COMPILE) $(M)visualeOpzioni.cpp -o visualeOpzioni.o
+
+Gioco.o: $(M)Gioco.cpp $(H)Gioco.hpp $(H)visualeMenu.hpp $(H)visualeSistemaSolare.hpp $(H)visualePianeta.hpp $(H)visualeOpzioni.hpp
 	$(COMPILE) $(M)Gioco.cpp -o Gioco.o
 
 main.o: $(M)main.cpp $(H)Gioco.hpp $(H)Lista.hpp $(H)Punto.hpp

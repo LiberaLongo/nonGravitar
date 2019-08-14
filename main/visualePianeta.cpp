@@ -5,8 +5,8 @@
 //#define DEBUG
 
 extern float WIDTH, HEIGHT;
-extern bool generaSistema, haiPerso;
-extern int vita, fuel, punteggio;
+//extern bool generaSistema, haiPerso;
+//extern int vita, fuel, punteggio;
 
 visualePianeta::visualePianeta(void)
 {

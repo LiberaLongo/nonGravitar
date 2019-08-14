@@ -9,5 +9,6 @@
 #include "./visualeMenu.hpp"
 #include "./visualeSistemaSolare.hpp"
 #include "./visualePianeta.hpp"
+#include "./visualeOpzioni.hpp"
 
 #endif // SCREENS_HPP_INCLUDED

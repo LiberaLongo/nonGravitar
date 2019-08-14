@@ -11,6 +11,17 @@ visualeMenu::visualeMenu(void)
     playing = false;
 }
 
+void visualeMenu::startGame()
+{
+    playing = true;
+    haiVinto = false;
+    if (generaSistema)
+    {
+        sistemasolare.genera();
+        generaSistema = false;
+    }
+}
+
 int visualeMenu::Run(sf::RenderWindow &App)
 {
     float dist = HEIGHT / 6;
@@ -61,7 +72,9 @@ int visualeMenu::Run(sf::RenderWindow &App)
     Button buttonContinue = Button(x, y, "Continue");
     Button buttonNewGame = Button(x, y, "New Game");
     //seconda linea
-    Button buttonExit = Button(x, y + dist, "Exit");
+    Button buttonOptions = Button(x, y + dist, "Options");
+    //terza linea
+    Button buttonExit = Button(x, y + dist * 2, "Exit");
 
     //un punto adibito a mouse click
     Punto mouseClick;
@@ -86,19 +99,18 @@ int visualeMenu::Run(sf::RenderWindow &App)
                     //fine dei giochi, si torna a lavoro...
                     return EXIT;
                 }
+                if (buttonOptions.checkMouse(mouseClick))
+                {
+                    //impostazioni del gioco
+                    return VISUALE_OPZIONI;
+                }
                 //buttonPlay, buttonContinue, buttonNewGame
                 //hanno tutti stessa x, y, widht, height
                 //e non è necessario controllarne più di uno
                 else if (buttonPlay.checkMouse(mouseClick))
                 {
                     //giochiamo!
-                    playing = true;
-                    haiVinto = false;
-                    if (generaSistema)
-                    {
-                        sistemasolare.genera();
-                        generaSistema = false;
-                    }
+                    startGame();
                     return VISUALE_SISTEMA_SOLARE;
                 }
                 break;
@@ -110,30 +122,34 @@ int visualeMenu::Run(sf::RenderWindow &App)
                     return EXIT;
                     break;
                 case sf::Keyboard::Up:
-                    menu = 0;
+                    if(menu > 0)
+                        menu--;
+                    else
+                        menu = 2;
                     break;
                 case sf::Keyboard::Down:
-                    menu = 1;
+                    if(menu < 2)
+                        menu++;
+                    else
+                        menu = 0;
                     break;
                 case sf::Keyboard::Return:
-                    if (menu == 0)
+                    switch(menu)
                     {
-                        //giochiamo!
-                        playing = true;
-                        haiVinto = false;
-                        if (generaSistema)
-                        {
-                            sistemasolare.genera();
-                            generaSistema = false;
-                        }
-                        return VISUALE_SISTEMA_SOLARE;
-                    }
-                    else
-                    {
-                        //fine dei giochi, si torna a lavoro...
+                    case 0:
+                        startGame();
+                        return VISUALE_SISTEMA_SOLARE; 
+                        break;
+                    case 1:
+                        return VISUALE_OPZIONI;
+                        break;
+                    case 2:
                         return EXIT;
+                        break;
+                    default:
+                        cout << "menuError" << endl;
+                        break;
                     }
-                    break;
                 default:
                     break;
                 }
@@ -141,23 +157,44 @@ int visualeMenu::Run(sf::RenderWindow &App)
                 break;
             }
         }
-        if (menu == 0)
+        switch (menu)
         {
+        case 0:
             //prima linea focalizzata
             buttonPlay.setChecked(true);
             buttonContinue.setChecked(true);
             buttonNewGame.setChecked(true);
             //le altre no
+            //seconda
+            buttonOptions.setChecked(false);
+            //terza
             buttonExit.setChecked(false);
-        }
-        else
-        {
+            break;
+        case 1:
             //seconda linea focalizzata
-            buttonExit.setChecked(true);
+            buttonOptions.setChecked(true);
             //le altre no
+            //prima
             buttonPlay.setChecked(false);
             buttonContinue.setChecked(false);
             buttonNewGame.setChecked(false);
+            //terza
+            buttonExit.setChecked(false);
+            break;
+        case 2:
+            //terza linea focalizzata
+            buttonExit.setChecked(true);
+            //le altre no
+            //prima
+            buttonPlay.setChecked(false);
+            buttonContinue.setChecked(false);
+            buttonNewGame.setChecked(false);
+            //seconda
+            buttonOptions.setChecked(false);
+            break;
+        default:
+            cout << "menuError" << endl;
+            break;
         }
 
         //Clearing screen
@@ -186,6 +223,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
             App.draw(testoGioco);
             buttonPlay.draw(App);
         }
+        buttonOptions.draw(App);
         buttonExit.draw(App);
         App.display();
     }

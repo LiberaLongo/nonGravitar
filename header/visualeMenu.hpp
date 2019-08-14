@@ -14,6 +14,9 @@ class visualeMenu : public cScreen
 {
 private:
 	bool playing = false;
+private:
+	void startGame();
+
 public:
 	visualeMenu(void);
 	virtual int Run(sf::RenderWindow &App);

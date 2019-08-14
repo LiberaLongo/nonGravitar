@@ -59,7 +59,8 @@ enum visuale
 {
     VISUALE_MENU,
     VISUALE_SISTEMA_SOLARE,
-    VISUALE_PIANETA
+    VISUALE_PIANETA,
+    VISUALE_OPZIONI
 };
 
 //numero di millisecondi dopo i quali aggiornare i proiettil

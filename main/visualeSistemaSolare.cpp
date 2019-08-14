@@ -4,8 +4,8 @@
 //#define DEBUG //se è definita stampo per debugghing
 
 extern float WIDTH, HEIGHT;
-extern bool generaSistema, haiVinto, haiPerso;
-int vita = VITA_NAVICELLA, fuel, punteggio = 0;
+//extern bool generaSistema, haiVinto, haiPerso;
+//int vita = VITA_NAVICELLA, fuel, punteggio = 0;
 
 //privata
 bool visualeSistemaSolare::check(void)
