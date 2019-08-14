@@ -4,8 +4,13 @@
 //#define DEBUG //se è definita stampo per debugghing
 
 extern float WIDTH, HEIGHT;
-//extern bool generaSistema, haiVinto, haiPerso;
-//int vita = VITA_NAVICELLA, fuel, punteggio = 0;
+
+//tastiera
+extern int MOVE_UP_1, MOVE_UP_2;
+extern int MOVE_LEFT_1, MOVE_LEFT_2;
+extern int MOVE_DOWN_1, MOVE_DOWN_2;
+extern int MOVE_RIGHT_1, MOVE_RIGHT_2;
+extern int KEY_MOVE;
 
 //privata
 bool visualeSistemaSolare::check(void)
@@ -79,32 +84,25 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                         "  (new live: " + to_string(NEW_LIVE) +
                         "k, bonus: " + to_string(BONUS) + "k)");
     testoVite.setPosition({x_testo, y_testo});
-#ifndef NON_FUNZIONA_FILL_COLOR
-    testoVite.setFillColor(coloreTesto.getColorLib());
-#endif
-#ifdef NON_FUNZIONA_FILL_COLOR
-    testoVite.setColor(coloreTesto.getColorLib());
-#endif
 
     testoFuel.setFont(Font);
     testoFuel.setCharacterSize(charSize);
     testoFuel.setString("fuel: " + to_string(fuel));
     testoFuel.setPosition({x_testo + dist_testo * 2, y_testo});
-#ifndef NON_FUNZIONA_FILL_COLOR
-    testoFuel.setFillColor(coloreTesto.getColorLib());
-#endif
-#ifdef NON_FUNZIONA_FILL_COLOR
-    testoFuel.setColor(coloreTesto.getColorLib());
-#endif
 
     testoPunti.setFont(Font);
     testoPunti.setCharacterSize(charSize);
     testoPunti.setString("punteggio: " + to_string(punteggio) + "k");
     testoPunti.setPosition({x_testo + dist_testo * 3, y_testo});
+
 #ifndef NON_FUNZIONA_FILL_COLOR
+    testoVite.setFillColor(coloreTesto.getColorLib());
+    testoFuel.setFillColor(coloreTesto.getColorLib());
     testoPunti.setFillColor(coloreTesto.getColorLib());
 #endif
 #ifdef NON_FUNZIONA_FILL_COLOR
+    testoVite.setColor(coloreTesto.getColorLib());
+    testoFuel.setColor(coloreTesto.getColorLib());
     testoPunti.setColor(coloreTesto.getColorLib());
 #endif
 
@@ -132,12 +130,9 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 
             //mouse cliccato
             case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left || event.mouseButton.button == sf::Mouse::Right)
-                {
-                    haCliccato = true;
-                    mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
-                    this->player.setAngolo(mouseClick);
-                }
+                haCliccato = true;
+                mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                this->player.setAngolo(mouseClick);
                 break;
             //tasti premuti?
             case sf::Event::KeyPressed:
@@ -145,30 +140,28 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 if (event.key.code == sf::Keyboard::Escape)
                     return VISUALE_MENU;
                 //Space per muoversi nella direzione precedente
-                else if (event.key.code == sf::Keyboard::Space)
+                else if (event.key.code == KEY_MOVE)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move();
                 }
-                //Enter per sparare
-                else if (event.key.code == sf::Keyboard::Return)
-                    carburanteFinito = this->player.shoot(); //WASD o freccie per muoversi
-                else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
+                //WASD o freccie per muoversi
+                else if (event.key.code == MOVE_UP_1 || event.key.code == MOVE_UP_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(UP);
                 }
-                else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left)
+                else if (event.key.code == MOVE_LEFT_1 || event.key.code == MOVE_LEFT_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(LEFT);
                 }
-                else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down)
+                else if (event.key.code == MOVE_DOWN_1 || event.key.code == MOVE_DOWN_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(DOWN);
                 }
-                else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right)
+                else if (event.key.code == MOVE_RIGHT_1 || event.key.code == MOVE_RIGHT_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(RIGHT);

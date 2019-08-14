@@ -28,7 +28,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
     int charSize = HEIGHT / 10;
     float x = WIDTH / 4;
     float y = HEIGHT / 3;
-    //colore della vittoria
+    //colore del testo
     ColoreRGB coloreTesto = ColoreRGB(LUMUS_MAXIMA, 0, LUMUS_MAXIMA);
 
     sf::Event event;

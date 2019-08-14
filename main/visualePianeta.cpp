@@ -5,8 +5,16 @@
 //#define DEBUG
 
 extern float WIDTH, HEIGHT;
-//extern bool generaSistema, haiPerso;
-//extern int vita, fuel, punteggio;
+
+//tastiera
+extern int MOVE_UP_1, MOVE_UP_2;
+extern int MOVE_LEFT_1, MOVE_LEFT_2;
+extern int MOVE_DOWN_1, MOVE_DOWN_2;
+extern int MOVE_RIGHT_1, MOVE_RIGHT_2;
+extern int RAGGIO_TRAENTE_1, RAGGIO_TRAENTE_2;
+extern int KEY_MOVE, KEY_SHOOT;
+//mouse
+extern int MOUSE_SHOOT, MOUSE_MOVE;
 
 visualePianeta::visualePianeta(void)
 {
@@ -78,32 +86,25 @@ int visualePianeta::Run(sf::RenderWindow &App)
                         "  (new live: " + to_string(NEW_LIVE) +
                         "k, bonus: " + to_string(BONUS) + "k)");
     testoVite.setPosition({x_testo, y_testo});
-#ifndef NON_FUNZIONA_FILL_COLOR
-    testoVite.setFillColor(coloreTesto.getColorLib());
-#endif
-#ifdef NON_FUNZIONA_FILL_COLOR
-    testoVite.setColor(coloreTesto.getColorLib();
-#endif
 
     testoFuel.setFont(Font);
     testoFuel.setCharacterSize(charSize);
     testoFuel.setString("fuel: " + to_string(fuel));
     testoFuel.setPosition({x_testo + dist_testo*2, y_testo});
-#ifndef NON_FUNZIONA_FILL_COLOR
-    testoFuel.setFillColor(coloreTesto.getColorLib());
-#endif
-#ifdef NON_FUNZIONA_FILL_COLOR
-    testoFuel.setColor(coloreTesto.getColorLib());
-#endif
 
     testoPunti.setFont(Font);
     testoPunti.setCharacterSize(charSize);
     testoPunti.setString("punteggio: " + to_string(punteggio) + "k");
     testoPunti.setPosition({x_testo + dist_testo*3, y_testo});
+
 #ifndef NON_FUNZIONA_FILL_COLOR
+    testoVite.setFillColor(coloreTesto.getColorLib());
+    testoFuel.setFillColor(coloreTesto.getColorLib());
     testoPunti.setFillColor(coloreTesto.getColorLib());
 #endif
 #ifdef NON_FUNZIONA_FILL_COLOR
+    testoVite.setColor(coloreTesto.getColorLib());
+    testoFuel.setColor(coloreTesto.getColorLib());
     testoPunti.setColor(coloreTesto.getColorLib());
 #endif
 
@@ -133,18 +134,14 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 break;
             //mouse cliccato
             case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left)
-                {
-                    haCliccato = true;
-                    mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                haCliccato = true;
+                mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                if (event.mouseButton.button == MOUSE_SHOOT)
                     carburanteFinito = this->player.shoot(mouseClick);
-                }
-                else if (event.mouseButton.button == sf::Mouse::Right)
-                {
-                    haCliccato = true;
-                    mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                else if (event.mouseButton.button == MOUSE_MOVE)
                     this->player.setAngolo(mouseClick);
-                }
+                else
+                    cout << "error\n";
                 break;
             //tasti premuti?
             case sf::Event::KeyPressed:
@@ -152,37 +149,37 @@ int visualePianeta::Run(sf::RenderWindow &App)
                 if (event.key.code == sf::Keyboard::Escape)
                     return VISUALE_SISTEMA_SOLARE;
                 //Space per muoversi nella direzione precedente
-                else if (event.key.code == sf::Keyboard::Space)
+                else if (event.key.code == KEY_MOVE)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move();
                 }
+                //Enter per sparare
+                else if (event.key.code == KEY_SHOOT)
+                    carburanteFinito = this->player.shoot();
                 //shift sinistro (o destro) per raggio traente
-                else if (event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift)
+                else if (event.key.code == RAGGIO_TRAENTE_1 || event.key.code == RAGGIO_TRAENTE_2)
                 {
                     raggio = true;
                     this->player.raggioTraente(this->pianetaVisualizzato.getHeadFuel());
                 }
-                //Enter per sparare
-                else if (event.key.code == sf::Keyboard::Return)
-                    carburanteFinito = this->player.shoot();
                 //WASD o freccie per muoversi
-                else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
+                else if (event.key.code == MOVE_UP_1 || event.key.code == MOVE_UP_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(UP);
                 }
-                else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left)
+                else if (event.key.code == MOVE_LEFT_1 || event.key.code == MOVE_LEFT_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(LEFT);
                 }
-                else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down)
+                else if (event.key.code == MOVE_DOWN_1 || event.key.code == MOVE_DOWN_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(DOWN);
                 }
-                else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right)
+                else if (event.key.code == MOVE_RIGHT_1 || event.key.code == MOVE_RIGHT_2)
                 {
                     NavicellaMoved = true;
                     carburanteFinito = this->player.move(RIGHT);

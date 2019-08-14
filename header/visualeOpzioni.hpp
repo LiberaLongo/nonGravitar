@@ -13,6 +13,7 @@ private:
 
 public:
 	visualeOpzioni(void);
+	void resetButton(void);
 	virtual int Run(sf::RenderWindow &App);
 };
 

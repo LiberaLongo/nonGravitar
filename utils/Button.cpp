@@ -14,7 +14,7 @@ void Button::settaFontTesto(void)
     this->buttonText.setFont(this->font);
     this->buttonText.setCharacterSize(this->charSize);
     this->buttonText.setString(this->testo);
-    this->buttonText.setPosition({this->getX(), this->getY()});
+    this->buttonText.setPosition({this->getX()+this->dist, this->getY()});
 }
 
 //PUBBLICHE
@@ -34,11 +34,22 @@ Button::Button(float x, float y, string testo)
     //e il resto di default
     this->settaFontTesto();
 }
-//non usato, ma simile
-Button::Button(Punto centro, string testo)
+Button::Button(float x, float y, string testo, float size)
 {
-    this->position = position;
+    this->position.setCoord(x, y);
     this->testo = testo;
+    this->width = size;
+    this->height = size;
+    //e il resto di default
+    this->settaFontTesto();
+}
+
+Button::Button(float x, float y, string testo, float width, float height)
+{
+    this->position.setCoord(x, y);
+    this->testo = testo;
+    this->width = width;
+    this->height = height;
     //e il resto di default
     this->settaFontTesto();
 }
@@ -198,6 +209,10 @@ void Button::draw(sf::RenderWindow &window)
     //rettangolo
     sf::RectangleShape rettangolo(sf::Vector2f(this->width, this->height));
     rettangolo.setPosition({this->getX(), this->getY()});
+    //setta un bordo di 10 all'interno del cerchio
+    rettangolo.setOutlineThickness(-this->outlinesize);
+    //colore del bordo giallo
+    rettangolo.setOutlineColor(sf::Color::Black);
     if (!this->checked)
     {
         //se il rettangolo NON è checked è tutto normale...

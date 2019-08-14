@@ -14,10 +14,12 @@ private:
     bool checked = false; //se true "colora inversamente" testo e sfondo
     int charSize = HEIGHT / 10;
     Punto position; //default (0,0)
-    float width = WIDTH/2;
+    float width = WIDTH/3;
     float height = HEIGHT/8;
+    float outlinesize = 1.f;
+    float dist = 5.f;
     ColoreRGB coloreTesto = ColoreRGB(LUMUS_MAXIMA, 0, 0); //rosso
-    ColoreRGB coloreSfondo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, LUMUS_MAXIMA); //bianco
+    ColoreRGB coloreSfondo = ColoreRGB(0, 0, LUMUS_MAXIMA); //blu
     string testo = "";
     string fontName = "verdanab.ttf";
     sf::Font font;
@@ -32,8 +34,8 @@ public:
     Button(void);
     //altri costruttori
     Button(float x, float y, string testo);
-    //non usato, ma simile
-    Button(Punto centro, string testo);
+    Button(float x, float y, string testo, float size);
+    Button(float x, float y, string testo, float width, float height);
 
     //distruttore
     virtual ~Button(void) {};
