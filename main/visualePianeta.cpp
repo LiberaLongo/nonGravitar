@@ -7,7 +7,7 @@
 extern float WIDTH, HEIGHT;
 
 //variabili condivise tra le visuali
-extern bool generaSistema, haiVinto, haiPerso;
+extern bool haiPerso;
 extern int vita, fuel, punteggio;
 
 //tastiera
@@ -249,6 +249,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         vita = this->pianetaVisualizzato.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->player.getX(), this->player.getY(), this->player.getVita());
         if (vita <= 0 || carburanteFinito)
         {
+            haiPerso = true;
             reset();
             //torno al menù
             return VISUALE_MENU;

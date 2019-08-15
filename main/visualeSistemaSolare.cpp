@@ -46,6 +46,7 @@ visualeSistemaSolare::visualeSistemaSolare(void)
     this->orologio.restart();
     generaSistema = false;
     haiVinto = false;
+    haiPerso = false;
     //inizializzo fuel
     fuel = this->player.getFuel();
 }
@@ -181,7 +182,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 if (this->player.isOutsideScreen())
                 {
                     //cout << "NON USCIRE DALLO SCHERMO, TI HO VISTO!" << endl;
-                    haiVinto = false;
                     return VISUALE_MENU;
                 }
                 if (this->check())
@@ -197,6 +197,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
             testoFuel.setString("fuel: " + to_string(fuel));
             if (vita <= 0 || carburanteFinito)
             {
+                haiPerso = true;
                 reset();
                 //torno al menù
                 return VISUALE_MENU;
@@ -213,6 +214,7 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         }
         else
         {
+            haiVinto = true;
             reset();
             //torno al menù
             return VISUALE_MENU;

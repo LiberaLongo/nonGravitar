@@ -17,7 +17,7 @@ float angoloLibreria(float angolo)
 }
 
 //variabili condivise tra le visuali
-extern bool generaSistema, haiVinto, haiPerso;
+extern bool generaSistema;
 extern int vita, fuel, punteggio;
 void reset(void)
 {
@@ -26,6 +26,5 @@ void reset(void)
     fuel = FUEL_NAVICELLA;
     punteggio = 0;
     //aggiorno i booleani
-    haiPerso = true;
     generaSistema = true;
 }
