@@ -29,8 +29,9 @@ visualePianeta::visualePianeta(void)
 
 int visualePianeta::Run(sf::RenderWindow &App)
 {
-    //aggiorno il fuel
+    //aggiorno il fuel e la vita
     this->player.setFuel(fuel);
+    this->player.setVita(vita);
     //globale lunghezza della superficie
     int lengthSuperficie = 0;
     //aggiorno coordinate

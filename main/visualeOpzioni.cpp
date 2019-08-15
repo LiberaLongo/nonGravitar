@@ -24,7 +24,6 @@ visualeOpzioni::visualeOpzioni(void)
 
 void visualeOpzioni::resetButton(void)
 {
-
     //tastiera
     MOVE_UP_1 = sf::Keyboard::W;
     MOVE_UP_2 = sf::Keyboard::Up;
@@ -41,10 +40,32 @@ void visualeOpzioni::resetButton(void)
     //mouse
     MOUSE_SHOOT = sf::Mouse::Left;
     MOUSE_MOVE = sf::Mouse::Right;
+
+    //stringa dei bottoni
+    /*
+    //tastiera
+    this->buttonW.setString("W");
+    this->buttonA.setString("A");
+    this->buttonS.setString("S");
+    this->buttonD.setString("D");
+    this->buttonUp.setString("^");
+    this->buttonLeft.setString("<");
+    this->buttonDown.setString("v");
+    this->buttonRight.setString(">");
+    this->buttonRaggio1.setString("LShift");
+    this->buttonRaggio2.setString("RShift");
+    this->buttonMove.setString("Space");
+    this->buttonShoot.setString("Enter");
+    //mouse
+    this->buttonMouseLeft.setString("L");
+    this->buttonMouseRight.setString("R");
+    */
 }
 
 int visualeOpzioni::Run(sf::RenderWindow &App)
 {
+    int menu = 0;
+
     //TESTO
     int charSize = HEIGHT/10;
     sf::Font Font;
@@ -91,36 +112,17 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
     testoRaggioTraente.setColor(coloreTesto.getColorLib());
 #endif
 
-    //BOTTONI
-    float dist = HEIGHT / 8;
-    float size = HEIGHT / 8, width = size * 3, height = size, x_rs = size, y_rgt = HEIGHT / 4;
-    float x_wasd = WIDTH * 4 / 5, y_wasd = HEIGHT / 3 - size, y_arrow = HEIGHT * 2 / 3 - size;
-    float x_mouse = WIDTH / 2, y_mouse = HEIGHT / 2;
-    //WASD buttons
-    Button buttonW = Button(x_wasd, y_wasd - size, "W", size);
-    Button buttonA = Button(x_wasd - size, y_wasd, "A", size);
-    Button buttonS = Button(x_wasd, y_wasd, "S", size);
-    Button buttonD = Button(x_wasd + size, y_wasd, "D", size);
-    //arrows buttons
-    Button buttonUp = Button(x_wasd, y_arrow - size, "^", size);
-    Button buttonLeft = Button(x_wasd - size, y_arrow, "<", size);
-    Button buttonDown = Button(x_wasd, y_arrow, "v", size);
-    Button buttonRight = Button(x_wasd + size, y_arrow, ">", size);
-    //key move
-    Button buttonMove = Button(WIDTH / 2, size * 3 / 2, "Space", width, height);
-    //key shoot
-    Button buttonShoot = Button(x_rs, HEIGHT * 2 / 3, "Enter", width, height);
-    //key raggio traente
-    Button buttonRaggio1 = Button(x_rs, y_rgt - height, "LShift", width, height);
-    Button buttonRaggio2 = Button(x_rs, y_rgt, "RShift", width, height);
-    //mouse
-    Button buttonMouseLeft = Button(x_mouse - size, y_mouse, "L", size);
-    Button buttonMouseRight = Button(x_mouse, y_mouse, "R", size);
-
-    //reset button
-    Button buttonReset = Button(0.f, HEIGHT - dist, "Reset");
-    //exit button
-    Button buttonBack = Button(WIDTH * 2 / 3, HEIGHT - dist, "Back");
+    //BOTTONI (nell .hpp)
+	Button arrayButton[] = {
+        this->buttonW, this->buttonA, this->buttonS, this->buttonD,
+        this->buttonUp, this->buttonLeft, this->buttonDown, this->buttonRight,
+        this->buttonRaggio1, this->buttonRaggio2,
+        this->buttonMove, this->buttonShoot,
+        this->buttonMouseLeft, this->buttonMouseRight,
+        //gli ultimi sono reset e back      
+        this->buttonReset, this->buttonBack
+    };
+    int dim = sizeof(arrayButton)/sizeof(arrayButton[0]);
 
     //mouseShape
     // define a circle
@@ -156,59 +158,94 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
                 break;
             case sf::Event::MouseButtonPressed:
                 mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
-                if (buttonBack.checkMouse(mouseClick))
+                for(int i = 0; i < dim ; i++) {
+                    if(arrayButton[i].checkMouse(mouseClick)) {
+                        menu = i;
+                        break; //esci dal ciclo for
+                    }
+                }
+                if (menu == dim - 2) { //if reset
+                    this->resetButton();
+                }
+                else if (menu == dim - 1) //if back
                 {
                     //fine dei giochi, si torna a lavoro...
                     return VISUALE_MENU;
                 }
+                break;
             case sf::Event::KeyPressed:
                 //Esc per uscire
-                switch (event.key.code)
-                {
-                case sf::Keyboard::Escape:
+                if( event.key.code == sf::Keyboard::Escape)
                     return VISUALE_MENU;
-                    break;
-                default:
-                    break;
+                else {
+                    switch(menu) {
+                        case 0:
+                            MOVE_UP_1 = event.key.code;
+                            break;
+                        case 1:
+                            MOVE_LEFT_1 = event.key.code;
+                            break;
+                        case 2:
+                            MOVE_DOWN_1 = event.key.code;
+                            break;
+                        case 3:
+                            MOVE_RIGHT_1 = event.key.code;
+                            break;
+                        case 4:
+                            MOVE_UP_2 = event.key.code;
+                            break;
+                        case 5:
+                            MOVE_LEFT_2 = event.key.code;
+                            break;
+                        case 6:
+                            MOVE_DOWN_2 = event.key.code;
+                            break;
+                        case 7:
+                            MOVE_RIGHT_2 = event.key.code;
+                            break;
+                        case 8:
+                            RAGGIO_TRAENTE_1 = event.key.code;
+                            break;
+                        case 9:
+                            RAGGIO_TRAENTE_2 = event.key.code;
+                            break;
+                        case 10:
+                            KEY_MOVE = event.key.code;
+                            break;
+                        case 11:
+                            KEY_SHOOT = event.key.code;
+                            break;
+                        default:
+                            break;
+                    }
+                    if( !( menu == dim-2 || menu == dim-1) )
+                    arrayButton[menu].setString(to_string(event.key.code));
                 }
             default:
                 break;
             }
         }
+        //tutti i bottoni checked false
+        for(int i = 0; i < dim; i++) {
+            arrayButton[i].setChecked(false);
+        }
+        //e risetta il button menu a true
+        arrayButton[menu].setChecked(true);
         //Clearing screen
         App.clear();
         //Drawing
         //forma del mouse
         App.draw(mouseCircle);
         App.draw(mouseRectangle);
-        //testo Opzioni
+        //disegna i testi
         App.draw(testoOptions);
         App.draw(testoMove);
         App.draw(testoShoot);
         App.draw(testoRaggioTraente);
-        //WASD buttons
-        buttonW.draw(App);
-        buttonA.draw(App);
-        buttonS.draw(App);
-        buttonD.draw(App);
-        //arrows buttons
-        buttonUp.draw(App);
-        buttonLeft.draw(App);
-        buttonDown.draw(App);
-        buttonRight.draw(App);
-        //key move
-        buttonMove.draw(App);
-        //key shoot
-        buttonShoot.draw(App);
-        //key raggio traente
-        buttonRaggio1.draw(App);
-        buttonRaggio2.draw(App);
-        //mouse
-        buttonMouseLeft.draw(App);
-        buttonMouseRight.draw(App);
-        //altri
-        buttonReset.draw(App);
-        buttonBack.draw(App);
+        //disegna ogni button
+        for(int i = 0; i < dim; i++) {
+            arrayButton[i].draw(App);
+        }
         //showing
         App.display();
     }

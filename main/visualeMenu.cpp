@@ -90,14 +90,11 @@ int visualeMenu::Run(sf::RenderWindow &App)
                     //fine dei giochi, si torna a lavoro...
                     return EXIT;
                 }
-                if (buttonOptions.checkMouse(mouseClick))
+                else if (buttonOptions.checkMouse(mouseClick))
                 {
                     //impostazioni del gioco
                     return VISUALE_OPZIONI;
                 }
-                //buttonPlay, buttonContinue, buttonNewGame
-                //hanno tutti stessa x, y, widht, height
-                //e non è necessario controllarne più di uno
                 else if (buttonPlay.checkMouse(mouseClick))
                 {
                     //giochiamo!
