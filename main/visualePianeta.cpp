@@ -48,7 +48,8 @@ int visualePianeta::Run(sf::RenderWindow &App)
         lengthSuperficie = this->pianetaVisualizzato.lunghezzaSuperfice();
         if (lengthSuperficie > MAX_SUPERFICE || lengthSuperficie < MIN_SUPERFICE)
         {
-            cout << "Errore nella conta o nella generazione della superfice";
+            cout << "Errore nella conta o nella generazione della superfice\n";
+            cout << "numPunti = " << lengthSuperficie << endl;
             return EXIT;
         }
         //Poligono pol = this->pianetaVisualizzato.getPoligono();
