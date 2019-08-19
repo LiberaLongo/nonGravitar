@@ -70,7 +70,7 @@ void Poligono::insert(float x, float y)
 //numero punti
 int Poligono::numPunti(void)
 {
-    return this->surface.lunghezza();
+    return this->lengthPunti;
 }
 //stampa
 void Poligono::printColore(void)
@@ -90,8 +90,7 @@ void Poligono::draw(sf::RenderWindow &window)
     int indice = 0;
     //crea una empty shape convex con 3 punti
     sf::ConvexShape convexSuperficie;
-    //convexSuperficie.setPointCount(this->numPunti());
-    convexSuperficie.setPointCount(MAX_SUPERFICE);
+    convexSuperficie.setPointCount(this->numPunti());
 
     //blu
     convexSuperficie.setFillColor(this->getColoreLib());
@@ -138,7 +137,7 @@ void Poligono::ordina(void)
     //inizializzo i vettori di angoli e di posizioni
     if (!(this->surface.empty()))
     {
-        for (int i = 0; i < MAX_SUPERFICE; i++)
+        for (int i = 0; i < this->lengthPunti; i++)
         {
             if (!(this->surface.finished(iter)))
             {
@@ -157,10 +156,6 @@ void Poligono::ordina(void)
                 //passo al successivo
                 iter = this->surface.next(iter);
             }
-            else
-            {
-                cout << "errore lista finita ma vettore più grande";
-            }
         }
     }
     else
@@ -172,7 +167,7 @@ void Poligono::ordina(void)
     float B[MAX_SUPERFICE];
     struct Elem<Punto> *posAux[MAX_SUPERFICE];
     //eseguo algoritmo di ordinamento e sistemo la lista
-    this->surface.ordina(MAX_SUPERFICE, angoli, B, posizioni, posAux);
+    this->surface.ordina(this->lengthPunti, angoli, B, posizioni, posAux);
 #ifdef NOME_PUNTO_SUPERFICE
     int conta = 0;
     if (!(this->surface.empty()))
@@ -201,11 +196,12 @@ void Poligono::genera(void)
 {
     //numero random per le coordinate
     float x = 0.f, y = 0.f;
+    this->lengthPunti = randomInt(MIN_SUPERFICE, MAX_SUPERFICE);
     //genera tutti i PUNTI all'inizio
-    for (int i = 0; i < MAX_SUPERFICE; i++)
+    for (int i = 0; i < this->lengthPunti; i++)
     {
-        x = (rand() % (int)(WIDTH - DISTANCE * 2)) + DISTANCE;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - DISTANCE * 2)) + DISTANCE; //tra 0.f e HEIGHT ma che non esca
+        x = (float)randomInt(DISTANCE, WIDTH - DISTANCE);  //tra 0.f e WIDTH ma che non esca
+        y = (float)randomInt(DISTANCE, HEIGHT - DISTANCE); //tra 0.f e HEIGHT ma che non esca
 
         //costruisci punto della superfice
         Punto p = Punto(x, y);

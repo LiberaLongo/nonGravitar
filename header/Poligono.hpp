@@ -16,6 +16,7 @@ class Poligono
 private:
     ColoreRGB colore;
     Lista<Punto> surface;
+    int lengthPunti = 0;
 
 //private:
 public:

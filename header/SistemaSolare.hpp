@@ -18,6 +18,7 @@ class SistemaSolare : public DisegnabileI
 {
 private:
     Lista<Pianeta> pianeti;
+    int lengthPianeti = 0;
 
 public:
     //costruttore vuoto

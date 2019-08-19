@@ -79,31 +79,32 @@ void SistemaSolare::genera()
         this->pianeti.remove_head();
     }
     //genera tutti i pianeti all'inizio
-    for (int i = 0; i < MAX_PLANET; i++)
+    this->lengthPianeti = randomInt(MIN_PLANET, MAX_PLANET);
+    for (int i = 0; i < this->lengthPianeti; i++)
     {
         //numero random per la dimensione del pianeta compreso tra min e max
-        float raggio = (rand() % (int)MAX_PIANETA_RAGGIO) + MIN_PIANETA_RAGGIO;
+        float raggio = (float)randomInt(MIN_PIANETA_RAGGIO, MAX_PIANETA_RAGGIO);
 
         //numero random per le coordinate
         float x = 0.f, y = 0.f;
-        x = (rand() % (int)(WIDTH - DISTANCE * 2)) + DISTANCE;  //tra 0.f e WIDTH ma che non esca
-        y = (rand() % (int)(HEIGHT - DISTANCE * 2)) + DISTANCE; //tra 0.f e HEIGHT ma che non esca
+        x = (float)randomInt(DISTANCE, WIDTH - DISTANCE);  //tra 0.f e WIDTH ma che non esca
+        y = (float)randomInt(DISTANCE, HEIGHT - DISTANCE); //tra 0.f e HEIGHT ma che non esca
 
         //costruisci pianeta
         Pianeta newPianeta = Pianeta(x, y, raggio);
 
         //colore
         int r, g, b;
-        r = (rand() % LUMUS_MAXIMA);
-        g = (rand() % LUMUS_MAXIMA);
-        b = (rand() % LUMUS_MAXIMA);
+        r = randomInt(0, LUMUS_MAXIMA);
+        g = randomInt(0, LUMUS_MAXIMA);
+        b = randomInt(0, LUMUS_MAXIMA);
         newPianeta.setColore(r, g, b);
 
         //colore atmosfera
         int ro, go, bo;
-        ro = (rand() % LUMUS_MAXIMA);
-        go = (rand() % LUMUS_MAXIMA);
-        bo = (rand() % LUMUS_MAXIMA);
+        ro = randomInt(0, LUMUS_MAXIMA);
+        go = randomInt(0, LUMUS_MAXIMA);
+        bo = randomInt(0, LUMUS_MAXIMA);
         newPianeta.setAtmosfera(ro, go, bo);
 
         //genera il pianeta

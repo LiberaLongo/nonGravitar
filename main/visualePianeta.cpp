@@ -46,7 +46,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         //conta i punti della superficie
         lengthSuperficie = this->pianetaVisualizzato.lunghezzaSuperfice();
-        if (lengthSuperficie != MAX_SUPERFICE)
+        if (lengthSuperficie > MAX_SUPERFICE || lengthSuperficie < MIN_SUPERFICE)
         {
             cout << "Errore nella conta o nella generazione della superfice";
             return EXIT;
@@ -228,7 +228,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
         this->pianetaVisualizzato.drawVisuale(App, lengthSuperficie);
 
         this->player.draw(App, raggio);
-        this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->pianetaVisualizzato.getHeadBunker(), this->pianetaVisualizzato.getPoligono(), MAX_SUPERFICE);
+        this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime(), this->pianetaVisualizzato.getHeadBunker(), this->pianetaVisualizzato.getPoligono(), lengthSuperficie);
         if (this->pianetaVisualizzato.emptyBunker())
         {
             //distruggi il pianeta

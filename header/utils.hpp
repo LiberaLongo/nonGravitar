@@ -38,10 +38,12 @@ using namespace std;
 #define PIANETA_RAGGIO 40.f
 
 //numero di pianeti/punti per sistema solare/pianeta
-#define MAX_SUPERFICE 16 //42, Risposta alla domanda fondamentale sulla vita, l'universo e tutto quanto, (cit. Davoli)
+#define MIN_SUPERFICE 8
+#define MAX_SUPERFICE 20 //42, Risposta alla domanda fondamentale sulla vita, l'universo e tutto quanto, (cit. Davoli)
 #define MAX_BUNKER 5
 #define MAX_FUEL 3
-#define MAX_PLANET 7 //7, numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
+#define MIN_PLANET 5
+#define MAX_PLANET 10 //7, numero massimo di ogni cosa XD (cit. Sio, scottecs magazine YT)
 
 //direzioni canoniche con angoli studiati in matematica
 #define RIGHT 0.f
@@ -77,6 +79,7 @@ enum visuale
 //Precondition: prende un angolo in gradi in forma canonica
 //Postcondition: lo trasforma opportunamente secondo la libreria grafica
 float angoloLibreria(float angolo);
-void reset();
+int randomInt(int min, int max);
+void reset(void);
 
 #endif //UTILS_HPP

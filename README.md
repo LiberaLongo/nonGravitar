@@ -41,3 +41,16 @@ compilare
 
 eventualmente rilanciare il gioco (rieseguendo il programma)
 `./app`
+
+### caso di errore nella compilazione
+
+abbiamo notato che una funzione sfml
+(sf::Text::setFillColor(...)) non sempre funziona
+l'alternativa (sf::Text::setColor(...)) è deprecata
+quindi se non dovesse funzionare è consigliato
+scommentare la 
+"//#define NON_FUNZIONA_FILL_COLOR"
+in utils.hpp (riga 16)
+togliendo le //
+quindi risulta:
+"#define NON_FUNZIONA_FILL_COLOR" 

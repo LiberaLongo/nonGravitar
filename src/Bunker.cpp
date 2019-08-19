@@ -115,7 +115,7 @@ void Bunker::shoot(void)
 {
     ColoreRGB giallo = ColoreRGB(LUMUS_MAXIMA, LUMUS_MAXIMA, 0);
     //genero una direzione random dipendente dal tipo
-    int randomDir = rand() % (this->tipo + 2);
+    int randomDir = randomInt(0, this->tipo+1);
 #ifdef DEBUG
     cout << "randomDir = " << randomDir << endl;
 #endif

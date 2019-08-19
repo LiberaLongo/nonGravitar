@@ -272,29 +272,35 @@ bool Pianeta::emptyBunker(void)
     return this->bunker.empty();
 }
 
+int old = -1;
+//ci salviamo il tempo vecchio per evitare di sparare più volte nello stesso millisecondo
+
 //fa sparare i bunker
 void Pianeta::shoot(sf::Time tempo)
 {
     int millisecondi = tempo.asMilliseconds();
     //se sono passati 300millisecondi dal reset o dal ultimo sparo
-    if (millisecondi % SPARA == 0)
+    if (millisecondi != old)
     {
-        if (!(this->bunker.empty()))
+        old = millisecondi;
+        if (millisecondi % SPARA == 0)
         {
-            //primo elemento utile non la sentinella
-            struct Elem<Bunker> *iter = this->bunker.head();
-            //se non vuota e non finita
-            while (!(this->bunker.finished(iter)))
+            if (!(this->bunker.empty()))
             {
-                Bunker cannoneSpara = this->bunker.read(iter);
-                cannoneSpara.shoot();
-                //passo al successivo
-                iter = this->bunker.next(iter);
+                //primo elemento utile non la sentinella
+                struct Elem<Bunker> *iter = this->bunker.head();
+                //se non vuota e non finita
+                while (!(this->bunker.finished(iter)))
+                {
+                    Bunker cannoneSpara = this->bunker.read(iter);
+                    cannoneSpara.shoot();
+                    //passo al successivo
+                    iter = this->bunker.next(iter);
+                }
             }
         }
     }
 }
-
 //aggiorna coordinate dei proiettili sparati dai bunker
 int Pianeta::aggiornaCoordinateProiettili(sf::Time tempo, float x, float y, int vita)
 {
@@ -310,7 +316,7 @@ int Pianeta::aggiornaCoordinateProiettili(sf::Time tempo, float x, float y, int 
             while (!(this->bunker.finished(iter)))
             {
                 Bunker cannoneAggiorna = this->bunker.read(iter);
-                vita = cannoneAggiorna.aggiornaCoordinateProiettili(x, y, vita, this->getPoligono(), MAX_SUPERFICE);
+                vita = cannoneAggiorna.aggiornaCoordinateProiettili(x, y, vita, this->getPoligono(), this->getPoligono().numPunti());
                 //passo al successivo
                 iter = this->bunker.next(iter);
             }

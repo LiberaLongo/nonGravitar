@@ -16,6 +16,11 @@ float angoloLibreria(float angolo)
     return (-angolo + 90.f);
 }
 
+int randomInt(int minimo,int massimo)
+{ // restituisco il valore non appena esso viene generato
+    return rand()%(massimo-minimo+1)+minimo;
+}
+
 //variabili condivise tra le visuali
 extern bool generaSistema;
 extern int vita, fuel, punteggio;
