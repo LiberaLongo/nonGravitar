@@ -9,8 +9,8 @@
 
 #include "cScreen.hpp"
 
-#include "../header/Navicella.hpp"
-#include "../header/SistemaSolare.hpp"
+#include "./Navicella.hpp"
+#include "./SistemaSolare.hpp"
 
 extern SistemaSolare sistemasolare;
 extern struct Elem<Pianeta> *pianetaInsideNow;

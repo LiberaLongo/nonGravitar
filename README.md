@@ -54,3 +54,6 @@ in utils.hpp (riga 16)
 togliendo le //
 quindi risulta:
 "#define NON_FUNZIONA_FILL_COLOR" 
+
+## relazione e scelte progettuali
+vedi RELAZIONE.md

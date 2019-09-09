@@ -17,6 +17,8 @@ int KEY_MOVE = sf::Keyboard::Space, KEY_SHOOT = sf::Keyboard::Return;
 //mouse
 int MOUSE_SHOOT = sf::Mouse::Left, MOUSE_MOVE = sf::Mouse::Right;
 
+string testi[] = {"W", "A", "S"};
+
 visualeOpzioni::visualeOpzioni(void)
 {
     //vuoto
@@ -41,25 +43,6 @@ void visualeOpzioni::resetButton(void)
     MOUSE_SHOOT = sf::Mouse::Left;
     MOUSE_MOVE = sf::Mouse::Right;
 
-    //stringa dei bottoni
-    /*
-    //tastiera
-    this->buttonW.setString("W");
-    this->buttonA.setString("A");
-    this->buttonS.setString("S");
-    this->buttonD.setString("D");
-    this->buttonUp.setString("^");
-    this->buttonLeft.setString("<");
-    this->buttonDown.setString("v");
-    this->buttonRight.setString(">");
-    this->buttonRaggio1.setString("LShift");
-    this->buttonRaggio2.setString("RShift");
-    this->buttonMove.setString("Space");
-    this->buttonShoot.setString("Enter");
-    //mouse
-    this->buttonMouseLeft.setString("L");
-    this->buttonMouseRight.setString("R");
-    */
 }
 
 int visualeOpzioni::Run(sf::RenderWindow &App)
@@ -231,9 +214,9 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
         }
         //e risetta il button menu a true
         arrayButton[menu].setChecked(true);
-        //Clearing screen
+        //pulisci scherma
         App.clear();
-        //Drawing
+        //disegna
         //forma del mouse
         App.draw(mouseCircle);
         App.draw(mouseRectangle);
@@ -246,9 +229,9 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
         for(int i = 0; i < dim; i++) {
             arrayButton[i].draw(App);
         }
-        //showing
+        //mostra
         App.display();
     }
-    //Never reaching this point normally, but just in case, exit the application
+    //non dovrebbe mai arrivare qui
     return EXIT;
 }

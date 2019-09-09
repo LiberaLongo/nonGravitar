@@ -8,7 +8,6 @@
 #include "./DisegnabileI.hpp"
 #include "./utils.hpp"
 #include "./Direzione.hpp"
-#include "./Lista.hpp"
 #include "./Proiettile.hpp"
 
 //ATTENZIONE! cpp inclusi per classi template
