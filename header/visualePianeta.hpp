@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "./cScreen.hpp"
-
 #include "./SistemaSolare.hpp"
 
 extern SistemaSolare sistemasolare;

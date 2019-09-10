@@ -152,10 +152,8 @@ da scommentare in caso di mancato funzionamento di setFillColor
 questa invece di usare setFillColor utilizza la deprecata setColor.
 
 aggiungendo la visualeOpzioni non richiesta dalle specifiche
-volevamo rendere facile all'utente vedere quali tasti usare, ma non vengono aggiornate
-opportunamente le scritte disegnate sulla finestra, all'uscita da questa.
-(i tasti se modificati dovrebbero scrivere il numero di quel tasto secondo SFML e il sistema operativo)
-si riescono a settare i tasti per muoversi, e per sparare ma non per il raggio traente.
+volevamo rendere facile all'utente vedere quali tasti usare
+ed eventualmente modificarli ma non si riesce a modificare il comando per il raggio traente.
 
 se viene rimpicciolita o ingrandita la finestra dopo averla generata (impostata da terminale)
 non si scalano le figure opportunamente, e non funziona il punto del mouse per l'utilizzo di seno e coseno riferito alla sola circonferenza goniometrica (non dipendenti dall'altezza e larghezza dello schermo)

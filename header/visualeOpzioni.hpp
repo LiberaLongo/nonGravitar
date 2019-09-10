@@ -4,8 +4,9 @@
 #include <iostream>
 
 #include "cScreen.hpp"
-
 #include "./Button.hpp"
+
+extern float WIDTH, HEIGHT;
 
 class visualeOpzioni : public cScreen
 {
@@ -45,6 +46,9 @@ private:
     Button buttonReset = Button(0.f, HEIGHT - dist, "Reset");
     //exit button
     Button buttonBack = Button(WIDTH * 2 / 3, HEIGHT - dist, "Back");
+
+    int dim = 16;
+    Button arrayButton[16];
 
 public:
 	visualeOpzioni(void);

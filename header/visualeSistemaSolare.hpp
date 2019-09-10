@@ -3,12 +3,10 @@
 #define VISUALE_SISTEMA_SOLARE_HPP
 
 #include <iostream>
-
 #include <ctime>
 #include <cstdlib>
 
 #include "cScreen.hpp"
-
 #include "./Navicella.hpp"
 #include "./SistemaSolare.hpp"
 
