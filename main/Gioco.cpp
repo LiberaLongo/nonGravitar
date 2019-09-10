@@ -1,8 +1,4 @@
-//codice gioco
-
 #include "../header/Gioco.hpp"
-
-//#define DEBUG
 
 //condizioni di esistenza per evitare bug eccessivi nel gioco
 #define MIN_SCHERMO 300.f
@@ -28,6 +24,7 @@ void impostazioniGioco(void)
 {
 	char chose;
 	bool errato = true;
+
 	cout << "\nSETTAGGI DI DEFAULT: ";
 	cout << "\nSchermo (width x height): " << WIDTH << " x " << HEIGHT << ".";
 	cout << "\nNavicella: size = " << SIZE_NAVICELLA << ", speed = " << SPEED_NAVICELLA << ".";
@@ -55,7 +52,6 @@ void impostazioniGioco(void)
 			//controllo se c'è un errore
 			errato = (WIDTH < MIN_SCHERMO || HEIGHT < MIN_SCHERMO);
 			//non ho modo di controllare se sono maggiori dello schermo del pc
-			//almeno per ora
 			if (errato)
 			{
 				cout << "\nERRORE! Inserisci delle dimensioni dello schermo corrette";
@@ -76,7 +72,6 @@ void impostazioniGioco(void)
 			//controllo se c'è un errore
 			errato = (SIZE_NAVICELLA < 3.f || SIZE_NAVICELLA > MAX_NAVICELLA) || (SPEED_NAVICELLA < 1.f || SPEED_NAVICELLA > MAX_SPEED);
 			//non ho modo di controllare se sono maggiori dello schermo del pc
-			//almeno per ora
 			if (errato)
 			{
 				cout << "\nERRORE! Inserisci delle dimensioni della navicella corrette";
@@ -96,7 +91,6 @@ void impostazioniGioco(void)
 			//controllo se c'è un errore
 			errato = (MIN_PIANETA_RAGGIO < SPEED_NAVICELLA) || (MIN_PIANETA_RAGGIO < SPEED_NAVICELLA) || MAX_PIANETA_RAGGIO < MIN_PIANETA_RAGGIO;
 			//non ho modo di controllare se sono maggiori dello schermo del pc
-			//almeno per ora
 			if (errato)
 			{
 				cout << "\nERRORE! Inserisci delle dimensioni del pianeta corrette";
@@ -123,24 +117,17 @@ int Gioco(void)
 	//genero il sistema solare la prima volta
 	sistemasolare.genera();
 
-#ifdef DEBUG
-	sistemasolare.printCentri();
-#endif
-
-	//Applications variables
+	//vettore di sottoclassi di cScreen per gestire le visuali
 	std::vector<cScreen *> Screens;
 	int screen = 0;
 
 	//Window creation
 	sf::RenderWindow App(sf::VideoMode(WIDTH, HEIGHT), "SFML nonGravitar");
 
-	//Mouse cursor visible? true => yes,it is; false => no it is'nt
-	//App.setMouseCursorVisible(true);
-
-	//Screens preparations
+	//Preparazione delle visuali
 	visualeMenu vM;
 	Screens.push_back(&vM);
-	//indirizzo visuale pianeta nel vettore 0
+	//indirizzo visuale menu nel vettore 0
 	visualeSistemaSolare vS;
 	Screens.push_back(&vS);
 	//indirizzo visuale sistema solare nel vettore 1
@@ -160,5 +147,4 @@ int Gioco(void)
 	}
 
 	return EXIT_SUCCESS;
-	//ritorno VERO perchè il gioco non è stato ancora implementato
 }

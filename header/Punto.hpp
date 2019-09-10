@@ -5,20 +5,12 @@
 #include "./utils.hpp"
 #include "./DisegnabileI.hpp"
 
-#define NOME_PUNTO
-
-#ifdef NOME_PUNTO
-#include <cstring>
-#endif
-
 class Punto : public DisegnabileI
 {
 private:
     float x = 0.f;
     float y = 0.f;
-#ifdef NOME_PUNTO
-    string name = "";
-#endif
+
 
 public:
     //costruttore vuoto
@@ -36,13 +28,6 @@ public:
     //getters
     float getX(void);
     float getY(void);
-
-#ifdef NOME_PUNTO
-    //set nome
-    void setName(string name);
-    //get nome
-    string getName(void);
-#endif
 
     //stampa
     void print(void);

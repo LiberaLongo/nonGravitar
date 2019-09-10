@@ -1,7 +1,5 @@
-//codice pianeta
 #include "../header/Pianeta.hpp"
 
-//#define DEBUG
 #define ORDINA
 
 extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
@@ -228,9 +226,6 @@ void Pianeta::generaBunkerFuel()
                 {
                     //aggiorno il numero di fuel generati
                     numeroFuel++;
-#ifdef NOME_PUNTO
-                    pMedio.setName("Fuel" + to_string(numeroFuel));
-#endif
                     //genero il carburante
                     Fuel metano = Fuel(pMedio);
                     //inserirlo nella lista
@@ -243,9 +238,6 @@ void Pianeta::generaBunkerFuel()
                     int angolo = p1.calcolaAngolo(p2) + 90.f;
                     //aggiorno il numero di bunker generati
                     numeroBunker++;
-#ifdef NOME_PUNTO
-                    pMedio.setName("Bunker" + to_string(numeroBunker));
-#endif
                     Bunker cannone = Bunker(pMedio, angolo);
                     cannone.genera();
                     //inserirlo nella lista

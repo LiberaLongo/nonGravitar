@@ -1,5 +1,3 @@
-//menù
-
 #include "../header/visualeMenu.hpp"
 
 extern float WIDTH, HEIGHT;
@@ -60,31 +58,27 @@ int visualeMenu::Run(sf::RenderWindow &App)
     testo.setColor(coloreTesto.getColorLib());
 #endif
     //bottoni
-    //prima linea
     Button buttonPlay = Button(x, y, "Play");
-    //seconda linea
     Button buttonOptions = Button(x, y + dist, "Options");
-    //terza linea
     Button buttonExit = Button(x, y + dist * 2, "Exit");
 
     //un punto adibito a mouse click
     Punto mouseClick;
-#ifdef NOME_PUNTO
-    mouseClick.setName("MOUSE");
-#endif
     while (Running)
     {
-        //Verifying events
+        //verifica gli eventi
         while (App.pollEvent(event))
         {
-            // Window closed
             switch (event.type)
             {
+            //finestra chiusa
             case sf::Event::Closed:
                 return EXIT;
                 break;
+            //mouse
             case sf::Event::MouseButtonPressed:
                 mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                //verifico se è stato premuto un bottone
                 if (buttonExit.checkMouse(mouseClick))
                 {
                     //fine dei giochi, si torna a lavoro...
@@ -102,6 +96,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
                     return VISUALE_SISTEMA_SOLARE;
                 }
                 break;
+            //tastiera
             case sf::Event::KeyPressed:
                 switch (event.key.code)
                 {
@@ -109,6 +104,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
                 case sf::Keyboard::Escape:
                     return EXIT;
                     break;
+                //freccie su giù
                 case sf::Keyboard::Up:
                     if(menu > 0)
                         menu--;
@@ -121,6 +117,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
                     else
                         menu = 0;
                     break;
+                //tasto enter
                 case sf::Keyboard::Return:
                     switch(menu)
                     {
@@ -176,7 +173,7 @@ int visualeMenu::Run(sf::RenderWindow &App)
             break;
         }
 
-        //Clearing screen
+        //pulisco lo schermo
         App.clear();
         //setto la stringa giusta a testo e buttonPlay
         if (playing)
@@ -202,15 +199,15 @@ int visualeMenu::Run(sf::RenderWindow &App)
             testo.setString("Non Gravitar");
             buttonPlay.setString("Play");
         }
-        //Drawing
+        //disegno
         App.draw(testo);
         buttonPlay.draw(App);
         buttonOptions.draw(App);
         buttonExit.draw(App);
-        //Showing
+        //mostro
         App.display();
     }
 
-    //Never reaching this point normally, but just in case, exit the application
+    //non dovrebbe mai raggiungere questo
     return EXIT;
 }

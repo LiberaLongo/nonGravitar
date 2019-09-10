@@ -1,8 +1,4 @@
-//codice navicella
 #include "../header/Navicella.hpp"
-
-//#define DEBUG
-//#define DEBUG_PROIETTILI
 
 extern float WIDTH, HEIGHT, SIZE_NAVICELLA;
 
@@ -76,9 +72,6 @@ void Navicella::print(void)
 //disegna
 void Navicella::draw(sf::RenderWindow &window)
 {
-#ifdef DEBUG
-    this->dir.draw(window);
-#endif
 
     //centro iniziale della figura prima di fare setPosition
     float x = 0.f, y = 0.f; //centro: (0,0)
@@ -97,10 +90,6 @@ void Navicella::draw(sf::RenderWindow &window)
     //ruota di angolo, PRIMA! della rotazione
     float angolo = angoloLibreria(this->getAngolo());
     triangolo.setRotation(angolo);
-#ifdef DEBUG
-    cout << "angoloCanonico = " << this->dir.getAngolo();
-    cout << ", angoloSFML = " << angolo;
-#endif
     //spostala  posizione effettiva del centro
     triangolo.setPosition(this->getX(), this->getY());
 
@@ -191,17 +180,11 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
                 {
                     //se il proiettile è uscito dallo schermo devo rimuoverlo
                     iterProiettile = this->proiettili.remove(iterProiettile);
-#ifdef DEBUG_PROIETTILI
-                    cout << "un proiettile è uscito" << endl;
-#endif
                 }                
                 if (aggiornato.isInsidePlanet(pol, n))
                 {
                     //se il proiettile è entrato nel pianeta devo rimuoverlo
                     iterProiettile = this->proiettili.remove(iterProiettile);
-    #ifdef DEBUG_PROIETTILI
-                    cout << "entrato nel pianeta" << endl;
-    #endif
                 }
                 else
                 {
@@ -233,14 +216,6 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
                             }
                         }
                     }
-                    /*
-                    else
-                    {
-                        cout << "lista bunker vuota\n";
-                        //se la lista di bunker è vuota devo distruggere il pianeta
-                        return true;
-                    }
-                    */
 
                     if (!colpitoQualcosa)
                     {
@@ -252,10 +227,6 @@ void Navicella::aggiornaCoordinateProiettili(sf::Time tempo, struct Elem<Bunker>
             }
         }
     }
-    /*
-    //non devo ancora distruggere il pianeta
-    return false;
-    */
 }
 
 void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
@@ -279,7 +250,6 @@ void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
             Punto centroFuel = Punto(controllato.getX(), controllato.getY());
             if (this->centroRaggioTraente.isNear(centroFuel, this->distanzaNavicellaRaggio))
             {
-                //cout << "ho trovato il fuel!\n";
                 trovato = true;
                 this->setFuel(this->getFuel() + controllato.getQuantita());
                 //rimuovo il fuel
@@ -287,8 +257,6 @@ void Navicella::raggioTraente(struct Elem<Fuel> *headFuel)
             }
             else
             {
-
-                //cout << "NON ho trovato il fuel!\n";
                 //passo al successivo
                 iter = listaFuel.next(iter);
             }

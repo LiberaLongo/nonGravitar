@@ -1,8 +1,4 @@
-//visuale pianeta codice
-
 #include "../header/visualePianeta.hpp"
-
-//#define DEBUG
 
 extern float WIDTH, HEIGHT;
 
@@ -53,14 +49,7 @@ int visualePianeta::Run(sf::RenderWindow &App)
             return EXIT;
         }
         //Poligono pol = this->pianetaVisualizzato.getPoligono();
-//voglio sapere come dare nome a un oggetto puntato da un puntatore
-#ifdef DEBUG
-        this->pianetaVisualizzato.print();
-#endif
     }
-#ifdef DEBUG
-    cout << "sono dentro il pianeta!" << endl;
-#endif
 
     //comincia la trattazione della finestra
     bool Running = true;
@@ -116,9 +105,6 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
     //un punto adibito a mouse click
     Punto mouseClick;
-#ifdef NOME_PUNTO
-    mouseClick.setName("MOUSE");
-#endif
     bool haCliccato = false;
 
     //esegui il programma finchè la finestra è aperta
@@ -198,9 +184,6 @@ int visualePianeta::Run(sf::RenderWindow &App)
             {
                 if (this->player.isOutsideScreen())
                 {
-#ifdef DEBUG
-                    cout << "ritornato a sistema solare" << endl;
-#endif
                     return VISUALE_SISTEMA_SOLARE;
                 }
                 if (this->player.isInsidePoligon(this->pianetaVisualizzato.getPoligono(), lengthSuperficie))
@@ -209,11 +192,6 @@ int visualePianeta::Run(sf::RenderWindow &App)
                     vita--;
                     this->player.setVita(vita);
                     //if (vita <= 0)
-
-#ifdef DEBUG
-                    cout << "entrato nel pianeta" << endl;
-#endif
-
                     return VISUALE_SISTEMA_SOLARE;
                 }
             }

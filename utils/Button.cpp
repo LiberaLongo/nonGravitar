@@ -1,4 +1,3 @@
-//codice di un bottone
 #include "../header/Button.hpp"
 
 //PRIVATA

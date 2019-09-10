@@ -1,4 +1,3 @@
-//codice proiettile
 #include "../header/Proiettile.hpp"
 
 extern float WIDTH, HEIGHT;

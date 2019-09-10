@@ -123,6 +123,11 @@ il tasto enter per sparare nella direzione corrente.
 rendendo di fatto possibile:
 muoversi obliquamente oppure muoversi solo nelle 4 direzioni.
 
+abbiamo ordinato la superfice del pianeta in funzione dell'angolo tra un vertice
+e il centro della finestra
+
+l'hitbox della navicella e dei bunker e del raggio traente sono tutti circolari.
+
 # difficoltà riscontrate
 
 trovare un algoritmo efficente per scoprire se un punto è interno a un poligono concavo, poichè

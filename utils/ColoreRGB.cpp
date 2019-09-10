@@ -1,5 +1,3 @@
-//codice colori
-
 #include "../header/ColoreRGB.hpp"
 
 //costruttore vuoto

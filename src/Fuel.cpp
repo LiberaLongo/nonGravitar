@@ -1,4 +1,3 @@
-//codice carburante
 #include "../header/Fuel.hpp"
 
 //PRIVATA
@@ -116,18 +115,8 @@ void Fuel::draw(sf::RenderWindow &window)
     }
     rectangle.setPosition(this->getX() - this->size / 2, this->getY() - this->size / 2);
 
-//nome se esiste
-#ifdef NOME_PUNTO
-    sf::Text testo;
-    testo.setString(this->centro.getName());
-#endif
-
     //il punto è al centro del rettangolo
     window.draw(rectangle);
-
-#ifdef NOME_PUNTO
-    window.draw(testo);
-#endif
 }
 
 //consumo carburante

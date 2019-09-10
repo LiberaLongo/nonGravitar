@@ -1,7 +1,4 @@
-//visuale sistema solare codice
 #include "../header/visualeSistemaSolare.hpp"
-
-//#define DEBUG //se è definita stampo per debugghing
 
 extern float WIDTH, HEIGHT;
 
@@ -26,13 +23,6 @@ bool visualeSistemaSolare::check(void)
     if (pianetaInsideNow != nullptr)
     {
         ritorno = true;
-#ifdef DEBUG
-        //stampa
-        //pianetaInsideNow è la posizione del pianeta nella lista
-        Pianeta pianeta = sistemasolare.toPtrPlanet(pianetaInsideNow);
-        //voglio sapere come dare nome a un oggetto puntato da un puntatore
-        pianeta.print();
-#endif
     }
     this->orologio.restart();
     return ritorno;
@@ -113,9 +103,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
 
     //un punto adibito a mouse click
     Punto mouseClick;
-#ifdef NOME_PUNTO
-    mouseClick.setName("MOUSE");
-#endif
     bool haCliccato = false;
 
     //esegui il programma finchè la finestra è aperta
@@ -172,7 +159,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                     carburanteFinito = this->player.move(RIGHT);
                 }
                 break;
-
             //noi non controlliamo gli altri tipi di evento
             default:
                 break;
@@ -186,9 +172,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
                 }
                 if (this->check())
                 {
-#ifdef DEBUG
-                    cout << "uscita di emergenza" << endl;
-#endif
                     return VISUALE_PIANETA;
                 }
             }
@@ -221,9 +204,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         }
 
         this->player.draw(App);
-        /*
-        this->player.aggiornaCoordinateProiettili(this->orologio.getElapsedTime());
-        */
         if (haCliccato)
             mouseClick.draw(App);
 
@@ -235,6 +215,6 @@ int visualeSistemaSolare::Run(sf::RenderWindow &App)
         //fine del frame corrente
         App.display();
     }
-
+    //non dovrebbe mai raggiungere questo punto
     return EXIT;
 }

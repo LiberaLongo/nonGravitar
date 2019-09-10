@@ -1,8 +1,4 @@
-//codice sistema solare
-
 #include "../header/SistemaSolare.hpp"
-
-//#define DEBUG
 
 //dimensioni dello SCHERMO
 extern float WIDTH, HEIGHT;
@@ -141,24 +137,15 @@ struct Elem<Pianeta> *SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
     struct Elem<Pianeta> *findedPlanet = nullptr;
     if (!(this->pianeti.empty()))
     {
-#ifdef DEBUG
-        cout << "lista non vuota" << endl;
-#endif
         struct Elem<Pianeta> *iter = this->pianeti.head();
         //nessun pianeta è vicino prima di scorrere la lista
         bool vicino = false;
         while (!vicino && !(this->pianeti.finished(iter)))
         {
-#ifdef DEBUG
-            cout << "non vicino e non finita" << endl;
-#endif
             //se iter è vicino alla navicella
             Pianeta controllato = this->pianeti.read(iter);
             if (navicella.isNear(controllato))
             {
-#ifdef DEBUG
-                cout << "navicella vicino al pianeta: " << endl;
-#endif
                 //esco dal while
                 vicino = true;
                 //aggiorno findedPlanet
@@ -168,9 +155,6 @@ struct Elem<Pianeta> *SistemaSolare::isNavicellaNearAPlanet(Navicella navicella)
             iter = this->pianeti.next(iter);
         }
     }
-#ifdef DEBUG
-    cout << "esco dal isNavicellaNearAPlanet" << endl;
-#endif
     return findedPlanet;
 }
 bool SistemaSolare::emptyPianeti(void)

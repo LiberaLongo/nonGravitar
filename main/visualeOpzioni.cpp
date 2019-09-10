@@ -1,9 +1,4 @@
-//codice opzioni
 #include "../header/visualeOpzioni.hpp"
-
-//menù
-
-#include "../header/visualeMenu.hpp"
 
 extern float WIDTH, HEIGHT;
 
@@ -17,7 +12,7 @@ int KEY_MOVE = sf::Keyboard::Space, KEY_SHOOT = sf::Keyboard::Return;
 //mouse
 int MOUSE_SHOOT = sf::Mouse::Left, MOUSE_MOVE = sf::Mouse::Right;
 
-string testi[] = {"W", "A", "S"};
+//string testi[] = {"W", "A", "S", "D", "^", "<", "v", ">", "LShift", "RShift", "Space", "Enter", "L", "R"};
 
 visualeOpzioni::visualeOpzioni(void)
 {
@@ -42,7 +37,6 @@ void visualeOpzioni::resetButton(void)
     //mouse
     MOUSE_SHOOT = sf::Mouse::Left;
     MOUSE_MOVE = sf::Mouse::Right;
-
 }
 
 int visualeOpzioni::Run(sf::RenderWindow &App)
@@ -108,24 +102,21 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
     int dim = sizeof(arrayButton)/sizeof(arrayButton[0]);
 
     //mouseShape
-    // define a circle
+    //cerchio
     sf::CircleShape mouseCircle(size);
     mouseCircle.setPosition(x_mouse - size, y_mouse + size );
     mouseCircle.setFillColor(sf::Color::Green);
-    //define a rectangle
+    //rettangolo
     sf::RectangleShape mouseRectangle({size*2, size});
     mouseRectangle.setPosition(x_mouse - size, y_mouse + size );
     mouseRectangle.setFillColor(sf::Color::Green);
-    //mouseShape = mouseCircle union mouseRectangle
+    //mouseShape = cerchio union rettangolo
 
     sf::Event event;
     bool Running = true;
 
     //un punto adibito a mouse click
     Punto mouseClick;
-#ifdef NOME_PUNTO
-    mouseClick.setName("MOUSE");
-#endif
 
     //
     while (Running)
@@ -133,14 +124,17 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
         //Verifying events
         while (App.pollEvent(event))
         {
-            // Window closed
+            //finestra chiusa
             switch (event.type)
             {
+            //finestra chiusa
             case sf::Event::Closed:
                 return EXIT;
                 break;
+            //mouse
             case sf::Event::MouseButtonPressed:
                 mouseClick.setCoord(event.mouseButton.x, event.mouseButton.y);
+                //controlla quale bottone è stato premuto
                 for(int i = 0; i < dim ; i++) {
                     if(arrayButton[i].checkMouse(mouseClick)) {
                         menu = i;
@@ -156,11 +150,13 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
                     return VISUALE_MENU;
                 }
                 break;
+            //tastiera
             case sf::Event::KeyPressed:
                 //Esc per uscire
                 if( event.key.code == sf::Keyboard::Escape)
                     return VISUALE_MENU;
                 else {
+                    //si modificano i comandi
                     switch(menu) {
                         case 0:
                             MOVE_UP_1 = event.key.code;
@@ -201,7 +197,8 @@ int visualeOpzioni::Run(sf::RenderWindow &App)
                         default:
                             break;
                     }
-                    if( !( menu == dim-2 || menu == dim-1) )
+                    if( menu < dim - 4 )
+                    //modifico la scritta del bottone
                     arrayButton[menu].setString(to_string(event.key.code));
                 }
             default:

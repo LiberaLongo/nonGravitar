@@ -1,7 +1,4 @@
-//codice punti
 #include "../header/Direzione.hpp"
-
-//#define DEBUG
 
 //costruttore vuoto
 Direzione::Direzione(void)
@@ -116,17 +113,8 @@ void Direzione::move(void)
     //prima erano float e round();
     double s_x = this->speed * (cos(angolo));
     double s_y = this->speed * (sin(angolo));
-#ifdef DEBUG
-    this->print();
-    cout << "s_x = [speed = " << this->speed << "]*[cos(" << this->angolo << " gradi) = " << (cos(angolo)) << "] = " << s_x << endl;
-    cout << "s_y = [speed = " << this->speed << "]*[sin(" << this->angolo << " gradi) = " << (sin(angolo)) << "] = " << s_y << endl;
-#endif
     //a cui viene opportunamente aggiunto le coordinate iniziali
     this->setX_origine(this->getX_origine() + (float)s_x);
     //la y va nella direzione opposta
     this->setY_origine(this->getY_origine() - (float)s_y);
-#ifdef DEBUG
-    this->print();
-    cout << endl;
-#endif
 }

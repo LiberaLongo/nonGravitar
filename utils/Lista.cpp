@@ -4,9 +4,6 @@
 
 #include "../header/Lista.hpp"
 
-//#define DEBUG
-//uncomment this line to remove DEBUG printing
-
 //costruttore e distruttore
 template <typename Tipo>
 Lista<Tipo>::Lista(void) : ListaParent<Tipo>()
@@ -18,9 +15,6 @@ Lista<Tipo>::Lista(void) : ListaParent<Tipo>()
 template <typename Tipo>
 struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 {
-#ifdef DEBUG
-	cout << "cerca " << v << endl;
-#endif
 	struct Elem<Tipo> *find = nullptr;
 	if (!(this->empty()))
 	{
@@ -46,9 +40,6 @@ struct Elem<Tipo> *Lista<Tipo>::search(Tipo v)
 template <typename Tipo>
 void Lista<Tipo>::print(void)
 {
-#ifdef DEBUG
-	cout << "stampa lista" << endl;
-#endif
 	cout << " : [ ";
 	if (!(this->empty()))
 	{

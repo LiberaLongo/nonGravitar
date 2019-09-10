@@ -1,9 +1,5 @@
 //navicella e bunker sono entità
-//codice Entity
 #include "../header/Entity.hpp"
-
-//#define DEBUG
-//#define DEBUG_PROIETTILI
 
 extern float WIDTH, HEIGHT;
 
@@ -146,17 +142,11 @@ int Entity::aggiornaCoordinateProiettili(float x, float y, int vita, Poligono po
             {
                 //se il proiettile è uscito dallo schermo devo rimuoverlo
                 iter = this->proiettili.remove(iter);
-#ifdef DEBUG_PROIETTILI
-                cout << "uscito" << endl;
-#endif
             }
             if (aggiornato.isInsidePlanet(pol, n))
             {
                 //se il proiettile è entrato nel pianeta devo rimuoverlo
                 iter = this->proiettili.remove(iter);
-#ifdef DEBUG_PROIETTILI
-                cout << "entrato nel pianeta" << endl;
-#endif
             }
             else
             {
@@ -167,9 +157,6 @@ int Entity::aggiornaCoordinateProiettili(float x, float y, int vita, Poligono po
                     iter = this->proiettili.remove(iter);
                     //faccio scendere la vita della navicella
                     vita--;
-#ifdef DEBUG_PROIETTILI
-                    cout << "un proiettile ha colpito la navicella" << endl;
-#endif
                 }
                 else
                 {

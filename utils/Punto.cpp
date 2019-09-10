@@ -1,7 +1,4 @@
-//codice punti
 #include "../header/Punto.hpp"
-
-//#define DEBUG
 
 //costruttore
 Punto::Punto(void)
@@ -38,25 +35,9 @@ float Punto::getY(void)
     return this->y;
 }
 
-#ifdef NOME_PUNTO
-//set nome
-void Punto::setName(string name)
-{
-    this->name = name;
-}
-//get nome
-string Punto::getName(void)
-{
-    return this->name;
-}
-#endif //NOME_PUNTO
-
 //stampa
 void Punto::print(void)
 {
-#ifdef NOME_PUNTO
-    cout << this->name;
-#endif
     cout << "( " << this->x << ", " << this->y << " )";
 }
 
@@ -73,27 +54,8 @@ void Punto::draw(sf::RenderWindow &window)
     sf::RectangleShape rectangle(sf::Vector2f(size * 2, size * 2));
     rectangle.setPosition(this->x - size, this->y - size);
 
-//nome se esiste
-#ifdef NOME_PUNTO
-    sf::Font Font;
-    sf::Text nomePunto;
-
-    if (!Font.loadFromFile("verdanab.ttf"))
-    {
-        cerr << "Error loading verdanab.ttf" << endl;
-    }
-    nomePunto.setFont(Font);
-    nomePunto.setCharacterSize(20);
-    nomePunto.setString(this->name);
-    nomePunto.setPosition(this->x, this->y);
-#endif
-
     //il punto è al centro del rettangolo
     window.draw(rectangle);
-
-#ifdef NOME_PUNTO
-    window.draw(nomePunto);
-#endif
 }
 //distanza
 //distanza tra due punti

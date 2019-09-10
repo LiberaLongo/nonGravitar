@@ -1,4 +1,3 @@
-//Poligono codice
 #include "../header/Poligono.hpp"
 
 //definizione di infinito (per algoritmo di Punto dentro Poligono)
@@ -168,26 +167,6 @@ void Poligono::ordina(void)
     struct Elem<Punto> *posAux[MAX_SUPERFICE];
     //eseguo algoritmo di ordinamento e sistemo la lista
     this->surface.ordina(this->lengthPunti, angoli, B, posizioni, posAux);
-#ifdef NOME_PUNTO_SUPERFICE
-    int conta = 0;
-    if (!(this->surface.empty()))
-    {
-        //primo elemento utile non la sentinella
-        struct Elem<Punto> *iter = this->surface.head();
-        //se non vuota e non finita
-        while (!(this->surface.finished(iter)))
-        {
-            //aggiorno contatore
-            conta++;
-            //setto il nome al punto
-            Punto nominato = this->surface.read(iter);
-            nominato.setName(to_string(conta) + ", " + nominato.getName());
-            this->surface.write(iter, nominato);
-            //passo al successivo
-            iter = this->surface.next(iter);
-        }
-    }
-#endif //NOME_PUNTO_SUPERFICE
 
 #endif //ORDINA
 }
