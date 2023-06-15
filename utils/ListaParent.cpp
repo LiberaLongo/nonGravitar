@@ -74,6 +74,7 @@ template <typename Tipo>
 struct Elem<Tipo> *ListaParent<Tipo>::write(struct Elem<Tipo> *p, Tipo v)
 {
 	p->item = v;
+	return p;
 }
 //
 template <typename Tipo>
@@ -136,13 +137,13 @@ void ListaParent<Tipo>::insert_tail(Tipo v)
 template <typename Tipo>
 struct Elem<Tipo> *ListaParent<Tipo>::remove_head(void)
 {
-	this->remove(this->head());
+	return this->remove(this->head());
 }
 //rimuovi in coda
 template <typename Tipo>
 struct Elem<Tipo> *ListaParent<Tipo>::remove_tail(void)
 {
-	this->remove(this->tail());
+	return this->remove(this->tail());
 }
 
 //cerca v scorrendo la ListaParent

@@ -2,9 +2,11 @@
 
 ## albero delle eredità:
 
+```
 ListaParent <--- Lista
   ^cpp             ^cpp
    --includeTemplate--
+```
 
 Direzione <-- Proiettile
 
@@ -13,7 +15,7 @@ Entity <-- [ Navicella, Bunker ]
 cScreen  <-- [ visualePianeta, visualeSistemaSolare, visualeMenu, visualeOpzioni ]
 
 ## albero delle dipendenze
-
+```
 indipendenti:
 [ utils, cScreen, DisegnabileI ]
 
@@ -80,6 +82,7 @@ main <-- gioco <-- screens <-- visualePianeta <-------- cScreen
                             ^- visualeMenu <----------- [Button, cScreen]
                             |                        ^- SistemaSolare ...
                             ^- visualeOpzioni <-------- [Button, cScreen]
+```
 
 ## scelte progettuali
 
@@ -183,6 +186,7 @@ trovato su internet (non ci ricordiamo dove)
 la soluzione per gestire visuali multiple
 utilizzando un array di sottoclassi di cScreen
 frammento di codice trovato:
+```
 {
   std::vector<cScreen *> Screens;
 	int screen = 0;
@@ -200,6 +204,7 @@ frammento di codice trovato:
 
 	return EXIT_SUCCESS;
 }
+```
 
 ## easter egg del codice
 

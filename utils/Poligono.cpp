@@ -44,12 +44,12 @@ void Poligono::setHead(struct Elem<Punto> *headSurface)
 //getters
 sf::Color Poligono::getColoreLib(void)
 {
-    this->colore.getColorLib();
+    return this->colore.getColorLib();
 }
 //ottengo il puntatore alla testa, non al primo elemento
 struct Elem<Punto> *Poligono::getHead(void)
 {
-    this->surface.getHead();
+    return this->surface.getHead();
 }
 
 //inserisce in testa

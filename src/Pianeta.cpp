@@ -101,11 +101,11 @@ float Pianeta::getRaggio(void)
 //colori
 sf::Color Pianeta::getColoreLib(void)
 {
-    this->poligono.getColoreLib();
+    return this->poligono.getColoreLib();
 }
 sf::Color Pianeta::getAtmosferaLib(void)
 {
-    this->atmosfera.getColorLib();
+    return this->atmosfera.getColorLib();
 }
 //ottengo il puntatore alla testa, non al primo elemento
 struct Elem<Punto> *Pianeta::getHeadSurface(void)

@@ -251,4 +251,5 @@ int visualePianeta::Run(sf::RenderWindow &App)
 
         App.display();
     }
+    return -1; //non dovrebbe mai arrivare qui
 }
